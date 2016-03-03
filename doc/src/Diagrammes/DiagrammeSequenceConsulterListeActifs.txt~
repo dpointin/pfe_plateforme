@@ -1,0 +1,15 @@
+activate Utilisateur
+  activate Systeme
+          Utilisateur->Systeme : demandeListeDesCours(typeDeClassement)
+	  activate BDD 
+		Systeme -> BDD: recupereListeDesCours(typeDeClassement)
+		BDD -> Systeme: envoieListeDesCours()
+	  deactivate BDD     
+          Systeme->Utilisateur : afficheListeSelonClassement()
+          Utilisateur->Systeme: selectionneSousListe()
+          Systeme->Utilisateur : afficheSousListe()
+          Utilisateur->Systeme : consulterActif(actif)
+
+  deactivate Systeme
+
+deactivate Utilisateur

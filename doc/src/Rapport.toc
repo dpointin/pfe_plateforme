@@ -1,0 +1,33 @@
+\select@language {french}
+\contentsline {chapter}{\numberline {1}Introduction et probl\IeC {\'e}matique}{2}{chapter.1}
+\contentsline {chapter}{\numberline {2}Besoin et exigences}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Base de donn\IeC {\'e}es}{3}{section.2.1}
+\contentsline {section}{\numberline {2.2}Gestion des actifs}{3}{section.2.2}
+\contentsline {section}{\numberline {2.3}Tableau de bord}{3}{section.2.3}
+\contentsline {chapter}{\numberline {3}Mod\IeC {\`e}le de la plateforme}{4}{chapter.3}
+\contentsline {section}{\numberline {3.1}Cas d'utilisation}{4}{section.3.1}
+\contentsline {section}{\numberline {3.2}Diagramme de s\IeC {\'e}quence}{5}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Cr\IeC {\'e}ation d'un compte}{5}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Authentification}{5}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Cr\IeC {\'e}ation d'un nouveau portefeuille}{5}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Consultation du classement des joueurs}{6}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Consultation et jeu avec le portefeuille}{6}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}Consultation d'un actif}{6}{subsection.3.2.6}
+\contentsline {subsection}{\numberline {3.2.7}Affichage d'un indicateur}{7}{subsection.3.2.7}
+\contentsline {subsection}{\numberline {3.2.8}Consultation de la liste des actifs}{7}{subsection.3.2.8}
+\contentsline {subsection}{\numberline {3.2.9}Gestion du portefeuille}{7}{subsection.3.2.9}
+\contentsline {subsection}{\numberline {3.2.10}Achat d'un actif}{8}{subsection.3.2.10}
+\contentsline {subsection}{\numberline {3.2.11}Affichage de la liste des actifs du portefeuille}{8}{subsection.3.2.11}
+\contentsline {subsection}{\numberline {3.2.12}Vente d'un actif}{8}{subsection.3.2.12}
+\contentsline {subsection}{\numberline {3.2.13}Suppression du portefeuille}{8}{subsection.3.2.13}
+\contentsline {chapter}{\numberline {4}Etude de la base de donn\IeC {\'e}es}{9}{chapter.4}
+\contentsline {chapter}{\numberline {5}Diff\IeC {\'e}rentes versions envisag\IeC {\'e}es}{10}{chapter.5}
+\contentsline {section}{\numberline {5.1}Version 1}{10}{section.5.1}
+\contentsline {section}{\numberline {5.2}Version 2}{10}{section.5.2}
+\contentsline {section}{\numberline {5.3}Version 3}{10}{section.5.3}
+\contentsline {section}{\numberline {5.4}Version 4}{10}{section.5.4}
+\contentsline {section}{\numberline {5.5}Version 5}{10}{section.5.5}
+\contentsline {section}{\numberline {5.6}Version 6}{11}{section.5.6}
+\contentsline {section}{\numberline {5.7}Version 7}{11}{section.5.7}
+\contentsline {section}{\numberline {5.8}Version 8}{11}{section.5.8}
+\contentsline {chapter}{\numberline {6}Mise en place des m\IeC {\'e}thodes agiles}{12}{chapter.6}

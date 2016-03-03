@@ -1,0 +1,31 @@
+.metadata/
+bin/
+tmp/
+*.tmp
+local.properties
+.settings/
+.loadpath
+.recommenders/
+Plateforme/build/
+Plateforme/build/classes/Model/
+*.class
+
+#Serveur
+apache-tomcat-7.0.67/
+RemoteSystemsTempsFiles/
+Servers/
+Test/
+Plateforme/.classpath
+
+
+
+
+# Eclipse Core
+.project
+
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+
+

@@ -1,0 +1,15 @@
+@startuml
+activate Utilisateur
+          loop tant que compte non créé
+          Utilisateur<-Systeme : IdentidiantMdp?()
+	  activate Systeme 
+		Utilisateur -> Systeme: saisieDonneesPerso()     
+          activate BDD
+                Systeme->BDD : interrogationBDD(donnees)
+                BDD -> Systeme : DonneesCorrecte() 
+          deactivate BDD
+          end
+          Systeme->Utilisateur : confirmationCreation()
+          deactivate Systeme
+  deactivate Utilisateur
+@startuml

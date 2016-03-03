@@ -1,0 +1,9 @@
+@startuml
+activate Systeme
+           activate BDD
+              Systeme-> BDD : recupererHistoriqueCours(actif)
+              BDD->Systeme : envoieHistoriqueCours()
+           deactivate BDD
+              Systeme->Systeme : calculerIndicateur(X)
+deactivate Systeme
+@enduml

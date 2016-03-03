@@ -1,0 +1,16 @@
+@startuml
+ activate Utilisateur
+            Utilisateur -> Systeme :DemandeAuthentification()
+            loop tant que utilisateur non correct
+            activate Systeme
+                   Systeme-> Utilisateur :DemandeIdentiteMdp()
+                   Utilisateur -> Systeme: SaisieIdentiteMdp()
+                   activate BDD
+                          Systeme -> BDD : UtilisateurCorrect?()
+                          BDD-> Systeme : reponse() 
+                   deactivate BDD
+            end
+                  Systeme -> Utilisateur : confirmationAuthentification()
+            deactivate Systeme        
+  deactivate Utilisateur
+@enduml

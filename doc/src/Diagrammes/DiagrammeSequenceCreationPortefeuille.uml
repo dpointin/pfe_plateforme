@@ -1,0 +1,8 @@
+@startuml
+  activate Systeme
+          System->BDD : ajouterPortefeuille(utilisateur,prix)
+	  activate BDD 
+		BDD --> Systeme: confirmationAjoutPortefeuille()
+	  deactivate BDD     
+  deactivate Systeme
+@enduml

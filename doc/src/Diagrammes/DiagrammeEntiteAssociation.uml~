@@ -1,0 +1,91 @@
+@startuml
+''' Titre du schema
+Title Schema E/A Base de données bourses 
+
+
+
+''' Legende
+package Legende <<Frame>>{
+    class Association<<(A, orchid)>> #White{
+        +Clef
+    }
+    class Entité<<(E, lightgreen)>>{
+        +<b>Clef primaire
+        +Clef
+    }
+    Association -- Entité : Cardinalité
+}
+
+
+
+''' Association
+class possede <<(A, orchid)>> #White
+class estComposeA <<(A, orchid)>> #White
+class estComposeT <<(A, orchid)>> #White
+class estUneA <<(A, orchid)>> #White
+class estUneO <<(A, orchid)>> #White
+class historique <<(A, orchid)>> #White
+
+
+
+
+''' Entites
+class Joueur<<(E, lightgreen)>>{
+    +<b>Login
+    +motDePasse
+}
+class Portefeuille<<(E, lightgreen)>>{
+    +<b>Nom
+    +Prix
+}
+class Avoir<<(E, lightgreen)>>{
+    +<b>Quantite
+    +prixGlobal
+    +delta
+}
+class Titre<<(E, lightgreen)>>{
+    +<b>Code
+    +Libelle
+}
+class Action<<(E, lightgreen)>>{
+    +<b>Societe
+    +dividende
+}
+class Obligation<<(E, lightgreen)>>{
+    +<b>Organisme
+    +valeur
+}
+class Cours<<(E, lightgreen)>>{
+    +<b>date
+    +valeur
+}
+
+
+
+
+
+
+''' Liaison
+Joueur - possede : 1,1
+possede - Portefeuille : 1,1
+
+estComposeA -up- Portefeuille : 1,n
+Avoir -up- estComposeA : 1,n
+
+estComposeT -up- Avoir : 1,1
+Titre -up- estComposeT : 1,n
+
+Action - estUneA : 1,1
+estUneA - Titre : 0,1
+
+Obligation -up- estUneO : 1,1
+estUneO -up- Titre : 0,1
+
+Titre - historique :1,n
+historique - Cours : 1,1
+
+
+
+hide empty attribute
+
+@enduml

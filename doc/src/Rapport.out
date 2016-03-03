@@ -1,0 +1,32 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction et probl\351matique}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Besoin et exigences}{}% 2
+\BOOKMARK [1][-]{section.2.1}{Base de donn\351es}{chapter.2}% 3
+\BOOKMARK [1][-]{section.2.2}{Gestion des actifs}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.3}{Tableau de bord}{chapter.2}% 5
+\BOOKMARK [0][-]{chapter.3}{Mod\350le de la plateforme}{}% 6
+\BOOKMARK [1][-]{section.3.1}{Cas d'utilisation}{chapter.3}% 7
+\BOOKMARK [1][-]{section.3.2}{Diagramme de s\351quence}{chapter.3}% 8
+\BOOKMARK [2][-]{subsection.3.2.1}{Cr\351ation d'un compte}{section.3.2}% 9
+\BOOKMARK [2][-]{subsection.3.2.2}{Authentification}{section.3.2}% 10
+\BOOKMARK [2][-]{subsection.3.2.3}{Cr\351ation d'un nouveau portefeuille}{section.3.2}% 11
+\BOOKMARK [2][-]{subsection.3.2.4}{Consultation du classement des joueurs}{section.3.2}% 12
+\BOOKMARK [2][-]{subsection.3.2.5}{Consultation et jeu avec le portefeuille}{section.3.2}% 13
+\BOOKMARK [2][-]{subsection.3.2.6}{Consultation d'un actif}{section.3.2}% 14
+\BOOKMARK [2][-]{subsection.3.2.7}{Affichage d'un indicateur}{section.3.2}% 15
+\BOOKMARK [2][-]{subsection.3.2.8}{Consultation de la liste des actifs}{section.3.2}% 16
+\BOOKMARK [2][-]{subsection.3.2.9}{Gestion du portefeuille}{section.3.2}% 17
+\BOOKMARK [2][-]{subsection.3.2.10}{Achat d'un actif}{section.3.2}% 18
+\BOOKMARK [2][-]{subsection.3.2.11}{Affichage de la liste des actifs du portefeuille}{section.3.2}% 19
+\BOOKMARK [2][-]{subsection.3.2.12}{Vente d'un actif}{section.3.2}% 20
+\BOOKMARK [2][-]{subsection.3.2.13}{Suppression du portefeuille}{section.3.2}% 21
+\BOOKMARK [0][-]{chapter.4}{Etude de la base de donn\351es}{}% 22
+\BOOKMARK [0][-]{chapter.5}{Diff\351rentes versions envisag\351es}{}% 23
+\BOOKMARK [1][-]{section.5.1}{Version 1}{chapter.5}% 24
+\BOOKMARK [1][-]{section.5.2}{Version 2}{chapter.5}% 25
+\BOOKMARK [1][-]{section.5.3}{Version 3}{chapter.5}% 26
+\BOOKMARK [1][-]{section.5.4}{Version 4}{chapter.5}% 27
+\BOOKMARK [1][-]{section.5.5}{Version 5}{chapter.5}% 28
+\BOOKMARK [1][-]{section.5.6}{Version 6}{chapter.5}% 29
+\BOOKMARK [1][-]{section.5.7}{Version 7}{chapter.5}% 30
+\BOOKMARK [1][-]{section.5.8}{Version 8}{chapter.5}% 31
+\BOOKMARK [0][-]{chapter.6}{Mise en place des m\351thodes agiles}{}% 32

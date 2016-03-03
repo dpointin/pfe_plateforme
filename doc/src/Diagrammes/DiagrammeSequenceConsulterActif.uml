@@ -1,0 +1,16 @@
+@startuml
+activate Utilisateur
+           activate Systeme
+           activate BDD
+           Systeme->BDD : miseAJour(actif)
+           BDD -> Systeme : envoieInformations()
+           Systeme -> Utilisateur : afficherInformations()
+           deactivate BDD
+
+loop [ Tant que l'utilisateur veut avoir un indicateur X]
+           Utilisateur->Systeme : calculerAfficherIndicateur(X)
+           Systeme->Utilisateur : afficheIndicateur()
+           end
+           deactivate Systeme
+  deactivate Utilisateur
+@enduml

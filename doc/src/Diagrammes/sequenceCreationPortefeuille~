@@ -1,0 +1,6 @@
+  activate Systeme
+          System->BDD : ajouterPortefeuille(utilisateur,prix)
+	  activateBDD 
+		BDD --> Systeme: confirmationAjoutPortefeuille()
+	  deactivateBDD     
+  deactivate Systeme

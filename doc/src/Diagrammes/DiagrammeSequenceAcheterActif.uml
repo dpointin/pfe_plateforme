@@ -1,0 +1,16 @@
+@startuml
+activate Utilisateur
+      Systeme -> Utilisateur : ConsulterListeDesActifs()
+      activate Systeme
+             Utilisateur <- Systeme : SelectionActif()
+             Utilisateur -> Systeme : nomActif
+             Utilisateur <- Systeme : SelectionQuantite()
+             Utilisateur -> Systeme : quantite
+             Systeme -> BDD : achatAction(joueur, actif, quantite)
+             activate BDD
+             BDD -> Systeme : confirmationAchat()
+             deactivate BDD
+      deactivate Systeme
+deactivate Utilisateur
+@enduml
+

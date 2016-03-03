@@ -1,0 +1,8 @@
+activate Systeme
+             alt [choix de l'utilisateur]
+             Systeme -> Utilisateur : afficherPortefeuille() 
+             activate Utilisateur
+             Systeme -> Utilisateur : gererPortefeuille()
+            end
+deactivate Utilisateur
+deactivate Systeme

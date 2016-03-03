@@ -1,0 +1,12 @@
+@startuml
+activate Systeme
+             Systeme -> BDD : ObtenirInformationsPortefeuille(Utilisateur)
+             activate BDD
+             BDD -> Systeme : envoieInformation()
+             deactivate BDD
+
+             Systeme -> Utilisateur : afficheActionListe()
+activate Utilisateur
+      deactivate Systeme
+deactivate Utilisateur
+@enduml

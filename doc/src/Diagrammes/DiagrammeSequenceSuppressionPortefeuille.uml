@@ -1,0 +1,8 @@
+@startuml
+activate Systeme 
+Systeme->BDD : supprimerPortefeuille(utilisateur) 
+activate BDD 
+BDD -> Systeme: confirmationSuppressionPortefeuille() 
+deactivate BDD 
+deactivate Systeme
+@enduml

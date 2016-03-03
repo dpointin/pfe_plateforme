@@ -1,0 +1,14 @@
+activate Systeme
+             Systeme -> BDD : obtenirClassement()
+             activate BDD
+             BDD -> Systeme : envoieClassement()
+             deactivate BDD
+             Systeme -> Utilisateur : choixAffichage()
+             activate Utilisateur
+             Utilisateur -> Systeme : choix
+             alt [choix]
+             Systeme -> Utilisateur : affichageClassementComplet()
+             Systeme -> Utilisateur : affichagePortefeuilleAutreJoueur()
+             end
+             deactivate Utilisateur
+deactivate Systeme

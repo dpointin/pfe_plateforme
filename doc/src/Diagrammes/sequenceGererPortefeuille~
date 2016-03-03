@@ -1,0 +1,9 @@
+ activate Systeme
+      Systeme -> Utilisateur : afficherPortefeuille() 
+      activate Utilisateur 
+      alt [L'utilisateur a le choix entre ]
+      Utilisateur -> Systeme : afficherListeActif()
+      Utilisateur -> Systeme : acheterActif()
+      end
+      deactivate Utilisateur
+deactivate Systeme

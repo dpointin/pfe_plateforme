@@ -1,0 +1,81 @@
+/* Général ------------------------------------------------------------------------------------- */
+@CHARSET "UTF-8";
+
+body, p, legend, label, input {
+font: normal 8pt verdana, helvetica, sans-serif;
+}
+fieldset {
+padding: 10px;
+border: 1px #0568CD solid;
+}
+legend {
+font-weight: bold;
+color: #0568CD;
+}
+/* css de Matthias*/
+table {
+	cellpadding: 10;
+	width: 60% ;
+    border-collapse: collapse;
+}
+th {
+	color:white;
+    height: 50px;
+    font-weight:normal;
+    background-color:#3366cc ;
+}
+td {
+	text-align:center;
+	height:35px ;
+}
+body {
+	color:black;
+	background-color:#d2d2d2;
+}
+nav ul{
+	padding:0px;
+	margin:0px;
+	list-style-type:none;	
+	background-color:#3366cc ;
+}
+nav li {
+	display:inline-block;
+	width:160px;
+	height:40px;
+	margin:0px;
+	padding:0px;
+	border-right:3px solid #CCCCCC;
+	text-align:center;
+	line-height:40px;	
+}
+nav li :hover {
+	background-color:#051153;
+}
+nav li a{
+	display:block;
+	text-decoration:none;
+	color:#FFFFFF;
+}
+
+/* Forms --------------------------------------------------------------------------------------- */
+form label {
+float: left;
+width: 200px;
+margin: 3px 0px 0px 0px;
+}
+form input {
+margin: 3px 3px 0px 0px;
+border: 1px #999 solid;
+}
+form input.sansLabel {
+margin-left: 200px;
+}
+form .requis {
+color: #c00;
+} 
+form .erreur {
+color: #900;
+} 
+form .succes {
+color: #090;
+} 
