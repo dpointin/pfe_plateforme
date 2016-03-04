@@ -37,4 +37,6 @@ public interface JoueurDao {
 	*/ 
 	Joueur trouver( String login ) throws DAOException;
 	
+	
+	void supprimer( String login ) throws DAOException;
 } 

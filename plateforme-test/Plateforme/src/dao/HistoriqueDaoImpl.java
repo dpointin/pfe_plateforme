@@ -64,7 +64,7 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
             	GregorianCalendar date = dates.next();
             	//(code, dateCours, valeurOuverture, valeurFermeture, valeurBas, valeurHaut, volume, valeurAjustee)
             	if (trouver(code, date)!=null) {
-            		throw new DAOException("Échec de l'ajout du cours, il existe déjà dans la table.");
+            	//	throw new DAOException("Échec de l'ajout du cours, il existe déjà dans la table.");
             	} else {
 	            	preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, code, new java.sql.Date(date.getTimeInMillis()), cours.getOuvertureJours(date), cours.getFermetureJours(date), cours.getBasJours(date), cours.getHautJours(date), cours.getVolumeJours(date), cours.getAdjFermetureJours(date));
 	            	int statut = preparedStatement.executeUpdate();

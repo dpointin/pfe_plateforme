@@ -28,7 +28,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
     private static final String SQL_UPDATE_ARGENT_INVESTI = "";
     private static final String SQL_UPDATE_ARGENT_DISPONIBLE = "";
     
-     private DAOFactory daoFactory;
+    private DAOFactory daoFactory;
 
     PortefeuilleDaoImpl( DAOFactory daoFactory ) {
         this.daoFactory = daoFactory;
@@ -46,12 +46,6 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 		return p;
 	}
 
-
-	@Override
-	public void mettreAJour(String login, Portefeuille portefeuille) throws DAOException {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public void acquerirOption(TypeOption typeOption, TypePosition typePosition, GregorianCalendar maturite, Double strike, Double prime, Integer idPortefeuille, String code) throws DAOException {

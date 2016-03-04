@@ -98,7 +98,14 @@ public class JoueurDaoImpl implements JoueurDao {
         }
     }
 
-   
+
+	@Override
+	public void supprimer(String login) throws DAOException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
     /**
 	* Methode qui retourne un utilisateur depuis la base
     * de donnees, correspondant à la requete SQL donnee prenant en parametres
@@ -170,5 +177,7 @@ public class JoueurDaoImpl implements JoueurDao {
         joueur.setMotDePasse( resultSet.getString( "motDePasse" ) );
         return joueur;
     }
+
+
 
 }
