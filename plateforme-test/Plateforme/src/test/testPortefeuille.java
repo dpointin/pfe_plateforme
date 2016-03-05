@@ -19,10 +19,10 @@ public class testPortefeuille {
 		Historique h=new Historique();
 		Hashtable<GregorianCalendar, Vector<Double>> hash=new Hashtable<GregorianCalendar, Vector<Double>>();
 		Vector<Double> v=new Vector<Double>();
-		v.add(1000.0);
-		v.add(1000.0);
-		v.add(1000.0);
-		v.add(1000.0);
+		v.add(100000.0);
+		v.add(100000.0);
+		v.add(100000.0);
+		v.add(100000.0);
 		Date d=new Date();
 		hash.put(new GregorianCalendar(d.getYear(),d.getMonth(),d.getDay()), v);
 		h.setValeurs(hash);
@@ -40,7 +40,7 @@ public class testPortefeuille {
 		System.out.println(p.getQuantiteObjetFinancier().get(t));
 		System.out.println(p.getPrixObjetFinancier().get(t));
 		System.out.println("on achete tout avec argent");
-		p.setArgentDisponible(100000.0);
+		p.setArgentDisponible(10000000.0);
 		p.acheter(t, 100);
 		System.out.println(p.getQuantiteObjetFinancier().get(t));
 		System.out.println(p.getPrixObjetFinancier().get(t));

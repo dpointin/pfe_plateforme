@@ -25,7 +25,6 @@ public class Portefeuille {
 		this.rendement = 0.0;
 		this.idPortefeuille = -1;
 	}
-
 	
 	public boolean acheter(ObjetFinancier objetFinancier, int quantite){
 		if( (objetFinancier.getNombreDisponible()>=quantite) && (objetFinancier.getPrix()*quantite<=argentDisponible) ){
