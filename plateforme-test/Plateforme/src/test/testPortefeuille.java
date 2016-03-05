@@ -14,7 +14,7 @@ public class testPortefeuille {
 	
 	public static void main(String[] args) {
 
-		Titre t=new Action("AAL", "aal",10000, 2.1);
+		Titre t=new Action("AAL", "aal",100, 2.1);
 		Historique h=new Historique();
 		Hashtable<GregorianCalendar, Vector<Double>> hash=new Hashtable<GregorianCalendar, Vector<Double>>();
 		Vector<Double> v=new Vector<Double>();
@@ -27,6 +27,29 @@ public class testPortefeuille {
 		h.setValeurs(hash);
 		t.setHistorique(h);
 		Portefeuille p=new Portefeuille();
+		System.out.println("Nombre avant tout achat");
+		System.out.println(p.getQuantiteTitre().get(t));
+		System.out.println(p.getPrixTitre().get(t));
+		System.out.println("on tente d'en acheter trop prix =1000");
+		p.acheter(t, 1000);
+		System.out.println(p.getQuantiteTitre().get(t));
+		System.out.println(p.getPrixTitre().get(t));
+		System.out.println("on achete tout");
 		p.acheter(t, 100);
+		System.out.println(p.getQuantiteTitre().get(t));
+		System.out.println(p.getPrixTitre().get(t));
+		System.out.println("on essaie d'en racheter une");
+		p.acheter(t, 1);
+		System.out.println(p.getQuantiteTitre().get(t));
+		System.out.println(p.getPrixTitre().get(t));
+		System.out.println("on en vend la moitie");
+		p.vendre(t, 50);
+		System.out.println(p.getQuantiteTitre().get(t));
+		System.out.println(p.getPrixTitre().get(t));
+		v.set(3, 0.0);
+		System.out.println("on achete tout en mettant le prix a 0");
+		p.acheter(t, 50);
+		System.out.println(p.getQuantiteTitre().get(t));
+		System.out.println(p.getPrixTitre().get(t));
 	}
 }

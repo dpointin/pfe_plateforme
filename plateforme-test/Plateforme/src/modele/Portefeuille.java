@@ -39,24 +39,28 @@ public class Portefeuille {
 
 	
 	public void acheter(Titre titre, int quantite){
-		int quantiteTemp=0;
-		if(quantiteTitre.get(titre)!=null)
-			quantiteTemp=quantiteTitre.get(titre);
-		double tempPrix=0;
-		if(prixTitre.get(titre)!=null)
-			tempPrix=prixTitre.get(titre);
-		Date d=new Date();
-		double prixFinal=(quantiteTemp*tempPrix+quantite*titre.getHistorique().getFermetureJours(new GregorianCalendar(d.getYear(),d.getMonth(),d.getDay())));
-	    int quantiteFinal=quantiteTemp+quantite;
-	    prixFinal/=quantiteFinal;
-	    quantiteTitre.put(titre, quantiteFinal);
-	    prixTitre.put(titre, prixFinal);
+		if(titre.getNombreDisponible()>=quantite){
+			int quantiteTemp=0;
+			if(quantiteTitre.get(titre)!=null)
+				quantiteTemp=quantiteTitre.get(titre);
+			double tempPrix=0;
+			if(prixTitre.get(titre)!=null)
+				tempPrix=prixTitre.get(titre);
+			Date d=new Date();
+			double prixFinal=(quantiteTemp*tempPrix+quantite*titre.getValeurActuelle());
+		    int quantiteFinal=quantiteTemp+quantite;
+		    prixFinal/=quantiteFinal;
+		    quantiteTitre.put(titre, quantiteFinal);
+		    prixTitre.put(titre, prixFinal);
+			titre.setNombreDisponible(titre.getNombreDisponible()-quantite);
+	    }
 	}
 
-    public void vendreAction(Titre titre, Integer quantite){
+    public void vendre(Titre titre, Integer quantite){
     	int tempQuantite=quantiteTitre.get(titre);
     	tempQuantite-=quantite;
     	quantiteTitre.put(titre, tempQuantite);
+		titre.setNombreDisponible(titre.getNombreDisponible()+quantite);
     }
 	
 	public void ajoutQuantiteTitre(Titre t, Integer q) {
