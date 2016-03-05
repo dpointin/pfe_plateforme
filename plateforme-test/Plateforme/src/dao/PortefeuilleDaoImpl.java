@@ -47,18 +47,17 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 	}
 
 	
-	@Override
+/*	
 	public void acquerirOption(TypeOption typeOption, TypePosition typePosition, GregorianCalendar maturite, Double strike, Double prime, Integer idPortefeuille, String code) throws DAOException {
 		acquerirOption(SQL_INSERT_OPTION, typeOption, typePosition, maturite, strike, prime, idPortefeuille, code);
 		investir(SQL_UPDATE_ARGENT_INVESTI, idPortefeuille, strike);
 	}
 
 
-	@Override
 	public void exercerOption(Integer idOption) {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
     
 
 // METHODES PRIVEES
@@ -258,5 +257,26 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 		} finally {
 		    fermeturesSilencieuses( preparedStatement, connexion );
 		}	
+	}
+
+
+	@Override
+	public void creer(String login, Portefeuille portefeuille) throws DAOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mettreAJour(String login, Portefeuille portefeuille) throws DAOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void supprimer(String login) throws DAOException {
+		// TODO Auto-generated method stub
+		
 	}
 }

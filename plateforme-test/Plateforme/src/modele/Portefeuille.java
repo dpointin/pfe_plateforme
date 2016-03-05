@@ -39,9 +39,14 @@ public class Portefeuille {
 
 	
 	public void acheter(Titre titre, int quantite){
-		int quantiteTemp=quantiteTitre.get(titre);
-		double tempPrix=prixTitre.get(titre);
-		double prixFinal=(quantiteTemp*tempPrix+quantite*titre.getHistorique().getFermetureJours(new GregorianCalendar()));
+		int quantiteTemp=0;
+		if(quantiteTitre.get(titre)!=null)
+			quantiteTemp=quantiteTitre.get(titre);
+		double tempPrix=0;
+		if(prixTitre.get(titre)!=null)
+			tempPrix=prixTitre.get(titre);
+		Date d=new Date();
+		double prixFinal=(quantiteTemp*tempPrix+quantite*titre.getHistorique().getFermetureJours(new GregorianCalendar(d.getYear(),d.getMonth(),d.getDay())));
 	    int quantiteFinal=quantiteTemp+quantite;
 	    prixFinal/=quantiteFinal;
 	    quantiteTitre.put(titre, quantiteFinal);
@@ -54,7 +59,7 @@ public class Portefeuille {
     	quantiteTitre.put(titre, tempQuantite);
     }
 	
-	/*public void ajoutQuantiteTitre(Titre t, Integer q) {
+	public void ajoutQuantiteTitre(Titre t, Integer q) {
 		getQuantiteTitre().put(t,q);
 	}
 	public void ajoutPrixTitre(Titre t, Double p) {
@@ -71,7 +76,7 @@ public class Portefeuille {
 	}	
 	public void ajoutPrixOption(Option t, Double p) {
 		getPrixOption().put(t,p);
-	}*/
+	}
 	
 	
 	
