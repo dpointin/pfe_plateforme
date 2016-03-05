@@ -42,16 +42,17 @@ public class testHistoriqueDao {
 		t.put(d1, v1);
 		h.setValeurs(t);
 */		
-/*		try {
+		try {
 			h_dao.mettreAJour("AAL");
 		} catch (DAOException e) {
 			System.out.println(e);
 		}
-*/		
+		
 		
 		GregorianCalendar d1 = new GregorianCalendar(2010,0,1);
 		System.out.println("Test de la fonction trouver");
 		Historique h_rep = h_dao.trouver("AAL", d1);
+		System.out.println(h_rep==null);
 		System.out.println("apres la creation : " +h_rep.getCode() + " - " + h_rep.getOuvertureJours(d1) +" - " + h_rep.getValeurs().size());
 		
 	/*	System.out.println("Test de la fonction trouver les cours entre deux dates");
