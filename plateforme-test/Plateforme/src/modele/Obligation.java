@@ -2,32 +2,33 @@ package modele;
 
 import java.util.GregorianCalendar;
 
-public class Obligation {
+public class Obligation extends ObjetFinancier{
 
 	private String emetteur;
 	private Double prix;
 	private Double tauxInterets;
-	private Integer nombreDisponible;
 	private GregorianCalendar dateFin;
 	
 	public Obligation(String emetteur, Double prix, Double tauxInterets, Integer nombreDisponible,
 			GregorianCalendar dateFin) {
-		super();
+		super(nombreDisponible);
 		this.emetteur = emetteur;
 		this.prix = prix;
 		this.tauxInterets = tauxInterets;
-		this.nombreDisponible = nombreDisponible;
 		this.dateFin = dateFin;
 	}
 		
+	
+	public double getPrix(){
+		return prix;
+	}
+	
+	//SETTER ET GETTER
 	public String getEmetteur() {
 		return emetteur;
 	}
 	public void setEmetteur(String emetteur) {
 		this.emetteur = emetteur;
-	}
-	public Double getPrix() {
-		return prix;
 	}
 	public void setPrix(Double prix) {
 		this.prix = prix;

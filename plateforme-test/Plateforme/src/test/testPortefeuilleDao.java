@@ -40,6 +40,7 @@ public class testPortefeuilleDao {
 		System.out.println("Argent disponible : "+ p.getArgentDisponible());
 		System.out.println("Rendement du portefeuille : "+ p.getRendement());
 		
+		/*
 		System.out.println("Liste de titres :");		
 		Enumeration<Titre> titres = p.getPrixTitre().keys();
 	    List<Titre> list = Collections.list(titres);
@@ -67,6 +68,6 @@ public class testPortefeuilleDao {
 	    	prix = p.getPrixObligation().get(obligation_l);
 	    	quantite = p.getQuantiteObligation().get(obligation_l);
 			System.out.println(obligation_l.getEmetteur() + " - prix : " + prix + " / quantite : " + quantite);
-		}
+		}*/
 	}
 }

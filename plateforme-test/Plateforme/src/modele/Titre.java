@@ -3,29 +3,21 @@ package modele;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public abstract class Titre {
+public abstract class Titre extends ObjetFinancier{
 
 	private String code ;
 	private String libelle;
-	protected Integer nombreDisponible;
 	protected Historique historique;
 
 	public Titre(String code, String libelle, Integer nombreDisponible) {
-		super();
+		super(nombreDisponible);
 		this.code = code;
 		this.libelle = libelle;
-		this.nombreDisponible = nombreDisponible;
 		this.historique = new Historique(code);
 	}
 	
 	
 	// GETTER SETTER
-	public Integer getNombreDisponible() {
-		return nombreDisponible;
-	}
-	public void setNombreDisponible(Integer nombreDisponible) {
-		this.nombreDisponible = nombreDisponible;
-	}
 	public String getLibelle() {
 		return libelle;
 	}
@@ -49,7 +41,7 @@ public abstract class Titre {
 
 	/////////////////////A MODIFIER AVEC LA DERNIERE VALEUR QUI EST DANS L HISTORIQUE
 	/////////////////////CETTE METHODE NE MARCHERA JAMAIS LES WEEK END OU JOUR FERIE SINON VU QUE LA BOURSE NE NOUS DONNERA PAS DE VALEUR
-	public Double getValeurActuelle(){
+	public double getPrix(){
 		Date d=new Date();
 		return historique.getFermetureJours(new GregorianCalendar(d.getYear(), d.getMonth(), d.getDay()));
 	}

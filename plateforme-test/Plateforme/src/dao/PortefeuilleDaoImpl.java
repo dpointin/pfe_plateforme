@@ -110,8 +110,8 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
             	Integer quantite = resultSet.getInt("quantite");
             	Double prixUnitaire = (double) resultSet.getFloat("prixUnitaire");
             	// set quantite et prix dans p
-            	p.ajoutPrixTitre(titre, prixUnitaire);
-            	p.ajoutQuantiteTitre(titre, quantite);            	
+            	p.ajoutPrixObjetFinancier(titre, prixUnitaire);
+            	p.ajoutQuantiteObjetFinancier(titre, quantite);            	
             }
         } catch ( SQLException e ) {
             throw new DAOException( e );
@@ -159,8 +159,8 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
             	Option option = new Option(idOption,type,position,maturite,strike,prime,titre);
             	
             	// set quantite et prix dans p
-            	p.ajoutPrixOption(option, prime);
-            	p.ajoutQuantiteOption(option, 1);            	
+            	p.ajoutPrixObjetFinancier(option, prime);
+            	p.ajoutQuantiteObjetFinancier(option, 1);            	
             }
         } catch ( SQLException e ) {
             throw new DAOException( e );
@@ -198,8 +198,8 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
             	Double prix = obligation.getPrix();
             	
             	// set quantite et prix dans p
-            	p.ajoutPrixObligation(obligation, prix); // prix*quantite?
-            	p.ajoutQuantiteObligation(obligation, quantite);            	
+            	p.ajoutPrixObjetFinancier(obligation, prix); // prix*quantite?
+            	p.ajoutQuantiteObjetFinancier(obligation, quantite);            	
             }
         } catch ( SQLException e ) {
             throw new DAOException( e );

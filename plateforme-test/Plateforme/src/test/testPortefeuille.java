@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import modele.Action;
 import modele.Historique;
+import modele.Obligation;
 import modele.Portefeuille;
 import modele.Titre;
 
@@ -28,28 +29,32 @@ public class testPortefeuille {
 		t.setHistorique(h);
 		Portefeuille p=new Portefeuille();
 		System.out.println("Nombre avant tout achat");
-		System.out.println(p.getQuantiteTitre().get(t));
-		System.out.println(p.getPrixTitre().get(t));
+		System.out.println(p.getQuantiteObjetFinancier().get(t));
+		System.out.println(p.getPrixObjetFinancier().get(t));
 		System.out.println("on tente d'en acheter trop prix =1000");
 		p.acheter(t, 1000);
-		System.out.println(p.getQuantiteTitre().get(t));
-		System.out.println(p.getPrixTitre().get(t));
+		System.out.println(p.getQuantiteObjetFinancier().get(t));
+		System.out.println(p.getPrixObjetFinancier().get(t));
 		System.out.println("on achete tout");
 		p.acheter(t, 100);
-		System.out.println(p.getQuantiteTitre().get(t));
-		System.out.println(p.getPrixTitre().get(t));
+		System.out.println(p.getQuantiteObjetFinancier().get(t));
+		System.out.println(p.getPrixObjetFinancier().get(t));
 		System.out.println("on essaie d'en racheter une");
 		p.acheter(t, 1);
-		System.out.println(p.getQuantiteTitre().get(t));
-		System.out.println(p.getPrixTitre().get(t));
+		System.out.println(p.getQuantiteObjetFinancier().get(t));
+		System.out.println(p.getPrixObjetFinancier().get(t));
 		System.out.println("on en vend la moitie");
 		p.vendre(t, 50);
-		System.out.println(p.getQuantiteTitre().get(t));
-		System.out.println(p.getPrixTitre().get(t));
+		System.out.println(p.getQuantiteObjetFinancier().get(t));
+		System.out.println(p.getPrixObjetFinancier().get(t));
 		v.set(3, 0.0);
 		System.out.println("on achete tout en mettant le prix a 0");
 		p.acheter(t, 50);
-		System.out.println(p.getQuantiteTitre().get(t));
-		System.out.println(p.getPrixTitre().get(t));
+		System.out.println(p.getQuantiteObjetFinancier().get(t));
+		System.out.println(p.getPrixObjetFinancier().get(t));
+		Obligation o=new Obligation("orange", 100.0, 0.1, 100, new GregorianCalendar());
+		p.acheter(o, 10);
+		System.out.println(p.getQuantiteObjetFinancier());
+
 	}
 }

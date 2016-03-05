@@ -2,7 +2,7 @@ package modele;
 
 import java.util.GregorianCalendar;
 
-public class Option {
+public class Option extends ObjetFinancier{
 
 	private Integer idOption;
 	private TypeOption type;
@@ -16,7 +16,8 @@ public class Option {
 
 	public Option(Integer idOption, TypeOption type, TypePosition position, GregorianCalendar maturite, Double strike, Double prime,
 			Titre titre) {
-		super();
+		////////////////////////////////POUR L INSTANT 0 FAUDRA QU'ON VOIT
+		super(0);
 		this.idOption = idOption;
 		this.type = type;
 		this.position = position;
@@ -27,6 +28,10 @@ public class Option {
 	}
 
 
+	public double getPrix(){
+		return 0.0;
+	}
+	
 
 	// GETTER SETTER
 	public Integer getIdOption() {
