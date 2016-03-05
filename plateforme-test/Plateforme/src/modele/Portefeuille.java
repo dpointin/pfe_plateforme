@@ -13,7 +13,7 @@ public class Portefeuille {
 	private Integer idPortefeuille;
 	
 	public Portefeuille() {
-		this(0.0);
+		this(1000.0);
 	}
 
 	public Portefeuille(Double argentDisponible) {

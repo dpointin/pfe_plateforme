@@ -120,7 +120,9 @@ public class Joueur {
 		return portefeuille.vendre(o, quantite);
 	}
 
-	
+	public void supprimerPortefeuille(){
+		this.setPortefeuille(new Portefeuille());
+	}
 	
 	/**
 	* Retourne le portefeuille du joueur.
