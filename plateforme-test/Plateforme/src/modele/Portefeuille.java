@@ -34,11 +34,11 @@ public class Portefeuille {
 		this.idPortefeuille = -1;
 	}
 	
-	// methodes : achat(titre, quantite) achat(option, quantite), achat(obligation, quantite)
-	// vendre(titre, quantite) vendre(option, quantite), vendre(obligation, quantite)
+	// methodes : achat(option, quantite), achat(obligation, quantite)
+	// vendre(option, quantite), vendre(obligation, quantite)
 
 	
-	public void acheter(Titre titre, int quantite){
+	public boolean acheter(Titre titre, int quantite){
 		if(titre.getNombreDisponible()>=quantite){
 			int quantiteTemp=0;
 			if(quantiteTitre.get(titre)!=null)
@@ -53,7 +53,10 @@ public class Portefeuille {
 		    quantiteTitre.put(titre, quantiteFinal);
 		    prixTitre.put(titre, prixFinal);
 			titre.setNombreDisponible(titre.getNombreDisponible()-quantite);
+			return true;
 	    }
+		else
+			return false;
 	}
 
     public void vendre(Titre titre, Integer quantite){
@@ -63,6 +66,29 @@ public class Portefeuille {
 		titre.setNombreDisponible(titre.getNombreDisponible()+quantite);
     }
 	
+    
+    public boolean acheter(Obligation obligation, Integer quantite){
+    	if(quantiteObligation.get(obligation)>=quantite){
+    		int quantiteTemp=0;
+			if(quantiteObligation.get(obligation)!=null)
+				quantiteTemp=quantiteObligation.get(obligation);
+			double tempPrix=0;
+			if(prixObligation.get(obligation)!=null)
+				tempPrix=prixObligation.get(obligation);
+			Date d=new Date();
+			double prixFinal=(quantiteTemp*tempPrix+quantite*obligation.getPrix());
+		    int quantiteFinal=quantiteTemp+quantite;
+		    prixFinal/=quantiteFinal;
+		    quantiteObligation.put(obligation, quantiteFinal);
+		    prixObligation.put(obligation, prixFinal);
+			obligation.setNombreDisponible(obligation.getNombreDisponible()-quantite);
+    		return true;
+    	}
+    	else return false;
+    }
+    
+    
+    //METHODE UTILISE DANS LE DAO POUR LE MOMENT
 	public void ajoutQuantiteTitre(Titre t, Integer q) {
 		getQuantiteTitre().put(t,q);
 	}
@@ -83,7 +109,7 @@ public class Portefeuille {
 	}
 	
 	
-	
+	//GETTER ET SETTER
 	public Double getArgentInvesti() {
 		return argentInvesti;
 	}
