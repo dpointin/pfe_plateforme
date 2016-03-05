@@ -111,12 +111,17 @@ public class Joueur {
 
 	
 	
-	// methodes : achat(titre, quantite) achat(option, quantite), achat(obligation, quantite)
-	// vendre(titre, quantite) vendre(option, quantite), vendre(obligation, quantite)
+	
+	public boolean achat(ObjetFinancier o, int quantite ){
+		return portefeuille.acheter(o, quantite);
+	}
+	
+	public boolean vendre(ObjetFinancier o, int quantite){
+		return portefeuille.vendre(o, quantite);
+	}
 
 	
 	
-
 	/**
 	* Retourne le portefeuille du joueur.
 	*

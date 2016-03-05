@@ -25,38 +25,40 @@ public class Portefeuille {
 		this.rendement = 0.0;
 		this.idPortefeuille = -1;
 	}
-	
-	// methodes : achat(option, quantite), achat(obligation, quantite)
-	// vendre(option, quantite), vendre(obligation, quantite)
 
 	
-	public boolean acheter(ObjetFinancier titre, int quantite){
-		if(titre.getNombreDisponible()>=quantite){
+	public boolean acheter(ObjetFinancier objetFinancier, int quantite){
+		if( (objetFinancier.getNombreDisponible()>=quantite) && (objetFinancier.getPrix()*quantite<=argentDisponible) ){
 			int quantiteTemp=0;
-			if(quantiteObjetFinancier.get(titre)!=null)
-				quantiteTemp=quantiteObjetFinancier.get(titre);
+			if(quantiteObjetFinancier.get(objetFinancier)!=null)
+				quantiteTemp=quantiteObjetFinancier.get(objetFinancier);
 			double tempPrix=0;
-			if(prixObjetFinancier.get(titre)!=null)
-				tempPrix=prixObjetFinancier.get(titre);
+			if(prixObjetFinancier.get(objetFinancier)!=null)
+				tempPrix=prixObjetFinancier.get(objetFinancier);
 			Date d=new Date();
-			double prixFinal=(quantiteTemp*tempPrix+quantite*titre.getPrix());
+			double prixFinal=(quantiteTemp*tempPrix+quantite*objetFinancier.getPrix());
 		    int quantiteFinal=quantiteTemp+quantite;
 		    prixFinal/=quantiteFinal;
-		    quantiteObjetFinancier.put(titre, quantiteFinal);
-		    prixObjetFinancier.put(titre, prixFinal);
-			titre.setNombreDisponible(titre.getNombreDisponible()-quantite);
+		    quantiteObjetFinancier.put(objetFinancier, quantiteFinal);
+		    prixObjetFinancier.put(objetFinancier, prixFinal);
+			objetFinancier.setNombreDisponible(objetFinancier.getNombreDisponible()-quantite);
 			return true;
 	    }
-		else
-			return false;
+		return false;
 	}
 
-    public void vendre(ObjetFinancier titre, Integer quantite){
-    	int tempQuantite=quantiteObjetFinancier.get(titre);
-    	tempQuantite-=quantite;
-    	quantiteObjetFinancier.put(titre, tempQuantite);
-		titre.setNombreDisponible(titre.getNombreDisponible()+quantite);
-    }
+    public boolean vendre(ObjetFinancier objetFinancier, Integer quantite){
+    	if(quantiteObjetFinancier.get(objetFinancier)!=null){
+	    	int tempQuantite=quantiteObjetFinancier.get(objetFinancier);
+	    	if(tempQuantite>=quantite){
+		    	tempQuantite-=quantite;
+		    	quantiteObjetFinancier.put(objetFinancier, tempQuantite);
+				objetFinancier.setNombreDisponible(objetFinancier.getNombreDisponible()+quantite);
+				return true;
+			}
+    	}
+    	return false;
+    }	
 	
     
     
@@ -106,7 +108,6 @@ public class Portefeuille {
 	public Integer getIdPortefeuille() {
 		return idPortefeuille;
 	}
-
 	public void setIdPortefeuille(Integer idPortefeuille) {
 		this.idPortefeuille = idPortefeuille;
 	}
