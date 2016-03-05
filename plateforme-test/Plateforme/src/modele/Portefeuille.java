@@ -1,5 +1,7 @@
 package modele;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Hashtable;
 public class Portefeuille {
 	
@@ -35,23 +37,24 @@ public class Portefeuille {
 	// methodes : achat(titre, quantite) achat(option, quantite), achat(obligation, quantite)
 	// vendre(titre, quantite) vendre(option, quantite), vendre(obligation, quantite)
 
-/*	public void ajouterAction(Action act, int quantite ){
-		int tempQuantite=quantiteTitre.get(act);
-		double tempPrix=prixTitre.get(act);
-		double prixFinal=(tempQuantite*tempPrix+quantite*act.getValeurDuJour());
-		int quantiteFinal=tempQuantite+quantite;
-		prixFinal/=(double)quantiteFinal;
-		quantiteTitre.put(act, quantiteFinal);
-		prixTitre.put(act, prixFinal);
-	}*/
 	
-/*	public void supprimerAction(Action act, int quantite){
-		int tempQuantite=quantiteAction.get(act);
-		tempQuantite-=quantite;
-		quantiteAction.put(act, tempQuantite);
-	}*/
+	public void acheter(Titre titre, int quantite){
+		int quantiteTemp=quantiteTitre.get(titre);
+		double tempPrix=prixTitre.get(titre);
+		double prixFinal=(quantiteTemp*tempPrix+quantite*titre.getHistorique().getFermetureJours(new GregorianCalendar()));
+	    int quantiteFinal=quantiteTemp+quantite;
+	    prixFinal/=quantiteFinal;
+	    quantiteTitre.put(titre, quantiteFinal);
+	    prixTitre.put(titre, prixFinal);
+	}
+
+    public void vendreAction(Titre titre, Integer quantite){
+    	int tempQuantite=quantiteTitre.get(titre);
+    	tempQuantite-=quantite;
+    	quantiteTitre.put(titre, tempQuantite);
+    }
 	
-	public void ajoutQuantiteTitre(Titre t, Integer q) {
+	/*public void ajoutQuantiteTitre(Titre t, Integer q) {
 		getQuantiteTitre().put(t,q);
 	}
 	public void ajoutPrixTitre(Titre t, Double p) {
@@ -68,7 +71,7 @@ public class Portefeuille {
 	}	
 	public void ajoutPrixOption(Option t, Double p) {
 		getPrixOption().put(t,p);
-	}
+	}*/
 	
 	
 	
