@@ -49,7 +49,7 @@ public class testHistoriqueDao {
 		}
 		
 		
-		GregorianCalendar d1 = new GregorianCalendar(2010,0,1);
+		GregorianCalendar d1 = new GregorianCalendar(2015,0,2);
 		System.out.println("Test de la fonction trouver");
 		Historique h_rep = h_dao.trouver("AAL", d1);
 		System.out.println(h_rep==null);
