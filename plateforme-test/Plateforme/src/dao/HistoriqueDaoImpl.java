@@ -1,7 +1,7 @@
 package dao;
 
 import java.util.GregorianCalendar;
-import java.util.Hashtable;
+import java.util.TreeMap;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -148,7 +148,7 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
         valeursCours.add(Double.parseDouble(resultSet.getString("volume")));
         valeursCours.add(Double.parseDouble(resultSet.getString("valeurAjustee")));
 
-        Hashtable<GregorianCalendar,Vector<Double>> ht = new Hashtable<GregorianCalendar,Vector<Double>>();
+        TreeMap<GregorianCalendar,Vector<Double>> ht = new TreeMap<GregorianCalendar,Vector<Double>>();
         ht.put(date, valeursCours);
         
         // si on recherch plusieurs date d'un cours

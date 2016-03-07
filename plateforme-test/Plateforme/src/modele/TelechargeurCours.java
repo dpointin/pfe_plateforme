@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Hashtable;
+import java.util.TreeMap;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -45,7 +45,7 @@ public class TelechargeurCours {
 			if(entree.hasNext()) //au cas ou mauvaise lecture
 				entree.nextLine();
 		
-			Hashtable<GregorianCalendar, Vector<Double>> ht = new Hashtable<GregorianCalendar, Vector<Double>>();
+			TreeMap<GregorianCalendar, Vector<Double>> ht = new TreeMap<GregorianCalendar, Vector<Double>>();
 			GregorianCalendar date_calendar = null;
 			Vector<Double> v = null;
 			
