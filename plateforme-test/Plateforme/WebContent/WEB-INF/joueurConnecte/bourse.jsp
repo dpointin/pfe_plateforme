@@ -11,37 +11,31 @@
 		<link type="text/css" rel="stylesheet" href="<c:url value="/inc/form.css"/>" />
 	</head>
 	
-	
 	<body>
-		<c:import url="/inc/menuBourse.jsp" />
+		<c:import url="/inc/menuConnecte.jsp" />
 		<br>
 		<h1> Titres </h1>
 		
-		<form method="post" action="<c:url value="/bourse" />">
-			<table>
-				<tr> 	<td>Voir historique</td> <td>Code</td> <td>Libellé</td>
-						<td>Type</td> <td>Rendement dividende</td> <td>Nombre disponible</td>
-				</tr>
-	
-				<c:forEach var="entry" items="${sessionScope['titres']}" >
-					<tr> <td> <input type="button" value="Historique" onclick="window.location='cours?code=${entry.code}'" ></td>
-					<c:set var="type" value="${fn:substringAfter(entry['class'],'.')}" />
-					<td>${entry.code}</td> <td>${entry.libelle}</td> <td>${type}</td>
-					<c:choose>  
-						<c:when test="${type eq 'Action'}"> 
-							<c:set var="dividende" value="${entry.dividende*10000}"/>
-							<c:set var="test" value="${fn:substringBefore(dividende,'.')}"/>
-							<td>  ${test/100} % </td> 
-						</c:when>
-						<c:when test="${type eq 'Indice'}"> <td> - </td> </c:when>
-					</c:choose>
-					<td>${entry.nombreDisponible}</td> </tr>
-				</c:forEach>
-				
-			</table>
-		</form>
+		<table>
+			<tr> 	<td>Voir historique</td> <td>Code</td> <td>Libellé</td>
+					<td>Type</td> <td>Rendement dividende</td> <td>Nombre disponible</td>
+			</tr>
 
+			<c:forEach var="entry" items="${requestScope['titres']}" >
+				<tr> <td> <input type="button" value="Historique" onclick="window.location='cours?code=${entry.code}'" ></td>
+				<c:set var="type" value="${fn:substringAfter(entry['class'],'.')}" />
+				<td>${entry.code}</td> <td>${entry.libelle}</td> <td>${type}</td>
+				<c:choose>  
+					<c:when test="${type eq 'Action'}"> 
+						<c:set var="dividende" value="${entry.dividende*10000}"/>
+						<c:set var="test" value="${fn:substringBefore(dividende,'.')}"/>
+						<td>  ${test/100} % </td> 
+					</c:when>
+					<c:when test="${type eq 'Indice'}"> <td> - </td> </c:when>
+				</c:choose>
+				<td>${entry.nombreDisponible}</td> </tr>
+			</c:forEach>
+			
+		</table>
 	</body>
-
-</body>
 </html>
