@@ -72,10 +72,8 @@ public class Bourse extends HttpServlet {
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		/* Affichage de la page de connexion */
 		ArrayList<Titre> titres = titreDao.trouverTousTitres();
-
-		/* Récupération de la session depuis la requête */
+	
 		HttpSession session = request.getSession();
-		
 		session.setAttribute( ATT_SESSION_TITRES, titres );
 		
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
@@ -98,9 +96,7 @@ public class Bourse extends HttpServlet {
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		ArrayList<Titre> titres = titreDao.trouverTousTitres();
 
-		/* Récupération de la session depuis la requête */
 		HttpSession session = request.getSession();
-		
 		session.setAttribute( ATT_SESSION_TITRES, titres );
 		
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );

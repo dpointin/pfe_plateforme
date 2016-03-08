@@ -32,7 +32,6 @@
 													                    [ '${date2}',  ${vecteur[2]}, ${vecteur[0]}, ${vecteur[3]}, ${vecteur[1]} ],
 													                </c:forEach>
 																], true);
-
 		                    		 
 		        // Set chart options
 		        var options = {
@@ -43,7 +42,7 @@
 
 		 
 		        // Instantiate and draw our chart, passing in some options.
-		        var chart = new google.visualization.CandlestickChart(document.getElementById('curve_chart'));
+		        var chart = new google.visualization.CandlestickChart(document.getElementById('chandelier'));
 		        chart.draw(data, options);
 		    }
 		</script>
@@ -51,8 +50,8 @@
 	
 	<body>
 		<c:import url="/inc/menuConnecte.jsp" />
-		<br>
-		<h1> Cours ${request['code']} </h1>
+
+		<h1> Chandeliers du cours : ${sessionScope['code']} </h1>
 			
 		<form method="post" action="<c:url value="/cours" />">
 			<input type="date" name="dateDebut"/>
@@ -64,5 +63,8 @@
 			</select>
 			<input type="submit" value="ChargerCours"/>
 		</form>
+		<br/>
+		
+		<div id="chandelier" style="width: 900px; height: 500px"></div>	
 	</body>
 </html>

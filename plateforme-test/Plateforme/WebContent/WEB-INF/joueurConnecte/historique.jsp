@@ -15,7 +15,7 @@
 	<body>
 		<c:import url="/inc/menuConnecte.jsp" />
 		<br>
-		<h1> Historique du cours : ${requestScope['code']} </h1>
+		<h1> Historique du cours : ${sessionScope['code']} </h1>
 	
 		
 		<form method="post" action="<c:url value="/cours" />">
@@ -34,7 +34,7 @@
 					<td>Fermeture</td> <td>Volume</td> <td>Fermeture ajustée</td>
 			</tr>
 
-			<c:forEach var="entry" items="${requestScope['cours'].valeurs}" >
+			<c:forEach var="entry" items="${sessionScope['cours'].valeurs}" >
 				<c:set var="date" value="${entry.key}"/>
 				<c:set var="vecteur" value="${entry.value}" />
 				<tr>

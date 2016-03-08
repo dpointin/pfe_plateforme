@@ -29,12 +29,12 @@ public class Cours extends HttpServlet {
 	/**
 	* ATT_SESSION_CODE correspond a l'attribut code
 	*/ 
-	public static final String ATT_REQUEST_CODE = "code";
+	public static final String ATT_SESSION_CODE = "code";
 	
 	/**
 	* ATT_SESSION_COURS correspond a l'attribut cours
 	*/ 
-	public static final String ATT_REQUEST_COURS = "cours";
+	public static final String ATT_SESSION_COURS = "cours";
 	
 	/**
 	* VUE correspond a la jsp lie a la servlet
@@ -84,14 +84,42 @@ public class Cours extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		this.code = request.getParameter("code");
-
-		Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2015,0,1),new GregorianCalendar());
-		
-		request.setAttribute( ATT_REQUEST_CODE, code );
-		request.setAttribute( ATT_REQUEST_COURS, cours );
-		
-		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+		System.out.println(this.code);		
+	//	if (request.getParameter("ChargerCours")!=null) {
+			System.out.println("dans le if du dopost");
+			String dateDebut = request.getParameter("dateDebut");
+			String dateFin = request.getParameter("dateFin");
+			System.out.println(dateDebut + "   " + dateFin);
+			// voir comment on récupère la date depuis la jsp !!
+			String typeGraphe = request.getParameter("typeGraphe");
+						
+			if (typeGraphe!=null && typeGraphe.equals("CHANDELIER")) {
+				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2016,2,1), new GregorianCalendar());
+				session.setAttribute( ATT_SESSION_CODE, code );
+				session.setAttribute( ATT_SESSION_COURS, cours );
+				this.getServletContext().getRequestDispatcher( VUE_CHANDELIER).forward( request, response );
+			} else if (typeGraphe!=null && typeGraphe.equals("CHART")) {
+				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2015,0,1), new GregorianCalendar());
+				session.setAttribute( ATT_SESSION_CODE, code );
+				session.setAttribute( ATT_SESSION_COURS, cours );
+				this.getServletContext().getRequestDispatcher( VUE_CHART).forward( request, response );
+			} else {
+				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2016,2,1), new GregorianCalendar());
+				session.setAttribute( ATT_SESSION_CODE, code );
+				session.setAttribute( ATT_SESSION_COURS, cours );
+				this.getServletContext().getRequestDispatcher( VUE).forward( request, response );
+			}
+	//	} else {
+		/*	Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2015,0,1),new GregorianCalendar());
+			
+			HttpSession session = request.getSession();
+			session.setAttribute( ATT_SESSION_CODE, code );
+			session.setAttribute( ATT_SESSION_COURS, cours );
+			
+			this.getServletContext().getRequestDispatcher( VUE).forward( request, response );*/
+	//	}
 	}
 	
 	
@@ -109,30 +137,43 @@ public class Cours extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		this.code = request.getParameter("code");
-		
-		if (request.getParameter("ChargerCours")!=null) {
+		HttpSession session = request.getSession();
+		this.code = (String) session.getAttribute("code");
+		System.out.println(this.code);
+	//	if (request.getParameter("ChargerCours")!=null) {
+		//	System.out.println("dans le if du dopost");
 			String dateDebut = request.getParameter("dateDebut");
 			String dateFin = request.getParameter("dateFin");
 			System.out.println(dateDebut + "   " + dateFin);
 			// voir comment on récupère la date depuis la jsp !!
 			String typeGraphe = request.getParameter("typeGraphe");
+			System.out.println(typeGraphe);
 			
-			Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2015,0,1), new GregorianCalendar());
-			
-			request.setAttribute( ATT_REQUEST_CODE, code );
-			request.setAttribute( ATT_REQUEST_COURS, cours );
-			
-			if (typeGraphe.equals("CHANDELIER")) {
+			if (typeGraphe!=null && typeGraphe.equals("CHANDELIER")) {
+				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2016,2,1), new GregorianCalendar());
+				session.setAttribute( ATT_SESSION_CODE, code );
+				session.setAttribute( ATT_SESSION_COURS, cours );
 				this.getServletContext().getRequestDispatcher( VUE_CHANDELIER).forward( request, response );
-			} else if (typeGraphe.equals("CHART")) {
+			} else if (typeGraphe!=null && typeGraphe.equals("CHART")) {
+				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2015,0,1), new GregorianCalendar());
+				session.setAttribute( ATT_SESSION_CODE, code );
+				session.setAttribute( ATT_SESSION_COURS, cours );
 				this.getServletContext().getRequestDispatcher( VUE_CHART).forward( request, response );
 			} else {
+				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2016,2,1), new GregorianCalendar());
+				session.setAttribute( ATT_SESSION_CODE, code );
+				session.setAttribute( ATT_SESSION_COURS, cours );
 				this.getServletContext().getRequestDispatcher( VUE).forward( request, response );
 			}
-		} else {
-			doGet(request,response);
-		}
+	//	} else {
+			/*Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2015,0,1),new GregorianCalendar());
+			
+			HttpSession session = request.getSession();
+			session.setAttribute( ATT_SESSION_CODE, code );
+			session.setAttribute( ATT_SESSION_COURS, cours );
+			
+			this.getServletContext().getRequestDispatcher( VUE).forward( request, response );*/
+	//	}
 	}
 
 	

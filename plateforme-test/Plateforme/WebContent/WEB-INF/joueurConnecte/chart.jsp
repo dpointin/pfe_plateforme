@@ -11,7 +11,7 @@
 		<title>Graphe</title>
 		<link type="text/css" rel="stylesheet" href="<c:url value="/inc/form.css"/>" />
 		
-				<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
  		<script type="text/javascript">
 		    // Load the Visualization API and the piechart package.
 		    google.load('visualization', '1.0', {
@@ -26,24 +26,26 @@
 		    function drawChart() {
 		        // Create the data table. 
 		        var data = google.visualization.arrayToDataTable([
-													                <c:forEach items="${cours.valeurs}" var="entry">
+													                <c:forEach items="${sessionScope['cours'].valeurs}" var="entry">
 																		<c:set var="date" value="${entry.key}"/>
-																		<c:set var="vecteur" value="${entry.value}" />
-													                    [ '${date2}',  ${vecteur[2]}, ${vecteur[0]}, ${vecteur[3]}, ${vecteur[1]} ],
+																		//<fmt:formatDate var="date2" type="both" dateStyle="full" value="${date.time}"/>
+																		<c:set var="vecteur" value="${entry.value}"/>
+													                    [ '${date2}',  ${vecteur[2]} ],
 													                </c:forEach>
 																], true);
 
 		                    		 
 		        // Set chart options
-		        var options = {
-		          title: 'Chandeliers',
-		         //curveType: 'function',
-		          legend: { position: 'bottom' }
-		        };
+		     	var options = {
+	    			title: 'Cours d\'ouverture',
+			        //curveType: 'function',
+			        legend: { position: 'bottom' }
+			    };
+
 
 		 
 		        // Instantiate and draw our chart, passing in some options.
-		        var chart = new google.visualization.Chart(document.getElementById('curve_chart'));
+		        var chart = new google.visualization.LineChart(document.getElementById('chart'));
 		        chart.draw(data, options);
 		    }
 		</script>
@@ -51,9 +53,8 @@
 	
 	<body>
 		<c:import url="/inc/menuConnecte.jsp" />
-		<br>
-		<h1> Graphe du cours : ${requestScope['code']} </h1>
-	
+		
+		<h1> Graphe du cours : ${sessionScope['code']} </h1>
 		
 		<form method="post" action="<c:url value="/cours" />">
 			<input type="date" name="dateDebut"/>
@@ -65,9 +66,8 @@
 			</select>
 			<input type="submit" value="ChargerCours"/>
 		</form>
-		
+		<br/>
 
-			
-		</table>
+		<div id="chart" style="width: 900px; height: 500px"></div>		
 	</body>
 </html>

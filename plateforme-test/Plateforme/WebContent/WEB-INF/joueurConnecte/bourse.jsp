@@ -21,7 +21,7 @@
 					<td>Type</td> <td>Rendement dividende</td> <td>Nombre disponible</td>
 			</tr>
 
-			<c:forEach var="entry" items="${requestScope['titres']}" >
+			<c:forEach var="entry" items="${sessionScope['titres']}" >
 				<tr> <td> <input type="button" value="Historique" onclick="window.location='cours?code=${entry.code}'" ></td>
 				<c:set var="type" value="${fn:substringAfter(entry['class'],'.')}" />
 				<td>${entry.code}</td> <td>${entry.libelle}</td> <td>${type}</td>
