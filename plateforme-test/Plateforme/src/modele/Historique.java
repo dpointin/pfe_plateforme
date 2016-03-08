@@ -1,14 +1,13 @@
 package modele;
 
 import java.util.GregorianCalendar;
-import java.util.Hashtable;
+import java.util.TreeMap;
 import java.util.Vector;
 
 public class Historique {
 
 	private String code;
-	private Hashtable<GregorianCalendar, Vector<Double>> valeurs;
-	// ATTENTION !! La Hashtable n'est pas triée selon les dates. VOIR testHistoriqueDao.java
+	private TreeMap<GregorianCalendar, Vector<Double>> valeurs;
 	/*	Vector<Double> :
 	 * 	0 : ouverture
 	 *  1 : haut
@@ -36,11 +35,11 @@ public class Historique {
 		this.code = code;
 	}
 	
-	public Hashtable<GregorianCalendar, Vector<Double>> getValeurs() {
+	public TreeMap<GregorianCalendar, Vector<Double>> getValeurs() {
 		return valeurs;
 	}
 
-	public void setValeurs(Hashtable<GregorianCalendar, Vector<Double>> valeurs) {
+	public void setValeurs(TreeMap<GregorianCalendar, Vector<Double>> valeurs) {
 		this.valeurs = valeurs;
 	}
 	
