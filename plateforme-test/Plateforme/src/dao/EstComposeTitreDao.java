@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.Vector;
 
 import modele.Portefeuille;
 import modele.Titre;
