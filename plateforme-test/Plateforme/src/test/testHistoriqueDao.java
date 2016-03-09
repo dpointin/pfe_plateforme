@@ -1,11 +1,6 @@
 package test;
 
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.GregorianCalendar;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Vector;
 
 import dao.DAOException;
 import dao.DAOFactory;

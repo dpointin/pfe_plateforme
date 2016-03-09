@@ -3,6 +3,7 @@ package test;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Hashtable;
+import java.util.TreeMap;
 import java.util.Vector;
 
 import modele.Action;
@@ -17,7 +18,7 @@ public class testPortefeuille {
 
 		Titre t=new Action("AAL", "aal",100, 2.1);
 		Historique h=new Historique();
-		Hashtable<GregorianCalendar, Vector<Double>> hash=new Hashtable<GregorianCalendar, Vector<Double>>();
+		TreeMap<GregorianCalendar, Vector<Double>> hash=new TreeMap<GregorianCalendar, Vector<Double>>();
 		Vector<Double> v=new Vector<Double>();
 		v.add(100000.0);
 		v.add(100000.0);

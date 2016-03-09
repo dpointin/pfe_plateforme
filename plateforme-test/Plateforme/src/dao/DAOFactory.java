@@ -189,4 +189,9 @@ public class DAOFactory {
 	public ObligationDao getObligationDao() {
 		return new ObligationDaoImpl( this );
 	}
+
+
+	public EstComposeTitreDao getEstComposeTitreDao() {
+		return new EstComposeTitreDaoImpl(this);
+	}
 } 

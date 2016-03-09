@@ -16,9 +16,9 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
 	private static final String SQL_SELECT = "SELECT * FROM EstComposeTitre WHERE idPortefeuille = ?";
 	private static final String SQL_DELETE_PORTEFEUILLE="DELETE FROM EstComposeTitre WHERE idPortefeuille=?";
 	private static final String SQL_DELETE_PORTEFEUILLE_CODE="DELETE FROM EstComposeTitre WHERE idPortefeuille=? AND code=?";
-    private static final String SQL_SELECT_CODE="SELECT CODE FROM EstComposeTitre WHERE idPortefeulle=? AND code=?";
-	private static final String SQL_INSERER="INSERT INTO EstComposeTitre (idPortefeuille, code, quantite, prixUnitaire )";
-    private static final String SQL_UPDATE="UPDATE EstComposeTitre SET quantite=?, prix=? WHERE idPortefeuille=? AND code=?";
+    private static final String SQL_SELECT_CODE="SELECT CODE FROM EstComposeTitre WHERE idPortefeuille=? AND code=?";
+	private static final String SQL_INSERER="INSERT INTO EstComposeTitre (idPortefeuille, code, quantite, prixUnitaire ) VALUES (?,?,?,?)";
+    private static final String SQL_UPDATE="UPDATE EstComposeTitre SET quantite=?, prixUnitaire=? WHERE idPortefeuille=? AND code=?";
 	
 	private DAOFactory daoFactory;
 
@@ -71,7 +71,7 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
             	Titre titre=t.recupererTitre(resultSet.getString("code"));
                 int qte=resultSet.getInt("quantite");
                 portefeuille.ajoutQuantiteObjetFinancier(titre, qte);
-                double prix=resultSet.getDouble("prix");
+                double prix=resultSet.getDouble("prixUnitaire");
                 portefeuille.ajoutPrixObjetFinancier(titre, prix);
             }
         } catch ( SQLException e ) {
