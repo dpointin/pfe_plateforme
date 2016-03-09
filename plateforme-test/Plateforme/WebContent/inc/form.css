@@ -2,8 +2,15 @@
 @CHARSET "UTF-8";
 
 body, p, legend, label, input {
-font: normal 8pt verdana, helvetica, sans-serif;
+font: normal 12pt verdana, helvetica, sans-serif;
 }
+
+h1 {
+	text-align : center ;
+	font-weight: bold;
+	color:#3366cc;
+}
+
 fieldset {
 padding: 10px;
 border: 1px #0568CD solid;
