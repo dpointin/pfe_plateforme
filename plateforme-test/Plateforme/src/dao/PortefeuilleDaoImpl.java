@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
+import modele.ObjetFinancier;
 import modele.Obligation;
 import modele.Option;
 import modele.Portefeuille;
@@ -20,10 +21,9 @@ import modele.TypePosition;
 public class PortefeuilleDaoImpl implements PortefeuilleDao {
 
     private static final String SQL_SELECT_PAR_LOGIN = "SELECT * FROM Portefeuille WHERE login = ?";
-    private static final String SQL_SELECT_PAR_IDPF_TITRES = "SELECT * FROM EstComposeTitre WHERE idPortefeuille = ?";
-    private static final String SQL_SELECT_PAR_IDPF_OPTIONS = "SELECT * FROM EstComposeOption WHERE idPortefeuille = ?";
-    private static final String SQL_SELECT_PAR_IDPF_OBLIGATIONS = "SELECT * FROM EstComposeObligation WHERE idPortefeuille = ?";
-
+    private static final String SQL_DELETE_CODE="DELETE FROM Portefeuille WHERE idPortefeuille=?";
+    private static final String SQL_INSERT="INSERT INTO Portefeuille (login, argentInvesti, argentDisponible, rendement VALUES (?,?,?,?)";
+    
     private static final String SQL_UPDATE_ARGENT_INVESTI = "";
     private static final String SQL_UPDATE_ARGENT_DISPONIBLE = "";
     
@@ -38,14 +38,38 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 	public Portefeuille charger(String login) throws DAOException {
 		Portefeuille p = charger(SQL_SELECT_PAR_LOGIN, login);
 		
-		chargerTitres(SQL_SELECT_PAR_IDPF_TITRES, p);
-		chargerOptions(SQL_SELECT_PAR_IDPF_OPTIONS, p);
-		chargerObligations(SQL_SELECT_PAR_IDPF_OBLIGATIONS, p);
+		EstComposeTitreDao estTitre=new EstComposeTitreDaoImpl(daoFactory);
+		estTitre.trouver(p);
+		EstComposeObligationDao estObligation= new EstComposeObligationDaoImpl(daoFactory);
+		estObligation.trouver(p);
 		
 		return p;
 	}
 
-	
+	@Override
+	public void creer(String login, Portefeuille portefeuille) throws DAOException {
+
+	}
+
+
+	@Override
+	public void mettreAJour(Portefeuille portefeuille, ObjetFinancier objetFinancier) throws DAOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void supprimer(String login) throws DAOException {
+		Portefeuille p=charger(login);
+		
+		EstComposeTitreDao estTitre=new EstComposeTitreDaoImpl(daoFactory);
+		estTitre.supprimer(p.getIdPortefeuille());
+		EstComposeObligationDao estCompose=new EstComposeObligationDaoImpl(daoFactory);
+		estCompose.supprimer(p.getIdPortefeuille());
+		
+		executeRequete(SQL_DELETE_CODE, p.getIdPortefeuille());
+	}
     
 
 // METHODES PRIVEES
@@ -77,8 +101,25 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
         return p;
     }
     
-    
+    private void executeRequete(String sql, Object...objects){
+    	Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objects);
+            int statut = preparedStatement.executeUpdate();
+            if ( statut == 0 ) {
+                throw new DAOException( "Échec de l'execution" );
+            }        
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( preparedStatement, connexion );
+        }
+    }
 
+    
   /*  private void chargerOptions( String sql, Portefeuille p) throws DAOException {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -181,23 +222,4 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 	}*/
 
 
-	@Override
-	public void creer(String login, Portefeuille portefeuille) throws DAOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mettreAJour(String login, Portefeuille portefeuille) throws DAOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void supprimer(String login) throws DAOException {
-		// TODO Auto-generated method stub
-		
-	}
 }

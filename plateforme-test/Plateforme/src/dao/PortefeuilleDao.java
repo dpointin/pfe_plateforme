@@ -1,5 +1,6 @@
 package dao;
 
+import modele.ObjetFinancier;
 import modele.Portefeuille;
 
 public interface PortefeuilleDao {
@@ -8,7 +9,7 @@ public interface PortefeuilleDao {
 	
 	Portefeuille charger(String login) throws DAOException;
 	
-	void mettreAJour(String login, Portefeuille portefeuille) throws DAOException;
+	void mettreAJour(Portefeuille portefeuille, ObjetFinancier objetFinancier) throws DAOException;
 	
 	void supprimer(String login) throws DAOException;
 	
