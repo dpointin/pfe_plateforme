@@ -7,34 +7,36 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 
+import modele.Obligation;
 import modele.Portefeuille;
 import modele.Titre;
 
-public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
-	
-	private static final String SQL_SELECT = "SELECT * FROM EstComposeTitre WHERE idPortefeuille = ?";
-	private static final String SQL_DELETE_PORTEFEUILLE="DELETE FROM EstComposeTitre WHERE idPortefeuille=?";
-	private static final String SQL_DELETE_PORTEFEUILLE_CODE="DELETE FROM EstComposeTitre WHERE idPortefeuille=? AND code=?";
-    private static final String SQL_SELECT_CODE="SELECT CODE FROM EstComposeTitre WHERE idPortefeuille=? AND code=?";
-	private static final String SQL_INSERER="INSERT INTO EstComposeTitre (idPortefeuille, code, quantite, prixUnitaire ) VALUES (?,?,?,?)";
-    private static final String SQL_UPDATE="UPDATE EstComposeTitre SET quantite=?, prixUnitaire=? WHERE idPortefeuille=? AND code=?";
+public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
+
+	private static final String SQL_SELECT = "SELECT * FROM EstComposeObligation WHERE idPortefeuille = ?";
+	private static final String SQL_DELETE_PORTEFEUILLE="DELETE FROM EstComposeObligation WHERE idPortefeuille=?";
+	private static final String SQL_DELETE_PORTEFEUILLE_EMETTEUR="DELETE FROM EstComposeObligation WHERE idPortefeuille=? AND emetteur=? AND dateFin=?";
+    private static final String SQL_SELECT_EMETTEUR="SELECT CODE FROM EstComposeTitre WHERE idPortefeuille=? AND emetteur=? AND dateFin=?";
+	private static final String SQL_INSERER="INSERT INTO EstComposeObligation (idPortefeuille, emetteur, quantite, dateFin) VALUES (?,?,?,?)";
+    private static final String SQL_UPDATE="UPDATE EstComposeObligation SET quantite=? WHERE idPortefeuille=? AND emetteur=? AND dateFin=?";
 	
 	private DAOFactory daoFactory;
 
-    EstComposeTitreDaoImpl( DAOFactory daoFactory ) {
+    EstComposeObligationDaoImpl( DAOFactory daoFactory ) {
         this.daoFactory = daoFactory;
     }
 
     @Override
-	public void mettreAJour(Portefeuille portefeuille, Titre titre) throws DAOException {
-    	if(portefeuille.getQuantiteObjetFinancier().get(titre)==0)
-    		executeRequete(SQL_DELETE_PORTEFEUILLE_CODE, portefeuille.getIdPortefeuille(), titre.getCode());
+	public void mettreAJour(Portefeuille portefeuille, Obligation obligation) throws DAOException {
+    	if(portefeuille.getQuantiteObjetFinancier().get(obligation)==0)
+    		executeRequete(SQL_DELETE_PORTEFEUILLE_EMETTEUR, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), obligation.getDateFin());
     	else
-    		if(trouverCode(SQL_SELECT_CODE,portefeuille.getIdPortefeuille(), titre.getCode())==false)
-    			executeRequete(SQL_INSERER, portefeuille.getIdPortefeuille(), titre.getCode(), portefeuille.getQuantiteObjetFinancier().get(titre), portefeuille.getPrixObjetFinancier().get(titre));
+    		if(trouverCode(SQL_SELECT_EMETTEUR,portefeuille.getIdPortefeuille(), obligation.getEmetteur(), obligation.getDateFin())==false)
+    			executeRequete(SQL_INSERER, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), obligation.getDateFin(), portefeuille.getQuantiteObjetFinancier().get(obligation));
     		else
-    			executeRequete(SQL_UPDATE, portefeuille.getQuantiteObjetFinancier().get(titre), portefeuille.getPrixObjetFinancier().get(titre), portefeuille.getIdPortefeuille(), titre.getCode());
+    			executeRequete(SQL_UPDATE, portefeuille.getQuantiteObjetFinancier().get(obligation),portefeuille.getIdPortefeuille(), obligation.getEmetteur(), obligation.getDateFin());
     }
 
 
@@ -67,12 +69,13 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de données retournée dans le ResultSet */
             while ( resultSet.next() ) {
-            	TitreDao t=new TitreDaoImpl(daoFactory);
-            	Titre titre=t.recupererTitre(resultSet.getString("code"));
+            	ObligationDao o=new ObligationDaoImpl(daoFactory);
+            	Obligation obligation=o.recupererObligation(resultSet.getString("emetteur"));
+            	//obligation.setDateFin(resultSet.getDate("dateFin"));
                 int qte=resultSet.getInt("quantite");
-                portefeuille.ajoutQuantiteObjetFinancier(titre, qte);
-                double prix=resultSet.getDouble("prixUnitaire");
-                portefeuille.ajoutPrixObjetFinancier(titre, prix);
+                portefeuille.ajoutQuantiteObjetFinancier(obligation, qte);
+                double prix=obligation.getPrix();
+                portefeuille.ajoutPrixObjetFinancier(obligation, prix);
             }
         } catch ( SQLException e ) {
             throw new DAOException( e );

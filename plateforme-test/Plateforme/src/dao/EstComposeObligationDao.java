@@ -1,7 +1,5 @@
 package dao;
 
-import java.util.Vector;
-
 import modele.Obligation;
 import modele.Portefeuille;
 
@@ -18,6 +16,6 @@ public interface EstComposeObligationDao {
 	
 	
 	//Renvoie toutes les obligations correspondant au joueur
-	Vector<Obligation> trouver(Portefeuille portefeuille) throws DAOException;
+	void trouver(Portefeuille portefeuille) throws DAOException;
 	
 }
