@@ -54,8 +54,18 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 
 	@Override
 	public void mettreAJour(Portefeuille portefeuille, ObjetFinancier objetFinancier) throws DAOException {
-		// TODO Auto-generated method stub
-		
+		if(objetFinancier instanceof Titre){
+			EstComposeTitreDao titre=new EstComposeTitreDaoImpl(daoFactory);
+			titre.mettreAJour(portefeuille, (Titre)objetFinancier); 
+		}else { if(objetFinancier instanceof Obligation){
+						EstComposeObligationDao obligation=new EstComposeObligationDaoImpl(daoFactory);
+						obligation.mettreAJour(portefeuille, (Obligation) objetFinancier); 
+				}else{
+					
+				}
+		}
+		executeRequete(SQL_UPDATE_ARGENT_DISPONIBLE, portefeuille.getArgentDisponible());
+		executeRequete(SQL_UPDATE_ARGENT_INVESTI, portefeuille.getArgentInvesti());
 	}
 
 
