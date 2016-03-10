@@ -33,8 +33,9 @@ public class Portefeuille {
 			double tempPrix=0;
 			if(prixObjetFinancier.get(objetFinancier)!=null)
 				tempPrix=prixObjetFinancier.get(objetFinancier);
-			Date d=new Date();
 			double prixFinal=(quantiteTemp*tempPrix+quantite*objetFinancier.getPrix());
+			argentDisponible-=prixFinal;
+			argentInvesti+=prixFinal;
 		    int quantiteFinal=quantiteTemp+quantite;
 		    prixFinal/=quantiteFinal;
 		    quantiteObjetFinancier.put(objetFinancier, quantiteFinal);
@@ -52,6 +53,8 @@ public class Portefeuille {
 		    	tempQuantite-=quantite;
 		    	quantiteObjetFinancier.put(objetFinancier, tempQuantite);
 				objetFinancier.setNombreDisponible(objetFinancier.getNombreDisponible()+quantite);
+				argentDisponible+=quantite*objetFinancier.getPrix();
+				argentInvesti-=quantite*objetFinancier.getPrix();
 				return true;
 			}
     	}
