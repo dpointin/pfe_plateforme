@@ -10,6 +10,17 @@
 		<meta charset="utf-8" />
 		<title>Historique</title>
 		<link type="text/css" rel="stylesheet" href="<c:url value="/inc/form.css"/>" />
+	  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+ 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<script>
+			 $(function() {
+			   $( "#datepicker" ).datepicker();
+			 });
+			 $(function() {
+				   $( "#datepicker2" ).datepicker();
+			 });
+		</script>
+  
 	</head>
 	
 	<body>
@@ -19,8 +30,10 @@
 	
 		
 		<form method="post" action="<c:url value="/cours" />">
-			<input type="date" name="dateDebut"/>
-			<input type="date" name="dateFin"/>
+		<!--	<input type="date" name="dateDebut"/>
+					<input type="date" name="dateFin"/>  -->
+			<p class="ll-skin-vigo">Date début : <input type="text" id="datepicker" class="ll-skin-vigo" name="dateDebut"></p>
+			<p class="ll-skin-vigo">Date fin : <input type="text" id="datepicker2" class="ll-skin-vigo" name="dateFin"></p>
 			<select name="typeGraphe">
 		 		<option value="CHART" selected>Courbes</option>
 				<option value="CHANDELIER">Chandeliers</option>

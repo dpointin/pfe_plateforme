@@ -91,22 +91,29 @@ public class Cours extends HttpServlet {
 			System.out.println("dans le if du dopost");
 			String dateDebut = request.getParameter("dateDebut");
 			String dateFin = request.getParameter("dateFin");
+			System.out.println(dateDebut);
+			String[] tabDebut = {"1","1","2015"};
+			String[] tabFin = {"1","1","2016"};
+			if (dateDebut != null && dateFin!=null) {
+				tabDebut = dateDebut.split("/");
+				tabFin = dateFin.split("/");
+			}
 			System.out.println(dateDebut + "   " + dateFin);
 			// voir comment on récupère la date depuis la jsp !!
 			String typeGraphe = request.getParameter("typeGraphe");
 						
 			if (typeGraphe!=null && typeGraphe.equals("CHANDELIER")) {
-				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2016,2,1), new GregorianCalendar());
+				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[0])-1,Integer.parseInt(tabDebut[1])), new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[0])-1,Integer.parseInt(tabFin[1])));
 				session.setAttribute( ATT_SESSION_CODE, code );
 				session.setAttribute( ATT_SESSION_COURS, cours );
 				this.getServletContext().getRequestDispatcher( VUE_CHANDELIER).forward( request, response );
 			} else if (typeGraphe!=null && typeGraphe.equals("CHART")) {
-				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2015,0,1), new GregorianCalendar());
+				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[0])-1,Integer.parseInt(tabDebut[1])), new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[0])-1,Integer.parseInt(tabFin[1])));
 				session.setAttribute( ATT_SESSION_CODE, code );
 				session.setAttribute( ATT_SESSION_COURS, cours );
 				this.getServletContext().getRequestDispatcher( VUE_CHART).forward( request, response );
 			} else {
-				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2016,2,1), new GregorianCalendar());
+				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[0])-1,Integer.parseInt(tabDebut[1])), new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[0])-1,Integer.parseInt(tabFin[1])));
 				session.setAttribute( ATT_SESSION_CODE, code );
 				session.setAttribute( ATT_SESSION_COURS, cours );
 				this.getServletContext().getRequestDispatcher( VUE).forward( request, response );
@@ -144,23 +151,28 @@ public class Cours extends HttpServlet {
 		//	System.out.println("dans le if du dopost");
 			String dateDebut = request.getParameter("dateDebut");
 			String dateFin = request.getParameter("dateFin");
+			String[] tabDebut = {"1","1","2015"};
+			String[] tabFin = {"1","1","2016"};
+			if (dateDebut != null && dateFin!=null) {
+				tabDebut = dateDebut.split("/");
+				tabFin = dateFin.split("/");
+			}
 			System.out.println(dateDebut + "   " + dateFin);
 			// voir comment on récupère la date depuis la jsp !!
 			String typeGraphe = request.getParameter("typeGraphe");
-			System.out.println(typeGraphe);
-			
+						
 			if (typeGraphe!=null && typeGraphe.equals("CHANDELIER")) {
-				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2016,2,1), new GregorianCalendar());
+				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[0])-1,Integer.parseInt(tabDebut[1])), new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[0])-1,Integer.parseInt(tabFin[1])));
 				session.setAttribute( ATT_SESSION_CODE, code );
 				session.setAttribute( ATT_SESSION_COURS, cours );
 				this.getServletContext().getRequestDispatcher( VUE_CHANDELIER).forward( request, response );
 			} else if (typeGraphe!=null && typeGraphe.equals("CHART")) {
-				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2015,0,1), new GregorianCalendar());
+				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[0])-1,Integer.parseInt(tabDebut[1])), new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[0])-1,Integer.parseInt(tabFin[1])));
 				session.setAttribute( ATT_SESSION_CODE, code );
 				session.setAttribute( ATT_SESSION_COURS, cours );
 				this.getServletContext().getRequestDispatcher( VUE_CHART).forward( request, response );
 			} else {
-				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(2016,2,1), new GregorianCalendar());
+				Historique cours = historiqueDao.trouver(code,new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[0])-1,Integer.parseInt(tabDebut[1])), new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[0])-1,Integer.parseInt(tabFin[1])));
 				session.setAttribute( ATT_SESSION_CODE, code );
 				session.setAttribute( ATT_SESSION_COURS, cours );
 				this.getServletContext().getRequestDispatcher( VUE).forward( request, response );

@@ -10,7 +10,16 @@
 		<meta charset="utf-8" />
 		<title>Graphe</title>
 		<link type="text/css" rel="stylesheet" href="<c:url value="/inc/form.css"/>" />
-		
+	  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+ 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<script>
+			 $(function() {
+			   $( "#datepicker" ).datepicker();
+			 });
+			 $(function() {
+				   $( "#datepicker2" ).datepicker();
+			 });
+		</script>
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
  		<script type="text/javascript">
 		    // Load the Visualization API and the piechart package.
@@ -57,8 +66,8 @@
 		<h1> Graphe du cours : ${sessionScope['code']} </h1>
 		
 		<form method="post" action="<c:url value="/cours" />">
-			<input type="date" name="dateDebut"/>
-			<input type="date" name="dateFin"/>
+			<p>Date début : <input type="text" id="datepicker" name="dateDebut"></p>
+			<p>Date fin : <input type="text" id="datepicker2" name="dateFin"></p>
 			<select name="typeGraphe">
 		 		<option value="CHART" selected>Courbes</option>
 				<option value="CHANDELIER">Chandeliers</option>
