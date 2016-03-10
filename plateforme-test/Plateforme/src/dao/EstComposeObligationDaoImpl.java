@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.GregorianCalendar;
 import java.util.Vector;
 
 import modele.Obligation;
@@ -71,7 +72,9 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
             while ( resultSet.next() ) {
             	ObligationDao o=new ObligationDaoImpl(daoFactory);
             	Obligation obligation=o.recupererObligation(resultSet.getString("emetteur"));
-            	//obligation.setDateFin(resultSet.getDate("dateFin"));
+            	GregorianCalendar dateFin = new GregorianCalendar();
+            	dateFin.setTime(resultSet.getDate("dateFin"));
+            	obligation.setDateFin(dateFin);
                 int qte=resultSet.getInt("quantite");
                 portefeuille.ajoutQuantiteObjetFinancier(obligation, qte);
                 double prix=obligation.getPrix();

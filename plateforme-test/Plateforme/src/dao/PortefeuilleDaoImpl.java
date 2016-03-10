@@ -24,7 +24,6 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
     private static final String SQL_SELECT_PAR_IDPF_OPTIONS = "SELECT * FROM EstComposeOption WHERE idPortefeuille = ?";
     private static final String SQL_SELECT_PAR_IDPF_OBLIGATIONS = "SELECT * FROM EstComposeObligation WHERE idPortefeuille = ?";
 
-    private static final String SQL_INSERT_OPTION = "INSERT INTO EstComposeOption (type, position, maturite, strike, prime, idPortefeuille, code) VALUES (?,?,?,?,?,?,?)";
     private static final String SQL_UPDATE_ARGENT_INVESTI = "";
     private static final String SQL_UPDATE_ARGENT_DISPONIBLE = "";
     
@@ -47,17 +46,6 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 	}
 
 	
-/*	
-	public void acquerirOption(TypeOption typeOption, TypePosition typePosition, GregorianCalendar maturite, Double strike, Double prime, Integer idPortefeuille, String code) throws DAOException {
-		acquerirOption(SQL_INSERT_OPTION, typeOption, typePosition, maturite, strike, prime, idPortefeuille, code);
-		investir(SQL_UPDATE_ARGENT_INVESTI, idPortefeuille, strike);
-	}
-
-
-	public void exercerOption(Integer idOption) {
-		// TODO Auto-generated method stub
-		
-	}*/
     
 
 // METHODES PRIVEES
@@ -89,52 +77,23 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
         return p;
     }
     
-    private void chargerTitres( String sql, Portefeuille p) throws DAOException {
+    
+
+  /*  private void chargerOptions( String sql, Portefeuille p) throws DAOException {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
-            /* Récupération d'une connexion depuis la Factory */
+            /* Récupération d'une connexion depuis la Factory 
             connexion = daoFactory.getConnection();
             /*
              * Préparation de la requête avec les objets passés en arguments
              * (ici, uniquement une adresse email) et exécution.
-             */
+             
             preparedStatement = initialisationRequetePreparee( connexion, sql, false, p.getIdPortefeuille());
             resultSet = preparedStatement.executeQuery();
-            /* Parcours de la ligne de données retournée dans le ResultSet */
-            while ( resultSet.next() ) {
-            	String code = resultSet.getString("code");
-            	Titre titre = daoFactory.getTitreDao().recupererTitre(code);
-            	Integer quantite = resultSet.getInt("quantite");
-            	Double prixUnitaire = (double) resultSet.getFloat("prixUnitaire");
-            	// set quantite et prix dans p
-            	p.ajoutPrixObjetFinancier(titre, prixUnitaire);
-            	p.ajoutQuantiteObjetFinancier(titre, quantite);            	
-            }
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
-        } finally {
-            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
-        }
-    }
-
-    private void chargerOptions( String sql, Portefeuille p) throws DAOException {
-        Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try {
-            /* Récupération d'une connexion depuis la Factory */
-            connexion = daoFactory.getConnection();
-            /*
-             * Préparation de la requête avec les objets passés en arguments
-             * (ici, uniquement une adresse email) et exécution.
-             */
-            preparedStatement = initialisationRequetePreparee( connexion, sql, false, p.getIdPortefeuille());
-            resultSet = preparedStatement.executeQuery();
-            /* Parcours de la ligne de données retournée dans le ResultSet */
+            /* Parcours de la ligne de données retournée dans le ResultSet 
             while ( resultSet.next() ) {
             	Integer idOption = resultSet.getInt("idOption");
             	TypeOption type ;
@@ -167,46 +126,8 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
         } finally {
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }
-    }
+    }*/
 
-
-	private void chargerObligations(String sql, Portefeuille p) {
-        Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try {
-            /* Récupération d'une connexion depuis la Factory */
-            connexion = daoFactory.getConnection();
-            /*
-             * Préparation de la requête avec les objets passés en arguments
-             * (ici, uniquement une adresse email) et exécution.
-             */
-            preparedStatement = initialisationRequetePreparee( connexion, sql, false, p.getIdPortefeuille());
-            resultSet = preparedStatement.executeQuery();
-            /* Parcours de la ligne de données retournée dans le ResultSet */
-            while ( resultSet.next() ) {
-            	String emetteur = resultSet.getString("emetteur");
-            	GregorianCalendar dateFin = new GregorianCalendar();
-            	dateFin.setTime(resultSet.getDate("dateFin"));
-            	
-            	Obligation obligation = daoFactory.getObligationDao().recupererObligation(emetteur);
-            	
-            	obligation.setDateFin(dateFin);
-            	
-            	Integer quantite = resultSet.getInt("nombre");
-            	Double prix = obligation.getPrix();
-            	
-            	// set quantite et prix dans p
-            	p.ajoutPrixObjetFinancier(obligation, prix); // prix*quantite?
-            	p.ajoutQuantiteObjetFinancier(obligation, quantite);            	
-            }
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
-        } finally {
-            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
-        }
-	}
     
     private static Portefeuille map( ResultSet resultSet ) throws SQLException {
         Portefeuille p = new Portefeuille();
@@ -223,7 +144,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
         return p;
     }
     
-	private void acquerirOption(String sql, TypeOption typeOption, TypePosition typePosition, GregorianCalendar maturite, Double strike, Double prime, Integer idPortefeuille, String code) throws DAOException {
+/*	private void acquerirOption(String sql, TypeOption typeOption, TypePosition typePosition, GregorianCalendar maturite, Double strike, Double prime, Integer idPortefeuille, String code) throws DAOException {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -239,9 +160,9 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
         } finally {
             fermeturesSilencieuses( preparedStatement, connexion );
         }	
-	}
+	}*/
 	
-	private void investir(String sql, Integer idPortefeuille, Double somme) {
+	/*private void investir(String sql, Integer idPortefeuille, Double somme) {
 	  	Connection connexion = null;
 		PreparedStatement preparedStatement = null;
 		try {
@@ -257,7 +178,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 		} finally {
 		    fermeturesSilencieuses( preparedStatement, connexion );
 		}	
-	}
+	}*/
 
 
 	@Override
