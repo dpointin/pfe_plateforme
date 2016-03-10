@@ -24,8 +24,8 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
     private static final String SQL_DELETE_CODE="DELETE FROM Portefeuille WHERE idPortefeuille=?";
     private static final String SQL_INSERT="INSERT INTO Portefeuille (login, argentInvesti, argentDisponible, rendement VALUES (?,?,?,?)";
     
-    private static final String SQL_UPDATE_ARGENT_INVESTI = "";
-    private static final String SQL_UPDATE_ARGENT_DISPONIBLE = "";
+    private static final String SQL_UPDATE_ARGENT_INVESTI = "UPDATE Portefeuille SET argentInvesti=? WHERE idPortefeuille=?";
+    private static final String SQL_UPDATE_ARGENT_DISPONIBLE = "UPDATE Portefeuille SET argentDisponible=? WHERE idPortefeuille=?";
     
     private DAOFactory daoFactory;
 
@@ -64,8 +64,8 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 					
 				}
 		}
-		executeRequete(SQL_UPDATE_ARGENT_DISPONIBLE, portefeuille.getArgentDisponible());
-		executeRequete(SQL_UPDATE_ARGENT_INVESTI, portefeuille.getArgentInvesti());
+		executeRequete(SQL_UPDATE_ARGENT_DISPONIBLE, portefeuille.getArgentDisponible(), portefeuille.getIdPortefeuille());
+		executeRequete(SQL_UPDATE_ARGENT_INVESTI, portefeuille.getArgentInvesti(), portefeuille.getIdPortefeuille());
 	}
 
 
