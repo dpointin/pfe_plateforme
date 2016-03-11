@@ -17,7 +17,7 @@ public class testEstComposeTitreDao {
 		public static void main(String[] args) {
 			DAOFactory fac= DAOFactory.getInstance();
 			EstComposeTitreDaoImpl estctdao = (EstComposeTitreDaoImpl) fac.getEstComposeTitreDao();
-			Titre t=new Action("AAL", "American Airlines Group Inc.",100, 2.1);
+			Titre t=new Action("AAL","Accor S.A.",100, 2.1);;
 			Historique h=new Historique();
 			TreeMap<GregorianCalendar, Vector<Double>> hash=new TreeMap<GregorianCalendar, Vector<Double>>();
 			Vector<Double> v=new Vector<Double>();
