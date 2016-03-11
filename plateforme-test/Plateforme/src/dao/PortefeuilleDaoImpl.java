@@ -22,7 +22,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 
     private static final String SQL_SELECT_PAR_LOGIN = "SELECT * FROM Portefeuille WHERE login = ?";
     private static final String SQL_DELETE_CODE="DELETE FROM Portefeuille WHERE idPortefeuille=?";
-    private static final String SQL_INSERT="INSERT INTO Portefeuille (login, argentInvesti, argentDisponible, rendement VALUES (?,?,?,?)";
+    private static final String SQL_INSERT="INSERT INTO Portefeuille (login, argentInvesti, argentDisponible, rendement) VALUES (?,?,?,?)";
     
     private static final String SQL_UPDATE_ARGENT_INVESTI = "UPDATE Portefeuille SET argentInvesti=? WHERE idPortefeuille=?";
     private static final String SQL_UPDATE_ARGENT_DISPONIBLE = "UPDATE Portefeuille SET argentDisponible=? WHERE idPortefeuille=?";
@@ -61,6 +61,16 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
             if ( statut == 0 ) {
                 throw new DAOException( "Échec de la creation de la table" );
             }
+ 
+			Iterator it;
+			it=portefeuille.getPrixObjetFinancier().keySet().iterator(); // on cree un iterator sur les clés de ton hashmap
+			 
+			while(it.hasNext())
+			{
+			   ObjetFinancier key=(ObjetFinancier) it.next();
+			   mettreAJour(portefeuille,key);
+			}
+        
         } catch ( SQLException e ) {
             throw new DAOException( e );
         } finally {
@@ -95,6 +105,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 		EstComposeObligationDao estCompose=new EstComposeObligationDaoImpl(daoFactory);
 		estCompose.supprimer(p.getIdPortefeuille());
 		
+		//Dans cet ordre sinon problème de supprimer une foreign key
 		executeRequete(SQL_DELETE_CODE, p.getIdPortefeuille());
 	}
     

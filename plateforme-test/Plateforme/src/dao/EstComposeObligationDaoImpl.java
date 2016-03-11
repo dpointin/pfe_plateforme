@@ -8,18 +8,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.GregorianCalendar;
-import java.util.Vector;
 
 import modele.Obligation;
 import modele.Portefeuille;
-import modele.Titre;
 
 public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
 
 	private static final String SQL_SELECT = "SELECT * FROM EstComposeObligation WHERE idPortefeuille = ?";
 	private static final String SQL_DELETE_PORTEFEUILLE="DELETE FROM EstComposeObligation WHERE idPortefeuille=?";
 	private static final String SQL_DELETE_PORTEFEUILLE_EMETTEUR="DELETE FROM EstComposeObligation WHERE idPortefeuille=? AND emetteur=? AND dateFin=?";
-    private static final String SQL_SELECT_EMETTEUR="SELECT CODE FROM EstComposeTitre WHERE idPortefeuille=? AND emetteur=? AND dateFin=?";
+    private static final String SQL_SELECT_EMETTEUR="SELECT emetteur FROM EstComposeObligation WHERE idPortefeuille=? AND emetteur=? AND dateFin=?";
 	private static final String SQL_INSERER="INSERT INTO EstComposeObligation (idPortefeuille, emetteur, quantite, dateFin) VALUES (?,?,?,?)";
     private static final String SQL_UPDATE="UPDATE EstComposeObligation SET quantite=? WHERE idPortefeuille=? AND emetteur=? AND dateFin=?";
 	
@@ -31,13 +29,13 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
 
     @Override
 	public void mettreAJour(Portefeuille portefeuille, Obligation obligation) throws DAOException {
-    	if(portefeuille.getQuantiteObjetFinancier().get(obligation)==0)
-    		executeRequete(SQL_DELETE_PORTEFEUILLE_EMETTEUR, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), obligation.getDateFin());
-    	else
-    		if(trouverCode(SQL_SELECT_EMETTEUR,portefeuille.getIdPortefeuille(), obligation.getEmetteur(), obligation.getDateFin())==false)
-    			executeRequete(SQL_INSERER, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), obligation.getDateFin(), portefeuille.getQuantiteObjetFinancier().get(obligation));
-    		else
-    			executeRequete(SQL_UPDATE, portefeuille.getQuantiteObjetFinancier().get(obligation),portefeuille.getIdPortefeuille(), obligation.getEmetteur(), obligation.getDateFin());
+    	if(portefeuille.getQuantiteObjetFinancier().get(obligation)==0){
+    		executeRequete(SQL_DELETE_PORTEFEUILLE_EMETTEUR, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));    	
+    	}else
+    		if(trouverEmetteurDate(SQL_SELECT_EMETTEUR,portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()))==false){
+    			executeRequete(SQL_INSERER, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), portefeuille.getQuantiteObjetFinancier().get(obligation), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));
+    		}	else
+    			executeRequete(SQL_UPDATE, portefeuille.getQuantiteObjetFinancier().get(obligation),portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));
     }
 
 
@@ -106,7 +104,7 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
         }
 	}
 	
-	private boolean trouverCode(String sql, Object... objets){
+	private boolean trouverEmetteurDate(String sql, Object... objets){
 		boolean b=false;
 		
 		Connection connexion = null;
