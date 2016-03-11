@@ -27,7 +27,8 @@
 	        ]);
 	
 	        var options = {
-	          title: 'Répartition du portefeuille'
+	          title: 'Répartition du portefeuille',
+	          is3D: true
 	        };
 	
 	        var chart = new google.visualization.PieChart(document.getElementById('camembert'));
@@ -40,13 +41,13 @@
 	
 	<body>
 		<c:import url="/inc/menuConnecte.jsp" />
-		
+
 		<h1>Indicateurs :</h1>
 		<table>
 			<tr><th>Distribution des actifs</th>
 				<th>Evolution des titres durant les 100 derniers jours de la bourse</th>
 			</tr>
-			<tr><td> <div id="piechart" style="width: 400px; height: 400px;"></div></td>
+			<tr><td> <div id="camembert" style="width: 400px; height: 400px;"></div></td>
 				<td>Courbe des titres</td>
 			</tr>
 			

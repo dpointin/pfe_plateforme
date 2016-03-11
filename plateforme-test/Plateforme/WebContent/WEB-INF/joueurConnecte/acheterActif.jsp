@@ -22,7 +22,16 @@
 	
 		<form method="post" action="<c:url value="/achat" />">
 			Titre :
-			Quantite :
+			<select name="code">
+				<c:forEach var="entry" items="${sessionScope['titres']}" >
+				<c:set var="type" value="${fn:substringAfter(entry['class'],'.')}" />
+				<c:if test="${type eq 'Action'}">
+			 			<option value="${entry.code}" selected>${entry.libelle}</option>
+				</c:if>
+
+				</c:forEach>		
+			</select>			
+			Quantite : <input type="text" name="quantite">
 			<input type="submit" value="Acheter" >
 		</form>
 			

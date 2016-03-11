@@ -1,6 +1,8 @@
 package controleur;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,9 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DAOFactory;
+import dao.HistoriqueDao;
 import dao.PortefeuilleDao;
+import dao.TitreDao;
+import modele.Historique;
 import modele.Joueur;
 import modele.Portefeuille;
+import modele.Titre;
 
 public class Achat extends HttpServlet {
 	/**
@@ -34,11 +40,22 @@ public class Achat extends HttpServlet {
 	*/ 
 	public static final String ATT_SESSION_JOUEUR = "sessionJoueur";
 	
+	/**
+	* ATT_SESSION_JOUEUR correspond a l'attribut titres
+	*/ 
+	public static final String ATT_SESSION_TITRES = "titres";
+
 	
 	/**
 	* VUE correspond a la jsp lie a la servlet
 	*/ 
-	public static final String VUE = "/WEB-INF/joueurConnecte/portefeuille.jsp";
+	public static final String VUE = "/WEB-INF/joueurConnecte/acheterActif.jsp";
+	
+	
+	/**
+	* VUE correspond a la jsp lie a la servlet
+	*/ 
+	public static final String VUE_PORTEFEUILLE = "/WEB-INF/joueurConnecte/portefeuille.jsp";
 	
 	/**
 	* VUE correspond a la jsp lie a la servlet
@@ -49,8 +66,8 @@ public class Achat extends HttpServlet {
 	* Le joueurDao de notre servlet
 	*/ 
 	private PortefeuilleDao portefeuilleDao;
-	
-	/**
+	private HistoriqueDao historiqueDao;
+	private TitreDao titreDao;	/**
 	* Implementation de la methode init 
 	* 
 	* @throws ServletException si jamais la recuperation de l'instance se passe mal
@@ -58,6 +75,8 @@ public class Achat extends HttpServlet {
 	public void init() throws ServletException {
 		/* Récupération d'une instance de nos DAO Obligation et Titre */
 		this.portefeuilleDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPortefeuilleDao();
+		this.titreDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTitreDao();
+		this.historiqueDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getHistoriqueDao();
 	}
 	
 	/**
@@ -74,17 +93,11 @@ public class Achat extends HttpServlet {
 	*/ 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		/* Affichage de la page de connexion */
-		HttpSession session = request.getSession();
-		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
+		ArrayList<Titre> titres = titreDao.trouverTousTitres();
 		
-		Portefeuille portefeuille = portefeuilleDao.charger(joueur.getLogin());
-		if (portefeuille != null) {
-			session.setAttribute( ATT_SESSION_PORTEFEUILLE, portefeuille );
-		} else {
-			session.setAttribute( ATT_SESSION_PORTEFEUILLE, new Portefeuille() );
-			
-		}
-
+		HttpSession session = request.getSession();
+		session.setAttribute( ATT_SESSION_TITRES, titres );
+	
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}
 	
@@ -103,7 +116,23 @@ public class Achat extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {		
-		this.getServletContext().getRequestDispatcher( VUE_GESTION_PORTEFEUILLE ).forward( request, response );
+		HttpSession session = request.getSession();
+		String code = request.getParameter("code");
+		Integer quantite = Integer.parseInt(request.getParameter("quantite"));
+		
+		Titre titre = titreDao.recupererTitre(code);
+		// a mettre dans recupererTitre
+		Historique historique = historiqueDao.trouver(code, new GregorianCalendar(2015,1,1), new GregorianCalendar());
+		titre.setHistorique(historique);
+		
+		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
+		Portefeuille portefeuille = portefeuilleDao.charger(joueur.getLogin());
+		
+		portefeuille.acheter(titre, quantite);
+		
+		portefeuilleDao.mettreAJour(portefeuille, titre);
+		
+		this.getServletContext().getRequestDispatcher( VUE_PORTEFEUILLE ).forward( request, response );
 	}
 
 	

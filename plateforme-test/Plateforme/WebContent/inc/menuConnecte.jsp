@@ -5,6 +5,7 @@
 <ul>
 	<li> <a href="<c:url value="/bourse"/>"> Bourse </a> </li>
 	<li> <a href="<c:url value="/portefeuilleGeneral"/>"> Portefeuille </a> </li>
+	<li> <a href="<c:url value="/achat"/>"> Acheter </a> </li>
 	<li> <a href="<c:url value="/deconnexion"/>"> Deconnexion </a> </li>
 </ul>
 </nav>

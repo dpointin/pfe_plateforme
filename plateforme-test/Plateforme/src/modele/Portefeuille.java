@@ -107,13 +107,15 @@ public class Portefeuille {
 	public Integer[] getCamembert() {
 		// obligation, ation, indice, option
 		Integer[] n = {0,0,0,0};
-		
+		System.out.println("je suis dans cammebert");
 		Iterator<ObjetFinancier> it = quantiteObjetFinancier.keySet().iterator(); 
 		while(it.hasNext()) {
 		   ObjetFinancier key = it.next();
 		   if (key instanceof Obligation) {
+				System.out.println("je suis dans obligaton");
 			   n[0] = n[0] + quantiteObjetFinancier.get(key);
 		   } else if  (key instanceof Action) {
+				System.out.println("je suis dans action");
 			   n[1] = n[1] + quantiteObjetFinancier.get(key);			   
 		   } else if  (key instanceof Indice) {
 			   n[2] = n[2] + quantiteObjetFinancier.get(key);			   
