@@ -18,7 +18,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 
     private static final String SQL_SELECT_PAR_LOGIN = "SELECT * FROM Portefeuille WHERE login = ?";
     private static final String SQL_DELETE_CODE="DELETE FROM Portefeuille WHERE idPortefeuille=?";
-    private static final String SQL_INSERT="INSERT INTO Portefeuille (login, argentDisponible, rendement) VALUES (?,?,?,?)";
+    private static final String SQL_INSERT="INSERT INTO Portefeuille (login, argentDisponible, rendement) VALUES (?,?,?)";
     
     private static final String SQL_UPDATE_ARGENT_DISPONIBLE = "UPDATE Portefeuille SET argentDisponible=? WHERE idPortefeuille=?";
     

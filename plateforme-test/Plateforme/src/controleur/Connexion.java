@@ -144,14 +144,18 @@ public class Connexion extends HttpServlet {
 		if(session.getAttribute(ATT_SESSION_JOUEUR)==null)
 			this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 		else{
-/**			TitreDao titreDao=( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTitreDao();
+		/*	TitreDao titreDao=( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTitreDao();
 			ArrayList<String> t=titreDao.trouverTousCodes();
+			int k = 0;
 			for(String s : t){
+				k++;
 				HistoriqueDao hDao=( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getHistoriqueDao();
 				hDao.mettreAJour(s);
 				System.out.println(s);
+				if (k == 1) break;
+				
 			}
-*/			this.getServletContext().getRequestDispatcher( VUE_CONNECTE ).forward( request, response );
+		*/	this.getServletContext().getRequestDispatcher( VUE_CONNECTE ).forward( request, response );
 		}
 	}
 

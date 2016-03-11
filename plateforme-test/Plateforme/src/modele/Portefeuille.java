@@ -2,7 +2,6 @@ package modele;
 
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Map;
 public class Portefeuille {
 	
 	private Double argentDisponible;

@@ -24,13 +24,13 @@
 		<table>
 			<tr>
 				<td>Argent disponible : ${sessionScope['portefeuille'].argentDisponible}<br/>
-				Argent investi : ${sessionScope['portefeuille'].argentInvesti}<br/>
 				Rendement : ${sessionScope['portefeuille'].rendement}</td>
 			
 				<td>
 					<form method="post" action="<c:url value="/portefeuilleGeneral" />">
-						<input type="submit" value="Gestion de mon portefeuille" ></td>
+						<input type="submit" value="Gestion de mon portefeuille" >
 					</form>
+				</td>
 			</tr>
 		</table>
 		

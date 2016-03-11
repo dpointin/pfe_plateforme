@@ -35,6 +35,11 @@
     <servlet-name>PortefeuilleGeneral</servlet-name>
     <servlet-class>controleur.PortefeuilleGeneral</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Achat</servlet-name>
+    <servlet-class>controleur.Achat</servlet-class>
+  </servlet> 
+  
   <servlet-mapping>
     <servlet-name>Inscription</servlet-name>
     <url-pattern>/inscription</url-pattern>
@@ -58,6 +63,10 @@
   <servlet-mapping>
     <servlet-name>PortefeuilleGeneral</servlet-name>
     <url-pattern>/portefeuilleGeneral</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Achat</servlet-name>
+    <url-pattern>/achat</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>Set Character Encoding</filter-name>
