@@ -1,4 +1,4 @@
-package test;
+package test.testModele;
 
 import java.util.Date;
 import java.util.GregorianCalendar;

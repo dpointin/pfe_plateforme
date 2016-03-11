@@ -1,4 +1,4 @@
-package test;
+package test.testdao;
 
 import dao.JoueurDaoImpl;
 import modele.Joueur;
