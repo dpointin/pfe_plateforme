@@ -38,11 +38,12 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 	public Portefeuille charger(String login) throws DAOException {
 		Portefeuille p = charger(SQL_SELECT_PAR_LOGIN, login);
 		
-		EstComposeTitreDao estTitre=new EstComposeTitreDaoImpl(daoFactory);
-		estTitre.trouver(p);
-		EstComposeObligationDao estObligation= new EstComposeObligationDaoImpl(daoFactory);
-		estObligation.trouver(p);
-		
+		if(p!=null){
+			EstComposeTitreDao estTitre=new EstComposeTitreDaoImpl(daoFactory);
+			estTitre.trouver(p);
+			EstComposeObligationDao estObligation= new EstComposeObligationDaoImpl(daoFactory);
+			estObligation.trouver(p);
+		}
 		return p;
 	}
 
