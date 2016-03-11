@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.Map;
 public class Portefeuille {
 	
-	private Double argentInvesti;
 	private Double argentDisponible;
 	private Hashtable<ObjetFinancier,Integer> quantiteObjetFinancier;
 	private Hashtable<ObjetFinancier,Double> prixObjetFinancier;	
@@ -18,7 +17,6 @@ public class Portefeuille {
 
 	public Portefeuille(Double argentDisponible) {
 		super();
-		this.argentInvesti = 0.0;
 		this.argentDisponible = argentDisponible;
 		this.quantiteObjetFinancier = new  Hashtable<ObjetFinancier,  Integer>();
 		this.prixObjetFinancier = new Hashtable<ObjetFinancier, Double>();
@@ -36,7 +34,6 @@ public class Portefeuille {
 				tempPrix=prixObjetFinancier.get(objetFinancier);
 			double prixFinal=(quantiteTemp*tempPrix+quantite*objetFinancier.getPrix());
 			argentDisponible-=prixFinal;
-			argentInvesti+=prixFinal;
 		    int quantiteFinal=quantiteTemp+quantite;
 		    prixFinal/=quantiteFinal;
 		    quantiteObjetFinancier.put(objetFinancier, quantiteFinal);
@@ -55,7 +52,6 @@ public class Portefeuille {
 		    	quantiteObjetFinancier.put(objetFinancier, tempQuantite);
 				objetFinancier.setNombreDisponible(objetFinancier.getNombreDisponible()+quantite);
 				argentDisponible+=quantite*objetFinancier.getPrix();
-				argentInvesti-=quantite*objetFinancier.getPrix();
 				return true;
 			}
     	}
@@ -76,12 +72,6 @@ public class Portefeuille {
 	
 	
 	//GETTER ET SETTER
-	public Double getArgentInvesti() {
-		return argentInvesti;
-	}
-	public void setArgentInvesti(Double argentInvesti) {
-		this.argentInvesti = argentInvesti;
-	}
 	public Double getArgentDisponible() {
 		return argentDisponible;
 	}

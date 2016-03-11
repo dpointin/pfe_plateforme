@@ -26,7 +26,6 @@ create table Joueur(
 create table Portefeuille(
     idPortefeuille INTEGER AUTO_INCREMENT not null,
     login varchar(20) not null UNIQUE,
-    argentInvesti FLOAT not null,
     argentDisponible FLOAT not null,
     rendement FLOAT,
 
