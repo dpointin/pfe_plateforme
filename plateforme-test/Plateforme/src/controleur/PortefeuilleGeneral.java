@@ -45,6 +45,11 @@ public class PortefeuilleGeneral extends HttpServlet {
 	public static final String VUE = "/WEB-INF/joueurConnecte/portefeuille.jsp";
 	
 	/**
+	* VUE correspond a la jsp lie a la servlet
+	*/ 
+	public static final String VUE_GESTION_PORTEFEUILLE = "/WEB-INF/joueurConnecte/gestionPortefeuille.jsp";
+	
+	/**
 	* Le joueurDao de notre servlet
 	*/ 
 	private PortefeuilleDao portefeuilleDao;
@@ -76,10 +81,14 @@ public class PortefeuilleGeneral extends HttpServlet {
 		HttpSession session = request.getSession();
 		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
 		
-		Portefeuille portefeuille = portefeuilleDao.charger(joueur.getLogin());
-		
-		session.setAttribute( ATT_SESSION_PORTEFEUILLE, portefeuille );
-		
+		Portefeuille portefeuille = null ;// = portefeuilleDao.charger(joueur.getLogin());
+		if (portefeuille != null) {
+			session.setAttribute( ATT_SESSION_PORTEFEUILLE, portefeuille );
+		} else {
+			session.setAttribute( ATT_SESSION_PORTEFEUILLE, new Portefeuille() );
+			
+		}
+
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}
 	
@@ -98,7 +107,7 @@ public class PortefeuilleGeneral extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {		
-		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+		this.getServletContext().getRequestDispatcher( VUE_GESTION_PORTEFEUILLE ).forward( request, response );
 	}
 
 	

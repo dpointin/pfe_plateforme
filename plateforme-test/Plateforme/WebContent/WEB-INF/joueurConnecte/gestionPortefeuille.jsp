@@ -12,6 +12,29 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link type="text/css" rel="stylesheet" href="<c:url value="/inc/form.css"/>" />
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	    <script type="text/javascript">
+	      google.charts.load('current', {'packages':['corechart']});
+	      google.charts.setOnLoadCallback(drawChart);
+	      function drawChart() {
+	
+	        var data = google.visualization.arrayToDataTable([
+	            ['Type', 		'Quantité'],
+	          	['Obligation', 	${portefeuille.camembert[0]}],
+	          	['Action',  	${portefeuille.camembert[1]}],
+	          	['Indice',  	${portefeuille.camembert[2]}],
+	          	['Option',  	${portefeuille.camembert[3]}]
+	        ]);
+	
+	        var options = {
+	          title: 'Répartition du portefeuille'
+	        };
+	
+	        var chart = new google.visualization.PieChart(document.getElementById('camembert'));
+	
+	        chart.draw(data, options);
+	      }
+	    </script>
 		<title>Gestion de mon portefeuille</title>
 	</head>
 	
@@ -20,8 +43,13 @@
 		
 		<h1>Indicateurs :</h1>
 		<table>
-			<tr><td><h2>Distribution des actifs</h2></td> <td><h2>Evolution des titres durant les 100 derniers jours de la bourse</h2></td> </tr>
-			<tr><td>Camembert</td> <td>Courbe des titres</td></tr>
+			<tr><th>Distribution des actifs</th>
+				<th>Evolution des titres durant les 100 derniers jours de la bourse</th>
+			</tr>
+			<tr><td> <div id="piechart" style="width: 400px; height: 400px;"></div></td>
+				<td>Courbe des titres</td>
+			</tr>
+			
 		</table>
 		
 		<h1>Problème d'optimisation de Markowitz :</h1>
