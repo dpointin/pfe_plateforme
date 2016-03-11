@@ -10,16 +10,28 @@
 		<meta charset="utf-8" />
 		<title>Chandeliers</title>
 		<link type="text/css" rel="stylesheet" href="<c:url value="/inc/form.css"/>" />
+		<link type="text/css" rel="stylesheet" href="<c:url value="/inc/datepicker.css"/>" />
 	  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
- 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		<script>
-			 $(function() {
-			   $( "#datepicker" ).datepicker();
-			 });
-			 $(function() {
-				   $( "#datepicker2" ).datepicker();
-			 });
+		 	$(function(){
+		        $('#datepicker').datepicker({
+		            inline: true,
+		            showOtherMonths: true,
+		            monthNames: [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" ],
+		            dayNamesMin: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+		        });
+	    	});
+		 	$(function(){
+		    	$('#datepicker2').datepicker({
+		        	inline: true,
+		            showOtherMonths: true,
+		            monthNames: [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" ],
+		            dayNamesMin: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+		        });
+			});
 		</script>
+		
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
  		<script type="text/javascript">
 		    // Load the Visualization API and the piechart package.
@@ -37,6 +49,7 @@
 		        var data = google.visualization.arrayToDataTable([
 													                <c:forEach items="${cours.valeurs}" var="entry">
 																		<c:set var="date" value="${entry.key}"/>
+																		<fmt:formatDate var="date2" type="date" dateStyle="short" value="${date.time}"/>
 																		<c:set var="vecteur" value="${entry.value}" />
 													                    [ '${date2}',  ${vecteur[2]}, ${vecteur[0]}, ${vecteur[3]}, ${vecteur[1]} ],
 													                </c:forEach>
@@ -63,8 +76,8 @@
 		<h1> Chandeliers du cours : ${sessionScope['code']} </h1>
 			
 		<form method="post" action="<c:url value="/cours" />">
-			<p>Date début : <input type="text" id="datepicker" name="dateDebut"></p>
-			<p>Date fin : <input type="text" id="datepicker2" name="dateFin"></p>
+			Date début : <div> <input type="text" id="datepicker" name="dateDebut"></div>
+			Date fin : <div> <input type="text" id="datepicker2" name="dateFin"></div>
 			<select name="typeGraphe">
 		 		<option value="CHART" selected>Courbes</option>
 				<option value="CHANDELIER">Chandeliers</option>
