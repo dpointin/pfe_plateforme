@@ -1,10 +1,7 @@
 package test.testdao;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.TreeMap;
 import java.util.Vector;
 
@@ -14,7 +11,6 @@ import dao.PortefeuilleDaoImpl;
 import modele.Action;
 import modele.Historique;
 import modele.Obligation;
-import modele.Option;
 import modele.Portefeuille;
 import modele.Titre;
 
