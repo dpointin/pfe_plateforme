@@ -1,4 +1,4 @@
-package test;
+package test.testdao;
 
 import java.util.Collections;
 import java.util.Enumeration;

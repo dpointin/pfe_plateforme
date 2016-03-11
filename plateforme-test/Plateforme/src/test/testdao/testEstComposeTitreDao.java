@@ -1,4 +1,4 @@
-package test;
+package test.testdao;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
