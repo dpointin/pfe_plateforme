@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DAOFactory;
 import dao.JoueurDao;
+import dao.PortefeuilleDao;
 import formulaire.InscriptionForm;
 import modele.Joueur;
+import modele.Portefeuille;
 
 /**
 * Servlet inscription gerant l'inscription d'un joueur
@@ -53,6 +55,10 @@ public class Inscription extends HttpServlet {
 	*/ 
 	private JoueurDao joueurDao;
 	
+	/**
+	* Le joueurDao de notre servlet
+	*/ 
+	private PortefeuilleDao portefeuilleDao;
 	
 	/**
 	* Implementation de la methode init 
@@ -62,6 +68,7 @@ public class Inscription extends HttpServlet {
 	public void init() throws ServletException {
 		/* Récupération d'une instance de notre DAO Utilisateur */
 		this.joueurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getJoueurDao();
+		this.portefeuilleDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPortefeuilleDao();
 	}
 	
 	
@@ -100,6 +107,10 @@ public class Inscription extends HttpServlet {
 		InscriptionForm form = new InscriptionForm( joueurDao );
 		/* Traitement de la requête et récupération du bean en résultant */
 		Joueur joueur = form.inscrireJoueur( request );
+		
+		Portefeuille portefeuille = new Portefeuille();
+		portefeuilleDao.creer(joueur.getLogin(), portefeuille);
+		
 		/* Stockage du formulaire et du bean dans l'objet request */
 		request.setAttribute( ATT_FORM, form );
 		request.setAttribute( ATT_USER, joueur );

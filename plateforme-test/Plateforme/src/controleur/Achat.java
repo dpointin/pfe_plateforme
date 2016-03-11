@@ -13,7 +13,7 @@ import dao.PortefeuilleDao;
 import modele.Joueur;
 import modele.Portefeuille;
 
-public class PortefeuilleGeneral extends HttpServlet {
+public class Achat extends HttpServlet {
 	/**
 	 * serialVersionUID
 	 */
