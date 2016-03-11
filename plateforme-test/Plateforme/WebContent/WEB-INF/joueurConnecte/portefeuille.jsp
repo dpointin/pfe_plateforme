@@ -27,7 +27,10 @@
 				Argent investi : ${sessionScope['portefeuille'].argentInvesti}<br/>
 				Rendement : ${sessionScope['portefeuille'].rendement}</td>
 			
-				<td>Bouton vers la page de gestion de portefeuille</td>
+				<td>
+					<form method="post" action="<c:url value="/portefeuilleGeneral" />">
+						<input type="submit" value="Gestion de mon portefeuille" ></td>
+					</form>
 			</tr>
 		</table>
 		
