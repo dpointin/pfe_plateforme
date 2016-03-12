@@ -119,16 +119,18 @@ public class Achat extends HttpServlet {
 		HttpSession session = request.getSession();
 		String code = request.getParameter("code");
 		Integer quantite = Integer.parseInt(request.getParameter("quantite"));
-		
+
 		Titre titre = titreDao.recupererTitre(code);
 		// a mettre dans recupererTitre
-		Historique historique = historiqueDao.trouver(code, new GregorianCalendar(2015,1,1), new GregorianCalendar());
-		titre.setHistorique(historique);
+	    // Historique historique = historiqueDao.trouver(code, new GregorianCalendar(2015,1,1), new GregorianCalendar());
+		// titre.setHistorique(historique);
 		
 		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
 		Portefeuille portefeuille = portefeuilleDao.charger(joueur.getLogin());
 		
+		System.out.print(portefeuille.getQuantiteObjetFinancier());
 		portefeuille.acheter(titre, quantite);
+		System.out.print(portefeuille.getQuantiteObjetFinancier());
 		
 		portefeuilleDao.mettreAJour(portefeuille, titre);
 		
