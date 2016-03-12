@@ -43,7 +43,7 @@ public abstract class Titre extends ObjetFinancier{
 		System.out.println(historique);
 	//	return historique.getFermetureJours(historique.getValeurs().firstKey());
 		//Date d=new Date();
-		return 1000;//historique.getFermetureJours(new GregorianCalendar(2016,2,10));
+		return 10;//historique.getFermetureJours(new GregorianCalendar(2016,2,10));
 	}
 	
 }

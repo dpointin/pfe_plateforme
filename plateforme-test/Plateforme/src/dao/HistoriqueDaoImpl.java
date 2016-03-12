@@ -84,7 +84,8 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        GregorianCalendar dateMax = new GregorianCalendar(2000,0,1);
+        //changer pour que ça aille plus vite
+        GregorianCalendar dateMax = new GregorianCalendar(2016,0,1);
         
         
         try {

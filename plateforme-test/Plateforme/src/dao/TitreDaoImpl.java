@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import modele.Action;
 import modele.Indice;
@@ -94,6 +95,8 @@ public class TitreDaoImpl implements TitreDao {
 	        	String libelle = resultSet.getString("libelle");
 	        	Integer nbDispo = resultSet.getInt("nombreDisponible");
 	        	indice = new Indice(code,libelle,nbDispo);
+	        	HistoriqueDao h_dao=new HistoriqueDaoImpl(daoFactory);
+	        	indice.setHistorique(h_dao.trouver(code, new GregorianCalendar()));
 	        }
 	    } catch ( SQLException e ) {
 	        throw new DAOException( e );
@@ -124,6 +127,8 @@ public class TitreDaoImpl implements TitreDao {
 	        	Integer nbDispo = resultSet.getInt("nombreDisponible");
 	        	Double dividende = (double) resultSet.getFloat("rendementDividende");
 	        	action = new Action(code,libelle,nbDispo,dividende);
+	        	HistoriqueDao h_dao=new HistoriqueDaoImpl(daoFactory);
+	        	action.setHistorique(h_dao.trouver(code, new GregorianCalendar()));
 	        }
 	    } catch ( SQLException e ) {
 	        throw new DAOException( e );
