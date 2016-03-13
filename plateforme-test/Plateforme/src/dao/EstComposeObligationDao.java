@@ -49,7 +49,7 @@ public interface EstComposeObligationDao {
 	*
 	* @param portefeuille où on veut ajouter les obligations
 	* 
-	* @throws DAOException Si une erreur arrive lors de la suppression dans la bdd
+	* @throws DAOException Si une erreur arrive lors de la recheche dans la bdd
 	* 
 	* @see Portefeuille
 	* @see DAOException
