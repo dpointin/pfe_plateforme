@@ -28,6 +28,9 @@ public class JoueurDaoImpl implements JoueurDao {
     private static final String SQL_INSERT           = "INSERT INTO Joueur (login, motDePasse) VALUES (?, ?)";
 
     
+	private static final String SQL_DELETE = "DELETE FROM Joueur WHERE login=?";
+
+    
     /**
 	* La daoFactory qui va permettre la connection a la base de donnee.
 	*/ 
@@ -86,7 +89,7 @@ public class JoueurDaoImpl implements JoueurDao {
         PreparedStatement preparedStatement = null;
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, joueur.getLogin(), joueur.getMotDePasse());
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, false, joueur.getLogin(), joueur.getMotDePasse());
             int statut = preparedStatement.executeUpdate();
             if ( statut == 0 ) {
                 throw new DAOException( "Échec de la création du joueur, aucune ligne ajoutée dans la table." );
@@ -99,10 +102,35 @@ public class JoueurDaoImpl implements JoueurDao {
     }
 
 
+    /**
+	* Implémentation de la méthode définie dans l'interface JoueurDao 
+	*
+	* @param login du joueur que l'on veut supprimer
+	* 
+	* @throws DAOException Si une erreur arrive lors de la suppression dans la bdd
+	* 
+	* @see Joueur
+	* @see DAOException
+	* @see JoueurDao
+	*/
 	@Override
 	public void supprimer(String login) throws DAOException {
-		// TODO Auto-generated method stub
-		
+		PortefeuilleDao p=new PortefeuilleDaoImpl(daoFactory);
+		p.supprimer(login);
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_DELETE, false, login);
+            int statut = preparedStatement.executeUpdate();
+            if ( statut == 0 ) {
+                throw new DAOException( "Échec de la suppression." );
+            }
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( preparedStatement, connexion );
+        }
 	}
 	
 	
