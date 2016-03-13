@@ -36,15 +36,12 @@ public abstract class Titre extends ObjetFinancier{
 		this.historique = historique;
 	}
 
-	/////////////////////A MODIFIER AVEC LA DERNIERE VALEUR QUI EST DANS L HISTORIQUE
-	/////////////////////CETTE METHODE NE MARCHERA JAMAIS LES WEEK END OU JOUR FERIE SINON VU QUE LA BOURSE NE NOUS DONNERA PAS DE VALEUR
 	public double getPrix(){
-		//System.out.println(historique.getValeurs().lastKey());
-		//System.out.println(historique);
 		return historique.getFermetureJours(historique.getValeurs().lastKey());
-		//Date d=new Date();
-		//return 10;//historique.getFermetureJours(new GregorianCalendar(2016,2,10));
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		return (obj instanceof Titre ) && ((Titre) obj).getCode().equals(code);
+	}
 }

@@ -31,8 +31,8 @@ public class Portefeuille {
 			double tempPrix=0;
 			if(prixObjetFinancier.get(objetFinancier)!=null)
 				tempPrix=prixObjetFinancier.get(objetFinancier);
+			argentDisponible-=tempPrix;
 			double prixFinal=(quantiteTemp*tempPrix+quantite*objetFinancier.getPrix());
-			argentDisponible-=prixFinal;
 		    int quantiteFinal=quantiteTemp+quantite;
 		    prixFinal/=quantiteFinal;
 		    quantiteObjetFinancier.put(objetFinancier, quantiteFinal);
@@ -61,14 +61,26 @@ public class Portefeuille {
     
     
     //METHODE UTILISE DANS LE DAO POUR LE MOMENT
-	public void ajoutQuantiteObjetFinancier(ObjetFinancier o, Integer q) {
+    public void ajoutQuantiteObjetFinancier(ObjetFinancier o, Integer q) {
 		getQuantiteObjetFinancier().put(o,q);
 	}
 	public void ajoutPrixObjetFinancier(ObjetFinancier o, Double p) {
 		getPrixObjetFinancier().put(o,p);
 	}
 	
-	
+	public ObjetFinancier trouver(ObjetFinancier o){
+		Iterator<ObjetFinancier> it = quantiteObjetFinancier.keySet().iterator(); 
+		while(it.hasNext()) {
+		   ObjetFinancier key = it.next();
+		   if ((o instanceof Obligation) && (((Obligation)o).equals(key)) ){
+			   return key;
+		   } else  if ((o instanceof Titre) && (((Titre)o).equals(key)) ){
+			   		return key;
+		   } else if  (key instanceof Option) {
+		   }
+		}
+		return o;
+	}
 	
 	//GETTER ET SETTER
 	public Double getArgentDisponible() {

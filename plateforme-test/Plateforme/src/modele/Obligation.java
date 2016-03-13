@@ -23,6 +23,11 @@ public class Obligation extends ObjetFinancier{
 		return prix;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		return (obj instanceof Obligation ) && ((Obligation) obj).getEmetteur().equals(emetteur) && ((Obligation) obj).getDateFin().equals(dateFin);
+	}
+	
 	//SETTER ET GETTER
 	public String getEmetteur() {
 		return emetteur;

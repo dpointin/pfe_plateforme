@@ -127,13 +127,14 @@ public class Achat extends HttpServlet {
 		
 		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
 		Portefeuille portefeuille = portefeuilleDao.charger(joueur.getLogin());
-		
+		titre=(Titre)portefeuille.trouver(titre);
 		System.out.print(portefeuille.getQuantiteObjetFinancier());
 		portefeuille.acheter(titre, quantite);
 		System.out.print(portefeuille.getQuantiteObjetFinancier());
 		
 		portefeuilleDao.mettreAJour(portefeuille, titre);
 		
+		session.setAttribute(ATT_SESSION_JOUEUR, joueur);
 		this.getServletContext().getRequestDispatcher( VUE_PORTEFEUILLE ).forward( request, response );
 	}
 
