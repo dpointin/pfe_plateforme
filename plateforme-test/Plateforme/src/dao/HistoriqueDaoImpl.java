@@ -16,20 +16,71 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+* Classe HistoriqueDaoImpl implémentant l'interface HistoriqueDao
+*
+* @author  Celine Chaugny & Damien Pointin 
+*/
 public class HistoriqueDaoImpl implements HistoriqueDao {
-
+	/**
+	* SQL_SELECT_PAR_CODE_DATE correspond a la requete SQL de recherche par code et date dans la table Historique.
+	*/
     private static final String SQL_SELECT_PAR_CODE_DATE = "SELECT * FROM Historique WHERE code = ? AND dateCours = ?";
+   
+    
+    /**
+	* SQL_SELECT_PAR_CODE_INTERVALLE_DATE correspond a la requete SQL de recherche par code et intervalle de date dans la table Historique.
+	*/
     private static final String SQL_SELECT_PAR_CODE_INTERVALLE_DATES = "SELECT * FROM Historique WHERE code = ? AND dateCours >= ? AND dateCours <= ?";
+    
+    
+    /**
+	* SQL_INSERT correspond a la requete SQL d'insertion dans la table Historique.
+	*/
     private static final String SQL_INSERT           = "INSERT INTO Historique (code, dateCours, valeurOuverture, valeurFermeture, valeurBas, valeurHaut, volume, valeurAjustee) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    
+    /**
+	* SQL_SELECT_MAX correspond a la requete SQL de recherche de la date maximale pour un code donne dans la table Historique.
+	*/
     private static final String SQL_SELECT_MAX = "SELECT MAX(dateCours) FROM Historique WHERE code = ?";
 
+    
+    /**
+	* La daoFactory qui va permettre la connection a la base de donnee.
+	*/ 
     private DAOFactory daoFactory;
 
+    
+    /**
+	* Constructeur HistoriqueDaoImpl.
+	* <p>
+	* Avec le parametre daoFactory
+	* </p>
+	*
+	* @param daoFactory
+	* La Fabrique dao de HistoriqueDaoImpl.
+	*
+	* @see HistoriqueDaoImpl#daoFactory
+	* @see DAOFactory
+	*/ 
     HistoriqueDaoImpl( DAOFactory daoFactory ) {
         this.daoFactory = daoFactory;
     }
 
 
+    /**
+	* Implementation de la methode definie dans l'interface HistoriqueDao
+	*
+	* @param code du titre que l'on veut trouver
+	* 
+	* @throws DAOException Si une erreur arrive lors l'ajout dans la bdd
+	* 
+	* @see Historique
+	* @see DAOException
+	* @see HistoriqueDao
+	* @see HistoriqueDaoImpl#ajouterCours(Historique)
+	*/ 
 	@Override
 	public void mettreAJour(String code) throws DAOException {
 		GregorianCalendar dateMax = max(code);
@@ -37,12 +88,44 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
 		ajouterCours(tc.getHistorique());
 	}
 	
+	
+	/**
+	* Implementation de la methode definie dans l'interface HistoriqueDao
+	*
+	* @param code du titre que l'on veut trouver
+	* @param date a laquelle on veut le retrouver
+	* 
+	* @return Historique a la date donnee
+	* 
+	* @throws DAOException Si une erreur arrive lors de la lecture dans la bdd
+	* 
+	* @see Historique
+	* @see DAOException
+	* @see HistoriqueDao
+	* @see HistoriqueDaoImpl#trouver(String, Object...)
+	*/ 
 	@Override
 	public Historique trouver(String code, GregorianCalendar date) throws DAOException {
 		return trouver(SQL_SELECT_PAR_CODE_DATE, code, new java.sql.Date(date.getTimeInMillis()));
 	}
 
 
+	/**
+	* Implementation de la methode definie dans l'interface HistoriqueDao
+	*
+	* @param code du titre que l'on veut trouver
+	* @param date_debut date a partir de laquelle on veut le retrouver
+	* @param date_fin date de fin ou on veut trouver le titre
+	* 
+	* @return Historique correspondant a l'intervalle
+	* 
+	* @throws DAOException Si une erreur arrive lors de la lecture dans la bdd
+	* 
+	* @see Historique
+	* @see DAOException
+	* @see HistoriqueDao
+	* @see HistoriqueDaoImpl#trouver(String, Object...)
+	*/ 
 	@Override
 	public Historique trouver(String code, GregorianCalendar date_debut, GregorianCalendar date_fin)
 			throws DAOException {
@@ -50,7 +133,17 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
 	}
 	
 
-	// METHODES PRIVEES
+	/**
+	* Methode privee qui permet d'ajouter l'historique a la table 
+	*
+	* @param cours historique que l'on veut ajouter a la table Historique
+	* 
+	* @throws DAOException Si une erreur arrive lors de l'ajout dans la bdd
+	* 
+	* @see Historique
+	* @see DAOException
+	* @see HistoriqueDao
+	*/ 
 	private void ajouterCours(Historique cours) throws DAOException {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -80,6 +173,21 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
         }
 	}
 	
+	
+	/**
+	* Methode privee qui permet de trouver la date maximale pour un titre
+	*
+	* @param code du titre dont on veut trouver la date max
+	* 
+	* @return date maximale
+	* 
+	* @throws DAOException Si une erreur arrive lors de l'ajout dans la bdd
+	* 
+	* @see Historique
+	* @see DAOException
+	* @see HistoriqueDao
+	* @see GregorianCalendar
+	*/ 
 	private GregorianCalendar max (String code) {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -106,6 +214,20 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
 	}
 
 	
+	/**
+	* Methode privee qui permet de trouver un historique
+	*
+	* @param sql correspondant a la requete
+	* @param objets parametre de la requete
+	* 
+	* @return Historique que l'on souhaite avoir a la sortie de la requete
+	* 
+	* @throws DAOException Si une erreur arrive lors de la lecture dans la bdd
+	* 
+	* @see Historique
+	* @see DAOException
+	* @see HistoriqueDao
+	*/ 
     private Historique trouver( String sql, Object... objets ) throws DAOException {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -115,10 +237,7 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            /*
-             * Préparation de la requête avec les objets passés en arguments
-             * (ici, uniquement une adresse email) et exécution.
-             */
+           // Préparation de la requête avec les objets passés en arguments
             preparedStatement = initialisationRequetePreparee( connexion, sql, false, objets );
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de données retournée dans le ResultSet */
@@ -134,6 +253,21 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
         return cours;
     }
 
+    
+    /**
+	* Methode privee qui permet de faire correspondre un historique par rapport a un resultSet
+	*
+	* @param resultSet requête que l'on veut faire correspondre avec un historique
+	* 
+	* @return Historique qui correspond a la requete
+	* 
+	* @throws SQLException Si une erreur arrive lors du mapping
+	* 
+	* @see Historique
+	* @see SQLException
+	* @see HistoriqueDao
+	* @see ResultSet
+	*/
     private static Historique map( ResultSet resultSet ) throws SQLException {
         Historique cours = new Historique();
         cours.setCode(resultSet.getString("code"));
