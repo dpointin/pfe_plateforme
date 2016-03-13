@@ -38,5 +38,16 @@ public interface JoueurDao {
 	Joueur trouver( String login ) throws DAOException;
 	
 	
+	/**
+	* Méthode chargée de supprimer un joueur
+	*
+	* @param login du joueur que l'on veut supprimer
+	* 
+	* @throws DAOException Si une erreur arrive lors de la suppression dans la bdd
+	* 
+	* @see Joueur
+	* @see DAOException
+	* @see JoueurDaoImpl
+	*/ 
 	void supprimer( String login ) throws DAOException;
 } 

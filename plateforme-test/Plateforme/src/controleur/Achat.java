@@ -135,6 +135,7 @@ public class Achat extends HttpServlet {
 		portefeuilleDao.mettreAJour(portefeuille, titre);
 		
 		session.setAttribute(ATT_SESSION_JOUEUR, joueur);
+		session.setAttribute(ATT_SESSION_PORTEFEUILLE, portefeuille);
 		this.getServletContext().getRequestDispatcher( VUE_PORTEFEUILLE ).forward( request, response );
 	}
 

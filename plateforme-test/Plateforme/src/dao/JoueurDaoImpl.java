@@ -132,10 +132,7 @@ public class JoueurDaoImpl implements JoueurDao {
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            /*
-             * Préparation de la requête avec les objets passés en arguments
-             * (ici, uniquement une adresse email) et exécution.
-             */
+            // Préparation de la requête avec les objets passés en arguments
             preparedStatement = initialisationRequetePreparee( connexion, sql, false, objets );
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de données retournée dans le ResultSet */
@@ -151,11 +148,7 @@ public class JoueurDaoImpl implements JoueurDao {
         return joueur;
     }
 
-    /*
-     * Simple méthode utilitaire permettant de faire la correspondance (le
-     * mapping) entre une ligne issue de la table des utilisateurs (un
-     * ResultSet) et un bean Utilisateur.
-     */
+   
     /**
 	* Methode qui fait la correspondance entre une ligne de la table
 	* et un Joueur du modele

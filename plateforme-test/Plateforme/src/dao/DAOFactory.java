@@ -191,11 +191,27 @@ public class DAOFactory {
 	}
 
 
+	/**
+	* Retourne une implémentation de estComposeTitreDao.
+	*
+	* @return un estComposeTitreDao.
+	* 
+	* @see EstComposeTitreDao
+	* @see EstComposeTitreDaoImpl
+	*/
 	public EstComposeTitreDao getEstComposeTitreDao() {
 		return new EstComposeTitreDaoImpl(this);
 	}
 	
 	
+	/**
+	* Retourne une implémentation de estComposeObligationDao.
+	*
+	* @return un estComposeObligationDao.
+	* 
+	* @see EstComposeObligationDao
+	* @see EstComposeObligationDaoImpl
+	*/
 	public EstComposeObligationDao getEstComposeObligationDao() {
 		return new EstComposeObligationDaoImpl(this);
 	}
