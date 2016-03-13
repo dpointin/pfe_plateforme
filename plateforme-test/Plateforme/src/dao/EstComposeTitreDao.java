@@ -1,7 +1,6 @@
 package dao;
 
 
-import modele.Obligation;
 import modele.Portefeuille;
 import modele.Titre;
 
@@ -19,7 +18,7 @@ public interface EstComposeTitreDao {
 	* sinon juste un update 
 	*
 	* @param portefeuille que l'on modifie
-	* @param titre dont on modifie la quantite
+	* @param titre dont on modifie la quantite et le prix
 	* 
 	* @throws DAOException Si une erreur arrive lors de la modification de la bdd
 	* 

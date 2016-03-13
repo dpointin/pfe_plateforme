@@ -1,6 +1,5 @@
 package dao;
 
-import modele.Joueur;
 import modele.Obligation;
 import modele.Portefeuille;
 

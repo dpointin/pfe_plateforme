@@ -13,43 +13,43 @@ import modele.Obligation;
 import modele.Portefeuille;
 
 /**
-* Classe EstComposeObligationDaoImpl implémentant l'interface EstComposeJoueurDao
+* Classe EstComposeObligationDaoImpl implémentant l'interface EstComposeObligationDao
 *
 * @author  Celine Chaugny & Damien Pointin 
 */
 public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
 	/**
-	* SQL_SELECT correspond a la requete SQL de recherche par idPortefeuille dans la table estComposePortefeuille.
+	* SQL_SELECT correspond a la requete SQL de recherche par idPortefeuille dans la table estComposeObligation.
 	*/ 
 	private static final String SQL_SELECT = "SELECT * FROM EstComposeObligation WHERE idPortefeuille = ?";
 	
 	
 	/**
-	* SQL_DELETE_PORTEFEUILLE correspond a la requete SQL de suppression par idPortefeuille dans la table estComposePortefeuille.
+	* SQL_DELETE_PORTEFEUILLE correspond a la requete SQL de suppression par idPortefeuille dans la table estComposeObligation.
 	*/
 	private static final String SQL_DELETE_PORTEFEUILLE="DELETE FROM EstComposeObligation WHERE idPortefeuille=?";
 	
 	
 	/**
-	* SQL_DELETE_PORTEFEUILLE_EMETTEUR correspond a la requete SQL de suppression par idPortefeuille et emetteur dans la table estComposePortefeuille.
+	* SQL_DELETE_PORTEFEUILLE_EMETTEUR correspond a la requete SQL de suppression par idPortefeuille et emetteur dans la table estComposeObligation.
 	*/
 	private static final String SQL_DELETE_PORTEFEUILLE_EMETTEUR="DELETE FROM EstComposeObligation WHERE idPortefeuille=? AND emetteur=? AND dateFin=?";
     
 	
 	/**
-	* SQL_SELECT correspond a la requete SQL de recherche par idPortefeuille, emetteur et dateFin dans la table estComposePortefeuille.
+	* SQL_SELECT correspond a la requete SQL de recherche par idPortefeuille, emetteur et dateFin dans la table estComposeObligation.
 	*/
 	private static final String SQL_SELECT_EMETTEUR="SELECT emetteur FROM EstComposeObligation WHERE idPortefeuille=? AND emetteur=? AND dateFin=?";
 	
 	
 	/**
-	* SQL_INSERER correspond a la requete SQL pour inserer une ligne dans la table estComposePortefeuille.
+	* SQL_INSERER correspond a la requete SQL pour inserer une ligne dans la table estComposeObligation.
 	*/
 	private static final String SQL_INSERER="INSERT INTO EstComposeObligation (idPortefeuille, emetteur, quantite, dateFin) VALUES (?,?,?,?)";
     
 	
 	/**
-	* SQL_UPDATE correspond a la requete SQL pour mettre a jour une ligne dans la table estComposePortefeuille.
+	* SQL_UPDATE correspond a la requete SQL pour mettre a jour une ligne dans la table estComposeObligation.
 	*/
 	private static final String SQL_UPDATE="UPDATE EstComposeObligation SET quantite=? WHERE idPortefeuille=? AND emetteur=? AND dateFin=?";
 	
@@ -109,7 +109,7 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
    	*
    	* @param id du portefeuille que l'on supprime
    	* 
-   	* @throws DAOException Si une erreur arrive lors la mise a jour de la bdd
+   	* @throws DAOException Si une erreur arrive lors la suppression dans la bdd
    	* 
    	* @see Portefeuille
    	* @see DAOException
@@ -122,7 +122,7 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
 	}
 
 
-	 /**
+	/**
    	* Implementation de la methode definie dans l'interface EstComposeObligationDao
    	*
    	* @param portefeuille que l'on veut remplir avec les obligations correspondantes
@@ -151,6 +151,7 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
    	* @see Portefeuille
    	* @see DAOException
    	* @see EstComposeObligationDao
+   	* @see Obligation
    	*/ 
     private void trouver( String sql, Portefeuille portefeuille ) throws DAOException {
         Connection connexion = null;
