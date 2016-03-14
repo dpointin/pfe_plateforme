@@ -13,7 +13,7 @@ import modele.Obligation;
 import modele.Portefeuille;
 
 /**
-* Classe EstComposeObligationDaoImpl implémentant l'interface EstComposeObligationDao
+* Classe EstComposeObligationDaoImpl implementant l'interface EstComposeObligationDao
 *
 * @author  Celine Chaugny & Damien Pointin 
 */
@@ -107,7 +107,7 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
     /**
    	* Implementation de la methode definie dans l'interface EstComposeObligationDao
    	*
-   	* @param id du portefeuille que l'on supprime
+   	* @param idPortefeuille que l'on supprime
    	* 
    	* @throws DAOException Si une erreur arrive lors la suppression dans la bdd
    	* 
@@ -159,14 +159,14 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
         ResultSet resultSet = null;
 
         try {
-            /* Récupération d'une connexion depuis la Factory */
+            /* Recuperation d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
             /*
-             * Préparation de la requête avec les objets passés en arguments
+             * Preparation de la requête avec les objets passes en arguments
              */
             preparedStatement = initialisationRequetePreparee( connexion, sql, false, portefeuille.getIdPortefeuille() );
             resultSet = preparedStatement.executeQuery();
-            /* Parcours de la ligne de données retournée dans le ResultSet */
+            /* Parcours de la ligne de donnees retournee dans le ResultSet */
             while ( resultSet.next() ) {
             	ObligationDao o=new ObligationDaoImpl(daoFactory);
             	Obligation obligation=o.recupererObligation(resultSet.getString("emetteur"));
@@ -188,12 +188,12 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
 	
     /**
    	* Methode privee generique qui permet l'execution d'une requete SQL quelconque
-   	* ne demandant aucun traitement supplémentaire
+   	* ne demandant aucun traitement supplementaire
    	*
    	* @param sql correspond a la requete SQL
-   	* @param objets correspond aux différents paramètres de la requête
+   	* @param objets correspond aux differents parametres de la requête
    	* 
-   	* @throws DAOException Si une erreur arrive lors l'exécution de la requête
+   	* @throws DAOException Si une erreur arrive lors l'execution de la requête
    	* 
    	* @see DAOException
    	* @see EstComposeObligationDao

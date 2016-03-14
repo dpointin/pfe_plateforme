@@ -15,7 +15,7 @@ import modele.Indice;
 import modele.Titre;
 
 /**
-* Classe TitreDaoImpl implémentant l'interface TitreDao
+* Classe TitreDaoImpl implementant l'interface TitreDao
 *
 * @author  Celine Chaugny & Damien Pointin 
 */
@@ -97,7 +97,7 @@ public class TitreDaoImpl implements TitreDao {
 	
 	
 	/**
-	* MéImplementation de la methode definie dans l'interface TitreDao
+	* Implementation de la methode definie dans l'interface TitreDao
 	*
 	* @return ArrayList<Titre> correspondant a l'ensemble des titres
 	* 
@@ -186,12 +186,12 @@ public class TitreDaoImpl implements TitreDao {
 	    Indice indice = null;
 	    
 	    try {
-	        /* Récupération d'une connexion depuis la Factory */
+	        /* Recuperation d'une connexion depuis la Factory */
 	        connexion = daoFactory.getConnection();
-	         // Préparation de la requête avec les objets passés en arguments
+	         // Preparation de la requête avec les objets passes en arguments
 	        preparedStatement = initialisationRequetePreparee( connexion, sql, false, code);
 	        resultSet = preparedStatement.executeQuery();
-	        /* Parcours de la ligne de données retournée dans le ResultSet */
+	        /* Parcours de la ligne de donnees retournee dans le ResultSet */
 	        if ( resultSet.next() ) {
 	        	String libelle = resultSet.getString("libelle");
 	        	Integer nbDispo = resultSet.getInt("nombreDisponible");
@@ -230,12 +230,12 @@ public class TitreDaoImpl implements TitreDao {
 	    Action action = null;
 	    
 	    try {
-	        /* Récupération d'une connexion depuis la Factory */
+	        /* Recuperation d'une connexion depuis la Factory */
 	        connexion = daoFactory.getConnection();
-	        // Préparation de la requête avec les objets passés en arguments
+	        // Preparation de la requête avec les objets passes en arguments
 	        preparedStatement = initialisationRequetePreparee( connexion, sql, false, code);
 	        resultSet = preparedStatement.executeQuery();
-	        /* Parcours de la ligne de données retournée dans le ResultSet */
+	        /* Parcours de la ligne de donnees retournee dans le ResultSet */
 	        if ( resultSet.next() ) {
 	        	String libelle = resultSet.getString("libelle");
 	        	Integer nbDispo = resultSet.getInt("nombreDisponible");
@@ -276,12 +276,12 @@ public class TitreDaoImpl implements TitreDao {
 	    String res = null;
 	    
 	    try {
-	        /* Récupération d'une connexion depuis la Factory */
+	        /* Recuperation d'une connexion depuis la Factory */
 	        connexion = daoFactory.getConnection();
-	        // Préparation de la requête avec les objets passés en arguments
+	        // Preparation de la requête avec les objets passes en arguments
 	        preparedStatement = initialisationRequetePreparee( connexion, sql, false, code);
 	        resultSet = preparedStatement.executeQuery();
-	        /* Parcours de la ligne de données retournée dans le ResultSet */
+	        /* Parcours de la ligne de donnees retournee dans le ResultSet */
 	        if ( resultSet.next() ) {
 	        	res = resultSet.getString("type");
 	        }

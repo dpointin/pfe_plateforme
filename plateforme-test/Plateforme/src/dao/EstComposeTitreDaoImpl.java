@@ -12,7 +12,7 @@ import modele.Portefeuille;
 import modele.Titre;
 
 /**
-* Classe EstComposeTitreDaoImpl implémentant l'interface EstComposeTitreDao
+* Classe EstComposeTitreDaoImpl implementant l'interface EstComposeTitreDao
 *
 * @author  Celine Chaugny & Damien Pointin 
 */
@@ -106,7 +106,7 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
     /**
    	* Implementation de la methode definie dans l'interface EstComposeTitreDao
    	*
-   	* @param id du portefeuille que l'on supprime
+   	* @param idPortefeuille que l'on supprime
    	* 
    	* @throws DAOException Si une erreur arrive lors la suppression dans la bdd
    	* 
@@ -158,12 +158,12 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
         ResultSet resultSet = null;
 
         try {
-            /* Récupération d'une connexion depuis la Factory */
+            /* Recuperation d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-             // Préparation de la requête avec les objets passés en arguments
+             // Preparation de la requête avec les objets passes en arguments
             preparedStatement = initialisationRequetePreparee( connexion, sql, false, portefeuille.getIdPortefeuille() );
             resultSet = preparedStatement.executeQuery();
-            /* Parcours de la ligne de données retournée dans le ResultSet */
+            /* Parcours de la ligne de donnees retournee dans le ResultSet */
             while ( resultSet.next() ) {
             	TitreDao t=new TitreDaoImpl(daoFactory);
             	Titre titre=t.recupererTitre(resultSet.getString("code"));
@@ -182,12 +182,12 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
 	
     /**
    	* Methode privee generique qui permet l'execution d'une requete SQL quelconque
-   	* ne demandant aucun traitement supplémentaire
+   	* ne demandant aucun traitement supplementaire
    	*
    	* @param sql correspond a la requete SQL
-   	* @param objets correspond aux différents paramètres de la requête
+   	* @param objets correspond aux differents parametres de la requête
    	* 
-   	* @throws DAOException Si une erreur arrive lors l'exécution de la requête
+   	* @throws DAOException Si une erreur arrive lors l'execution de la requête
    	* 
    	* @see DAOException
    	* @see EstComposeTitreDao

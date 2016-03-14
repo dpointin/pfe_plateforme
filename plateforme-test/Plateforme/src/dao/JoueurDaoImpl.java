@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import modele.Joueur;
 
 /**
-* Classe JoueurDaoImpl implémentant l'interface JoueurDao
+* Classe JoueurDaoImpl implementant l'interface JoueurDao
 *
 * @author  Celine Chaugny & Damien Pointin 
 */
@@ -73,7 +73,7 @@ public class JoueurDaoImpl implements JoueurDao {
 
     
     /**
-	* Implémentation de la méthode définie dans l'interface JoueurDao 
+	* Implementation de la methode definie dans l'interface JoueurDao 
 	*
 	* @param joueur que l'on veut ajouter
 	* 
@@ -103,7 +103,7 @@ public class JoueurDaoImpl implements JoueurDao {
 
 
     /**
-	* Implémentation de la méthode définie dans l'interface JoueurDao 
+	* Implementation de la methode definie dans l'interface JoueurDao 
 	*
 	* @param login du joueur que l'on veut supprimer
 	* 
@@ -136,7 +136,7 @@ public class JoueurDaoImpl implements JoueurDao {
 	
     /**
 	* Methode qui retourne un utilisateur depuis la base
-    * de donnees, correspondant à la requete SQL donnee prenant en parametres
+    * de donnees, correspondant a la requete SQL donnee prenant en parametres
     * les objets passes en argument.
 	* 
 	* @param sql
@@ -158,12 +158,12 @@ public class JoueurDaoImpl implements JoueurDao {
         Joueur joueur = null;
 
         try {
-            /* Récupération d'une connexion depuis la Factory */
+            /* Recuperation d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            // Préparation de la requête avec les objets passés en arguments
+            // Preparation de la requête avec les objets passes en arguments
             preparedStatement = initialisationRequetePreparee( connexion, sql, false, objets );
             resultSet = preparedStatement.executeQuery();
-            /* Parcours de la ligne de données retournée dans le ResultSet */
+            /* Parcours de la ligne de donnees retournee dans le ResultSet */
             if ( resultSet.next() ) {
                 joueur = map( resultSet );
             }

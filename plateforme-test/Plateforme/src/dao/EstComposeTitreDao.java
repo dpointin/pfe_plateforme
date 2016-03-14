@@ -11,8 +11,8 @@ import modele.Titre;
 */
 public interface EstComposeTitreDao {
 	/**
-	* Méthode chargée de creer mettre a jour la quantite 
-	* du titre passé en entree dans le portefeuille 
+	* Methode chargee de creer mettre a jour la quantite 
+	* du titre passe en entree dans le portefeuille 
 	* si elle n'est pas presente on la cree
 	* sinon s'il n'y en a plus on la supprime
 	* sinon juste un update 
@@ -30,9 +30,9 @@ public interface EstComposeTitreDao {
 		
 	
 	/**
-	* Sert à supprimer toutes les lignes d'un même portefeuille
+	* Sert a supprimer toutes les lignes d'un même portefeuille
 	*
-	* @param id du portefeuille que l'on supprime
+	* @param idPortefeuille que l'on supprime
 	* 
 	* @throws DAOException Si une erreur arrive lors de la suppression dans la bdd
 	* 

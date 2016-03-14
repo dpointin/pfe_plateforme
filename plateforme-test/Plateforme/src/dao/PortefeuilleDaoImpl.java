@@ -15,7 +15,7 @@ import modele.Portefeuille;
 import modele.Titre;
 
 /**
-* Classe PortefeuilleDaoImpl implémentant l'interface PortefeuilleDao
+* Classe PortefeuilleDaoImpl implementant l'interface PortefeuilleDao
 *
 * @author  Celine Chaugny & Damien Pointin 
 */
@@ -177,7 +177,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 	/**
    	* Implementation de la methode definie dans l'interface PortefeuilleDao
    	*
-   	* @return login du joueur dont on veut supprimer le portefeuille
+   	* @param login du joueur dont on veut supprimer le portefeuille
    	* 
    	* @throws DAOException Si une erreur arrive lors la suppression dans la bdd
    	* 
@@ -197,7 +197,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 		EstComposeObligationDao estCompose=new EstComposeObligationDaoImpl(daoFactory);
 		estCompose.supprimer(p.getIdPortefeuille());
 		
-		//Dans cet ordre sinon problème de supprimer une foreign key
+		//Dans cet ordre sinon probleme de supprimer une foreign key
 		executeRequete(SQL_DELETE_CODE, p.getIdPortefeuille());
 	}
     
@@ -223,12 +223,12 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
         Portefeuille p = null;
 
         try {
-            /* Récupération d'une connexion depuis la Factory */
+            /* Recuperation d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            // Préparation de la requête avec les objets passés en arguments/
+            // Preparation de la requête avec les objets passes en arguments/
             preparedStatement = initialisationRequetePreparee( connexion, sql, false, login);
             resultSet = preparedStatement.executeQuery();
-            /* Parcours de la ligne de données retournée dans le ResultSet */
+            /* Parcours de la ligne de donnees retournee dans le ResultSet */
             if ( resultSet.next() ) {
                 p = map( resultSet );
             }

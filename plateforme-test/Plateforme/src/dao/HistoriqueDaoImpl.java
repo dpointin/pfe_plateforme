@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
-* Classe HistoriqueDaoImpl implémentant l'interface HistoriqueDao
+* Classe HistoriqueDaoImpl implementant l'interface HistoriqueDao
 *
 * @author  Celine Chaugny & Damien Pointin 
 */
@@ -157,7 +157,7 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
             	GregorianCalendar date = dates.next();
             	//(code, dateCours, valeurOuverture, valeurFermeture, valeurBas, valeurHaut, volume, valeurAjustee)
             	if (trouver(code, date)!=null) {
-            	//	throw new DAOException("Échec de l'ajout du cours, il existe déjà dans la table.");
+            	//	throw new DAOException("echec de l'ajout du cours, il existe deja dans la table.");
             	} else {
 	            	preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, code, new java.sql.Date(date.getTimeInMillis()), cours.getOuvertureJours(date), cours.getFermetureJours(date), cours.getBasJours(date), cours.getHautJours(date), cours.getVolumeJours(date), cours.getAdjFermetureJours(date));
 	            	int statut = preparedStatement.executeUpdate();
@@ -200,7 +200,7 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
             connexion = daoFactory.getConnection();
             preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_MAX, false, code);
             resultSet = preparedStatement.executeQuery();
-            /* Parcours de la ligne de données retournée dans le ResultSet */
+            /* Parcours de la ligne de donnees retournee dans le ResultSet */
             if ( resultSet.next() ) {
             	if (resultSet.getDate(1)!=null)
             		dateMax.setTime(resultSet.getDate(1));
@@ -235,12 +235,12 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
         Historique cours = null;
 
         try {
-            /* Récupération d'une connexion depuis la Factory */
+            /* Recuperation d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-           // Préparation de la requête avec les objets passés en arguments
+           // Preparation de la requête avec les objets passes en arguments
             preparedStatement = initialisationRequetePreparee( connexion, sql, false, objets );
             resultSet = preparedStatement.executeQuery();
-            /* Parcours de la ligne de données retournée dans le ResultSet */
+            /* Parcours de la ligne de donnees retournee dans le ResultSet */
             if ( resultSet.next() ) {
                 cours = map( resultSet );
             }

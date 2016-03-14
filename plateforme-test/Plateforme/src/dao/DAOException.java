@@ -15,7 +15,7 @@ public class DAOException extends RuntimeException {
 	/**
 	* Constructeur DAOException.
 	* <p>
-	* Avec le paramètre message
+	* Avec le parametre message
 	* </p>
 	*
 	* @param message
@@ -29,7 +29,7 @@ public class DAOException extends RuntimeException {
 	/**
 	* Constructeur DAOException.
 	* <p>
-	* Avec le paramètre message et la cause
+	* Avec le parametre message et la cause
 	* </p>
 	*
 	* @param message
@@ -45,7 +45,7 @@ public class DAOException extends RuntimeException {
 	/**
 	* Constructeur DAOException.
 	* <p>
-	* Avec le paramètre cause
+	* Avec le parametre cause
 	* </p>
 	*
 	* @param cause

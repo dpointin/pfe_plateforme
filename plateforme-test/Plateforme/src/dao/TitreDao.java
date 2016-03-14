@@ -11,7 +11,7 @@ import modele.Titre;
 */
 public interface TitreDao {
 	/**
-	* Méthode chargée de récupérer tous les codes des titres
+	* Methode chargee de recuperer tous les codes des titres
 	*
 	* @return ArrayList<String> correspondant a l'ensemble des codes
 	* 
@@ -25,7 +25,7 @@ public interface TitreDao {
 	
 	
 	/**
-	* Méthode chargée de récupérer tous les titres
+	* Methode chargee de recuperer tous les titres
 	*
 	* @return ArrayList<Titre> correspondant a l'ensemble des titres
 	* 
@@ -39,7 +39,7 @@ public interface TitreDao {
 	
 	
 	/**
-	* Méthode chargée de récupérer le type du titre en fonction de son code
+	* Methode chargee de recuperer le type du titre en fonction de son code
 	*
 	* @param code dont on veut savoir le type
 	*
@@ -55,7 +55,7 @@ public interface TitreDao {
 	
 	
 	/**
-	* Méthode chargée de récupérer le type correspondant a un code
+	* Methode chargee de recuperer le type correspondant a un code
 	*
 	* @param code dont on veut recuperer le titre
 	*

@@ -9,7 +9,7 @@ import modele.Joueur;
 */
 public interface JoueurDao {
 	/**
-	* Méthode chargée de creer un joueur dans la bdd qui sera implementee dans 
+	* Methode chargee de creer un joueur dans la bdd qui sera implementee dans 
 	* JoueurDaoImpl	
 	*
 	* @param joueur que l'on veut ajouter
@@ -24,7 +24,7 @@ public interface JoueurDao {
 	
 	
 	/**
-	* Méthode chargée de trouver un joueur dans la bdd qui sera implementee dans 
+	* Methode chargee de trouver un joueur dans la bdd qui sera implementee dans 
 	* JoueurDaoImpl	
 	*
 	* @return login que l'on veut trouver
@@ -39,7 +39,7 @@ public interface JoueurDao {
 	
 	
 	/**
-	* Méthode chargée de supprimer un joueur
+	* Methode chargee de supprimer un joueur
 	*
 	* @param login du joueur que l'on veut supprimer
 	* 

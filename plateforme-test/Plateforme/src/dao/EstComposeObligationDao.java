@@ -12,8 +12,8 @@ public interface EstComposeObligationDao {
 
 	
 	/**
-	* Méthode chargée de creer mettre a jour la quantite 
-	* de l'obligation passé en entree dans le portefeuille 
+	* Methode chargee de creer mettre a jour la quantite 
+	* de l'obligation passe en entree dans le portefeuille 
 	* si elle n'est pas presente on la cree
 	* sinon s'il n'y en a plus on la supprime
 	* sinon juste un update 
@@ -31,9 +31,9 @@ public interface EstComposeObligationDao {
 	
 	
 	/**
-	* Sert à supprimer toutes les lignes d'un même portefeuille
+	* Sert a supprimer toutes les lignes d'un meme portefeuille
 	*
-	* @param id du portefeuille que l'on supprime
+	* @param idPortefeuille que l'on supprime
 	* 
 	* @throws DAOException Si une erreur arrive lors de la suppression dans la bdd
 	* 
@@ -46,7 +46,7 @@ public interface EstComposeObligationDao {
 	/**
 	* Permet de rajouter toutes les obligations appartenant au joueur dans son portefeuille
 	*
-	* @param portefeuille où on veut ajouter les obligations
+	* @param portefeuille ou on veut ajouter les obligations
 	* 
 	* @throws DAOException Si une erreur arrive lors de la recheche dans la bdd
 	* 

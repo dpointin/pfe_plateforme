@@ -82,8 +82,8 @@ public class DAOFactory {
 	
 	
 	/**
-	* Méthode chargée de récupérer les informations de connexion à la base de
-	* données, charger le driver JDBC et retourner une instance de la Factory	
+	* Methode chargee de recuperer les informations de connexion a la base de
+	* donnees, charger le driver JDBC et retourner une instance de la Factory	
 	*
 	* @return une instance de la fabrique
 	* 
@@ -120,16 +120,16 @@ public class DAOFactory {
 		DAOFactory instance = new DAOFactory( url, nomUtilisateur, motDePasse );
 			return instance;
 		}
-		/* Méthode chargée de fournir une connexion à la base de données */
+		/* Methode chargee de fournir une connexion a la base de donnees */
 		/* package */ 
 		Connection getConnection() throws SQLException {
 		return DriverManager.getConnection( url, username, password );
 	}
 		
 	
-	// Méthodes de récupération de l'implémentation des différents DAO (un seul pour le moment)
+	// Methodes de recuperation de l'implementation des differents DAO (un seul pour le moment)
 	/**
-	* Retourne une implémentation d'un joueurDAO.
+	* Retourne une implementation d'un joueurDAO.
 	*
 	* @return un joueurDao.
 	* 
@@ -141,7 +141,7 @@ public class DAOFactory {
 	}
 	
 	/**
-	* Retourne une implémentation d'un historiqueDAO.
+	* Retourne une implementation d'un historiqueDAO.
 	*
 	* @return un historiqueDao.
 	* 
@@ -153,7 +153,7 @@ public class DAOFactory {
 	}	
 	
 	/**
-	* Retourne une implémentation d'un historiqueDAO.
+	* Retourne une implementation d'un historiqueDAO.
 	*
 	* @return un historiqueDao.
 	* 
@@ -166,7 +166,7 @@ public class DAOFactory {
 	
 
 	/**
-	* Retourne une implémentation d'un titreDao.
+	* Retourne une implementation d'un titreDao.
 	*
 	* @return un titreDao.
 	* 
@@ -179,7 +179,7 @@ public class DAOFactory {
 
 	
 	/**
-	* Retourne une implémentation d'un obligationDao.
+	* Retourne une implementation d'un obligationDao.
 	*
 	* @return un obligationDao.
 	* 
@@ -192,7 +192,7 @@ public class DAOFactory {
 
 
 	/**
-	* Retourne une implémentation de estComposeTitreDao.
+	* Retourne une implementation de estComposeTitreDao.
 	*
 	* @return un estComposeTitreDao.
 	* 
@@ -205,7 +205,7 @@ public class DAOFactory {
 	
 	
 	/**
-	* Retourne une implémentation de estComposeObligationDao.
+	* Retourne une implementation de estComposeObligationDao.
 	*
 	* @return un estComposeObligationDao.
 	* 

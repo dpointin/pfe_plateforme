@@ -10,7 +10,7 @@ import modele.Portefeuille;
 */
 public interface PortefeuilleDao {
 	/**
-	* Méthode chargée de creer un portefeuille dans la bdd qui sera implementee dans 
+	* Methode chargee de creer un portefeuille dans la bdd qui sera implementee dans 
 	* PortefeuilleDaoImpl	
 	*
 	* @param login du joueur dont on veut ajouter le portefeuille
@@ -26,7 +26,7 @@ public interface PortefeuilleDao {
 	
 	
 	/**
-	* Méthode chargée de lire le portefeuille d'un joueur dans la bdd 
+	* Methode chargee de lire le portefeuille d'un joueur dans la bdd 
 	* qui sera implementee dans JoueurDaoImpl	
 	*
 	* @param login du joueur dont on veut lire le portefeuille
@@ -43,7 +43,7 @@ public interface PortefeuilleDao {
 	
 	
 	/**
-	* Méthode chargée de mettre a jour la quantite et le prix d'un objet financier dans la bdd
+	* Methode chargee de mettre a jour la quantite et le prix d'un objet financier dans la bdd
 	* qui sera implementee dans JoueurDaoImpl	
 	*
 	* @param portefeuille du joueur que l'on met a jour
@@ -59,7 +59,7 @@ public interface PortefeuilleDao {
 	
 	
 	/**
-	* Méthode chargée de supprimer le portefeuille d'un joueur dans la bdd 
+	* Methode chargee de supprimer le portefeuille d'un joueur dans la bdd 
 	* qui sera implementee dans JoueurDaoImpl	
 	*
 	* @param login du joueur dont on veut supprimer le portefeuille

@@ -13,8 +13,8 @@ import java.sql.Statement;
 */
 public final class DAOUtilitaire {
    	/**
-	* Constructeur caché par défaut (car c'est une classe finale utilitaire,
-    * contenant uniquement des méthode appelées de manière statique)
+	* Constructeur cache par defaut (car c'est une classe finale utilitaire,
+    * contenant uniquement des methode appelees de maniere statique)
 	*/ 
     private DAOUtilitaire() {
     }
@@ -122,7 +122,7 @@ public final class DAOUtilitaire {
     
     /**
    	* Initialise la requete preparee basee sur la connexion passee en argument,
-    * avec la requête SQL et les objets donnés.
+    * avec la requête SQL et les objets donnes.
    	* 
    	* @param connexion
    	* la connexion a la bdd

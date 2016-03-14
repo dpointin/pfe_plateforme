@@ -11,7 +11,7 @@ import modele.Obligation;
 */
 public interface ObligationDao {
 	/**
-	* Méthode chargée de recuperer les emetteurs de toutes les obligations
+	* Methode chargee de recuperer les emetteurs de toutes les obligations
 	*
 	* @return Vector<String> correspondant a la liste des emetteurs d'obligation
 	* 
@@ -25,7 +25,7 @@ public interface ObligationDao {
 	
 	
 	/**
-	* Méthode chargée de recuperer l'obligation qui correspond a un emetteur
+	* Methode chargee de recuperer l'obligation qui correspond a un emetteur
 	* 
 	* @param emetteur de l'obligation
 	*

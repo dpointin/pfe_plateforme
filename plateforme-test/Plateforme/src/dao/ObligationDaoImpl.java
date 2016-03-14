@@ -12,7 +12,7 @@ import java.util.Vector;
 import modele.Obligation;
 
 /**
-* Classe ObligationDaoImpl implémentant l'interface ObligationDao
+* Classe ObligationDaoImpl implementant l'interface ObligationDao
 *
 * @author  Celine Chaugny & Damien Pointin 
 */
@@ -127,12 +127,12 @@ public class ObligationDaoImpl implements ObligationDao {
 	    Obligation obligation = null;
 	    
 	    try {
-	        /* Récupération d'une connexion depuis la Factory */
+	        /* Recuperation d'une connexion depuis la Factory */
 	        connexion = daoFactory.getConnection();
-	         // Préparation de la requête avec les objets passés en arguments
+	         // Preparation de la requête avec les objets passes en arguments
 	        preparedStatement = initialisationRequetePreparee( connexion, sql, false, emetteur);
 	        resultSet = preparedStatement.executeQuery();
-	        /* Parcours de la ligne de données retournée dans le ResultSet */
+	        /* Parcours de la ligne de donnees retournee dans le ResultSet */
 	        if ( resultSet.next() ) {
 	        	Double prix = (double) resultSet.getFloat("prix");
 	        	Double tauxInterets = (double) resultSet.getFloat("tauxInterets");

@@ -3,7 +3,7 @@ package dao;
 import java.util.GregorianCalendar;
 
 import modele.Historique;
-
+import modele.Titre;
 /**
 * Interface JoueurDao definissant les methodes dialoguant avec la table Historique
 *
@@ -11,7 +11,7 @@ import modele.Historique;
 */
 public interface HistoriqueDao {
 	/**
-	* Méthode chargée de mettre a jour la table Historique pour le code donne
+	* Methode chargee de mettre a jour la table Historique pour le code donne
 	* c'est a dire telecharger les cours et les inserer
 	*
 	* @param code du titre dont on veut mettre a jour l'historique
@@ -27,7 +27,7 @@ public interface HistoriqueDao {
 	
 	
 	/**
-	* Méthode qui permet de trouver la valeur d'un titre a une date donnee
+	* Methode qui permet de trouver la valeur d'un titre a une date donnee
 	*
 	* @param code du titre dont on veut la valeur
 	* @param date a laquelle on veut la valeur
@@ -46,11 +46,11 @@ public interface HistoriqueDao {
 	
 	
 	/**
-	* Méthode qui permet de trouver la valeur d'un titre dans un intervalle de date donne
+	* Methode qui permet de trouver la valeur d'un titre dans un intervalle de date donne
 	*
 	* @param code du titre dont on veut la valeur
 	* @param date_debut date a partir de laquelle on veut la valeur
-	* @param date_fin date jusqu'à laquelle on veut la valeur
+	* @param date_fin date jusqu'a laquelle on veut la valeur
 	* 
 	* @return historique correspondant a la valeur du titre pour l'intervalle donne en entree
 	* 
