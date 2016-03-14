@@ -38,4 +38,18 @@ public interface ObligationDao {
 	* @see ObligationDaoImpl
 	*/
 	Obligation recupererObligation(String emetteur) throws DAOException;
+	
+	
+	/**
+	* Methode chargee de mettreAJour le nombre disponible d'une obligation
+	*
+	* @param obligation que l'on met a jour
+	* 
+	* @throws DAOException Si une erreur arrive lors de la mise a jour de la bdd
+	* 
+	* @see Obligation
+	* @see DAOException
+	* @see ObligationDaoImpl
+	*/ 
+	void mettreAJour(Obligation obligation) throws DAOException;
 }

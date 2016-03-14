@@ -68,4 +68,18 @@ public interface TitreDao {
 	* @see TitreDaoImpl
 	*/ 
 	Titre recupererTitre(String code) throws DAOException;
+	
+	
+	/**
+	* Methode chargee de mettreAJour le nombre disponigle d'un titre
+	*
+	* @param titre que l'on met a jour
+	* 
+	* @throws DAOException Si une erreur arrive lors de la mise a jour de la bdd
+	* 
+	* @see Titre
+	* @see DAOException
+	* @see TitreDaoImpl
+	*/ 
+	void mettreAJour(Titre titre) throws DAOException;
 }

@@ -37,7 +37,8 @@ public class Portefeuille {
 		    prixFinal/=quantiteFinal;
 		    quantiteObjetFinancier.put(objetFinancier, quantiteFinal);
 		    prixObjetFinancier.put(objetFinancier, prixFinal);
-			objetFinancier.setNombreDisponible(objetFinancier.getNombreDisponible()-quantite);
+			//nombre dispo mis a jour
+		    objetFinancier.setNombreDisponible(objetFinancier.getNombreDisponible()-quantite);
 			return true;
 	    }
 		return false;
@@ -49,7 +50,8 @@ public class Portefeuille {
 	    	if(tempQuantite>=quantite){
 		    	tempQuantite-=quantite;
 		    	quantiteObjetFinancier.put(objetFinancier, tempQuantite);
-				objetFinancier.setNombreDisponible(objetFinancier.getNombreDisponible()+quantite);
+				//nombre dispo mis a jour
+		    	objetFinancier.setNombreDisponible(objetFinancier.getNombreDisponible()+quantite);
 				argentDisponible+=quantite*objetFinancier.getPrix();
 				return true;
 			}

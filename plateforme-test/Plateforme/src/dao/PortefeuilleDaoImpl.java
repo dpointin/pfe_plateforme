@@ -163,9 +163,13 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 		if(objetFinancier instanceof Titre){
 			EstComposeTitreDao titre=new EstComposeTitreDaoImpl(daoFactory);
 			titre.mettreAJour(portefeuille, (Titre)objetFinancier); 
+			TitreDao t=new TitreDaoImpl(daoFactory);
+			t.mettreAJour((Titre)objetFinancier);
 		}else { if(objetFinancier instanceof Obligation){
 						EstComposeObligationDao obligation=new EstComposeObligationDaoImpl(daoFactory);
 						obligation.mettreAJour(portefeuille, (Obligation) objetFinancier); 
+						ObligationDao o=new ObligationDaoImpl(daoFactory);
+						o.mettreAJour((Obligation)objetFinancier);
 				}else{
 					//Pour les options
 				}

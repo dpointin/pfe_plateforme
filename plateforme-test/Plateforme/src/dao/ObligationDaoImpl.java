@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import modele.Obligation;
+import modele.Portefeuille;
 
 /**
 * Classe ObligationDaoImpl implementant l'interface ObligationDao
@@ -28,6 +29,12 @@ public class ObligationDaoImpl implements ObligationDao {
 	*/ 
     private static final String SQL_SELECT_PAR_EMETTEUR = "SELECT * FROM Obligation WHERE emetteur = ?";
 		
+    
+    /**
+	* SQL_UPDATE correspond a la requete SQL de mise a jour du nombre disponible d'une obligation dans la table Obligation.
+	*/ 
+    private static final String SQL_UPDATE = "UPDATE Obligation SET nombreDisponible=? WHERE emetteur=? AND dateFin=?";
+    
     
     /**
 	* La daoFactory qui va permettre la connection a la base de donnee.
@@ -107,6 +114,24 @@ public class ObligationDaoImpl implements ObligationDao {
 		
 	
 	/**
+	* Implementation de la methode definie dans l'interface ObligationDao
+	*
+	* @param obligation que l'on met a jour
+	* 
+	* @throws DAOException Si une erreur arrive lors de la mise a jour de la bdd
+	* 
+	* @see Obligation
+	* @see DAOException
+	* @see ObligationDao
+	* @see ObligationDaoImpl#executeRequete(String, Object...)
+	*/
+	@Override
+	public void mettreAJour(Obligation obligation) throws DAOException{
+		executeRequete(SQL_UPDATE, obligation.getNombreDisponible(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));
+	}
+	
+	
+	/**
 	* Methode privee permettant de recuperer une obligation
 	* 
 	* @param sql correspond a la requete sql
@@ -147,4 +172,34 @@ public class ObligationDaoImpl implements ObligationDao {
 		return obligation;
 	}
 
+	
+	/**
+   	* Methode privee permettant l'excution d'une requete
+   	*
+   	* @param sql correspond a la requete sql
+   	* @param objects correspond aux parametres de la requete
+   	*  
+   	* @throws DAOException Si une erreur arrive lors l'execution de la requete
+   	* 
+   	* @see Portefeuille
+   	* @see DAOException
+   	* @see PortefeuilleDao
+   	*/ 
+    private void executeRequete(String sql, Object...objects){
+    	Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objects);
+            int statut = preparedStatement.executeUpdate();
+            if ( statut == 0 ) {
+                throw new DAOException( "Échec de l'execution" );
+            }        
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( preparedStatement, connexion );
+        }
+    }
 }
