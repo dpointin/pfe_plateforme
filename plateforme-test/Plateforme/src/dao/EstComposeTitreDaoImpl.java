@@ -160,7 +160,7 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
         try {
             /* Recuperation d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-             // Preparation de la requête avec les objets passes en arguments
+             // Preparation de la requete avec les objets passes en arguments
             preparedStatement = initialisationRequetePreparee( connexion, sql, false, portefeuille.getIdPortefeuille() );
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de donnees retournee dans le ResultSet */
@@ -185,9 +185,9 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
    	* ne demandant aucun traitement supplementaire
    	*
    	* @param sql correspond a la requete SQL
-   	* @param objets correspond aux differents parametres de la requête
+   	* @param objets correspond aux differents parametres de la requete
    	* 
-   	* @throws DAOException Si une erreur arrive lors l'execution de la requête
+   	* @throws DAOException Si une erreur arrive lors l'execution de la requete
    	* 
    	* @see DAOException
    	* @see EstComposeTitreDao
@@ -212,9 +212,9 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
 	
 	
 	/**
-   	* Methode privee qui permet de savoir si une requête renvoie au moins une ligne
+   	* Methode privee qui permet de savoir si une requete renvoie au moins une ligne
    	*
-   	* @param sql correspondant a la requête SQL
+   	* @param sql correspondant a la requete SQL
    	* @param objets parametre de la requete 
    	* 
    	* @throws DAOException Si une erreur arrive lors l'execution de la requete

@@ -122,7 +122,7 @@ public final class DAOUtilitaire {
     
     /**
    	* Initialise la requete preparee basee sur la connexion passee en argument,
-    * avec la requête SQL et les objets donnes.
+    * avec la requete SQL et les objets donnes.
    	* 
    	* @param connexion
    	* la connexion a la bdd

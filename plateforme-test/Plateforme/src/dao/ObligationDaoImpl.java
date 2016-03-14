@@ -129,7 +129,7 @@ public class ObligationDaoImpl implements ObligationDao {
 	    try {
 	        /* Recuperation d'une connexion depuis la Factory */
 	        connexion = daoFactory.getConnection();
-	         // Preparation de la requête avec les objets passes en arguments
+	         // Preparation de la requete avec les objets passes en arguments
 	        preparedStatement = initialisationRequetePreparee( connexion, sql, false, emetteur);
 	        resultSet = preparedStatement.executeQuery();
 	        /* Parcours de la ligne de donnees retournee dans le ResultSet */

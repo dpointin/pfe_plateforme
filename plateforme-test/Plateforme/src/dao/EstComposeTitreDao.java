@@ -30,7 +30,7 @@ public interface EstComposeTitreDao {
 		
 	
 	/**
-	* Sert a supprimer toutes les lignes d'un même portefeuille
+	* Sert a supprimer toutes les lignes d'un meme portefeuille
 	*
 	* @param idPortefeuille que l'on supprime
 	* 
@@ -45,7 +45,7 @@ public interface EstComposeTitreDao {
 	/**
 	* Permet de rajouter tous les titres appartenant au joueur dans son portefeuille
 	*
-	* @param portefeuille où on veut ajouter les titres
+	* @param portefeuille ou on veut ajouter les titres
 	* 
 	* @throws DAOException Si une erreur arrive lors de la recherche dans la bdd
 	* 

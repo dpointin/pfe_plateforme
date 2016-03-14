@@ -237,7 +237,7 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
         try {
             /* Recuperation d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-           // Preparation de la requête avec les objets passes en arguments
+           // Preparation de la requete avec les objets passes en arguments
             preparedStatement = initialisationRequetePreparee( connexion, sql, false, objets );
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de donnees retournee dans le ResultSet */
@@ -257,7 +257,7 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
     /**
 	* Methode privee qui permet de faire correspondre un historique par rapport a un resultSet
 	*
-	* @param resultSet requête que l'on veut faire correspondre avec un historique
+	* @param resultSet requete que l'on veut faire correspondre avec un historique
 	* 
 	* @return Historique qui correspond a la requete
 	* 
