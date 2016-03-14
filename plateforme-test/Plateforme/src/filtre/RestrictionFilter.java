@@ -1,6 +1,5 @@
 package filtre;
 
-
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -34,7 +33,7 @@ public class RestrictionFilter implements Filter {
 		}
 		/* Récupération de la session depuis la requête */
 		HttpSession session = request.getSession();
-		/**
+		/*
 		* Si l'objet utilisateur n'existe pas dans la session en cours, alors
 		* l'utilisateur n'est pas connecté.
 		*/
