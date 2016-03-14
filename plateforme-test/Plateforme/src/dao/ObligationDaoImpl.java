@@ -11,16 +11,58 @@ import java.util.Vector;
 
 import modele.Obligation;
 
+/**
+* Classe ObligationDaoImpl implémentant l'interface ObligationDao
+*
+* @author  Celine Chaugny & Damien Pointin 
+*/
 public class ObligationDaoImpl implements ObligationDao {
+	/**
+	* SQL_SELECT_TOUTES_OBLIGATIONS correspond a la requete SQL de recherche de tous les emetteurs dans la table Obligation.
+	*/ 
     private static final String SQL_SELECT_TOUTES_OBLIGATIONS = "SELECT emetteur FROM Obligation";
-	private static final String SQL_SELECT_PAR_EMETTEUR = "SELECT * FROM Obligation WHERE emetteur = ?";
+	
+    
+    /**
+	* SQL_SELECT_PAR_EMETTEUR correspond a la requete SQL de recherche d'une obligation par emetteur dans la table Obligation.
+	*/ 
+    private static final String SQL_SELECT_PAR_EMETTEUR = "SELECT * FROM Obligation WHERE emetteur = ?";
 		
+    
+    /**
+	* La daoFactory qui va permettre la connection a la base de donnee.
+	*/ 
     private DAOFactory daoFactory;
 
+    
+    /**
+	* Constructeur ObligationDaoImpl.
+	* <p>
+	* Avec le parametre daoFactory
+	* </p>
+	*
+	* @param daoFactory
+	* La Fabrique dao de l'ObligationDaoImpl.
+	*
+	* @see ObligationDaoImpl#daoFactory
+	* @see DAOFactory
+	*/ 
     ObligationDaoImpl( DAOFactory daoFactory ) {
         this.daoFactory = daoFactory;
     }
 	    
+    
+    /**
+	* Implementation de la methode definie dans l'interface JoueurDao
+	*
+	* @return Vector<String> contenant tous les emetteurs
+	* 
+	* @throws DAOException Si une erreur arrive lors la recherche dans la bdd
+	* 
+	* @see Obligation
+	* @see DAOException
+	* @see ObligationDao
+	*/ 
 	@Override
 	public Vector<String> trouverToutesObligations() throws DAOException {
 		Connection con=null;
@@ -43,11 +85,41 @@ public class ObligationDaoImpl implements ObligationDao {
 		return sol;
 	}
 
+	
+	/**
+	* Implementation de la methode definie dans l'interface JoueurDao
+	*
+	* @param emetteur de l'obligation que l'on recherche
+	*
+	* @return Obligation que l'on recherche
+	* 
+	* @throws DAOException Si une erreur arrive lors la recherche dans la bdd
+	* 
+	* @see Obligation
+	* @see DAOException
+	* @see ObligationDao
+	* @see ObligationDaoImpl#recupererObligation(String, String)
+	*/ 
 	@Override
 	public Obligation recupererObligation(String emetteur) throws DAOException {
 		return recupererObligation(SQL_SELECT_PAR_EMETTEUR, emetteur);
 	}
 		
+	
+	/**
+	* Methode privee permettant de recuperer une obligation
+	* 
+	* @param sql correspond a la requete sql
+	* @param emetteur correspond a l'emetteur de l'obligation
+	*
+	* @return Obligation que l'on veut trouver
+	* 
+	* @throws DAOException Si une erreur arrive lors la recherche dans la bdd
+	* 
+	* @see Obligation
+	* @see DAOException
+	* @see ObligationDao
+	*/ 
 	private Obligation recupererObligation(String sql, String emetteur) throws DAOException {	
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
@@ -57,10 +129,7 @@ public class ObligationDaoImpl implements ObligationDao {
 	    try {
 	        /* Récupération d'une connexion depuis la Factory */
 	        connexion = daoFactory.getConnection();
-	        /*
-	         * Préparation de la requête avec les objets passés en arguments
-	         * (ici, uniquement une adresse email) et exécution.
-	         */
+	         // Préparation de la requête avec les objets passés en arguments
 	        preparedStatement = initialisationRequetePreparee( connexion, sql, false, emetteur);
 	        resultSet = preparedStatement.executeQuery();
 	        /* Parcours de la ligne de données retournée dans le ResultSet */
