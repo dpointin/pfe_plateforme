@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import modele.Obligation;
 
@@ -71,18 +71,18 @@ public class ObligationDaoImpl implements ObligationDao {
 	* @see ObligationDao
 	*/ 
 	@Override
-	public Vector<String> trouverToutesObligations() throws DAOException {
+	public ArrayList<String> trouverTousEmetteurs() throws DAOException {
 		Connection con=null;
 		PreparedStatement pre=null;
 		ResultSet res=null;
-		Vector<String> sol=null;
+		ArrayList<String> sol=null;
 		try {
 			con=daoFactory.getConnection();
 			pre=initialisationRequetePreparee(con, SQL_SELECT_TOUTES_OBLIGATIONS, false);
 			res=pre.executeQuery();
-			sol=new Vector<String>();
+			sol=new ArrayList<String>();
 			while(res.next())
-				sol.add(res.getString("code"));
+				sol.add(res.getString("emetteur"));
 		}
 		catch ( SQLException e){
 			throw new DAOException(e);
@@ -90,6 +90,29 @@ public class ObligationDaoImpl implements ObligationDao {
 			fermeturesSilencieuses(pre,con);
 		}
 		return sol;
+	}
+
+	
+	/**
+	* Implementation de la methode definie dans l'interface ObligationDao
+	*
+	* @return ArrayList<Obligation> correspondant a l'ensemble des obligations
+	* 
+	* @throws DAOException Si une erreur arrive lors de la lecture dans la bdd
+	* 
+	* @see Obligation
+	* @see DAOException
+	* @see ObligationDao
+	* @see ObligationDaoImpl#recupererObligation(String)
+	*/ 
+	@Override
+	public ArrayList<Obligation> trouverToutesObligations() throws DAOException {
+		ArrayList<String> emetteurs = trouverTousEmetteurs();
+		ArrayList<Obligation> obligations = new ArrayList<Obligation>();
+		for (String emetteur : emetteurs) {
+			obligations.add(recupererObligation(emetteur));
+		}
+		return obligations;
 	}
 
 	

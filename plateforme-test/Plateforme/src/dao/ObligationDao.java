@@ -1,6 +1,6 @@
 package dao;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 import modele.Obligation;
 
@@ -13,7 +13,7 @@ public interface ObligationDao {
 	/**
 	* Methode chargee de recuperer les emetteurs de toutes les obligations
 	*
-	* @return Vector<String> correspondant a la liste des emetteurs d'obligation
+	* @return ArrayList<String> correspondant a la liste des emetteurs d'obligation
 	* 
 	* @throws DAOException Si une erreur arrive lors de la lecture de la bdd
 	* 
@@ -21,8 +21,20 @@ public interface ObligationDao {
 	* @see DAOException
 	* @see ObligationDaoImpl
 	*/ 
-	Vector<String> trouverToutesObligations() throws DAOException;
+	ArrayList<String> trouverTousEmetteurs() throws DAOException;
 	
+	/**
+	* Methode chargee de recuperer toutes les obligations
+	*
+	* @return ArrayList<Obligation> correspondant a l'ensemble des obligations
+	* 
+	* @throws DAOException Si une erreur arrive lors de la lecture de la bdd
+	* 
+	* @see Obligation
+	* @see DAOException
+	* @see ObligationDaoImpl
+	*/ 
+	ArrayList<Obligation> trouverToutesObligations() throws DAOException;
 	
 	/**
 	* Methode chargee de recuperer l'obligation qui correspond a un emetteur

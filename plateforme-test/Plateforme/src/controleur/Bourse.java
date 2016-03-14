@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import dao.DAOFactory;
 import dao.ObligationDao;
 import dao.TitreDao;
+import modele.Obligation;
 import modele.Titre;
 
 public class Bourse extends HttpServlet {
@@ -30,11 +31,30 @@ public class Bourse extends HttpServlet {
 	*/ 
 	public static final String ATT_SESSION_TITRES = "titres";
 
+	/**
+	* ATT_SESSION_JOUEUR correspond a l'attribut titres
+	*/ 
+	public static final String ATT_SESSION_OBLIGATIONS = "obligations";
 	
 	/**
 	* VUE correspond a la jsp lie a la servlet
 	*/ 
 	public static final String VUE = "/WEB-INF/joueurConnecte/bourse.jsp";
+	
+	/**
+	* VUE correspond a la jsp lie a la servlet
+	*/ 
+	public static final String VUE_ACTIONS = "/WEB-INF/joueurConnecte/bourseActions.jsp";
+	
+	/**
+	* VUE correspond a la jsp lie a la servlet
+	*/ 
+	public static final String VUE_INDICES = "/WEB-INF/joueurConnecte/bourseIndices.jsp";
+
+	/**
+	* VUE correspond a la jsp lie a la servlet
+	*/ 
+	public static final String VUE_OBLIGATIONS = "/WEB-INF/joueurConnecte/bourseObligations.jsp";
 	
 	/**
 	* Le joueurDao de notre servlet
@@ -72,11 +92,24 @@ public class Bourse extends HttpServlet {
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		/* Affichage de la page de connexion */
 		ArrayList<Titre> titres = titreDao.trouverTousTitres();
-	
+		ArrayList<Obligation> obligations = obligationDao.trouverToutesObligations();
+		
 		HttpSession session = request.getSession();
 		session.setAttribute( ATT_SESSION_TITRES, titres );
+		session.setAttribute( ATT_SESSION_OBLIGATIONS, obligations );
 		
-		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+		String redir = request.getParameter("redir");
+		if (redir != null) {
+			if (redir.equals("actions")) {
+				this.getServletContext().getRequestDispatcher( VUE_ACTIONS ).forward( request, response );
+			} else if (redir.equals("indices")) {
+				this.getServletContext().getRequestDispatcher( VUE_INDICES ).forward( request, response );				
+			} else {
+				this.getServletContext().getRequestDispatcher( VUE_OBLIGATIONS ).forward( request, response );
+			}
+		} else {
+			this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+		}
 	}
 	
 	
@@ -100,6 +133,7 @@ public class Bourse extends HttpServlet {
 		session.setAttribute( ATT_SESSION_TITRES, titres );
 		
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+
 	}
 
 	

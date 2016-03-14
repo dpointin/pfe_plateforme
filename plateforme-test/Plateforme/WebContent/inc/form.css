@@ -64,6 +64,50 @@ nav li a{
 	color:#FFFFFF;
 }
 
+nav li.active {
+	background-color:#051153;
+	color:#FFFFFF;
+}
+
+
+#monmenu ul ul {
+ 	padding:0px;
+	margin:0px;
+	list-style-type:none;	
+	background-color:#3366cc ;
+	display: none;
+	left: 144px;
+	top: -1px;
+	position: absolute;
+	border: 1px solid #B0B0B0;
+}
+ #monmenu li {
+	display:inline-block;
+	width:160px;
+	height:40px;
+	margin:0px;
+	padding:0px;
+	border-right:3px solid #CCCCCC;
+	text-align:center;
+	line-height:40px;	
+}
+
+ #monmenu li:hover, #monmenu li.sfhover {
+ 	background-color:#051153;
+ }
+ #monmenu li a {
+	display:block;
+	text-decoration:none;
+	color:#FFFFFF;
+ }
+ 
+ #monmenu li:hover ul.niveau2, #monmenu li li:hover ul.niveau3, #monmenu li.sfhover ul.niveau2, #monmenu li li.sfhover ul.niveau3 {
+ 	background-color:#051153;
+	color:#FFFFFF;
+	display: block}
+ #monmenu li.plus {background-position:right; background-repeat: no-repeat; border-bottom: 1px solid #B0B0B0;}
+
+ 
 /* Forms --------------------------------------------------------------------------------------- */
 form label {
 float: left;
