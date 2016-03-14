@@ -3,6 +3,7 @@ package dao;
 import static dao.DAOUtilitaire.fermeturesSilencieuses;
 import static dao.DAOUtilitaire.initialisationRequetePreparee;
 import static dao.DAOUtilitaire.executeRequete;
+import static dao.DAOUtilitaire.verification;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -90,14 +91,14 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
    	* @see DAOException
    	* @see EstComposeTitreDao
    	* @see DAOUtilitaire#executeRequete(DAOFactory, String, Object...)
-   	* @see EstComposeTitreDaoImpl#verification(String, Object...)
+   	* @see DAOUtilitaire#verification(String, Object...)
    	*/ 
     @Override
 	public void mettreAJour(Portefeuille portefeuille, Titre titre) throws DAOException {
     	if(portefeuille.getQuantiteObjetFinancier().get(titre)==0)
     		executeRequete(daoFactory,SQL_DELETE_PORTEFEUILLE_CODE, portefeuille.getIdPortefeuille(), titre.getCode());
     	else
-    		if(verification(SQL_SELECT_CODE,portefeuille.getIdPortefeuille(), titre.getCode())==false)
+    		if(verification(daoFactory,SQL_SELECT_CODE,portefeuille.getIdPortefeuille(), titre.getCode())==false)
     			executeRequete(daoFactory,SQL_INSERER, portefeuille.getIdPortefeuille(), titre.getCode(), portefeuille.getQuantiteObjetFinancier().get(titre), portefeuille.getPrixObjetFinancier().get(titre));
     		else
     			executeRequete(daoFactory,SQL_UPDATE, portefeuille.getQuantiteObjetFinancier().get(titre), portefeuille.getPrixObjetFinancier().get(titre), portefeuille.getIdPortefeuille(), titre.getCode());
@@ -179,39 +180,5 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }
     }
-
-	
-	/**
-   	* Methode privee qui permet de savoir si une requete renvoie au moins une ligne
-   	*
-   	* @param sql correspondant a la requete SQL
-   	* @param objets parametre de la requete 
-   	* 
-   	* @throws DAOException Si une erreur arrive lors l'execution de la requete
-   	* 
-   	* @see DAOException
-   	* @see EstComposeTitreDao
-   	*/ 
-	private boolean verification(String sql, Object... objets){
-		boolean b=false;
-		
-		Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        
-        try {
-            connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objets);
-            resultSet = preparedStatement.executeQuery();
-            if ( resultSet.next() ) 
-            	b=true;        
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
-        } finally {
-            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
-        }
-		
-		return b;
-	}
 
 }

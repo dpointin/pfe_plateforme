@@ -3,6 +3,7 @@ package dao;
 import static dao.DAOUtilitaire.fermeturesSilencieuses;
 import static dao.DAOUtilitaire.initialisationRequetePreparee;
 import static dao.DAOUtilitaire.executeRequete;
+import static dao.DAOUtilitaire.verification;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -91,14 +92,14 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
    	* @see DAOException
    	* @see EstComposeObligationDao
    	* @see DAOUtilitaire#executeRequete(String, Object...)
-   	* @see EstComposeObligationDaoImpl#verification(String, Object...)
+   	* @see DAOUtilitaire#verification(String, Object...)
    	*/ 
     @Override
 	public void mettreAJour(Portefeuille portefeuille, Obligation obligation) throws DAOException {
     	if(portefeuille.getQuantiteObjetFinancier().get(obligation)==0){
     		executeRequete(daoFactory, SQL_DELETE_PORTEFEUILLE_EMETTEUR, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));    	
     	}else
-    		if(verification(SQL_SELECT_EMETTEUR,portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()))==false){
+    		if(verification(daoFactory, SQL_SELECT_EMETTEUR,portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()))==false){
     			executeRequete(daoFactory,SQL_INSERER, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), portefeuille.getQuantiteObjetFinancier().get(obligation), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));
     		}	else
     			executeRequete(daoFactory,SQL_UPDATE, portefeuille.getQuantiteObjetFinancier().get(obligation),portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));
@@ -185,39 +186,5 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }
     }
-	
-	
-	/**
-   	* Methode privee qui permet de savoir si une requete renvoie au moins une ligne
-   	*
-   	* @param sql correspondant a la requete SQL
-   	* @param objets parametre de la requete 
-   	* 
-   	* @throws DAOException Si une erreur arrive lors l'execution de la requete
-   	* 
-   	* @see DAOException
-   	* @see EstComposeObligationDao
-   	*/ 
-	private boolean verification(String sql, Object... objets){
-		boolean b=false;
-		
-		Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        
-        try {
-            connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objets);
-            resultSet = preparedStatement.executeQuery();
-            if ( resultSet.next() ) 
-            	b=true;        
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
-        } finally {
-            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
-        }
-		
-		return b;
-	}
 
 }

@@ -175,4 +175,37 @@ public final class DAOUtilitaire {
             fermeturesSilencieuses( preparedStatement, connexion );
         }
     }
+    
+    
+    /**
+   	* Methode privee qui permet de savoir si une requete renvoie au moins une ligne
+   	*
+   	* @param sql correspondant a la requete SQL
+   	* @param objets parametre de la requete 
+   	* 
+   	* @throws DAOException Si une erreur arrive lors l'execution de la requete
+   	* 
+   	* @see DAOException
+   	*/ 
+	public static boolean verification(DAOFactory daoFactory, String sql, Object... objets){
+		boolean b=false;
+		
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objets);
+            resultSet = preparedStatement.executeQuery();
+            if ( resultSet.next() ) 
+            	b=true;        
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }
+		
+		return b;
+	}
 }
