@@ -10,6 +10,7 @@ drop table EstComposeObligation;
 drop table Historique;
 drop table Titre;
 drop table Obligation;
+drop table HistoriquePortefeuille;
 SET foreign_key_checks = 1;
 
 
@@ -131,7 +132,7 @@ INSERT INTO Obligation
     ("FRANCE", 1, 0.029, 100000),
     ("ESPAGNE", 1, 0.045, 1000),
     ("ALLEMAGNE", 1, 0.02, 1000),
-    ("ALLEMAGNE", 1, 0.025, 1000),
+    ("ROYAUME-UNI", 1, 0.025, 1000),
     ("RENAULT", 1000, 0.06, 5000000),
     ("TOTAL", 100, 0.042, 1000000),
     ("PEUGEOT", 1000, 0.064, 2000000),
