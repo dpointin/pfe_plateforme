@@ -2,6 +2,7 @@ package dao;
 
 import static dao.DAOUtilitaire.fermeturesSilencieuses;
 import static dao.DAOUtilitaire.initialisationRequetePreparee;
+import static dao.DAOUtilitaire.executeRequete;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -88,18 +89,18 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
    	* @see Titre
    	* @see DAOException
    	* @see EstComposeTitreDao
-   	* @see EstComposeTitreDaoImpl#executeRequete(String, Object...)
+   	* @see DAOUtilitaire#executeRequete(DAOFactory, String, Object...)
    	* @see EstComposeTitreDaoImpl#verification(String, Object...)
    	*/ 
     @Override
 	public void mettreAJour(Portefeuille portefeuille, Titre titre) throws DAOException {
     	if(portefeuille.getQuantiteObjetFinancier().get(titre)==0)
-    		executeRequete(SQL_DELETE_PORTEFEUILLE_CODE, portefeuille.getIdPortefeuille(), titre.getCode());
+    		executeRequete(daoFactory,SQL_DELETE_PORTEFEUILLE_CODE, portefeuille.getIdPortefeuille(), titre.getCode());
     	else
     		if(verification(SQL_SELECT_CODE,portefeuille.getIdPortefeuille(), titre.getCode())==false)
-    			executeRequete(SQL_INSERER, portefeuille.getIdPortefeuille(), titre.getCode(), portefeuille.getQuantiteObjetFinancier().get(titre), portefeuille.getPrixObjetFinancier().get(titre));
+    			executeRequete(daoFactory,SQL_INSERER, portefeuille.getIdPortefeuille(), titre.getCode(), portefeuille.getQuantiteObjetFinancier().get(titre), portefeuille.getPrixObjetFinancier().get(titre));
     		else
-    			executeRequete(SQL_UPDATE, portefeuille.getQuantiteObjetFinancier().get(titre), portefeuille.getPrixObjetFinancier().get(titre), portefeuille.getIdPortefeuille(), titre.getCode());
+    			executeRequete(daoFactory,SQL_UPDATE, portefeuille.getQuantiteObjetFinancier().get(titre), portefeuille.getPrixObjetFinancier().get(titre), portefeuille.getIdPortefeuille(), titre.getCode());
     }
 
 
@@ -113,11 +114,11 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
    	* @see Portefeuille
    	* @see DAOException
    	* @see EstComposeTitreDao
-   	* @see EstComposeTitreDaoImpl#executeRequete(String, Object...)
+   	* @see DAOUtilitaire#executeRequete(DAOFactory, String, Object...)
    	*/ 
 	@Override
 	public void supprimer(Integer idPortefeuille) throws DAOException {
-		executeRequete(SQL_DELETE_PORTEFEUILLE, idPortefeuille);
+		executeRequete(daoFactory,SQL_DELETE_PORTEFEUILLE, idPortefeuille);
 	}
 
 
@@ -179,37 +180,6 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
         }
     }
 
-	
-    /**
-   	* Methode privee generique qui permet l'execution d'une requete SQL quelconque
-   	* ne demandant aucun traitement supplementaire
-   	*
-   	* @param sql correspond a la requete SQL
-   	* @param objets correspond aux differents parametres de la requete
-   	* 
-   	* @throws DAOException Si une erreur arrive lors l'execution de la requete
-   	* 
-   	* @see DAOException
-   	* @see EstComposeTitreDao
-   	*/ 
-	private void executeRequete(String sql, Object...objets ){
-		Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        
-        try {
-            connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objets);
-            int statut = preparedStatement.executeUpdate();
-            if ( statut == 0 ) {
-                throw new DAOException( "Échec de l'execution" );
-            }        
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
-        } finally {
-            fermeturesSilencieuses( preparedStatement, connexion );
-        }
-	}
-	
 	
 	/**
    	* Methode privee qui permet de savoir si une requete renvoie au moins une ligne

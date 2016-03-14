@@ -2,6 +2,7 @@ package dao;
 
 import static dao.DAOUtilitaire.fermeturesSilencieuses;
 import static dao.DAOUtilitaire.initialisationRequetePreparee;
+import static dao.DAOUtilitaire.executeRequete;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -156,7 +157,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
    	* @see PortefeuilleDao
    	* @see EstComposeTitreDao
    	* @see EstComposeObligationDao
-   	* @see PortefeuilleDaoImpl#executeRequete(String, Object...)
+   	* @see DAOUtilitaire#executeRequete(String, Object...)
    	*/ 
 	@Override
 	public void mettreAJour(Portefeuille portefeuille, ObjetFinancier objetFinancier) throws DAOException {
@@ -174,7 +175,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 					//Pour les options
 				}
 		}
-		executeRequete(SQL_UPDATE_ARGENT_DISPONIBLE, portefeuille.getArgentDisponible(), portefeuille.getIdPortefeuille());
+		executeRequete(daoFactory,SQL_UPDATE_ARGENT_DISPONIBLE, portefeuille.getArgentDisponible(), portefeuille.getIdPortefeuille());
 	}
 
 
@@ -188,7 +189,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
    	* @see Portefeuille
    	* @see DAOException
    	* @see PortefeuilleDao
-   	* @see PortefeuilleDaoImpl#executeRequete(String, Object...)
+   	* @see DAOUtilitaire#executeRequete(String, Object...)
    	* @see EstComposeTitreDao
    	* @see EstComposeObligationDao
    	*/ 
@@ -202,7 +203,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 		estCompose.supprimer(p.getIdPortefeuille());
 		
 		//Dans cet ordre sinon probleme de supprimer une foreign key
-		executeRequete(SQL_DELETE_CODE, p.getIdPortefeuille());
+		executeRequete(daoFactory,SQL_DELETE_CODE, p.getIdPortefeuille());
 	}
     
 
@@ -244,38 +245,6 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 
         return p;
     }
-    
-    
-    /**
-   	* Methode privee permettant l'excution d'une requete
-   	*
-   	* @param sql correspond a la requete sql
-   	* @param objects correspond aux parametres de la requete
-   	*  
-   	* @throws DAOException Si une erreur arrive lors l'execution de la requete
-   	* 
-   	* @see Portefeuille
-   	* @see DAOException
-   	* @see PortefeuilleDao
-   	*/ 
-    private void executeRequete(String sql, Object...objects){
-    	Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        
-        try {
-            connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objects);
-            int statut = preparedStatement.executeUpdate();
-            if ( statut == 0 ) {
-                throw new DAOException( "Échec de l'execution" );
-            }        
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
-        } finally {
-            fermeturesSilencieuses( preparedStatement, connexion );
-        }
-    }
-
     
     
     /**

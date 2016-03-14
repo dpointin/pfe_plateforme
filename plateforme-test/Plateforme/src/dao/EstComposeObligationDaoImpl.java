@@ -2,6 +2,7 @@ package dao;
 
 import static dao.DAOUtilitaire.fermeturesSilencieuses;
 import static dao.DAOUtilitaire.initialisationRequetePreparee;
+import static dao.DAOUtilitaire.executeRequete;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -89,18 +90,18 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
    	* @see Obligation
    	* @see DAOException
    	* @see EstComposeObligationDao
-   	* @see EstComposeObligationDaoImpl#executeRequete(String, Object...)
+   	* @see DAOUtilitaire#executeRequete(String, Object...)
    	* @see EstComposeObligationDaoImpl#verification(String, Object...)
    	*/ 
     @Override
 	public void mettreAJour(Portefeuille portefeuille, Obligation obligation) throws DAOException {
     	if(portefeuille.getQuantiteObjetFinancier().get(obligation)==0){
-    		executeRequete(SQL_DELETE_PORTEFEUILLE_EMETTEUR, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));    	
+    		executeRequete(daoFactory, SQL_DELETE_PORTEFEUILLE_EMETTEUR, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));    	
     	}else
     		if(verification(SQL_SELECT_EMETTEUR,portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()))==false){
-    			executeRequete(SQL_INSERER, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), portefeuille.getQuantiteObjetFinancier().get(obligation), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));
+    			executeRequete(daoFactory,SQL_INSERER, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), portefeuille.getQuantiteObjetFinancier().get(obligation), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));
     		}	else
-    			executeRequete(SQL_UPDATE, portefeuille.getQuantiteObjetFinancier().get(obligation),portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));
+    			executeRequete(daoFactory,SQL_UPDATE, portefeuille.getQuantiteObjetFinancier().get(obligation),portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));
     }
 
 
@@ -114,11 +115,11 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
    	* @see Portefeuille
    	* @see DAOException
    	* @see EstComposeObligationDao
-   	* @see EstComposeObligationDaoImpl#executeRequete(String, Object...)
+   	* @see DAOUtilitaire#executeRequete(String, Object...)
    	*/ 
 	@Override
 	public void supprimer(Integer idPortefeuille) throws DAOException {
-		executeRequete(SQL_DELETE_PORTEFEUILLE, idPortefeuille);
+		executeRequete(daoFactory,SQL_DELETE_PORTEFEUILLE, idPortefeuille);
 	}
 
 
@@ -184,37 +185,6 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
             fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }
     }
-
-	
-    /**
-   	* Methode privee generique qui permet l'execution d'une requete SQL quelconque
-   	* ne demandant aucun traitement supplementaire
-   	*
-   	* @param sql correspond a la requete SQL
-   	* @param objets correspond aux differents parametres de la requete
-   	* 
-   	* @throws DAOException Si une erreur arrive lors l'execution de la requete
-   	* 
-   	* @see DAOException
-   	* @see EstComposeObligationDao
-   	*/ 
-	private void executeRequete(String sql, Object...objets ){
-		Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        
-        try {
-            connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objets);
-            int statut = preparedStatement.executeUpdate();
-            if ( statut == 0 ) {
-                throw new DAOException( "Échec de l'execution" );
-            }        
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
-        } finally {
-            fermeturesSilencieuses( preparedStatement, connexion );
-        }
-	}
 	
 	
 	/**

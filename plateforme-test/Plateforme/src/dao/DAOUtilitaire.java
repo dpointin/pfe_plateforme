@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 /**
 * Classe DAOFactory representant la fabrique DAO
 *
@@ -144,5 +145,34 @@ public final class DAOUtilitaire {
             preparedStatement.setObject( i + 1, objets[i] );
         }
         return preparedStatement;
+    }
+    
+    
+    /**
+   	* Methode permettant l'excution d'une requete
+   	*
+   	* @param sql correspond a la requete sql
+   	* @param objects correspond aux parametres de la requete
+   	*  
+   	* @throws DAOException Si une erreur arrive lors l'execution de la requete
+   	* 
+   	* @see DAOException
+   	*/ 
+    public static void executeRequete(DAOFactory daoFactory, String sql, Object...objects){
+    	Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objects);
+            int statut = preparedStatement.executeUpdate();
+            if ( statut == 0 ) {
+                throw new DAOException( "Échec de l'execution" );
+            }        
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( preparedStatement, connexion );
+        }
     }
 }

@@ -2,6 +2,7 @@ package dao;
 
 import static dao.DAOUtilitaire.fermeturesSilencieuses;
 import static dao.DAOUtilitaire.initialisationRequetePreparee;
+import static dao.DAOUtilitaire.executeRequete;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +13,6 @@ import java.util.GregorianCalendar;
 
 import modele.Action;
 import modele.Indice;
-import modele.Portefeuille;
 import modele.Titre;
 
 /**
@@ -181,11 +181,11 @@ public class TitreDaoImpl implements TitreDao {
 	* @see Titre
 	* @see DAOException
 	* @see TitreDao
-	* @see TitreDaoImpl#executeRequete(String, Object...)
+	* @see DAOUtilitaire#executeRequete(String, Object...)
 	*/
 	@Override
 	public void mettreAJour(Titre titre) throws DAOException{
-		executeRequete(SQL_UPDATE, titre.getNombreDisponible(), titre.getCode());
+		executeRequete(daoFactory, SQL_UPDATE, titre.getNombreDisponible(), titre.getCode());
 	}
 
 	
@@ -318,34 +318,4 @@ public class TitreDaoImpl implements TitreDao {
 		return res;
 	}
 
-	
-	/**
-   	* Methode privee permettant l'excution d'une requete
-   	*
-   	* @param sql correspond a la requete sql
-   	* @param objects correspond aux parametres de la requete
-   	*  
-   	* @throws DAOException Si une erreur arrive lors l'execution de la requete
-   	* 
-   	* @see Portefeuille
-   	* @see DAOException
-   	* @see PortefeuilleDao
-   	*/ 
-    private void executeRequete(String sql, Object...objects){
-    	Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        
-        try {
-            connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objects);
-            int statut = preparedStatement.executeUpdate();
-            if ( statut == 0 ) {
-                throw new DAOException( "Échec de l'execution" );
-            }        
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
-        } finally {
-            fermeturesSilencieuses( preparedStatement, connexion );
-        }
-    }
 }
