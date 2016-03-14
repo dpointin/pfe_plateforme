@@ -14,21 +14,76 @@ import modele.Obligation;
 import modele.Portefeuille;
 import modele.Titre;
 
+/**
+* Classe PortefeuilleDaoImpl implémentant l'interface PortefeuilleDao
+*
+* @author  Celine Chaugny & Damien Pointin 
+*/
 public class PortefeuilleDaoImpl implements PortefeuilleDao {
-
+	/**
+	* SQL_SELECT_PAR_LOGIN correspond a la requete SQL de recherche par login dans la table portefeuille.
+	*/ 
     private static final String SQL_SELECT_PAR_LOGIN = "SELECT * FROM Portefeuille WHERE login = ?";
+    
+    
+    /**
+	* SQL_SELECT_CODE correspond a la requete SQL de suppression par idPortefeuille dans la table portefeuille.
+	*/ 
     private static final String SQL_DELETE_CODE="DELETE FROM Portefeuille WHERE idPortefeuille=?";
+    
+    
+    /**
+	* SQL_SELECT_INSERT correspond a la requete SQL pour inserer une ligne dans la table portefeuille.
+	*/ 
     private static final String SQL_INSERT="INSERT INTO Portefeuille (login, argentDisponible, rendement) VALUES (?,?,?)";
     
+    
+    /**
+	* SQL_UPDATE_ARGENT_DISPONIBLE correspond a la requete SQL de mise a jour de l'argent disponible pour un portefeuille dans la table portefeuille.
+	*/ 
     private static final String SQL_UPDATE_ARGENT_DISPONIBLE = "UPDATE Portefeuille SET argentDisponible=? WHERE idPortefeuille=?";
     
+    
+    /**
+   	* La daoFactory qui va permettre la connection a la base de donnee.
+   	*/ 
     private DAOFactory daoFactory;
 
+    
+    
+    /**
+   	* Constructeur PortefeuilleDaoImpl.
+   	* <p>
+   	* Avec le parametre daoFactory
+   	* </p>
+   	*
+   	* @param daoFactory
+   	* La Fabrique dao du PortefeuilleDaoImpl.
+   	*
+   	* @see PortefeuilleDaoImpl#daoFactory
+   	* @see DAOFactory
+   	*/ 
     PortefeuilleDaoImpl( DAOFactory daoFactory ) {
         this.daoFactory = daoFactory;
     }
     
     
+    /**
+   	* Implementation de la methode definie dans l'interface PortefeuilleDao
+   	*
+   	* @param login du joueur dont on veut le portefeuille
+   	* 
+   	* @return Portefeuille du joueur
+   	* 
+   	* @throws DAOException Si une erreur arrive lors la recherche dans la bdd
+   	* 
+   	* @see Portefeuille
+   	* @see DAOException
+   	* @see PortefeuilleDao
+   	* @see PortefeuilleDaoImpl#charger(String)
+   	* @see EstComposeTitreDao
+   	* @see EstComposeObligationDao
+   	*/ 
 	@Override
 	public Portefeuille charger(String login) throws DAOException {
 		Portefeuille p = charger(SQL_SELECT_PAR_LOGIN, login);
@@ -42,6 +97,20 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 		return p;
 	}
 
+	
+	
+	/**
+   	* Implementation de la methode definie dans l'interface PortefeuilleDao
+   	*
+   	* @param login du joueur auquel appartient le portefeuille
+   	* @param portefeuille auquel appartient le joueur
+   	* 
+   	* @throws DAOException Si une erreur arrive lors l'ajout dans la bdd
+   	* 
+   	* @see Portefeuille
+   	* @see DAOException
+   	* @see PortefeuilleDao
+   	*/ 
 	@Override
 	public void creer(String login, Portefeuille portefeuille) throws DAOException {
 		Connection connexion = null;
@@ -58,8 +127,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
                 throw new DAOException( "Échec de la creation de la table" );
             }
  
-			Iterator it;
-			it=portefeuille.getPrixObjetFinancier().keySet().iterator(); // on cree un iterator sur les clés de ton hashmap
+			Iterator<ObjetFinancier> it=portefeuille.getPrixObjetFinancier().keySet().iterator(); // on cree un iterator sur les clés de ton hashmap
 			 
 			while(it.hasNext())
 			{
@@ -75,6 +143,21 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 	}
 
 
+	/**
+   	* Implementation de la methode definie dans l'interface PortefeuilleDao
+   	*
+   	* @param portefeuille du joueur que l'on veut mettre a jour
+   	* @param objetFinancier que l'on veut mettre a jour
+   	*  
+   	* @throws DAOException Si une erreur arrive lors la mise a jour de la bdd
+   	* 
+   	* @see Portefeuille
+   	* @see DAOException
+   	* @see PortefeuilleDao
+   	* @see EstComposeTitreDao
+   	* @see EstComposeObligationDao
+   	* @see PortefeuilleDaoImpl#executeRequete(String, Object...)
+   	*/ 
 	@Override
 	public void mettreAJour(Portefeuille portefeuille, ObjetFinancier objetFinancier) throws DAOException {
 		if(objetFinancier instanceof Titre){
@@ -84,13 +167,27 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 						EstComposeObligationDao obligation=new EstComposeObligationDaoImpl(daoFactory);
 						obligation.mettreAJour(portefeuille, (Obligation) objetFinancier); 
 				}else{
-					
+					//Pour les options
 				}
 		}
 		executeRequete(SQL_UPDATE_ARGENT_DISPONIBLE, portefeuille.getArgentDisponible(), portefeuille.getIdPortefeuille());
 	}
 
 
+	/**
+   	* Implementation de la methode definie dans l'interface PortefeuilleDao
+   	*
+   	* @return login du joueur dont on veut supprimer le portefeuille
+   	* 
+   	* @throws DAOException Si une erreur arrive lors la suppression dans la bdd
+   	* 
+   	* @see Portefeuille
+   	* @see DAOException
+   	* @see PortefeuilleDao
+   	* @see PortefeuilleDaoImpl#executeRequete(String, Object...)
+   	* @see EstComposeTitreDao
+   	* @see EstComposeObligationDao
+   	*/ 
 	@Override
 	public void supprimer(String login) throws DAOException {
 		Portefeuille p=charger(login);
@@ -105,7 +202,20 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 	}
     
 
-// METHODES PRIVEES
+	/**
+   	* Methode privee permettant de charger un portefeuille
+   	*
+   	* @param sql correspond a la requete sql
+   	* @param login correspond au login du joueur
+   	* 
+   	* @return Portefeuille que l'on modifie
+   	*  
+   	* @throws DAOException Si une erreur arrive lors la lecture dans la bdd
+   	* 
+   	* @see Portefeuille
+   	* @see DAOException
+   	* @see PortefeuilleDao
+   	*/ 
     private Portefeuille charger( String sql, String login ) throws DAOException {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -115,10 +225,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            /*
-             * Préparation de la requête avec les objets passés en arguments
-             * (ici, uniquement une adresse email) et exécution.
-             */
+            // Préparation de la requête avec les objets passés en arguments/
             preparedStatement = initialisationRequetePreparee( connexion, sql, false, login);
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de données retournée dans le ResultSet */
@@ -134,6 +241,19 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
         return p;
     }
     
+    
+    /**
+   	* Methode privee permettant l'excution d'une requete
+   	*
+   	* @param sql correspond a la requete sql
+   	* @param objects correspond aux parametres de la requete
+   	*  
+   	* @throws DAOException Si une erreur arrive lors l'execution de la requete
+   	* 
+   	* @see Portefeuille
+   	* @see DAOException
+   	* @see PortefeuilleDao
+   	*/ 
     private void executeRequete(String sql, Object...objects){
     	Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -153,56 +273,20 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
     }
 
     
-  /*  private void chargerOptions( String sql, Portefeuille p) throws DAOException {
-        Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try {
-            /* Récupération d'une connexion depuis la Factory 
-            connexion = daoFactory.getConnection();
-            /*
-             * Préparation de la requête avec les objets passés en arguments
-             * (ici, uniquement une adresse email) et exécution.
-             
-            preparedStatement = initialisationRequetePreparee( connexion, sql, false, p.getIdPortefeuille());
-            resultSet = preparedStatement.executeQuery();
-            /* Parcours de la ligne de données retournée dans le ResultSet 
-            while ( resultSet.next() ) {
-            	Integer idOption = resultSet.getInt("idOption");
-            	TypeOption type ;
-            	if (resultSet.getString("type").equals("CALL")) {
-            		type = TypeOption.CALL;
-            	} else {
-            		type = TypeOption.PUT;
-            	}
-            	TypePosition position ;
-            	if (resultSet.getString("position").equals("LONG")) {
-            		position = TypePosition.LONG;
-            	} else {
-            		position = TypePosition.SHORT;
-            	}           	
-            	GregorianCalendar maturite = new GregorianCalendar();
-            	maturite.setTime(resultSet.getDate("maturite"));
-            	Double strike = (double) resultSet.getFloat("strike");
-            	Double prime = (double) resultSet.getFloat("prime");
-            	
-            	Titre titre = daoFactory.getTitreDao().recupererTitre(resultSet.getString("code"));
-       
-            	Option option = new Option(idOption,type,position,maturite,strike,prime,titre);
-            	
-            	// set quantite et prix dans p
-            	p.ajoutPrixObjetFinancier(option, prime);
-            	p.ajoutQuantiteObjetFinancier(option, 1);            	
-            }
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
-        } finally {
-            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
-        }
-    }*/
-
     
+    /**
+   	* Methode privee permettant de faire correspondre un resultSet avec un Portefeuille
+   	*
+   	* @param resultSet que l'on veut faire correspondre avec un portefeuille
+   	* 
+   	* @return Portefeuille correspondant au resultSet 
+   	*  
+   	* @throws SQLException Si une erreur arrive lors du mappin
+   	* 
+   	* @see Portefeuille
+   	* @see SQLException
+   	* @see PortefeuilleDao
+   	*/ 
     private static Portefeuille map( ResultSet resultSet ) throws SQLException {
         Portefeuille p = new Portefeuille();
 
@@ -216,42 +300,5 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
         
         return p;
     }
-    
-/*	private void acquerirOption(String sql, TypeOption typeOption, TypePosition typePosition, GregorianCalendar maturite, Double strike, Double prime, Integer idPortefeuille, String code) throws DAOException {
-        Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connexion = daoFactory.getConnection();
-            
-        	preparedStatement = initialisationRequetePreparee(connexion, sql, true, typeOption, typePosition, maturite, strike, prime, idPortefeuille, code);
-        	int statut = preparedStatement.executeUpdate();
-            if ( statut == 0 ) {
-                throw new DAOException( "Échec de l'ajout de l'option, aucune ligne ajoutée dans la table." );
-            }
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
-        } finally {
-            fermeturesSilencieuses( preparedStatement, connexion );
-        }	
-	}*/
-	
-	/*private void investir(String sql, Integer idPortefeuille, Double somme) {
-	  	Connection connexion = null;
-		PreparedStatement preparedStatement = null;
-		try {
-		    connexion = daoFactory.getConnection();
-		    
-			preparedStatement = initialisationRequetePreparee(connexion, sql, true, idPortefeuille, somme);
-			int statut = preparedStatement.executeUpdate();
-		    if ( statut == 0 ) {
-		        throw new DAOException( "Échec de modification du l'argent investi et de l'argent disponible du portefeuille." );
-		}
-		} catch ( SQLException e ) {
-		    throw new DAOException( e );
-		} finally {
-		    fermeturesSilencieuses( preparedStatement, connexion );
-		}	
-	}*/
-
 
 }
