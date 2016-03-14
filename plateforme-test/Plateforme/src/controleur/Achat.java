@@ -2,7 +2,6 @@ package controleur;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,10 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DAOFactory;
-import dao.HistoriqueDao;
 import dao.PortefeuilleDao;
 import dao.TitreDao;
-import modele.Historique;
 import modele.Joueur;
 import modele.Portefeuille;
 import modele.Titre;
@@ -66,7 +63,6 @@ public class Achat extends HttpServlet {
 	* Le joueurDao de notre servlet
 	*/ 
 	private PortefeuilleDao portefeuilleDao;
-	private HistoriqueDao historiqueDao;
 	private TitreDao titreDao;	/**
 	* Implementation de la methode init 
 	* 
@@ -76,7 +72,6 @@ public class Achat extends HttpServlet {
 		/* Récupération d'une instance de nos DAO Obligation et Titre */
 		this.portefeuilleDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPortefeuilleDao();
 		this.titreDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTitreDao();
-		this.historiqueDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getHistoriqueDao();
 	}
 	
 	/**
