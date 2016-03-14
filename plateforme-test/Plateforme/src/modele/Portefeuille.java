@@ -31,7 +31,7 @@ public class Portefeuille {
 			double tempPrix=0;
 			if(prixObjetFinancier.get(objetFinancier)!=null)
 				tempPrix=prixObjetFinancier.get(objetFinancier);
-			argentDisponible-=tempPrix;
+			argentDisponible-=objetFinancier.getPrix()*quantite;
 			double prixFinal=(quantiteTemp*tempPrix+quantite*objetFinancier.getPrix());
 		    int quantiteFinal=quantiteTemp+quantite;
 		    prixFinal/=quantiteFinal;
