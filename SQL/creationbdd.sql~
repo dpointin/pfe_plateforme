@@ -126,6 +126,17 @@ create table HistoriquePortefeuille(
     PRIMARY KEY(idHistoriquePortefeuille)
 );
 
+INSERT INTO Obligation
+(emetteur, prix, tauxInterets, nombreDisponible) VALUES
+    ("FRANCE", 1, 0.029, 100000),
+    ("ESPAGNE", 1, 0.045, 1000),
+    ("ALLEMAGNE", 1, 0.02, 1000),
+    ("ALLEMAGNE", 1, 0.025, 1000),
+    ("RENAULT", 1000, 0.06, 5000000),
+    ("TOTAL", 100, 0.042, 1000000),
+    ("PEUGEOT", 1000, 0.064, 2000000),
+    ("AREVA", 100, 0.045, 10000000);
+
 INSERT INTO Titre
 (code, libelle, type, nombreDisponible) VALUES
     ("^FCHI", "CAC40", "INDICE",10000),
@@ -362,12 +373,3 @@ INSERT INTO Titre
     ("WFM","Whole Foods Market, Inc.","ACTION",0.0155,1000),
     ("XLNX","Xilinx Inc.","ACTION",0.0294,1000),
     ("YHOO","Yahoo! Inc.","ACTION",0.0197,1000);
-    
-    
-    
-    
-    
-       
-
-    
-    
