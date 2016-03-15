@@ -19,7 +19,7 @@
     <servlet-name>Connexion</servlet-name>
     <servlet-class>controleur.Connexion</servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>controleur.Deconnexion</servlet-class>
   </servlet>
@@ -38,12 +38,15 @@
   <servlet>
     <servlet-name>Achat</servlet-name>
     <servlet-class>controleur.Achat</servlet-class>
-  </servlet> 
+  </servlet>
   <servlet>
     <servlet-name>Vente</servlet-name>
     <servlet-class>controleur.Vente</servlet-class>
-  </servlet> 
-    
+  </servlet>
+  <servlet>
+    <servlet-name>Exporter</servlet-name>
+    <servlet-class>controleur.Exporter</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Inscription</servlet-name>
     <url-pattern>/inscription</url-pattern>
@@ -76,7 +79,10 @@
     <servlet-name>Vente</servlet-name>
     <url-pattern>/vente</url-pattern>
   </servlet-mapping>
-   
+  <servlet-mapping>
+    <servlet-name>Exporter</servlet-name>
+    <url-pattern>/exporter</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>Set Character Encoding</filter-name>
     <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>

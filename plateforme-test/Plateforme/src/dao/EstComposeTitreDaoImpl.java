@@ -95,8 +95,11 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
    	*/ 
     @Override
 	public void mettreAJour(Portefeuille portefeuille, Titre titre) throws DAOException {
-    	if(portefeuille.getQuantiteObjetFinancier().get(titre)==0)
+    	if(portefeuille.getQuantiteObjetFinancier().get(titre)==0){
     		executeRequete(daoFactory,SQL_DELETE_PORTEFEUILLE_CODE, portefeuille.getIdPortefeuille(), titre.getCode());
+    		portefeuille.getQuantiteObjetFinancier().remove(titre);
+    		portefeuille.getPrixObjetFinancier().remove(titre);
+    	}
     	else
     		if(verification(daoFactory,SQL_SELECT_CODE,portefeuille.getIdPortefeuille(), titre.getCode())==false)
     			executeRequete(daoFactory,SQL_INSERER, portefeuille.getIdPortefeuille(), titre.getCode(), portefeuille.getQuantiteObjetFinancier().get(titre), portefeuille.getPrixObjetFinancier().get(titre));
