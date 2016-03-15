@@ -1,6 +1,7 @@
 package controleur;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import dao.DAOFactory;
 import dao.PortefeuilleDao;
 import modele.Joueur;
+import modele.ObjetFinancier;
 import modele.Portefeuille;
 
 public class PortefeuilleGeneral extends HttpServlet {
@@ -43,7 +45,7 @@ public class PortefeuilleGeneral extends HttpServlet {
 	/**
 	* VUE correspond a la jsp lie a la servlet
 	*/ 
-	public static final String VUE_GESTION_PORTEFEUILLE = "/WEB-INF/joueurConnecte/portefeuilleIndicateurs.jsp";
+	public static final String VUE_INDICATEURS = "/WEB-INF/joueurConnecte/portefeuilleIndicateurs.jsp";
 	
 	/**
 	* Le joueurDao de notre servlet
@@ -82,10 +84,14 @@ public class PortefeuilleGeneral extends HttpServlet {
 			session.setAttribute( ATT_SESSION_PORTEFEUILLE, portefeuille );
 		} else {
 			session.setAttribute( ATT_SESSION_PORTEFEUILLE, new Portefeuille() );
-			
 		}
-
-		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+		
+		if (request.getParameter("redir") != null) {
+			Enumeration<ObjetFinancier> enum_ObjetsFinanciers = portefeuille.getPrixObjetFinancier().keys();
+			this.getServletContext().getRequestDispatcher( VUE_INDICATEURS ).forward( request, response );			
+		} else {
+			this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+		}
 	}
 	
 	
@@ -103,7 +109,7 @@ public class PortefeuilleGeneral extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {		
-		this.getServletContext().getRequestDispatcher( VUE_GESTION_PORTEFEUILLE ).forward( request, response );
+		this.getServletContext().getRequestDispatcher( VUE_INDICATEURS ).forward( request, response );
 	}
 
 	
