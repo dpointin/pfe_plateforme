@@ -40,7 +40,7 @@
 	</head>
 	
 	<body>
-		<c:import url="/inc/menuConnecte.jsp" />
+		<c:import url="/inc/menuPortefeuille.jsp" />
 
 		<h1>Indicateurs :</h1>
 		<table>

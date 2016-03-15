@@ -68,7 +68,7 @@ public class Connexion extends HttpServlet {
 	/** 
 	* VUE correspond a la jsp lie a la servlet
 	*/ 
-	public static final String VUE_CONNECTE = "/WEB-INF/joueurConnecte/acceuilPortefeuille.jsp";
+	public static final String VUE_CONNECTE = "/WEB-INF/joueurConnecte/accueilConnecte.jsp";
 	
 	
 	/**

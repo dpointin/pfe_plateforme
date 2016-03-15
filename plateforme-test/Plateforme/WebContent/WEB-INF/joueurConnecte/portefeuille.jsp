@@ -16,8 +16,7 @@
 	</head>
 	
 	<body>
-		<!--<c:import url="/inc/menuConnecte.jsp" />-->
-				<c:import url="/inc/menuPortefeuille.jsp" />
+		<c:import url="/inc/menuPortefeuille.jsp" />
 		
 		<h1>Mon Portefeuille d'Actifs</h1>
 		

@@ -10,10 +10,10 @@
 </head>
 <body>
 
-<h1> Accueil </h1>
-
-<c:import url="/inc/menuDebut.jsp" />
-
+	<h1> Accueil </h1>
+	
+	<c:import url="/inc/menuDebut.jsp" />
+	
 
 </body>
 </html>

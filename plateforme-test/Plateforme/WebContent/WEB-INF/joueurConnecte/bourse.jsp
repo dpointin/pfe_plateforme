@@ -12,7 +12,6 @@
 	</head>
 	
 	<body>
-		<c:import url="/inc/menuConnecte.jsp" />
 		<c:import url="/inc/menuBourse.jsp" />
 		<br>
 		<h1> Titres </h1>

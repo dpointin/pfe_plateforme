@@ -73,7 +73,7 @@
 	</head>
 	
 	<body>
-		<c:import url="/inc/menuConnecte.jsp" />
+		<c:import url="/inc/menuBourse.jsp" />
 		
 		<h1> Graphe du cours : ${sessionScope['code']} </h1>
 		

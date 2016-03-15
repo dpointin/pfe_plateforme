@@ -19,94 +19,96 @@ legend {
 font-weight: bold;
 color: #0568CD;
 }
+
 /* css de Matthias*/
 table {
 	cellpadding: 10;
 	width: 60% ;
     border-collapse: collapse;
 }
+
 th {
 	color:white;
     height: 50px;
     font-weight:normal;
     background-color:#3366cc ;
 }
+
 td {
 	text-align:center;
 	height:35px ;
 }
+
 body {
 	color:black;
 	background-color:#d2d2d2;
 }
-nav ul{
-	padding:0px;
-	margin:0px;
-	list-style-type:none;	
-	background-color:#3366cc ;
+
+/*MENU*/
+#menu { 
+	margin-top:15px
 }
-nav li {
-	display:inline-block;
+
+/* État par défaut */
+#menu ul { 
+	margin:0; 
+	padding:0; 
+	list-style:none;
+	list-style-type:none;
+	text-align:center;
+	font-size:.1em; 
+	letter-spacing:-2px }
+	
+#menu li { 
+	display:inline-block; 
+	position:relative; 
 	width:160px;
 	height:40px;
 	margin:0px;
 	padding:0px;
-	border-right:3px solid #CCCCCC;
-	text-align:center;
-	line-height:40px;	
-}
-nav li :hover {
-	background-color:#051153;
-}
-nav li a{
-	display:block;
-	text-decoration:none;
-	color:#FFFFFF;
-}
-
-nav li.active {
-	background-color:#051153;
-	color:#FFFFFF;
-}
-
-
-#monmenu ul ul {
- 	padding:0px;
-	margin:0px;
-	list-style-type:none;	
-	background-color:#3366cc ;
-	display: none;
-	left: 144px;
-	top: -1px;
-	position: absolute;
-	border: 1px solid #B0B0B0;
-}
- #monmenu li {
-	display:inline-block;
-	width:160px;
-	height:40px;
-	margin:0px;
-	padding:0px;
-	border-right:3px solid #CCCCCC;
+	border-right:5px solid #d2d2d2;
 	text-align:center;
 	line-height:40px;	
 }
 
- #monmenu li:hover, #monmenu li.sfhover {
- 	background-color:#051153;
- }
- #monmenu li a {
-	display:block;
-	text-decoration:none;
-	color:#FFFFFF;
- }
- 
- #monmenu li:hover ul.niveau2, #monmenu li li:hover ul.niveau3, #monmenu li.sfhover ul.niveau2, #monmenu li li.sfhover ul.niveau3 {
- 	background-color:#051153;
-	color:#FFFFFF;
-	display: block}
- #monmenu li.plus {background-position:right; background-repeat: no-repeat; border-bottom: 1px solid #B0B0B0;}
+#menu li li { 
+	display:block
+}
 
+#menu a {
+	display:block; 
+	width:150px; 
+	height:40px; 
+	font-size:14px; 
+	letter-spacing:normal; 
+	line-height:40px; 
+	color:#fff; 
+	background:#3366cc;
+	text-decoration:none
+}
+
+#menu li ul { 
+	left:-4000px; 
+	position:absolute
+}
+
+/* Survol d'un lien racine */
+#menu a:hover, #menu li:hover > a { 
+	color: #3366cc; 
+	background: #051153 
+
+}
+#menu li:hover > ul { 
+	left: 0 
+}
+
+/* Survol d'un lien de sous-menu */
+#menu li li:hover > ul { left: 150px; top: 0 }
+
+#menu #active {
+	color: #ffffff; 
+	background: #5c3566 
+}
  
 /* Forms --------------------------------------------------------------------------------------- */
 form label {
