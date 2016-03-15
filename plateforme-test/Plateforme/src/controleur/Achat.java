@@ -127,11 +127,7 @@ public class Achat extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {		
-		HttpSession session = request.getSession();
-		
-		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
-		Portefeuille portefeuille = portefeuilleDao.charger(joueur.getLogin());
-		
+		/* Recherche */
 		String motsCles = request.getParameter("motscles");
 		String type = request.getParameter("type");
 		System.out.println(type);
@@ -161,6 +157,13 @@ public class Achat extends HttpServlet {
 		for (Obligation o : obligations) {
 			objetsFinanciers.add(o);
 		}
+		request.setAttribute( ATT_SESSION_OBJETS_FINANCIERS, objetsFinanciers );
+		
+		/* Achat */
+		HttpSession session = request.getSession();
+		
+		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
+		Portefeuille portefeuille = portefeuilleDao.charger(joueur.getLogin());
 		
 	/*
 		String code = request.getParameter("code");
@@ -180,7 +183,7 @@ public class Achat extends HttpServlet {
 		
 		session.setAttribute(ATT_SESSION_PORTEFEUILLE, portefeuille);
 	*/
-		request.setAttribute( ATT_SESSION_OBJETS_FINANCIERS, objetsFinanciers );
+
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}
 

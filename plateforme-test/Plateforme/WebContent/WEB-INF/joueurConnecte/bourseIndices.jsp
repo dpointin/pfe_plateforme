@@ -22,9 +22,10 @@
 			</tr>
 
 			<c:forEach var="entry" items="${sessionScope['titres']}" >
-				<tr> <td> <input type="button" value="Historique" onclick="window.location='cours?code=${entry.code}'" ></td>
+				<tr> 
 				<c:set var="type" value="${fn:substringAfter(entry['class'],'.')}" />
 				<c:if test="${type eq 'Indice'}"> 
+					<td> <input type="button" value="Historique" onclick="window.location='cours?code=${entry.code}'" ></td>
 					<td>${entry.code}</td> <td>${entry.libelle}</td> <td>${type}</td>
 					<td>${entry.nombreDisponible}</td>
 				</c:if>
