@@ -37,6 +37,21 @@ public interface TitreDao {
 	*/ 
 	ArrayList<Titre> trouverTousTitres() throws DAOException;
 	
+	/**
+	* Methode chargee de recuperer les titres contenant certains mots cles et d'un certain type
+	*
+	* @param motsCles que l'on souhaite retrouver dans le libelle ou le code
+	* @param type des titres que l'on souhaite recuperer (TOUS, ACTION, INDICE)
+	*
+	* @return ArrayList<Titre> correspondant a l'ensemble des titres repondant aux criteres
+	* 
+	* @throws DAOException Si une erreur arrive lors de la lecture dans la bdd
+	* 
+	* @see Titre
+	* @see DAOException
+	* @see TitreDaoImpl
+	*/ 
+	ArrayList<Titre> rechercheTitres(String motsCles, String type) throws DAOException;
 	
 	/**
 	* Methode chargee de recuperer le type du titre en fonction de son code

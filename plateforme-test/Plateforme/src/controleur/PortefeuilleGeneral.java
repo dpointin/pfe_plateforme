@@ -43,7 +43,7 @@ public class PortefeuilleGeneral extends HttpServlet {
 	/**
 	* VUE correspond a la jsp lie a la servlet
 	*/ 
-	public static final String VUE_GESTION_PORTEFEUILLE = "/WEB-INF/joueurConnecte/gestionPortefeuille.jsp";
+	public static final String VUE_GESTION_PORTEFEUILLE = "/WEB-INF/joueurConnecte/portefeuilleIndicateurs.jsp";
 	
 	/**
 	* Le joueurDao de notre servlet

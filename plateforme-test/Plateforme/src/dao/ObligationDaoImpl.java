@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import modele.Obligation;
+import modele.Titre;
 
 /**
 * Classe ObligationDaoImpl implementant l'interface ObligationDao
@@ -60,7 +61,7 @@ public class ObligationDaoImpl implements ObligationDao {
 	    
     
     /**
-	* Implementation de la methode definie dans l'interface JoueurDao
+	* Implementation de la methode definie dans l'interface ObligationDao
 	*
 	* @return Vector<String> contenant tous les emetteurs
 	* 
@@ -96,14 +97,16 @@ public class ObligationDaoImpl implements ObligationDao {
 	/**
 	* Implementation de la methode definie dans l'interface ObligationDao
 	*
-	* @return ArrayList<Obligation> correspondant a l'ensemble des obligations
+	* @param motsCles que l'on souhaite retrouver dans le libelle ou le code
+	* @param type des titres que l'on souhaite recuperer (TOUS, ACTION, INDICE)
+	*
+	* @return ArrayList<Titre> correspondant a l'ensemble des titres repondant aux criteres
 	* 
 	* @throws DAOException Si une erreur arrive lors de la lecture dans la bdd
 	* 
-	* @see Obligation
+	* @see Titre
 	* @see DAOException
-	* @see ObligationDao
-	* @see ObligationDaoImpl#recupererObligation(String)
+	* @see TitreDaoImpl
 	*/ 
 	@Override
 	public ArrayList<Obligation> trouverToutesObligations() throws DAOException {
@@ -115,9 +118,16 @@ public class ObligationDaoImpl implements ObligationDao {
 		return obligations;
 	}
 
-	
+
+
+	@Override
+	public ArrayList<Obligation> rechercheObligations(String motCles) throws DAOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
-	* Implementation de la methode definie dans l'interface JoueurDao
+	* Implementation de la methode definie dans l'interface ObligationDao
 	*
 	* @param emetteur de l'obligation que l'on recherche
 	*

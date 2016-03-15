@@ -2,6 +2,7 @@ package controleur;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DAOFactory;
+import dao.ObligationDao;
 import dao.PortefeuilleDao;
 import dao.TitreDao;
 import modele.Joueur;
+import modele.ObjetFinancier;
+import modele.Obligation;
 import modele.Portefeuille;
 import modele.Titre;
 
@@ -46,7 +50,7 @@ public class Achat extends HttpServlet {
 	/**
 	* VUE correspond a la jsp lie a la servlet
 	*/ 
-	public static final String VUE = "/WEB-INF/joueurConnecte/acheterActif.jsp";
+	public static final String VUE = "/WEB-INF/joueurConnecte/portefeuilleAcheter.jsp";
 	
 	
 	/**
@@ -57,13 +61,16 @@ public class Achat extends HttpServlet {
 	/**
 	* VUE correspond a la jsp lie a la servlet
 	*/ 
-	public static final String VUE_GESTION_PORTEFEUILLE = "/WEB-INF/joueurConnecte/gestionPortefeuille.jsp";
+	public static final String VUE_GESTION_PORTEFEUILLE = "/WEB-INF/joueurConnecte/portefeuilleIndicateurs.jsp";
 	
 	/**
 	* Le joueurDao de notre servlet
 	*/ 
 	private PortefeuilleDao portefeuilleDao;
-	private TitreDao titreDao;	/**
+	private TitreDao titreDao;	
+	private ObligationDao obligationDao;
+	
+	/**
 	* Implementation de la methode init 
 	* 
 	* @throws ServletException si jamais la recuperation de l'instance se passe mal
@@ -72,6 +79,7 @@ public class Achat extends HttpServlet {
 		/* Récupération d'une instance de nos DAO Obligation et Titre */
 		this.portefeuilleDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPortefeuilleDao();
 		this.titreDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTitreDao();
+		this.obligationDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getObligationDao();
 	}
 	
 	/**
@@ -112,7 +120,42 @@ public class Achat extends HttpServlet {
 	*/ 
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {		
 		HttpSession session = request.getSession();
+		
+		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
+		Portefeuille portefeuille = portefeuilleDao.charger(joueur.getLogin());
+		
+		String motsCles = request.getParameter("motscles");
+		String type = request.getParameter("type");
+		ArrayList<Titre> titres = new ArrayList<Titre>();
+		ArrayList<Obligation> obligations = new ArrayList<Obligation>();
+		Vector<ObjetFinancier> objetsFinanciers = new Vector<ObjetFinancier>();
+		
+		if (type != null) {
+			if (type.equals("TOUS")) {
+				titres = titreDao.rechercheTitres(motsCles, type);
+				obligations = obligationDao.rechercheObligations(motsCles);
+			} else if (type.equals("ACTION")) {
+				titres = titreDao.rechercheTitres(motsCles, type);
+			} else if (type.equals("INDICE")) {
+				titres = titreDao.rechercheTitres(motsCles, type);				
+			} else {
+				obligations = obligationDao.rechercheObligations(motsCles);
+			}
+		} else {
+			titres = titreDao.trouverTousTitres();
+			obligations = obligationDao.trouverToutesObligations();
+		}
+		
+		for (Titre t : titres) {
+			objetsFinanciers.add(t);
+		}
+		for (Obligation o : obligations) {
+			objetsFinanciers.add(o);
+		}
+		
+	/*
 		String code = request.getParameter("code");
+		
 		Integer quantite = Integer.parseInt(request.getParameter("quantite"));
 
 		Titre titre = titreDao.recupererTitre(code);
@@ -120,12 +163,15 @@ public class Achat extends HttpServlet {
 		
 		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
 		Portefeuille portefeuille = portefeuilleDao.charger(joueur.getLogin());
+		
 		titre=(Titre)portefeuille.trouver(titre);
 		portefeuille.acheter(titre, quantite);
 		
 		portefeuilleDao.mettreAJour(portefeuille, titre);
 		
 		session.setAttribute(ATT_SESSION_PORTEFEUILLE, portefeuille);
+	*/
+		request.setAttribute("objetsFinanciers",objetsFinanciers);
 		this.getServletContext().getRequestDispatcher( VUE_PORTEFEUILLE ).forward( request, response );
 	}
 

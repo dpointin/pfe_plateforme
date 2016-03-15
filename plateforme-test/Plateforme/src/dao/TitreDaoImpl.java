@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Set;
 
 import modele.Action;
 import modele.Indice;
@@ -129,6 +131,57 @@ public class TitreDaoImpl implements TitreDao {
 	/**
 	* Implementation de la methode definie dans l'interface TitreDao
 	*
+	* @param motsCles que l'on souhaite retrouver dans le libelle ou le code
+	* @param type des titres que l'on souhaite recuperer (TOUS, ACTION, INDICE)
+	*
+	* @return ArrayList<Titre> correspondant a l'ensemble des titres repondant aux criteres
+	* 
+	* @throws DAOException Si une erreur arrive lors de la lecture dans la bdd
+	* 
+	* @see Titre
+	* @see DAOException
+	* @see TitreDaoImpl
+	*/ 
+	@Override
+	public ArrayList<Titre> rechercheTitres(String motsCles, String type) throws DAOException {
+		ArrayList<Titre> vecTitres = new ArrayList<Titre>() ; 
+		if(type.equals("TOUS")) {
+			vecTitres = trouverTousTitres();
+		} else {
+			ArrayList<String> codes = trouverTousCodes();
+			for (String code : codes) {
+				if (recupererTypeTitre(code).equals(type)) {
+					vecTitres.add(recupererTitre(code));
+				}
+			}
+		}
+		
+		if (motsCles.equals("")) {
+			return vecTitres;
+		}
+		
+		String[] mots =  motsCles.split(" ");
+		Set<Titre> setTitresChoisis = new HashSet<Titre>() ; 
+		for(Titre t : vecTitres) {
+			for(String mot : mots) {
+				if (t.getCode().toLowerCase().contains(mot.toLowerCase()) || t.getLibelle().toLowerCase().contains(mot.toLowerCase())) {
+					setTitresChoisis.add(t);
+					break ;
+				}
+			}		
+		}
+	
+		ArrayList<Titre> titresChoisis = new ArrayList<Titre>() ; 
+		for(Titre t : setTitresChoisis) {
+			titresChoisis.add(t);
+		}	
+		return titresChoisis;
+	}
+
+	
+	/**
+	* Implementation de la methode definie dans l'interface TitreDao
+	*
 	* @param code dont on veut savoir le type
 	*
 	* @return String correspondant au type
@@ -168,8 +221,7 @@ public class TitreDaoImpl implements TitreDao {
 		} else {
 			return recupererAction(SQL_SELECT_PAR_CODE, code);
 		}
-	}
-	
+	}	
 	
 	/**
 	* Implementation de la methode definie dans l'interface TitreDao
@@ -317,5 +369,4 @@ public class TitreDaoImpl implements TitreDao {
 	    }
 		return res;
 	}
-
 }

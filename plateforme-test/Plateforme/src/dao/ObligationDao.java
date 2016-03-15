@@ -35,6 +35,22 @@ public interface ObligationDao {
 	* @see ObligationDaoImpl
 	*/ 
 	ArrayList<Obligation> trouverToutesObligations() throws DAOException;
+
+	/**
+	* Methode chargee de recuperer toutes les obligations contenant certains mots cles
+	* 
+	* @param motsCles que l'on souhaite retrouver dans l'emetteur de l'obligation
+	*
+	* @return ArrayList<Obligation> correspondant a l'ensemble des obligations repondant aux criteres
+	* 
+	* @throws DAOException Si une erreur arrive lors de la lecture de la bdd
+	* 
+	* @see Obligation
+	* @see DAOException
+	* @see ObligationDaoImpl
+	*/ 
+	ArrayList<Obligation> rechercheObligations(String motCles) throws DAOException;
+	
 	
 	/**
 	* Methode chargee de recuperer l'obligation qui correspond a un emetteur
