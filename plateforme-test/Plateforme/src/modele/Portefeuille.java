@@ -2,6 +2,8 @@ package modele;
 
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Vector;
+
 public class Portefeuille {
 	
 	private Double argentDisponible;
@@ -9,6 +11,7 @@ public class Portefeuille {
 	private Hashtable<ObjetFinancier,Double> prixObjetFinancier;	
 	private Double rendement;
 	private Integer idPortefeuille;
+	private Vector<Operation> operations;
 	
 	public Portefeuille() {
 		this(1000.0);
@@ -21,6 +24,7 @@ public class Portefeuille {
 		this.prixObjetFinancier = new Hashtable<ObjetFinancier, Double>();
 		this.rendement = 0.0;
 		this.idPortefeuille = -1;
+		operations=new Vector<Operation>();
 	}
 	
 	public boolean acheter(ObjetFinancier objetFinancier, int quantite){
@@ -39,7 +43,8 @@ public class Portefeuille {
 		    prixObjetFinancier.put(objetFinancier, prixFinal);
 			//nombre dispo mis a jour
 		    objetFinancier.setNombreDisponible(objetFinancier.getNombreDisponible()-quantite);
-			return true;
+			operations.add(new Operation(objetFinancier,objetFinancier.getPrix(),quantite));
+		    return true;
 	    }
 		return false;
 	}
@@ -53,6 +58,7 @@ public class Portefeuille {
 				//nombre dispo mis a jour
 		    	objetFinancier.setNombreDisponible(objetFinancier.getNombreDisponible()+quantite);
 				argentDisponible+=quantite*objetFinancier.getPrix();
+				operations.add(new Operation(objetFinancier,objetFinancier.getPrix(),-quantite));
 				return true;
 			}
     	}
@@ -117,7 +123,14 @@ public class Portefeuille {
 		this.idPortefeuille = idPortefeuille;
 	}
 	
-	
+	public Vector<Operation> getOperations() {
+		return operations;
+	}
+
+	public void setOperations(Vector<Operation> operations) {
+		this.operations = operations;
+	}
+
 	public Integer[] getCamembert() {
 		// obligation, ation, indice, option
 		Integer[] n = {0,0,0,0};
