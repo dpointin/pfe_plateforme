@@ -20,6 +20,11 @@
 		
 		<h1>Vente</h1>
 		
+		<% if (request.getAttribute("erreur")!=null) {
+			out.print("<p style=\"color: #ff0000\" >" +request.getAttribute("erreur") + "</p>");
+		}
+		%>
+		
 		<h2>Actifs du portefeuille</h2>
 		<table border="1px" style="width:100%">
 			<tr>

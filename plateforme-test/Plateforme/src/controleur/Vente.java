@@ -138,6 +138,8 @@ public class Vente extends HttpServlet {
 		Enumeration<ObjetFinancier> enum_ObjetsFinanciers = portefeuille.getPrixObjetFinancier().keys();
 		ArrayList<ObjetFinancier> objetsFinanciers = Collections.list(enum_ObjetsFinanciers);
 		
+		System.out.println("nombre d'objets : " + objetsFinanciers.size());
+		
 		String quantiteString = request.getParameter("quantite");
 		if (quantiteString != null && !quantiteString.equals("")) {
 			Integer quantite = Integer.parseInt(quantiteString);
@@ -160,11 +162,10 @@ public class Vente extends HttpServlet {
 				} else {
 					if (request.getParameter(((Obligation)objetsFinanciers.get(i)).getEmetteur())!=null) {
 						Obligation obligation = obligationDao.recupererObligation(((Obligation)objetsFinanciers.get(i)).getEmetteur());
-						GregorianCalendar dateFin = new GregorianCalendar();
-						dateFin.add(Calendar.YEAR, 10);
-						obligation.setDateFin(dateFin);
 						obligation=(Obligation)portefeuille.trouver(obligation);
+						System.out.println("l'emmeteur existe");
 						if (portefeuille.vendre(obligation, quantite)) {
+							System.out.println("vente effecutee");
 							portefeuilleDao.mettreAJour(portefeuille, obligation);
 							session.setAttribute(ATT_SESSION_PORTEFEUILLE, portefeuille);
 							this.getServletContext().getRequestDispatcher( VUE_PORTEFEUILLE ).forward( request, response );
