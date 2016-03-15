@@ -23,6 +23,11 @@
 		<c:import url="/inc/menuPortefeuille.jsp" />
 		
 		<h1>Acheter un actif</h1>
+
+		<% if (request.getAttribute("erreur")!=null) {
+			out.print("<p style=\"color: #ff0000\" >" +request.getAttribute("erreur") + "</p>");
+		}
+		%>
 	
 		<form method="post" action="<c:url value="/achat" />">
 			<input type="text" name="motscles" placeholder="Recherche...">

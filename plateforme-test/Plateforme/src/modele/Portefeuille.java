@@ -14,7 +14,7 @@ public class Portefeuille {
 	private Vector<Operation> operations;
 	
 	public Portefeuille() {
-		this(1000.0);
+		this(10000.0);
 	}
 
 	public Portefeuille(Double argentDisponible) {
