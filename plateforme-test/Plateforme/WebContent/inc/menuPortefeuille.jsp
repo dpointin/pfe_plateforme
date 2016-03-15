@@ -14,7 +14,7 @@
 			<ul>
 				<li> <a href="<c:url value="/achat"/>"> Acheter </a> </li>
 				<li> <a href="<c:url value="/vente"/>"> Vendre </a> </li>
-				<li> <a href="<c:url value=""/>"> Indicateurs </a> </li>
+				<li> <a href="<c:url value="/portefeuilleGeneral?redir=indicateurs"/>"> Indicateurs </a> </li>
 				<li> <a href="<c:url value=""/>"> Exporter </a> </li>		
 			</ul>
 		</li> 
