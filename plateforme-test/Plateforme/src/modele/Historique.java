@@ -38,7 +38,7 @@ public class Historique {
 		while(it.hasNext())
 		{
 		   GregorianCalendar key=(GregorianCalendar) it.next();
-		   baseCent.put(key, getFermetureJours(key)/reference);
+		   baseCent.put(key, getFermetureJours(key)/reference*100);
 		}
 		
 		return baseCent;
