@@ -5,7 +5,7 @@ import java.util.GregorianCalendar;
 import modele.Historique;
 import modele.Titre;
 /**
-* Interface JoueurDao definissant les methodes dialoguant avec la table Historique
+* Interface HistoriqueDao definissant les methodes dialoguant avec la table Historique
 *
 * @author  Celine Chaugny & Damien Pointin 
 */
