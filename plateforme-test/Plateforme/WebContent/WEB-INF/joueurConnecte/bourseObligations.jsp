@@ -16,7 +16,7 @@
 		<br>
 		<h1> Obligations </h1>
 					
-		<table>
+		<table border="1px" style="width:100%">
 			<tr> 	<th>Emetteur</th> <th>Prix</th>
 					<th>Taux d'intérêts</th> <th>Nombre disponible</th>
 			</tr>

@@ -2,6 +2,7 @@ package controleur;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Vector;
 
 import javax.servlet.ServletException;
@@ -58,11 +59,7 @@ public class Achat extends HttpServlet {
 	*/ 
 	public static final String VUE_PORTEFEUILLE = "/WEB-INF/joueurConnecte/portefeuille.jsp";
 	
-	/**
-	* VUE correspond a la jsp lie a la servlet
-	*/ 
-	public static final String VUE_GESTION_PORTEFEUILLE = "/WEB-INF/joueurConnecte/portefeuilleIndicateurs.jsp";
-	
+
 	/**
 	* Le joueurDao de notre servlet
 	*/ 
@@ -108,8 +105,30 @@ public class Achat extends HttpServlet {
 		}
 		
 		request.setAttribute( ATT_SESSION_OBJETS_FINANCIERS, objetsFinanciers );
-	
-		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );		
+
+			
+//			System.out.println(code);
+//			System.out.println(quantite);		
+//			if (code != null) {
+//				System.out.println("Code : " + code);
+//				Titre titre = titreDao.recupererTitre(code);
+//				titre=(Titre)portefeuille.trouver(titre);
+//				portefeuille.acheter(titre, quantite);
+//				portefeuilleDao.mettreAJour(portefeuille, titre);
+//				session.setAttribute(ATT_SESSION_PORTEFEUILLE, portefeuille);
+//				this.getServletContext().getRequestDispatcher( VUE_PORTEFEUILLE ).forward( request, response );
+//			}
+//			
+//			if (emetteur != null) {
+//				System.out.println("Emetteur : " + emetteur);
+//				Obligation obligation = obligationDao.recupererObligation(emetteur);
+//				obligation=(Obligation)portefeuille.trouver(obligation);
+//				portefeuille.acheter(obligation, quantite);
+//				portefeuilleDao.mettreAJour(portefeuille, obligation);
+//				session.setAttribute(ATT_SESSION_PORTEFEUILLE, portefeuille);
+//				this.getServletContext().getRequestDispatcher( VUE_PORTEFEUILLE ).forward( request, response );
+//			}
 	}
 	
 	
@@ -157,34 +176,49 @@ public class Achat extends HttpServlet {
 		for (Obligation o : obligations) {
 			objetsFinanciers.add(o);
 		}
-		request.setAttribute( ATT_SESSION_OBJETS_FINANCIERS, objetsFinanciers );
+
 		
 		/* Achat */
-		HttpSession session = request.getSession();
-		
+		HttpSession session = request.getSession();	
 		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
 		Portefeuille portefeuille = portefeuilleDao.charger(joueur.getLogin());
 		
-	/*
-		String code = request.getParameter("code");
-		
-		Integer quantite = Integer.parseInt(request.getParameter("quantite"));
-
-		Titre titre = titreDao.recupererTitre(code);
-		
-		
-		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
-		Portefeuille portefeuille = portefeuilleDao.charger(joueur.getLogin());
-		
-		titre=(Titre)portefeuille.trouver(titre);
-		portefeuille.acheter(titre, quantite);
-		
-		portefeuilleDao.mettreAJour(portefeuille, titre);
-		
-		session.setAttribute(ATT_SESSION_PORTEFEUILLE, portefeuille);
-	*/
-
-		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+		String quantiteString = request.getParameter("quantite");
+		if (quantiteString != null) {
+			Integer quantite = Integer.parseInt(quantiteString);
+			Boolean trouve = false;
+			int i = 0;
+			while (!trouve && i < objetsFinanciers.size()) {
+				if (objetsFinanciers.get(i) instanceof Titre) {
+					if (request.getParameter(((Titre)objetsFinanciers.get(i)).getCode())!=null) {
+						Titre titre = titreDao.recupererTitre(((Titre)objetsFinanciers.get(i)).getCode());
+						titre=(Titre)portefeuille.trouver(titre);
+						portefeuille.acheter(titre, quantite);
+						portefeuilleDao.mettreAJour(portefeuille, titre);
+						session.setAttribute(ATT_SESSION_PORTEFEUILLE, portefeuille);
+						trouve = true;
+						this.getServletContext().getRequestDispatcher( VUE_PORTEFEUILLE ).forward( request, response );
+					}
+				} else {
+					if (request.getParameter(((Obligation)objetsFinanciers.get(i)).getEmetteur())!=null) {
+						Obligation obligation = obligationDao.recupererObligation(((Obligation)objetsFinanciers.get(i)).getEmetteur());
+						GregorianCalendar dateFin = new GregorianCalendar();
+						dateFin.set(dateFin.YEAR + 10, dateFin.MONTH, dateFin.DAY_OF_MONTH);
+						obligation.setDateFin((new GregorianCalendar()));
+						obligation=(Obligation)portefeuille.trouver(obligation);
+						portefeuille.acheter(obligation, quantite);
+						portefeuilleDao.mettreAJour(portefeuille, obligation);
+						session.setAttribute(ATT_SESSION_PORTEFEUILLE, portefeuille);
+						trouve = true;
+						this.getServletContext().getRequestDispatcher( VUE_PORTEFEUILLE ).forward( request, response );
+					}
+				}
+				i++;
+			}
+		} else {
+			request.setAttribute( ATT_SESSION_OBJETS_FINANCIERS, objetsFinanciers );
+			this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+		}
 	}
 
 	

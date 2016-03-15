@@ -16,7 +16,7 @@
 		<br>
 		<h1> Indices </h1>
 			
-		<table>
+		<table border="1px" style="width:100%">
 			<tr> 	<th>Voir historique</th> <th>Code</th> <th>Libellé</th>
 					<th>Type</th> <th>Nombre disponible</th>
 			</tr>

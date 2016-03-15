@@ -42,13 +42,15 @@
 				<th>Prix unitaire</th>
 				<th>Nombre disponible</th>
 				<th>Quantité</th>
-				<th>Achter</th>
+				<th>Acheter</th>
 			</tr>
 			<% Vector<ObjetFinancier> objetsFinanciersVec = (Vector<ObjetFinancier>) request.getAttribute("objetsFinanciers") ; 
 			
 			if(objetsFinanciersVec!=null) {			
  				for(int i=0;i<objetsFinanciersVec.size();i++){	
- 					out.print("<tr>");			
+ 					out.print("<tr>");		%>	
+					<form method="post" action="<c:url value="/achat" />">
+					<%
  					if (objetsFinanciersVec.get(i) instanceof Titre) {
  						out.print("<td>"+ ((Titre)objetsFinanciersVec.get(i)).getLibelle() +"</td>");
  						out.print("<td>"+ ((Titre)objetsFinanciersVec.get(i)).getPrix() +"€</td>");
@@ -57,13 +59,15 @@
  						out.print("<td>"+ ((Obligation)objetsFinanciersVec.get(i)).getPrix() +"€</td>");
  					}	
  					out.print("<td>"+ objetsFinanciersVec.get(i).getNombreDisponible() +"</td>");
- 					out.print("<td> <input type=\"text\" name=\"quantite\"  > </td>");
+ 					
+ 					out.print("<td> <input type=\"text\" name=\"quantite\" > </td>");
  					if (objetsFinanciersVec.get(i) instanceof Titre) {
-   						out.print("<td> <input type=\"button\" value=\"Acheter ce titre\" onclick=\"window.location='achat?code="+((Titre)objetsFinanciersVec.get(i)).getCode()+"'\" > </td>"); 
+ 						out.print("<td> <input type=\"submit\" name=\"" + ((Titre)objetsFinanciersVec.get(i)).getCode() + "\" value=\"Acheter\"> </td>");
  					} else {
- 	   					out.print("<td> <input type=\"button\" value=\"Acheter cette obligation\" onclick=\"window.location='achat?emetteur="+((Obligation)objetsFinanciersVec.get(i)).getEmetteur()+"'\" > </td>");
- 					}
-   					out.print("</tr>");
+ 						out.print("<td> <input type=\"submit\" name=\"" + ((Obligation)objetsFinanciersVec.get(i)).getEmetteur() + "\" value=\"Acheter\"> </td>");
+ 	  				}%>
+ 					</form>
+					<%out.print("</tr>");
  				}			
  			} %>
  		</table> 	

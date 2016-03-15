@@ -43,7 +43,7 @@
 		<c:import url="/inc/menuPortefeuille.jsp" />
 
 		<h1>Indicateurs :</h1>
-		<table>
+		<table border="1px" style="width:100%">
 			<tr><th>Distribution des actifs</th>
 				<th>Evolution des titres durant les 100 derniers jours de la bourse</th>
 			</tr>

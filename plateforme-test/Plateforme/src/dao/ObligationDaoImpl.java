@@ -35,7 +35,7 @@ public class ObligationDaoImpl implements ObligationDao {
     /**
 	* SQL_UPDATE correspond a la requete SQL de mise a jour du nombre disponible d'une obligation dans la table Obligation.
 	*/ 
-    private static final String SQL_UPDATE = "UPDATE Obligation SET nombreDisponible=? WHERE emetteur=? AND dateFin=?";
+    private static final String SQL_UPDATE = "UPDATE Obligation SET nombreDisponible=? WHERE emetteur=?";
     
     
     /**
@@ -191,7 +191,7 @@ public class ObligationDaoImpl implements ObligationDao {
 	*/
 	@Override
 	public void mettreAJour(Obligation obligation) throws DAOException{
-		executeRequete(daoFactory, SQL_UPDATE, obligation.getNombreDisponible(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));
+		executeRequete(daoFactory, SQL_UPDATE, obligation.getNombreDisponible(), obligation.getEmetteur());
 	}
 	
 	

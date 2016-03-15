@@ -35,21 +35,21 @@
 		</table>
 		
 		<h2>Actifs du portefeuille</h2>
-		<table>
+		<table border="1px" style="width:100%">
 			<tr>
-				<td>Objet financier</td> <td>Type</td> <td>Quantité</td>
-				<td>Prix Unitaire</td> <td>Détail</td> <td>Vente</td>
+				<th>Objet financier</th> <th>Type</th> <th>Quantité</th>
+				<th>Prix Unitaire</th> <th>Détail</th> <th>Vente</th>
 			</tr>
 		
 			<c:forEach var="objetsFinanciers" items="${sessionScope['portefeuille'].quantiteObjetFinancier}" >
 				<c:set var="objetFinancier" value="${objetsFinanciers.key}"/>
 				<c:set var="quantite" value="${objetsFinanciers.value}" />
 				<c:set var="prix" value="${sessionScope['portefeuille'].prixObjetFinancier[objetsFinanciers.key]}" />
-				<c:set var="type" value="${fn:substringAfter(entry['class'],'.')}" />
+				<c:set var="type" value="${fn:substringAfter(objetFinancier['class'],'.')}" />
 				<tr>
 					<c:choose> 
 						<c:when test="${type eq 'Obligation'}"> 
-							<td>${objetFinancier.emmetteur}</td>
+							<td>${objetFinancier.emetteur}</td>
 						</c:when>
 						<c:when test="${type eq 'Option'}"> 
 							<td>${objetFinancier.titre.code}</td>
@@ -60,7 +60,7 @@
 					</c:choose>
 					<td>${type}</td>
 				 	<td>${quantite}</td>
-					<td>${prix}</td>
+					<td>${prix} €</td>
 					<td>Bouton détail</td>
 					<td>Bouton vente</td>
 				</tr>

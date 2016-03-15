@@ -20,7 +20,7 @@
 		<input type="button" value="Indices" onclick="window.location='bourse?redir=indices'" ></td>				
 		<input type="button" value="Obligations" onclick="window.location='bourse?redir=obligations'" ></td>
 				
-		<table>
+		<table border="1px" style="width:100%">
 			<tr> 	<td>Voir historique</td> <td>Code</td> <td>Libellé</td>
 					<td>Type</td> <td>Rendement dividende</td> <td>Nombre disponible</td>
 			</tr>
