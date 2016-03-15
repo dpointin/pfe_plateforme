@@ -98,6 +98,8 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
 	public void mettreAJour(Portefeuille portefeuille, Obligation obligation) throws DAOException {
     	if(portefeuille.getQuantiteObjetFinancier().get(obligation)==0){
     		executeRequete(daoFactory, SQL_DELETE_PORTEFEUILLE_EMETTEUR, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));    	
+    		portefeuille.getQuantiteObjetFinancier().remove(obligation);
+    		portefeuille.getPrixObjetFinancier().remove(obligation);
     	}else
     		if(verification(daoFactory, SQL_SELECT_EMETTEUR,portefeuille.getIdPortefeuille(), obligation.getEmetteur(), new java.sql.Date(obligation.getDateFin().getTimeInMillis()))==false){
     			executeRequete(daoFactory,SQL_INSERER, portefeuille.getIdPortefeuille(), obligation.getEmetteur(), portefeuille.getQuantiteObjetFinancier().get(obligation), new java.sql.Date(obligation.getDateFin().getTimeInMillis()));
