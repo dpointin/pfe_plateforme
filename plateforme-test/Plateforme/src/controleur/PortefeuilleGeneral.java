@@ -1,7 +1,13 @@
 package controleur;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.Vector;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +20,7 @@ import dao.PortefeuilleDao;
 import modele.Joueur;
 import modele.ObjetFinancier;
 import modele.Portefeuille;
+import modele.Titre;
 
 public class PortefeuilleGeneral extends HttpServlet {
 	/**
@@ -35,7 +42,12 @@ public class PortefeuilleGeneral extends HttpServlet {
 	* ATT_SESSION_JOUEUR correspond a l'attribut session Joueur
 	*/ 
 	public static final String ATT_SESSION_JOUEUR = "sessionJoueur";
-	
+
+	/**
+	* ATT_SESSION_JOUEUR correspond a l'attribut session Joueur
+	*/ 
+	public static final String 	ATT_COURS_BASE_CENT = "baseCent";
+
 	
 	/**
 	* VUE correspond a la jsp lie a la servlet
@@ -88,6 +100,46 @@ public class PortefeuilleGeneral extends HttpServlet {
 		
 		if (request.getParameter("redir") != null) {
 			Enumeration<ObjetFinancier> enum_ObjetsFinanciers = portefeuille.getPrixObjetFinancier().keys();
+			TreeMap<GregorianCalendar, Vector<Double>> baseCent = new TreeMap<GregorianCalendar, Vector<Double>>();
+			ArrayList<ObjetFinancier> objetsFinanciers = Collections.list(enum_ObjetsFinanciers);
+			
+			ArrayList<Titre> titres = new ArrayList<Titre>();
+			Vector<String> codes = new Vector<String>();
+			for (ObjetFinancier o : objetsFinanciers) {
+				if (o instanceof Titre) {
+					titres.add((Titre) o);
+					codes.add(((Titre)o).getCode());
+				}
+			}
+			
+			if (titres.size() > 0) {
+				TreeMap<GregorianCalendar, Double> temp = titres.get(0).getHistorique().getBaseCent();
+				Set<GregorianCalendar> dates = temp.keySet();
+				for (GregorianCalendar d : dates) {
+					Vector<Double> v = new Vector<Double>();
+					v.add(temp.get(d));
+					baseCent.put(d,v);
+				}
+				for (int i=1; i<titres.size(); i++) {
+					Double prec = 0.0;
+					TreeMap<GregorianCalendar, Double> temp2 = titres.get(i).getHistorique().getBaseCent();
+					for (GregorianCalendar d : dates) {
+						if (temp2.containsKey(d)) {
+							prec = temp2.get(d);
+							Vector<Double> v = baseCent.get(d);
+							v.add(temp2.get(d));
+							baseCent.put(d, v);
+						} else {
+							Vector<Double> v = baseCent.get(d);
+							v.add(prec);
+							baseCent.put(d, v);
+						}
+					}
+				}
+			}
+
+			session.setAttribute("titres", codes);
+			session.setAttribute(ATT_COURS_BASE_CENT, baseCent);
 			this.getServletContext().getRequestDispatcher( VUE_INDICATEURS ).forward( request, response );			
 		} else {
 			this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 
 <%@page import="java.util.Vector" %>
 <%@page import="modele.Portefeuille" %>
@@ -14,61 +16,90 @@
 		<link type="text/css" rel="stylesheet" href="<c:url value="/inc/form.css"/>" />
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	    <script type="text/javascript">
-	      google.charts.load('current', {'packages':['corechart']});
-	      google.charts.setOnLoadCallback(drawChart);
-	      function drawChart() {
+	      	google.charts.setOnLoadCallback(drawChart);
+	      	function drawChart() {
+	        	var data = google.visualization.arrayToDataTable([
+		            ['Type', 		'Quantité'],
+		          	['Obligation', 	${portefeuille.camembert[0]}],
+		          	['Action',  	${portefeuille.camembert[1]}],
+		          	['Indice',  	${portefeuille.camembert[2]}],
+		          	['Option',  	${portefeuille.camembert[3]}]
+	        	]);
 	
-	        var data = google.visualization.arrayToDataTable([
-	            ['Type', 		'Quantité'],
-	          	['Obligation', 	${portefeuille.camembert[0]}],
-	          	['Action',  	${portefeuille.camembert[1]}],
-	          	['Indice',  	${portefeuille.camembert[2]}],
-	          	['Option',  	${portefeuille.camembert[3]}]
-	        ]);
+	        	var options = {
+	          		title: 'Répartition du portefeuille',
+	          		is3D: true
+	        	};
 	
-	        var options = {
-	          title: 'Répartition du portefeuille',
-	          is3D: true
-	        };
+	        	var chart = new google.visualization.PieChart(document.getElementById('camembert'));
 	
-	        var chart = new google.visualization.PieChart(document.getElementById('camembert'));
-	
-	        chart.draw(data, options);
+	        	chart.draw(data, options);
 	      }
-	    </script>
-	    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
- 		<script type="text/javascript">
-		    // Load the Visualization API and the piechart package.
-		    google.load('visualization', '1.0', {
-		        'packages' : [ 'corechart' ]
-		    });
+	      
+          google.charts.load('current', {'packages':['corechart']});
+	  	  google.charts.setOnLoadCallback(drawChart2);
 		 
-		    // Set a callback to run when the Google Visualization API is loaded.
-		    google.setOnLoadCallback(drawChart);
-		 
-		    // Callback that creates and populates a data table, instantiates the pie chart,
-		    // passes in the data and draws it.
-		    function drawChart() {
+
+		  function drawChart2() {
 		        // Create the data table. 
-		        var data = google.visualization.arrayToDataTable([
-													                <c:forEach items="${sessionScope['titres'].valeurs}" var="entry">
-																		<c:set var="date" value="${entry.key}"/>
-																		<fmt:formatDate var="date2" type="date" dateStyle="short" value="${date.time}"/>
-																		<c:set var="vecteur" value="${entry.value}"/>
-													                    [ '${date2}',  ${vecteur[2]} ],
-													                </c:forEach>
-																], true);
+		        var data = google.visualization.DataTable();
+		        data.addColumn('number', 'Date');
+		        <c:set var="codes" value="${sessionScope['titres']}"/>
+            	<c:if test="${fn:length(codes)>=1}">
+            		data.addColumn('number', '${codes[0]}');
+            		<c:if test="${fn:length(codes)>=2}">
+            			data.addColumn('number', '${codes[1]}');
+            			<c:if test="${fn:length(codes)>=3}">
+            				data.addColumn('number', '${codes[2]}');
+            				<c:if test="${fn:length(codes)>=4}">
+            					data.addColumn('number', '${codes[3]}');
+                				<c:if test="${fn:length(codes)>=5}">
+            						data.addColumn('number', '${codes[4]}');
+                    				<c:if test="${fn:length(codes)>=6}">
+            							data.addColumn('number', '${codes[5]}');
+            						</c:if>
+            					</c:if>
+            				</c:if>
+            			</c:if>
+            		</c:if>
+            	</c:if>
+
+		        data.addRows([
+						<c:forEach items="${sessionScope['baseCent']}" var="entry">
+							<c:set var="date" value="${entry.key}"/>
+							<fmt:formatDate var="date2" type="date" dateStyle="short" value="${date.time}"/>
+							<c:set var="vecteur" value="${entry.value}"/>
+							<c:choose>  
+								<c:when test="${fn:length(vecteur)==1}"> 
+									[ '${date2}', ${vecteur[0]}],
+								</c:when>
+								<c:when test="${fn:length(vecteur)==2}"> 	
+									[ '${date2}', ${vecteur[0]}, ${vecteur[1]}],
+								</c:when>
+								<c:when test="${fn:length(vecteur)==3}"> 		
+									[ '${date2}', ${vecteur[0]}, ${vecteur[1]}, ${vecteur[2]}],
+								</c:when>
+								<c:when test="${fn:length(vecteur)==4}"> 		
+									[ '${date2}', ${vecteur[0]}, ${vecteur[1]}, ${vecteur[2]}, ${vecteur[3]}],
+								</c:when>
+								<c:when test="${fn:length(vecteur)==5}"> 		
+									[ '${date2}', ${vecteur[0]}, ${vecteur[1]}, ${vecteur[2]}, ${vecteur[3]}, ${vecteur[4]}],
+								</c:when>
+								<c:otherwise>
+									[ '${date2}', ${vecteur[0]}, ${vecteur[1]}, ${vecteur[2]}, ${vecteur[3]}, ${vecteur[4]}, ${vecteur[5]}],										
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+				]);
 
 		                    		 
 		        // Set chart options
 		     	var options = {
-	    			title: 'Cours d\'ouverture',
+	    			title: 'Cours de fermeture sur la derniere periode',
 			        //curveType: 'function',
 			        legend: { position: 'bottom' }
 			    };
 
-
-		 
 		        // Instantiate and draw our chart, passing in some options.
 		        var chart = new google.visualization.LineChart(document.getElementById('chart'));
 		        chart.draw(data, options);
@@ -85,8 +116,8 @@
 			<tr><th>Distribution des actifs</th>
 				<th>Evolution des titres durant les 100 derniers jours de la bourse</th>
 			</tr>
-			<tr><td> <div id="camembert" style="width: 400px; height: 400px;"></div></td>
-				<td>Courbe des titres</td>
+			<tr><td> <div id="camembert" style="width: 400px; height: 400px;"></div> </td>
+				<td> <div id="chart" style="width: 500px; height: 500px"></div>	</td>
 			</tr>
 			
 		</table>

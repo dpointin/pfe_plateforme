@@ -35,10 +35,11 @@ public class Historique {
 		
 		//on itere sur toutes les valeurs et on les rajoute
 		Iterator<GregorianCalendar> it=valeurs.keySet().iterator(); // on cree un iterator sur les clés de ton hashmap
-		while(it.hasNext())
-		{
-		   GregorianCalendar key=(GregorianCalendar) it.next();
-		   baseCent.put(key, getFermetureJours(key)/reference*100);
+		int i=0;
+		while(it.hasNext() && i<50) { /// que les 50 dernieres valeurs
+			i++;
+			GregorianCalendar key=(GregorianCalendar) it.next();
+			baseCent.put(key, getFermetureJours(key)/reference*100);
 		}
 		
 		return baseCent;
