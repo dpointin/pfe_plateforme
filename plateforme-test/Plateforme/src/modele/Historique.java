@@ -1,6 +1,7 @@
 package modele;
 
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.Vector;
 
@@ -25,6 +26,23 @@ public class Historique {
 		super();
 		this.code = code;
 	}	
+	
+	
+	public TreeMap<GregorianCalendar, Double> getBaseCent(){
+		TreeMap<GregorianCalendar, Double> baseCent=new TreeMap<GregorianCalendar, Double>();
+		//Notre reference est la premiere date
+		Double reference= getFermetureJours(valeurs.firstKey());
+		
+		//on itere sur toutes les valeurs et on les rajoute
+		Iterator<GregorianCalendar> it=valeurs.keySet().iterator(); // on cree un iterator sur les clés de ton hashmap
+		while(it.hasNext())
+		{
+		   GregorianCalendar key=(GregorianCalendar) it.next();
+		   baseCent.put(key, getFermetureJours(key)/reference*100);
+		}
+		
+		return baseCent;
+	}
 	
 	// GETTERS AND SETTERS
 	public String getCode() {
