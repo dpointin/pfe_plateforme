@@ -33,13 +33,13 @@ public class HistoriquePortefeuilleDaoImpl implements HistoriquePortefeuilleDao 
 	/**
 	* SQL_INSERT_OBLIGATION correspond a la requete SQL d'insertion d'une operation obligation dans la table HistoriquePortefeuilles.
 	*/
-	private static final String SQL_INSERT_OBLIGATION= "INSERT INTO HistoriquePortefeuille (idPortefeuille, emetteur, prix, quantite, dateOperation, dateFinObligation) VALUES (?, ?, ?, ?, ?, ?,)";
+	private static final String SQL_INSERT_OBLIGATION= "INSERT INTO HistoriquePortefeuille (idPortefeuille, emetteur, prix, quantite, dateOperation, dateFinObligation) VALUES (?, ?, ?, ?, ?, ?)";
 	    
 	    
 	/**
 	* SQL_INSERT_TITRE correspond a la requete SQL d'insertion d'une operation titre dans la table HistoriquePortefeuille.
 	*/
-	private static final String SQL_INSERT_TITRE= "INSERT INTO HistoriquePortefeuille (idPortefeuille, code, prix, quantite, dateOperation) VALUES (?, ?, ?, ?, ?,)";
+	private static final String SQL_INSERT_TITRE= "INSERT INTO HistoriquePortefeuille (idPortefeuille, code, prix, quantite, dateOperation) VALUES (?, ?, ?, ?, ?)";
 	
 	
 	/**
