@@ -94,6 +94,9 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 			estTitre.trouver(p);
 			EstComposeObligationDao estObligation= new EstComposeObligationDaoImpl(daoFactory);
 			estObligation.trouver(p);
+			//On recupere l'historique des operations
+			HistoriquePortefeuilleDao hist=new HistoriquePortefeuilleDaoImpl(daoFactory);
+			p.setOperations(hist.trouver(p.getIdPortefeuille()));
 		}
 		return p;
 	}
@@ -175,6 +178,10 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 					//Pour les options
 				}
 		}
+		//On ajoute dans l'historique
+		HistoriquePortefeuilleDao hist=new HistoriquePortefeuilleDaoImpl(daoFactory);
+		hist.ajouter(portefeuille.getIdPortefeuille(),portefeuille.getOperations().get(portefeuille.getOperations().size()-1));
+		//Mise a jour de l'argent disponible
 		executeRequete(daoFactory,SQL_UPDATE_ARGENT_DISPONIBLE, portefeuille.getArgentDisponible(), portefeuille.getIdPortefeuille());
 	}
 
