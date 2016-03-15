@@ -9,9 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import modele.Obligation;
-import modele.Titre;
 
 /**
 * Classe ObligationDaoImpl implementant l'interface ObligationDao
@@ -97,16 +98,14 @@ public class ObligationDaoImpl implements ObligationDao {
 	/**
 	* Implementation de la methode definie dans l'interface ObligationDao
 	*
-	* @param motsCles que l'on souhaite retrouver dans le libelle ou le code
-	* @param type des titres que l'on souhaite recuperer (TOUS, ACTION, INDICE)
-	*
-	* @return ArrayList<Titre> correspondant a l'ensemble des titres repondant aux criteres
+	* @return ArrayList<Obligation> correspondant a l'ensemble des obligations
 	* 
 	* @throws DAOException Si une erreur arrive lors de la lecture dans la bdd
 	* 
-	* @see Titre
+	* @see Obligation
 	* @see DAOException
-	* @see TitreDaoImpl
+	* @see ObligationDao
+	* @see ObligationDaoImpl#recupererObligation(String)
 	*/ 
 	@Override
 	public ArrayList<Obligation> trouverToutesObligations() throws DAOException {
@@ -119,11 +118,43 @@ public class ObligationDaoImpl implements ObligationDao {
 	}
 
 
-
+	/**
+	* Implementation de la methode definie dans l'interface ObligationDao
+	* 
+	* @param motsCles que l'on souhaite retrouver dans l'emetteur de l'obligation
+	*
+	* @return ArrayList<Obligation> correspondant a l'ensemble des obligations repondant aux criteres
+	* 
+	* @throws DAOException Si une erreur arrive lors de la lecture de la bdd
+	* 
+	* @see Obligation
+	* @see DAOException
+	* @see ObligationDaoImpl
+	*/ 
 	@Override
-	public ArrayList<Obligation> rechercheObligations(String motCles) throws DAOException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Obligation> rechercheObligations(String motsCles) throws DAOException {
+		ArrayList<Obligation> vecObligations = trouverToutesObligations();
+
+		if (motsCles.equals("")) {
+			return vecObligations;
+		}
+		
+		String[] mots =  motsCles.split(" ");
+		Set<Obligation> setObligationsChoisis = new HashSet<Obligation>() ; 
+		for(Obligation o : vecObligations) {
+			for(String mot : mots) {
+				if (o.getEmetteur().toLowerCase().contains(mot.toLowerCase())) {
+					setObligationsChoisis.add(o);
+					break ;
+				}
+			}		
+		}
+	
+		ArrayList<Obligation> obligationsChoisis = new ArrayList<Obligation>() ; 
+		for(Obligation t : setObligationsChoisis) {
+			obligationsChoisis.add(t);
+		}	
+		return obligationsChoisis;
 	}
 
 	/**

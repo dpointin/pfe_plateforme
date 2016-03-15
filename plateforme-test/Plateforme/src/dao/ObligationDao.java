@@ -49,7 +49,7 @@ public interface ObligationDao {
 	* @see DAOException
 	* @see ObligationDaoImpl
 	*/ 
-	ArrayList<Obligation> rechercheObligations(String motCles) throws DAOException;
+	ArrayList<Obligation> rechercheObligations(String motsCles) throws DAOException;
 	
 	
 	/**

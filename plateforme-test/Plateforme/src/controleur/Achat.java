@@ -44,7 +44,7 @@ public class Achat extends HttpServlet {
 	/**
 	* ATT_SESSION_JOUEUR correspond a l'attribut titres
 	*/ 
-	public static final String ATT_SESSION_TITRES = "titres";
+	public static final String ATT_SESSION_OBJETS_FINANCIERS = "objetsFinanciers";
 
 	
 	/**
@@ -97,9 +97,17 @@ public class Achat extends HttpServlet {
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		/* Affichage de la page de connexion */
 		ArrayList<Titre> titres = titreDao.trouverTousTitres();
+		ArrayList<Obligation> obligations = obligationDao.trouverToutesObligations();
+
+		Vector<ObjetFinancier> objetsFinanciers = new Vector<ObjetFinancier>();
+		for (Titre t : titres) {
+			objetsFinanciers.add(t);
+		}
+		for (Obligation o : obligations) {
+			objetsFinanciers.add(o);
+		}
 		
-		HttpSession session = request.getSession();
-		session.setAttribute( ATT_SESSION_TITRES, titres );
+		request.setAttribute( ATT_SESSION_OBJETS_FINANCIERS, objetsFinanciers );
 	
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}
@@ -126,6 +134,7 @@ public class Achat extends HttpServlet {
 		
 		String motsCles = request.getParameter("motscles");
 		String type = request.getParameter("type");
+		System.out.println(type);
 		ArrayList<Titre> titres = new ArrayList<Titre>();
 		ArrayList<Obligation> obligations = new ArrayList<Obligation>();
 		Vector<ObjetFinancier> objetsFinanciers = new Vector<ObjetFinancier>();
@@ -171,8 +180,8 @@ public class Achat extends HttpServlet {
 		
 		session.setAttribute(ATT_SESSION_PORTEFEUILLE, portefeuille);
 	*/
-		request.setAttribute("objetsFinanciers",objetsFinanciers);
-		this.getServletContext().getRequestDispatcher( VUE_PORTEFEUILLE ).forward( request, response );
+		request.setAttribute( ATT_SESSION_OBJETS_FINANCIERS, objetsFinanciers );
+		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}
 
 	

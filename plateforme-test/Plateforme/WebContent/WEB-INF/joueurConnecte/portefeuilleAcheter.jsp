@@ -26,7 +26,7 @@
 	
 		<form method="post" action="<c:url value="/achat" />">
 			<input type="text" name="motscles" placeholder="Recherche...">
-			<select name="typeObjet">
+			<select name="type">
 				<option value="TOUS" selected>Tous les types</option>
 				<option value="ACTION">Action</option>
 				<option value="INDICE">Indice</option>
@@ -34,6 +34,7 @@
 			</select>		
 			<input type="submit" value="Recherche">	
 		</form>
+		<br/>	
 			
 		<table border="1px" style="width:100%">
 			<tr>
@@ -55,7 +56,7 @@
  						out.print("<td>"+ ((Obligation)objetsFinanciersVec.get(i)).getEmetteur() +"</td>");
  						out.print("<td>"+ ((Obligation)objetsFinanciersVec.get(i)).getPrix() +"€</td>");
  					}	
- 					out.print("<td>"+ objetsFinanciersVec.get(i).getNombreDisponible() +"€</td>");
+ 					out.print("<td>"+ objetsFinanciersVec.get(i).getNombreDisponible() +"</td>");
  					out.print("<td> <input type=\"text\" name=\"quantite\"  > </td>");
  					if (objetsFinanciersVec.get(i) instanceof Titre) {
    						out.print("<td> <input type=\"button\" value=\"Acheter ce titre\" onclick=\"window.location='achat?code="+((Titre)objetsFinanciersVec.get(i)).getCode()+"'\" > </td>"); 
