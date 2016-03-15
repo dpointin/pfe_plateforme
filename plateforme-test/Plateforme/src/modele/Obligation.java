@@ -25,7 +25,12 @@ public class Obligation extends ObjetFinancier{
 	
 	@Override
 	public boolean equals(Object obj) {
-		return (obj instanceof Obligation ) && ((Obligation) obj).getEmetteur().equals(emetteur) && ((Obligation) obj).getDateFin().equals(dateFin);
+		if(obj instanceof Obligation){
+			boolean date = (((Obligation) obj).getDateFin().YEAR==(dateFin.YEAR) && ((Obligation) obj).getDateFin().MONTH==(dateFin.MONTH) && ((Obligation) obj).getDateFin().DATE==(dateFin.DATE));
+			return  date && ((Obligation) obj).getEmetteur().equals(emetteur) ;
+		}
+		else
+			return false;
 	}
 	
 	//SETTER ET GETTER
