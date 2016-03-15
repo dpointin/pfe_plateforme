@@ -38,7 +38,7 @@
 		<table border="1px" style="width:100%">
 			<tr>
 				<th>Objet financier</th> <th>Type</th> <th>Quantité</th>
-				<th>Prix Unitaire</th> <th>Détail</th> <th>Vente</th>
+				<th>Prix Unitaire</th> <th>Détail</th>
 			</tr>
 		
 			<c:forEach var="objetsFinanciers" items="${sessionScope['portefeuille'].quantiteObjetFinancier}" >
@@ -62,7 +62,6 @@
 				 	<td>${quantite}</td>
 					<td>${prix} €</td>
 					<td>Bouton détail</td>
-					<td>Bouton vente</td>
 				</tr>
 			</c:forEach>
 		</table>		
