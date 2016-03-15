@@ -99,6 +99,7 @@ public class HistoriquePortefeuilleDaoImpl implements HistoriquePortefeuilleDao 
 		}finally{
 			fermeturesSilencieuses(pre,con);
 		}
+		//System.out.println(sol);
 		return sol;
 	}
 
