@@ -78,14 +78,22 @@
 		<h1> Graphe du cours : ${sessionScope['code']} </h1>
 		
 		<form method="post" action="<c:url value="/cours" />">
-			Date début : <div> <input type="text" id="datepicker" name="dateDebut"></div>
-			Date fin : <div> <input type="text" id="datepicker2" name="dateFin"></div>
-			<select name="typeGraphe">
-		 		<option value="CHART" selected>Courbes</option>
-				<option value="CHANDELIER">Chandeliers</option>
-				<option value="TABLEAU">Tableau de valeurs</option>				
-			</select>
-			<input type="submit" value="ChargerCours"/>
+			<table border="1px" style="width:100%">
+				<tr>
+				<td>Date début : <input type="text" id="datepicker" name="dateDebut"></td>
+				<td>Date fin : <input type="text" id="datepicker2" name="dateFin"></td>
+				<td><select name="typeGraphe">
+				 		<option value="CHART" selected>Courbes</option>
+						<option value="CHANDELIER">Chandeliers</option>
+						<option value="TABLEAU">Tableau de valeurs</option>				
+					</select>
+				</td>
+				<td>	
+					<input type="submit" value="ChargerCours"/>
+				</td>
+				</tr>
+
+			</table>
 		</form>
 		<br/>
 

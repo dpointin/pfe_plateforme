@@ -43,7 +43,7 @@
 		<form method="post" action="<c:url value="/cours" />">
 			<table border="1px" style="width:100%">
 				<tr>
-				<td> Date début : <input type="text" id="datepicker" name="dateDebut"></td>
+				<td>Date début : <input type="text" id="datepicker" name="dateDebut"></td>
 				<td>Date fin : <input type="text" id="datepicker2" name="dateFin"></td>
 				<td><select name="typeGraphe">
 				 		<option value="CHART" selected>Courbes</option>

@@ -18,14 +18,15 @@
 		
 		<table border="1px" style="width:100%">
 			<tr> 	<th>Voir historique</th> <th>Code</th> <th>Libellé</th>
-					<th>Type</th> <th>Rendement dividende</th> <th>Nombre disponible</th>
+					<th>Rendement dividende</th> <th>Nombre disponible</th>
 			</tr>
 
 			<c:forEach var="entry" items="${sessionScope['titres']}" >
-				<tr> <td> <input type="button" value="Historique" onclick="window.location='cours?code=${entry.code}'" ></td>
+				<tr> 
 				<c:set var="type" value="${fn:substringAfter(entry['class'],'.')}" />
 				<c:if test="${type eq 'Action'}"> 
-					<td>${entry.code}</td> <td>${entry.libelle}</td> <td>${type}</td>
+					<td> <input type="button" value="Historique" onclick="window.location='cours?code=${entry.code}'" ></td>
+					<td>${entry.code}</td> <td>${entry.libelle}</td> 
 					<c:set var="dividende" value="${entry.dividende*10000}"/>
 					<c:set var="divid" value="${fn:substringBefore(dividende,'.')}"/>
 					<td>${divid/100} %</td> 

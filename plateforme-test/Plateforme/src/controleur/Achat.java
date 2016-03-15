@@ -2,6 +2,8 @@ package controleur;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Vector;
 
@@ -130,7 +132,7 @@ public class Achat extends HttpServlet {
 		/* Recherche */
 		String motsCles = request.getParameter("motscles");
 		String type = request.getParameter("type");
-		System.out.println(type);
+	
 		ArrayList<Titre> titres = new ArrayList<Titre>();
 		ArrayList<Obligation> obligations = new ArrayList<Obligation>();
 		Vector<ObjetFinancier> objetsFinanciers = new Vector<ObjetFinancier>();
@@ -189,8 +191,8 @@ public class Achat extends HttpServlet {
 					if (request.getParameter(((Obligation)objetsFinanciers.get(i)).getEmetteur())!=null) {
 						Obligation obligation = obligationDao.recupererObligation(((Obligation)objetsFinanciers.get(i)).getEmetteur());
 						GregorianCalendar dateFin = new GregorianCalendar();
-						dateFin.set(dateFin.YEAR + 10, dateFin.MONTH, dateFin.DAY_OF_MONTH);
-						obligation.setDateFin((new GregorianCalendar()));
+						dateFin.add(Calendar.YEAR, 10);
+						obligation.setDateFin(dateFin);
 						obligation=(Obligation)portefeuille.trouver(obligation);
 						if (portefeuille.acheter(obligation, quantite)) {
 							portefeuilleDao.mettreAJour(portefeuille, obligation);

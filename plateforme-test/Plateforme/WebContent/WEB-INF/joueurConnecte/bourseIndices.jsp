@@ -17,8 +17,8 @@
 		<h1> Indices </h1>
 			
 		<table border="1px" style="width:100%">
-			<tr> 	<th>Voir historique</th> <th>Code</th> <th>Libellé</th>
-					<th>Type</th> <th>Nombre disponible</th>
+			<tr> 	<th>Voir historique</th> <th>Code</th> 
+					<th>Libellé</th> <th>Nombre disponible</th>
 			</tr>
 
 			<c:forEach var="entry" items="${sessionScope['titres']}" >
@@ -26,7 +26,7 @@
 				<c:set var="type" value="${fn:substringAfter(entry['class'],'.')}" />
 				<c:if test="${type eq 'Indice'}"> 
 					<td> <input type="button" value="Historique" onclick="window.location='cours?code=${entry.code}'" ></td>
-					<td>${entry.code}</td> <td>${entry.libelle}</td> <td>${type}</td>
+					<td>${entry.code}</td> <td>${entry.libelle}</td> 
 					<td>${entry.nombreDisponible}</td>
 				</c:if>
 		 		</tr>
