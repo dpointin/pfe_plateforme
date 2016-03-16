@@ -5,9 +5,19 @@ import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.Vector;
 
+/**
+* Classe Historique representant l'historique d'un titre 
+*
+* @author  Celine Chaugny & Damien Pointin 
+*/
 public class Historique {
-
+	/**
+	* Le code du tire auquel appartient l'historique.
+	*
+	*/ 
 	private String code;
+	
+	
 	private TreeMap<GregorianCalendar, Vector<Double>> valeurs;
 	/*	Vector<Double> :
 	 * 	0 : ouverture
