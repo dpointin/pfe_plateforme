@@ -45,7 +45,7 @@
 		        var data = google.visualization.arrayToDataTable([
 													                <c:forEach items="${sessionScope['cours'].valeurs}" var="entry">
 																		<c:set var="date" value="${entry.key}"/>
-																		<fmt:formatDate var="date2" type="date" dateStyle="short" value="${date.time}"/>
+																		<fmt:formatDate var="date2" type="date" dateStyle="short" pattern="dd/MM/yyyy" value="${date.time}"/>
 																		<c:set var="vecteur" value="${entry.value}"/>
 													                    [ '${date2}',  ${vecteur[2]} ],
 													                </c:forEach>

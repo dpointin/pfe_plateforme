@@ -70,7 +70,7 @@
 				<c:set var="date" value="${entry.key}"/>
 				<c:set var="vecteur" value="${entry.value}" />
 				<tr>
-					<fmt:formatDate var="date2" type="date" dateStyle="short" value="${date.time}"/>
+					<fmt:formatDate var="date2" type="date" dateStyle="short" pattern="dd/MM/yyyy" value="${date.time}"/>
 					<td>${date2}</td> <td>${vecteur[0]}</td> <td>${vecteur[1]}</td>
 					<td>${vecteur[2]}</td> <td>${vecteur[3]}</td>
 					<td>${vecteur[4]}</td> <td>${vecteur[5]}</td>

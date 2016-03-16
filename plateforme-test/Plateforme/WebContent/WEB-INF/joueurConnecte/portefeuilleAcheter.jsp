@@ -43,7 +43,7 @@
 			
 		<table border="1px" style="width:100%">
 			<tr>
-				<th>Titre</th>
+				<th colspan=2>Objet Financier</th>
 				<th>Prix unitaire</th>
 				<th>Nombre disponible</th>
 				<th>Quantité</th>
@@ -57,10 +57,12 @@
 					<form method="post" action="<c:url value="/achat" />">
 					<%
  					if (objetsFinanciersVec.get(i) instanceof Titre) {
+ 						out.print("<td>"+ ((Titre)objetsFinanciersVec.get(i)).getCode() +"</td>");
  						out.print("<td>"+ ((Titre)objetsFinanciersVec.get(i)).getLibelle() +"</td>");
  						out.print("<td>"+ ((Titre)objetsFinanciersVec.get(i)).getPrix() +"€</td>");
  					} else {
  						out.print("<td>"+ ((Obligation)objetsFinanciersVec.get(i)).getEmetteur() +"</td>");
+ 						out.print("<td> 10 ans </td>");
  						out.print("<td>"+ ((Obligation)objetsFinanciersVec.get(i)).getPrix() +"€</td>");
  					}	
  					out.print("<td>"+ objetsFinanciersVec.get(i).getNombreDisponible() +"</td>");

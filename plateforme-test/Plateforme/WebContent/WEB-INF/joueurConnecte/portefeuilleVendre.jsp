@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@page import="java.util.Vector" %>
 <%@page import="modele.Portefeuille" %>
@@ -41,8 +42,10 @@
 						<c:set var="type" value="${fn:substringAfter(objetFinancier['class'],'.')}" />
 					
 						<c:choose> 
-							<c:when test="${type eq 'Obligation'}"> 
-								<td>${objetFinancier.emetteur} date fin</td>
+							<c:when test="${type eq 'Obligation'}"> 							
+								<c:set var="date" value="${objetFinancier.dateFin}"/>
+								<fmt:formatDate var="date2" type="date" dateStyle="short" pattern="dd/MM/yyyy" value="${date.time}"/>
+								<td>${objetFinancier.emetteur} (${date2})</td>
 							</c:when>
 							<c:otherwise> 
 								<td>${objetFinancier.code}</td> 

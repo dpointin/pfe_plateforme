@@ -58,7 +58,7 @@
 				 var i=0;
 				 <c:forEach items="${sessionScope['baseCent']}" var="entry">
 				 	<c:set var="date" value="${entry.key}"/>
-					<fmt:formatDate var="date2" type="date" dateStyle="short" value="${date.time}"/>
+					<fmt:formatDate var="date2" type="date" dateStyle="short" pattern="dd/MM/yyyy" value="${date.time}"/>
 					<c:set var="vecteur" value="${entry.value}"/>
 						j=0;
 						data.setCell(i, j, '${date2}');
@@ -96,7 +96,7 @@
 		<h1>Indicateurs :</h1>
 		<table border="1px" style="width:100%">
 			<tr><th>Distribution des actifs</th>
-				<th>Evolution des titres durant les 100 derniers jours de la bourse</th>
+				<th>Evolution des titres en base 100</th>
 			</tr>
 			<tr><td> <div id="camembert" style="width: 400px; height: 400px; text-align: center"></div> </td> 
 				<td> <div id="chart" style="width: 700px; height: 500px; text-align: center"></div>	</td>

@@ -17,8 +17,8 @@
 		<h1> Titres </h1>
 
 		<table border="1px" style="width:100%">
-			<tr> 	<td>Voir historique</td> <td>Code</td> <td>Libellé</td>
-					<td>Type</td> <td>Rendement dividende</td> <td>Nombre disponible</td>
+			<tr> 	<th>Voir historique</th> <th>Code</th> <th>Libellé</th>
+					<th>Type</th> <th>Rendement dividende</th> <th>Nombre disponible</th>
 			</tr>
 
 			<c:forEach var="entry" items="${sessionScope['titres']}" >
