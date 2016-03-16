@@ -27,6 +27,9 @@
 			]);
 			
 			var options = {
+					backgroundColor: '#d2d2d2',
+					width: 400,
+			        height: 400,
 			 		title: 'Répartition du portefeuille',
 			 		is3D: true
 			};
@@ -68,9 +71,14 @@
 			  
 		        // Set chart options
 		     	var options = {
+					//backgroundColor: '#d2d2d2',
+					backgroundColor: {stroke:'black', fill:'#d2d2d2',strokeSize: 1},
+					width: 700,
+			        height: 500,
 	    			title: 'Cours de fermeture sur la derniere periode',
 			        //curveType: 'function',
-			        legend: { position: 'bottom' }
+
+
 			    };
 	
 		        // Instantiate and draw our chart, passing in some options.
@@ -90,8 +98,8 @@
 			<tr><th>Distribution des actifs</th>
 				<th>Evolution des titres durant les 100 derniers jours de la bourse</th>
 			</tr>
-			<tr><td> <div id="camembert" style="width: 400px; height: 400px;"></div> </td> 
-				<td> <div id="chart" style="width: 700px; height: 500px"></div>	</td>
+			<tr><td> <div id="camembert" style="width: 400px; height: 400px; text-align: center"></div> </td> 
+				<td> <div id="chart" style="width: 700px; height: 500px; text-align: center"></div>	</td>
 			</tr>
 			
 		</table>
