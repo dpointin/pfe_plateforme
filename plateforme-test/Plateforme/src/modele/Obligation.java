@@ -1,5 +1,6 @@
 package modele;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Obligation extends ObjetFinancier{
@@ -26,7 +27,16 @@ public class Obligation extends ObjetFinancier{
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Obligation){
-			boolean date = (((Obligation) obj).getDateFin().YEAR==(dateFin.YEAR) && ((Obligation) obj).getDateFin().MONTH==(dateFin.MONTH) && ((Obligation) obj).getDateFin().DATE==(dateFin.DATE));
+			/*System.out.println(((Obligation) obj).getDateFin().get(Calendar.YEAR)==(dateFin.get(Calendar.YEAR)));
+			System.out.println(((Obligation) obj).getDateFin().get(Calendar.YEAR));
+			System.out.println((dateFin.get(Calendar.YEAR)));
+			System.out.println(((Obligation) obj).getDateFin().get(Calendar.MONTH)==(dateFin.get(Calendar.MONTH)));
+			System.out.println(((Obligation) obj).getDateFin().get(Calendar.MONTH));
+			System.out.println((dateFin.get(Calendar.MONTH)));
+			System.out.println(((Obligation) obj).getDateFin().get(Calendar.DAY_OF_MONTH)==(dateFin.get(Calendar.DAY_OF_MONTH)));
+			System.out.println(((Obligation) obj).getDateFin().get(Calendar.DAY_OF_MONTH));
+			System.out.println((dateFin.get(Calendar.DAY_OF_MONTH)));*/
+			boolean date = (((Obligation) obj).getDateFin().get(Calendar.YEAR)==(dateFin.get(Calendar.YEAR)) && ((Obligation) obj).getDateFin().get(Calendar.MONTH)==(dateFin.get(Calendar.MONTH)) && ((Obligation) obj).getDateFin().get(Calendar.DAY_OF_MONTH)==(dateFin.get(Calendar.DAY_OF_MONTH)));
 			return  date && ((Obligation) obj).getEmetteur().equals(emetteur) ;
 		}
 		else
