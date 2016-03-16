@@ -149,7 +149,7 @@ public class Portefeuille {
 		this.operations = operations;
 	}
 
-	public Integer[] getCamembert() {
+	public Integer[] getCamembertQuantite() {
 		// obligation, ation, indice, option
 		Integer[] n = {0,0,0,0};
 		Iterator<ObjetFinancier> it = quantiteObjetFinancier.keySet().iterator(); 
@@ -163,6 +163,25 @@ public class Portefeuille {
 			   n[2] = n[2] + quantiteObjetFinancier.get(key);			   
 		   } else if  (key instanceof Option) {
 			   n[3] = n[3] + quantiteObjetFinancier.get(key);			   
+		   }
+		}
+		return n;
+	}
+	
+	public Double[] getCamembertPrix() {
+		// obligation, ation, indice, option
+		Double[] n = {0.0,0.0,0.0,0.0};
+		Iterator<ObjetFinancier> it = prixObjetFinancier.keySet().iterator(); 
+		while(it.hasNext()) {
+		   ObjetFinancier key = it.next();
+		   if (key instanceof Obligation) {
+			   n[0] = n[0] + prixObjetFinancier.get(key)*quantiteObjetFinancier.get(key);
+		   } else if  (key instanceof Action) {
+			   n[1] = n[1] + prixObjetFinancier.get(key)*quantiteObjetFinancier.get(key);			   
+		   } else if  (key instanceof Indice) {
+			   n[2] = n[2] + prixObjetFinancier.get(key)*quantiteObjetFinancier.get(key);			   
+		   } else if  (key instanceof Option) {
+			   n[3] = n[3] + prixObjetFinancier.get(key)*quantiteObjetFinancier.get(key);			   
 		   }
 		}
 		return n;
