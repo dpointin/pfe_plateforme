@@ -274,7 +274,7 @@ public class TitreDaoImpl implements TitreDao {
 	        	Integer nbDispo = resultSet.getInt("nombreDisponible");
 	        	indice = new Indice(code,libelle,nbDispo);
 	        	HistoriqueDao h_dao=new HistoriqueDaoImpl(daoFactory);
-	        	indice.setHistorique(h_dao.trouver(code, new GregorianCalendar(2016,1,2),new GregorianCalendar()));
+	        	indice.setHistorique(h_dao.trouver(code, new GregorianCalendar(2000,0,2),new GregorianCalendar()));
 	        }
 	    } catch ( SQLException e ) {
 	        throw new DAOException( e );
@@ -319,7 +319,7 @@ public class TitreDaoImpl implements TitreDao {
 	        	Double dividende = (double) resultSet.getFloat("rendementDividende");
 	        	action = new Action(code,libelle,nbDispo,dividende);
 	        	HistoriqueDao h_dao=new HistoriqueDaoImpl(daoFactory);
-	        	action.setHistorique(h_dao.trouver(code, new GregorianCalendar(2016,1,2),new GregorianCalendar()));
+	        	action.setHistorique(h_dao.trouver(code, new GregorianCalendar(2000,0,2),new GregorianCalendar()));
 	        }
 	    } catch ( SQLException e ) {
 	        throw new DAOException( e );
