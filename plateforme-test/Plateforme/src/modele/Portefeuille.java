@@ -1,7 +1,12 @@
 package modele;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.GregorianCalendar;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.TreeMap;
 import java.util.Vector;
 
 public class Portefeuille {
@@ -25,6 +30,19 @@ public class Portefeuille {
 		this.rendement = 0.0;
 		this.idPortefeuille = -1;
 		operations=new Vector<Operation>();
+	}
+	
+	public int getNbActifs() {
+		Enumeration<ObjetFinancier> enum_ObjetsFinanciers = getPrixObjetFinancier().keys();
+		ArrayList<ObjetFinancier> objetsFinanciers = Collections.list(enum_ObjetsFinanciers);
+
+		int n=0;
+		for (ObjetFinancier o : objetsFinanciers) {
+			if (o instanceof Titre) {
+				n++;
+			}
+		}
+		return n;
 	}
 	
 	public boolean acheter(ObjetFinancier objetFinancier, int quantite){
