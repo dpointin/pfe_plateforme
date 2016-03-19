@@ -67,14 +67,14 @@
 																		<c:set var="date" value="${entry.key}"/>
 																		<fmt:formatDate var="date2" type="date" dateStyle="short" pattern="dd/MM/yyyy" value="${date.time}"/>
 																		<c:set var="vecteur" value="${entry.value}"/>
-													                    [ '${date2}',  ${vecteur[2]} ],
+													                    [ '${date2}',  ${vecteur[4]} ],
 													                </c:forEach>
 																], true);
 
 		                    		 
 		        // Set chart options
 		     	var options = {
-	    			title: 'Cours d\'ouverture',
+	    			title: 'Volumes',
 			        //curveType: 'function',
 			        legend: { position: 'bottom' }
 			    };
@@ -82,7 +82,7 @@
 
 		 
 		        // Instantiate and draw our chart, passing in some options.
-		        var chart = new google.visualization.LineChart(document.getElementById('chart'));
+		        var chart = new google.visualization.ColumnChart(document.getElementById('volumes'));
 		        chart.draw(data, options);
 		    }
 		</script>
@@ -91,7 +91,7 @@
 	<body>
 		<c:import url="/inc/menuBourse.jsp" />
 		
-		<h1> Graphe du cours : ${sessionScope['code']} </h1>
+		<h1> Volumes du cours : ${sessionScope['code']} </h1>
 		
 		<form method="post" action="<c:url value="/cours" />">
 			<table border="1px" style="width:100%">
@@ -114,6 +114,6 @@
 		</form>
 		<br/>
 
-		<div id="chart" style="width: 900px; height: 500px"></div>		
+		<div id="volumes" style="width: 900px; height: 500px"></div>		
 	</body>
 </html>

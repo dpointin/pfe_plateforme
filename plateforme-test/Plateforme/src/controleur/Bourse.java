@@ -2,6 +2,7 @@ package controleur;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import dao.DAOFactory;
 import dao.ObligationDao;
 import dao.TitreDao;
+import modele.ObjetFinancier;
 import modele.Obligation;
 import modele.Titre;
 
@@ -35,6 +37,9 @@ public class Bourse extends HttpServlet {
 	* ATT_SESSION_JOUEUR correspond a l'attribut titres
 	*/ 
 	public static final String ATT_SESSION_OBLIGATIONS = "obligations";
+	
+
+	public static final String ATT_SESSION_OBJETS_FINANCIERS = "objetsFinanciers";
 	
 	/**
 	* VUE correspond a la jsp lie a la servlet
@@ -127,13 +132,39 @@ public class Bourse extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		ArrayList<Titre> titres = titreDao.trouverTousTitres();
-
-		HttpSession session = request.getSession();
-		session.setAttribute( ATT_SESSION_TITRES, titres );
+		/* Recherche */
+		String motsCles = request.getParameter("motscles");
+		String type = request.getParameter("type");
+	
+		ArrayList<Titre> titres = new ArrayList<Titre>();
+		ArrayList<Obligation> obligations = new ArrayList<Obligation>();
+		Vector<ObjetFinancier> objetsFinanciers = new Vector<ObjetFinancier>();
 		
-		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+		if (type != null) {
+			if (type.equals("TOUS")) {
+				titres = titreDao.rechercheTitres(motsCles, type);
+				obligations = obligationDao.rechercheObligations(motsCles);
+			} else if (type.equals("ACTION")) {
+				titres = titreDao.rechercheTitres(motsCles, type);
+			} else if (type.equals("INDICE")) {
+				titres = titreDao.rechercheTitres(motsCles, type);				
+			} else {
+				obligations = obligationDao.rechercheObligations(motsCles);
+			}
+		} else {
+			titres = titreDao.trouverTousTitres();
+			obligations = obligationDao.trouverToutesObligations();
+		}
+		
+		for (Titre t : titres) {
+			objetsFinanciers.add(t);
+		}
+		for (Obligation o : obligations) {
+			objetsFinanciers.add(o);
+		}
 
+		request.setAttribute( ATT_SESSION_OBJETS_FINANCIERS, objetsFinanciers );
+		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}
 
 	
