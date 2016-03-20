@@ -50,6 +50,11 @@ public class Cours extends HttpServlet {
 	public static final String VUE_CHART = "/WEB-INF/joueurConnecte/chart.jsp";
 	
 	/**
+	* VUE_VOLUMES correspond a la jsp lie a la servlet
+	*/ 
+	public static final String VUE_VOLUMES = "/WEB-INF/joueurConnecte/volumes.jsp";
+	
+	/**
 	* Le historiqueDao de notre servlet
 	*/ 
 	private HistoriqueDao historiqueDao;
@@ -87,30 +92,28 @@ public class Cours extends HttpServlet {
 
 		String dateDebut = request.getParameter("dateDebut");
 		String dateFin = request.getParameter("dateFin");
-		System.out.println(dateDebut);
 		String[] tabDebut = {"1","1","2015"};
-		String[] tabFin = {"1","1","2016"};
-		if (dateDebut != null && dateFin!=null) {
-			tabDebut = dateDebut.split("/");
-			tabFin = dateFin.split("/");
+		String[] tabFin = {"1","12","2016"};
+		if (dateDebut != null && dateFin!=null && !dateDebut.equals("") && !dateFin.equals("")) {
+			System.out.println("je suis dans le if, date debut : " + dateDebut);
+			tabDebut = dateDebut.split("-");
+			tabFin = dateFin.split("-");
 		}
 
 		String typeGraphe = request.getParameter("typeGraphe");
+		GregorianCalendar deb = new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[1])-1,Integer.parseInt(tabDebut[0]));
+		GregorianCalendar fin = new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[1])-1,Integer.parseInt(tabFin[0]));
+		Historique cours = historiqueDao.trouver(code,deb,fin);
+		session.setAttribute( ATT_SESSION_CODE, code );
+		session.setAttribute( ATT_SESSION_COURS, cours );
 					
 		if (typeGraphe!=null && typeGraphe.equals("CHANDELIER")) {
-			Historique cours = historiqueDao.trouver(code,new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[0])-1,Integer.parseInt(tabDebut[1])), new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[0])-1,Integer.parseInt(tabFin[1])));
-			session.setAttribute( ATT_SESSION_CODE, code );
-			session.setAttribute( ATT_SESSION_COURS, cours );
 			this.getServletContext().getRequestDispatcher( VUE_CHANDELIER).forward( request, response );
 		} else if (typeGraphe!=null && typeGraphe.equals("CHART")) {
-			Historique cours = historiqueDao.trouver(code,new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[0])-1,Integer.parseInt(tabDebut[1])), new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[0])-1,Integer.parseInt(tabFin[1])));
-			session.setAttribute( ATT_SESSION_CODE, code );
-			session.setAttribute( ATT_SESSION_COURS, cours );
 			this.getServletContext().getRequestDispatcher( VUE_CHART).forward( request, response );
+		} else if (typeGraphe!=null && typeGraphe.equals("VOLUMES")) {
+			this.getServletContext().getRequestDispatcher( VUE_VOLUMES).forward( request, response );
 		} else {
-			Historique cours = historiqueDao.trouver(code,new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[0])-1,Integer.parseInt(tabDebut[1])), new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[0])-1,Integer.parseInt(tabFin[1])));
-			session.setAttribute( ATT_SESSION_CODE, code );
-			session.setAttribute( ATT_SESSION_COURS, cours );
 			this.getServletContext().getRequestDispatcher( VUE).forward( request, response );
 		}
 	}
@@ -136,28 +139,31 @@ public class Cours extends HttpServlet {
 		String dateDebut = request.getParameter("dateDebut");
 		String dateFin = request.getParameter("dateFin");
 		String[] tabDebut = {"1","1","2015"};
-		String[] tabFin = {"1","1","2016"};
-		if (dateDebut != null && dateFin!=null) {
-			tabDebut = dateDebut.split("/");
-			tabFin = dateFin.split("/");
+		String[] tabFin = {"1","12","2016"};
+		if (dateDebut != null && dateFin!=null && !dateDebut.equals("") && !dateFin.equals("")) {
+			System.out.println("je suis dans le if, date debut : " + dateDebut);
+			tabDebut = dateDebut.split("-");
+			tabFin = dateFin.split("-");
 		}
 		
+		
+		System.out.println("Code :" + code);
+		GregorianCalendar deb = new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[1])-1,Integer.parseInt(tabDebut[0]));
+		GregorianCalendar fin = new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[1])-1,Integer.parseInt(tabFin[0]));
+		Historique cours = historiqueDao.trouver(code,deb,fin);
+		session.setAttribute( ATT_SESSION_CODE, code );
+		session.setAttribute( ATT_SESSION_COURS, cours );
+		
+
 		String typeGraphe = request.getParameter("typeGraphe");
 					
 		if (typeGraphe!=null && typeGraphe.equals("CHANDELIER")) {
-			Historique cours = historiqueDao.trouver(code,new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[0])-1,Integer.parseInt(tabDebut[1])), new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[0])-1,Integer.parseInt(tabFin[1])));
-			session.setAttribute( ATT_SESSION_CODE, code );
-			session.setAttribute( ATT_SESSION_COURS, cours );
 			this.getServletContext().getRequestDispatcher( VUE_CHANDELIER).forward( request, response );
 		} else if (typeGraphe!=null && typeGraphe.equals("CHART")) {
-			Historique cours = historiqueDao.trouver(code,new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[0])-1,Integer.parseInt(tabDebut[1])), new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[0])-1,Integer.parseInt(tabFin[1])));
-			session.setAttribute( ATT_SESSION_CODE, code );
-			session.setAttribute( ATT_SESSION_COURS, cours );
 			this.getServletContext().getRequestDispatcher( VUE_CHART).forward( request, response );
+		} else if (typeGraphe!=null && typeGraphe.equals("VOLUMES")) {
+			this.getServletContext().getRequestDispatcher( VUE_VOLUMES).forward( request, response );
 		} else {
-			Historique cours = historiqueDao.trouver(code,new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[0])-1,Integer.parseInt(tabDebut[1])), new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[0])-1,Integer.parseInt(tabFin[1])));
-			session.setAttribute( ATT_SESSION_CODE, code );
-			session.setAttribute( ATT_SESSION_COURS, cours );
 			this.getServletContext().getRequestDispatcher( VUE).forward( request, response );
 		}
 	}

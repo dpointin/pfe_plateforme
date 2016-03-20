@@ -13,25 +13,55 @@
 	
 	<body>
 		<c:import url="/inc/menuBourse.jsp" />
-		<br>
-		<h1> Titres </h1>
+		<br/>
+		
+		<h2> Faire une recherche : </h2>
+		<form method="post" action="<c:url value="/bourse" />">
+			<input type="text" name="motscles" placeholder="Recherche...">
+			<select name="type">
+				<option value="TOUS" selected>Tous les types</option>
+				<option value="ACTION">Action</option>
+				<option value="INDICE">Indice</option>
+				<option value="OBLIGATION">Obligation</option>
+			</select>		
+			<input type="submit" value="Recherche">	
+		</form>
+		
+		<br/>	
+		
+		<h2> Actifs de la Bourse : </h2>
 
 		<table border="1px" style="width:100%">
-			<tr> 	<th>Voir historique</th> <th>Code</th> <th>Libellé</th>
+			<tr> 	<th>Prix / Historique</th> <th>Objet financier</th>
 					<th>Type</th> <th>Rendement dividende</th> <th>Nombre disponible</th>
 			</tr>
 
-			<c:forEach var="entry" items="${sessionScope['titres']}" >
-				<tr> <td> <input type="button" value="Historique" onclick="window.location='cours?code=${entry.code}'" ></td>
+			<c:forEach var="entry" items="${objetsFinanciers}" >
+				<tr> 
 				<c:set var="type" value="${fn:substringAfter(entry['class'],'.')}" />
-				<td>${entry.code}</td> <td>${entry.libelle}</td> <td>${type}</td>
 				<c:choose>  
-					<c:when test="${type eq 'Action'}"> 
+					<c:when test="${type eq 'Action'}">
+						<td> <input type="button" value="Historique" onclick="window.location='cours?code=${entry.code}'" ></td> 
+						<td>${entry.libelle} (${entry.code})</td>
+						<td>${type}</td>
 						<c:set var="dividende" value="${entry.dividende*10000}"/>
 						<c:set var="test" value="${fn:substringBefore(dividende,'.')}"/>
 						<td>  ${test/100} % </td> 
 					</c:when>
-					<c:when test="${type eq 'Indice'}"> <td> - </td> </c:when>
+					<c:when test="${type eq 'Indice'}"> 
+						<td> <input type="button" value="Historique" onclick="window.location='cours?code=${entry.code}'" ></td>
+						<td>${entry.libelle} (${entry.code})</td>
+						<td>${type}</td>
+						<td> - </td>
+					</c:when>
+					<c:otherwise>
+						<td>${entry.prix}€</td>
+						<td>${entry.emetteur} (10 ans)</td>
+						<td>${type}</td>
+						<c:set var="tauxInterets" value="${entry.tauxInterets*10000}"/>
+					 	<c:set var="tauxInt" value="${fn:substringBefore(tauxInterets,'.')}"/>
+					 	<td>${tauxInt/100} %</td>				
+					</c:otherwise>
 				</c:choose>
 				<td>${entry.nombreDisponible}</td> </tr>
 			</c:forEach>

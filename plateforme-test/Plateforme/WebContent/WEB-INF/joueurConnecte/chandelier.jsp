@@ -18,16 +18,36 @@
 		        $('#datepicker').datepicker({
 		            inline: true,
 		            showOtherMonths: true,
-		            monthNames: [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" ],
-		            dayNamesMin: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+		            altField: "#datepicker",
+		            closeText: 'Fermer',
+		            prevText: 'Précédent',
+		            nextText: 'Suivant',
+		            currentText: 'Aujourd\'hui',
+		            monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+		            monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+		            dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+		            dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+		            dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+		            weekHeader: 'Sem.',
+		            dateFormat: 'dd-mm-yy'
 		        });
 	    	});
 		 	$(function(){
 		    	$('#datepicker2').datepicker({
 		        	inline: true,
 		            showOtherMonths: true,
-		            monthNames: [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" ],
-		            dayNamesMin: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+		            altField: "#datepicker2",
+		            closeText: 'Fermer',
+		            prevText: 'Précédent',
+		            nextText: 'Suivant',
+		            currentText: 'Aujourd\'hui',
+		            monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+		            monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+		            dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+		            dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+		            dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+		            weekHeader: 'Sem.',
+		            dateFormat: 'dd-mm-yy'
 		        });
 			});
 		</script>
@@ -83,6 +103,7 @@
 				<td><select name="typeGraphe">
 				 		<option value="CHART" selected>Courbes</option>
 						<option value="CHANDELIER">Chandeliers</option>
+						<option value="VOLUMES">Volumes</option>
 						<option value="TABLEAU">Tableau de valeurs</option>				
 					</select>
 				</td>
