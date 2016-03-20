@@ -1,7 +1,6 @@
 package controleur;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,11 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.JoueurDao;
-import dao.TitreDao;
 import formulaire.ConnexionForm;
 import modele.Joueur;
 import dao.DAOFactory;
-import dao.HistoriqueDao;
 
 /**
 * Servlet connexion gerant la connexion d'un joueur

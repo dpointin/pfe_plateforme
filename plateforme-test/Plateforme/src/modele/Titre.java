@@ -13,7 +13,6 @@ public abstract class Titre extends ObjetFinancier{
 		this.historique = new Historique(code);
 	}
 	
-	
 	// GETTER SETTER
 	public String getLibelle() {
 		return libelle;

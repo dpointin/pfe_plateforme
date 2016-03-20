@@ -91,7 +91,7 @@ public class HistoriquePortefeuilleDaoImpl implements HistoriquePortefeuilleDao 
 			pre=initialisationRequetePreparee(con, SQL_SELECT_ID, false,idPortefeuille);
 			res=pre.executeQuery();
 			sol=new Vector<Operation>();
-			while(res.next()) 
+			while(res.next())
 				sol.add(map(res));
 		}
 		catch ( SQLException e){
@@ -119,15 +119,62 @@ public class HistoriquePortefeuilleDaoImpl implements HistoriquePortefeuilleDao 
 	*/
 	@Override
 	public void ajouter(int idPortefeuille, Operation operation) throws DAOException {
-			if (operation.getObjetFinancier() instanceof Obligation){
-				Obligation o=(Obligation)operation.getObjetFinancier();
-				executeRequete(daoFactory, SQL_INSERT_OBLIGATION, idPortefeuille, o.getEmetteur(),operation.getPrixUnitaire(), operation.getQuantite(), new java.sql.Date(operation.getDate().getTimeInMillis()),new java.sql.Date(o.getDateFin().getTimeInMillis()) );
-			}	
-			else{
-				Titre t=(Titre) operation.getObjetFinancier();
-				executeRequete(daoFactory, SQL_INSERT_TITRE, idPortefeuille, t.getCode(), operation.getPrixUnitaire(),operation.getQuantite(), new java.sql.Date(operation.getDate().getTimeInMillis()));
-			}
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        
+        try {
+            connexion = daoFactory.getConnection();
+            if(operation.getObjetFinancier() instanceof Obligation){
+            	Obligation o=(Obligation) operation.getObjetFinancier();
+            	preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT_OBLIGATION, true, idPortefeuille, o.getEmetteur(),operation.getPrixUnitaire(),operation.getQuantite(), new java.sql.Date(operation.getDate().getTimeInMillis()),new java.sql.Date(o.getDateFin().getTimeInMillis()));
+            }
+            else{
+            	Titre t=(Titre) operation.getObjetFinancier();
+            	preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT_TITRE, true, idPortefeuille, t.getCode(), operation.getPrixUnitaire(),operation.getQuantite(), new java.sql.Date(operation.getDate().getTimeInMillis()));
+
+            }
+            ResultSet result=preparedStatement.getGeneratedKeys();
+            if(result.next())
+            	operation.setId(result.getInt(1));
+            int statut = preparedStatement.executeUpdate();
+            if ( statut == 0 ) {
+                throw new DAOException( "Échec de l'execution" );
+            }          
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( preparedStatement, connexion );
+        }
 	}
+	
+	
+	 /**
+   	* Methode permettant l'excution d'une requete
+   	*
+   	* @param sql correspond a la requete sql
+   	* @param objects correspond aux parametres de la requete
+   	*  
+   	* @throws DAOException Si une erreur arrive lors l'execution de la requete
+   	* 
+   	* @see DAOException
+   	*/ 
+    public static void executeRequete(DAOFactory daoFactory, String sql, Object...objects){
+    	Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objects);
+            int statut = preparedStatement.executeUpdate();
+            if ( statut == 0 ) {
+                throw new DAOException( "Échec de l'execution" );
+            }        
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( preparedStatement, connexion );
+        }
+    }
 
 	
 	/**
@@ -166,6 +213,7 @@ public class HistoriquePortefeuilleDaoImpl implements HistoriquePortefeuilleDao 
         operation.setDate(dateOp);
         operation.setPrixUnitaire(resultSet.getDouble("prix"));
         operation.setQuantite(resultSet.getInt("quantite"));
+        operation.setId(resultSet.getInt("idHistoriquePortefeuille"));
         return operation;
     }
 }

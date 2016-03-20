@@ -3,6 +3,8 @@ package modele;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import com.sun.xml.internal.bind.v2.runtime.RuntimeUtil.ToStringAdapter;
+
 public class Obligation extends ObjetFinancier{
 
 	private String emetteur;
@@ -24,6 +26,9 @@ public class Obligation extends ObjetFinancier{
 		return prix;
 	}
 	
+	public String toString(){
+		return "OBLIGATION;"+getEmetteur()+" date de fin : "+getDateFin().get(Calendar.DATE)+"/"+getDateFin().get(Calendar.MONTH+1)+"/"+getDateFin().get(Calendar.YEAR);
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Obligation){

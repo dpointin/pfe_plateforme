@@ -57,4 +57,7 @@ public class Action extends Titre {
 		this.dividende = dividende;
 	}
 
+	public String toString(){
+		return "ACTION;"+getLibelle();
+	}
 }

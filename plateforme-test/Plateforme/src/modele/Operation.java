@@ -1,5 +1,6 @@
 package modele;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Operation {
@@ -7,6 +8,7 @@ public class Operation {
 	private double prixUnitaire;
 	private int quantite;
 	private GregorianCalendar date;
+	int id;
 	
 	
 	//Constructeur
@@ -21,7 +23,17 @@ public class Operation {
 		date= new GregorianCalendar();
 	}
 	
-	
+	public String toString(){
+		String s=id+";";
+		s+=date.get(Calendar.DATE)+"/"+date.get(Calendar.MONTH+1)+"/"+date.get(Calendar.YEAR)+";";
+		if(quantite<0)
+			s+="VENTE;"+(-quantite)+";";
+		else
+			s+="ACHAT;"+quantite+";";
+		s+=prixUnitaire+";";
+		s+=objetFinancier.toString()+";";
+		return s;
+	}
 	//Getter et Setter
 	public ObjetFinancier getObjetFinancier() {
 		return objetFinancier;
@@ -53,6 +65,10 @@ public class Operation {
 
 	public void setDate(GregorianCalendar date) {
 		this.date = date;
+	}
+	
+	public void setId(int id){
+		this.id=id;
 	}
 	
 }

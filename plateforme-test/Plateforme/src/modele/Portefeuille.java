@@ -3,10 +3,8 @@ package modele;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.GregorianCalendar;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.TreeMap;
 import java.util.Vector;
 
 public class Portefeuille {
@@ -84,7 +82,23 @@ public class Portefeuille {
     }	
 	
     
-    
+    public String ecrire(){
+    	String s;
+    	s="Argent disponible;"+argentDisponible+"<br><br><br>";
+    	s+="Composition Portefeuille <br>";
+    	s+="Type du produit;Descriptif ; quantite; prixUnitaire <br>";
+    	Iterator<ObjetFinancier> it = quantiteObjetFinancier.keySet().iterator(); 
+		while(it.hasNext()) {
+		   ObjetFinancier key = it.next();
+		   s+=key.toString()+";"+quantiteObjetFinancier.get(key)+";"+prixObjetFinancier.get(key)+"<br>";
+		}
+		s+="<br><br>";
+    	s+="Numero ;Date ; ACHAT/VENTE; Quantite; Prix Unitaire; Type du produit; Detail du produit"+"<br>";
+    	for(Operation o:operations){
+    		s+=o.toString()+"<br>";
+    	}
+    	return s;
+    }
     
     //METHODE UTILISE DANS LE DAO POUR LE MOMENT
     public void ajoutQuantiteObjetFinancier(ObjetFinancier o, Integer q) {
