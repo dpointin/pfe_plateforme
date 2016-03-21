@@ -17,6 +17,11 @@ import modele.ObjetFinancier;
 import modele.Obligation;
 import modele.Titre;
 
+/**
+* Servlet bourse gerant l'affichage d'une "sous" bourse avec une barre de recherche
+*
+* @author  Celine Chaugny & Damien Pointin 
+*/
 public class Bourse extends HttpServlet {
 	/**
 	 * serialVersionUID
@@ -29,16 +34,18 @@ public class Bourse extends HttpServlet {
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	
 	/**
-	* ATT_SESSION_JOUEUR correspond a l'attribut titres
+	* ATT_SESSION_TITRES correspond a l'attribut titres
 	*/ 
 	public static final String ATT_SESSION_TITRES = "titres";
 
 	/**
-	* ATT_SESSION_JOUEUR correspond a l'attribut titres
+	* ATT_SESSION_OBLIGATIONS correspond a l'attribut obligations
 	*/ 
 	public static final String ATT_SESSION_OBLIGATIONS = "obligations";
 	
-
+	/**
+	* ATT_SESSION_OBJETS_FINANCIERS correspond a l'attribut objetsFinanciers
+	*/ 
 	public static final String ATT_SESSION_OBJETS_FINANCIERS = "objetsFinanciers";
 	
 	/**
@@ -47,27 +54,27 @@ public class Bourse extends HttpServlet {
 	public static final String VUE = "/WEB-INF/joueurConnecte/bourse.jsp";
 	
 	/**
-	* VUE correspond a la jsp lie a la servlet
+	* VUE_ACTIONS correspond a la jsp affichant toutes les actions de la "sous" bourse
 	*/ 
 	public static final String VUE_ACTIONS = "/WEB-INF/joueurConnecte/bourseActions.jsp";
 	
 	/**
-	* VUE correspond a la jsp lie a la servlet
+	* VUE_INDICES correspond a la jsp affichant tous les indices de la "sous" bourse
 	*/ 
 	public static final String VUE_INDICES = "/WEB-INF/joueurConnecte/bourseIndices.jsp";
 
 	/**
-	* VUE correspond a la jsp lie a la servlet
+	* VUE_OBLIGATIONS correspond a la jsp affichant toutes les obligations de la "sous" bourse
 	*/ 
 	public static final String VUE_OBLIGATIONS = "/WEB-INF/joueurConnecte/bourseObligations.jsp";
 	
 	/**
-	* Le joueurDao de notre servlet
+	* Le titreDao de notre servlet
 	*/ 
 	private TitreDao titreDao;
 	
 	/**
-	* Le joueurDao de notre servlet
+	* Le obligationDao de notre servlet
 	*/ 
 	private ObligationDao obligationDao;
 	
@@ -77,14 +84,13 @@ public class Bourse extends HttpServlet {
 	* @throws ServletException si jamais la recuperation de l'instance se passe mal
 	*/ 
 	public void init() throws ServletException {
-		/* Récupération d'une instance de nos DAO Obligation et Titre */
 		this.titreDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTitreDao();
 		this.obligationDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getObligationDao();
 	}
 	
 	/**
 	* Implementation de la methode doGet
-	* affiche la page de connexion
+	* affiche la page de bourse ou la page de redirection demandee si l'attribut redir existe
 	* 
 	* @param request
 	* la HttpRequeteServlet
@@ -95,7 +101,6 @@ public class Bourse extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		/* Affichage de la page de connexion */
 		ArrayList<Titre> titres = titreDao.trouverTousTitres();
 		ArrayList<Obligation> obligations = obligationDao.trouverToutesObligations();
 		
@@ -120,8 +125,8 @@ public class Bourse extends HttpServlet {
 	
 	/**
 	* Implementation de la methode doPost
-	* effectue la connexion du joueur s'il n'y a eu aucune erreur, ajout de l'attribut
-	* dans la session puis affichage de la page connexion
+	* permet d'effectuer une recherche parmis les objets financiers de la bourse,
+	* permet aussi d'acceder à l'historique d'un titre et a des graphes
 	* 
 	* @param request
 	* la HttpRequeteServlet
