@@ -13,6 +13,11 @@ import dao.DAOFactory;
 import dao.HistoriqueDao;
 import modele.Historique;
 
+/**
+* Servlet cours gerant l'historique d'un titre
+*
+* @author  Celine Chaugny & Damien Pointin 
+*/
 public class Cours extends HttpServlet {
 	/**
 	 * serialVersionUID
@@ -40,17 +45,17 @@ public class Cours extends HttpServlet {
 	public static final String VUE = "/WEB-INF/joueurConnecte/historique.jsp";
 	
 	/**
-	* VUE_CHANDELIER correspond a la jsp lie a la servlet
+	* VUE_CHANDELIER correspond a la jsp d'affichage du graphe en chandeliers
 	*/ 
 	public static final String VUE_CHANDELIER = "/WEB-INF/joueurConnecte/chandelier.jsp";
 	
 	/**
-	* VUE_CHART correspond a la jsp lie a la servlet
+	* VUE_CHART correspond a la jsp d'affichage du graphe en courbe
 	*/ 
 	public static final String VUE_CHART = "/WEB-INF/joueurConnecte/chart.jsp";
 	
 	/**
-	* VUE_VOLUMES correspond a la jsp lie a la servlet
+	* VUE_VOLUMES correspond a la jsp d'affichage des volumes sous forme de barres
 	*/ 
 	public static final String VUE_VOLUMES = "/WEB-INF/joueurConnecte/volumes.jsp";
 	
@@ -60,7 +65,7 @@ public class Cours extends HttpServlet {
 	private HistoriqueDao historiqueDao;
 
 	/**
-	* Le code de notre servlet
+	* Le code du titre de notre servlet
 	*/ 
 	private String code;
 	
@@ -70,13 +75,12 @@ public class Cours extends HttpServlet {
 	* @throws ServletException si jamais la recuperation de l'instance se passe mal
 	*/ 
 	public void init() throws ServletException {
-		/* Récupération d'une instance de nos DAO Obligation et Titre */
 		this.historiqueDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getHistoriqueDao();
 	}
 	
 	/**
 	* Implementation de la methode doGet
-	* affiche la page de connexion
+	* affichage de la page d'historique ou de la page graphique
 	* 
 	* @param request
 	* la HttpRequeteServlet
@@ -90,39 +94,22 @@ public class Cours extends HttpServlet {
 		HttpSession session = request.getSession();
 		this.code = request.getParameter("code");
 
-		String dateDebut = request.getParameter("dateDebut");
-		String dateFin = request.getParameter("dateFin");
 		String[] tabDebut = {"1","1","2015"};
 		String[] tabFin = {"1","12","2016"};
-		if (dateDebut != null && dateFin!=null && !dateDebut.equals("") && !dateFin.equals("")) {
-			System.out.println("je suis dans le if, date debut : " + dateDebut);
-			tabDebut = dateDebut.split("-");
-			tabFin = dateFin.split("-");
-		}
-
-		String typeGraphe = request.getParameter("typeGraphe");
+		
 		GregorianCalendar deb = new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[1])-1,Integer.parseInt(tabDebut[0]));
 		GregorianCalendar fin = new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[1])-1,Integer.parseInt(tabFin[0]));
 		Historique cours = historiqueDao.trouver(code,deb,fin);
 		session.setAttribute( ATT_SESSION_CODE, code );
 		session.setAttribute( ATT_SESSION_COURS, cours );
 					
-		if (typeGraphe!=null && typeGraphe.equals("CHANDELIER")) {
-			this.getServletContext().getRequestDispatcher( VUE_CHANDELIER).forward( request, response );
-		} else if (typeGraphe!=null && typeGraphe.equals("CHART")) {
-			this.getServletContext().getRequestDispatcher( VUE_CHART).forward( request, response );
-		} else if (typeGraphe!=null && typeGraphe.equals("VOLUMES")) {
-			this.getServletContext().getRequestDispatcher( VUE_VOLUMES).forward( request, response );
-		} else {
-			this.getServletContext().getRequestDispatcher( VUE).forward( request, response );
-		}
+		this.getServletContext().getRequestDispatcher( VUE).forward( request, response );
 	}
 	
 	
 	/**
 	* Implementation de la methode doPost
-	* effectue la connexion du joueur s'il n'y a eu aucune erreur, ajout de l'attribut
-	* dans la session puis affichage de la page connexion
+	* selectionne les donnees sur la periode donnee et redirige vers la page adequate (tableau de valeurs, graphique..)
 	* 
 	* @param request
 	* la HttpRequeteServlet
@@ -141,22 +128,17 @@ public class Cours extends HttpServlet {
 		String[] tabDebut = {"1","1","2015"};
 		String[] tabFin = {"1","12","2016"};
 		if (dateDebut != null && dateFin!=null && !dateDebut.equals("") && !dateFin.equals("")) {
-			System.out.println("je suis dans le if, date debut : " + dateDebut);
 			tabDebut = dateDebut.split("-");
 			tabFin = dateFin.split("-");
 		}
 		
-		
-		System.out.println("Code :" + code);
 		GregorianCalendar deb = new GregorianCalendar(Integer.parseInt(tabDebut[2]),Integer.parseInt(tabDebut[1])-1,Integer.parseInt(tabDebut[0]));
 		GregorianCalendar fin = new GregorianCalendar(Integer.parseInt(tabFin[2]),Integer.parseInt(tabFin[1])-1,Integer.parseInt(tabFin[0]));
 		Historique cours = historiqueDao.trouver(code,deb,fin);
 		session.setAttribute( ATT_SESSION_CODE, code );
 		session.setAttribute( ATT_SESSION_COURS, cours );
-		
 
-		String typeGraphe = request.getParameter("typeGraphe");
-					
+		String typeGraphe = request.getParameter("typeGraphe");					
 		if (typeGraphe!=null && typeGraphe.equals("CHANDELIER")) {
 			this.getServletContext().getRequestDispatcher( VUE_CHANDELIER).forward( request, response );
 		} else if (typeGraphe!=null && typeGraphe.equals("CHART")) {

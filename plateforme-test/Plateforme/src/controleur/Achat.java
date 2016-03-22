@@ -22,6 +22,11 @@ import modele.Obligation;
 import modele.Portefeuille;
 import modele.Titre;
 
+/**
+* Servlet achat gerant l'achat d'objets financiers
+*
+* @author  Celine Chaugny & Damien Pointin 
+*/
 public class Achat extends HttpServlet {
 	/**
 	 * serialVersionUID
@@ -34,7 +39,7 @@ public class Achat extends HttpServlet {
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	
 	/**
-	* ATT_SESSION_JOUEUR correspond a l'attribut titres
+	* ATT_SESSION_PORTEFEUILLE correspond a l'attribut session Portefeuille
 	*/ 
 	public static final String ATT_SESSION_PORTEFEUILLE = "portefeuille";
 
@@ -44,12 +49,12 @@ public class Achat extends HttpServlet {
 	public static final String ATT_SESSION_JOUEUR = "sessionJoueur";
 	
 	/**
-	* ATT_SESSION_JOUEUR correspond a l'attribut titres
+	* ATT_SESSION_OBJETS_FINANCIERS correspond a l'attribut Objets Financiers
 	*/ 
 	public static final String ATT_SESSION_OBJETS_FINANCIERS = "objetsFinanciers";
 
 	/**
-	* ATT_SESSION_JOUEUR correspond a l'attribut session Joueur
+	* ATT_ERREUR correspond a l'attribut erreur pouvant arriver lors d'un achat
 	*/ 
 	public static final String ATT_ERREUR = "erreur";
 	
@@ -58,18 +63,25 @@ public class Achat extends HttpServlet {
 	*/ 
 	public static final String VUE = "/WEB-INF/joueurConnecte/portefeuilleAcheter.jsp";
 	
-	
 	/**
-	* VUE correspond a la jsp lie a la servlet
+	* VUE_PORTEFEUILLE correspond a la jsp principale du portefeuille
 	*/ 
 	public static final String VUE_PORTEFEUILLE = "/WEB-INF/joueurConnecte/portefeuille.jsp";
 	
 
 	/**
-	* Le joueurDao de notre servlet
+	* Le portefeuilleDao de notre servlet
 	*/ 
 	private PortefeuilleDao portefeuilleDao;
+	
+	/**
+	* Le titreDao de notre servlet
+	*/ 
 	private TitreDao titreDao;	
+	
+	/**
+	* Le obligationDao de notre servlet
+	*/ 
 	private ObligationDao obligationDao;
 	
 	/**
@@ -86,7 +98,7 @@ public class Achat extends HttpServlet {
 	
 	/**
 	* Implementation de la methode doGet
-	* affiche la page de connexion
+	* affiche la page d'achat
 	* 
 	* @param request
 	* la HttpRequeteServlet
@@ -97,7 +109,6 @@ public class Achat extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		/* Affichage de la page de connexion */
 		ArrayList<Titre> titres = titreDao.trouverTousTitres();
 		ArrayList<Obligation> obligations = obligationDao.trouverToutesObligations();
 
@@ -116,8 +127,9 @@ public class Achat extends HttpServlet {
 	
 	/**
 	* Implementation de la methode doPost
-	* effectue la connexion du joueur s'il n'y a eu aucune erreur, ajout de l'attribut
-	* dans la session puis affichage de la page connexion
+	* permet d'effectuer une recherche parmis les objets financiers de la bourse,
+	* permet aussi d'acheter un objet financier s'il n'y a eu aucune erreur,
+	* ajout de l'objet au portefeuille du joueur et affichage de la page du portefeuille
 	* 
 	* @param request
 	* la HttpRequeteServlet

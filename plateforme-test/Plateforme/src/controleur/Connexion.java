@@ -29,10 +29,10 @@ public class Connexion extends HttpServlet {
 
 	
 	/**
-	 *Correspond au message si on essaie d'accéder à une page ou la connexion est requise
-	 *vaut true ou false 
+	 * ALERTE_PB_CONNEXION correspond au message d'alerte si on essaie d'acceder
+	 * a une page ou la connexion est requise, vaut true ou false 
 	 */
-	public static final String ALERTE_PB_CONNEXION="messageAlerte";
+	public static final String ALERTE_PB_CONNEXION = "messageAlerte";
 	
 	
 	/**
@@ -42,7 +42,7 @@ public class Connexion extends HttpServlet {
 	
 	
 	/**
-	* ATT_USER correspond a l'attribut joueur
+	* ATT_JOUEUR correspond a l'attribut joueur
 	*/ 
 	public static final String ATT_JOUEUR = "joueur";
 	
@@ -66,7 +66,7 @@ public class Connexion extends HttpServlet {
 	
 	
 	/** 
-	* VUE correspond a la jsp lie a la servlet
+	* VUE_CONNECTE correspond a la jsp lie l'accueil d'un joueur connecte
 	*/ 
 	public static final String VUE_CONNECTE = "/WEB-INF/joueurConnecte/accueilConnecte.jsp";
 	
@@ -83,7 +83,6 @@ public class Connexion extends HttpServlet {
 	* @throws ServletException si jamais la recuperation de l'instance se passe mal
 	*/ 
 	public void init() throws ServletException {
-		/* Récupération d'une instance de notre DAO Utilisateur */
 		this.joueurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getJoueurDao();
 	}
 	
@@ -101,7 +100,6 @@ public class Connexion extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		/* Affichage de la page de connexion */
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}
 	

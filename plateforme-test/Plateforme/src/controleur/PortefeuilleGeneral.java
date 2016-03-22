@@ -115,25 +115,25 @@ public class PortefeuilleGeneral extends HttpServlet {
 			if (titres.size() > 0) {
 				TreeMap<GregorianCalendar, Double> temp = titres.get(0).getHistorique().getBaseCent();
 				Set<GregorianCalendar> dates = temp.keySet();
+				GregorianCalendar dateReference=null;
 				for (GregorianCalendar d : dates) {
-					Vector<Double> v = new Vector<Double>();
-					v.add(temp.get(d));
-					baseCent.put(d,v);
-				}
-				for (int i=1; i<titres.size(); i++) {
-					Double prec = 0.0;
-					TreeMap<GregorianCalendar, Double> temp2 = titres.get(i).getHistorique().getBaseCent();
-					for (GregorianCalendar d : dates) {
-						if (temp2.containsKey(d)) {
-							prec = temp2.get(d);
-							Vector<Double> v = baseCent.get(d);
+					boolean b=true;
+					for (int i=1; i<titres.size(); i++) {
+						TreeMap<GregorianCalendar, Double> temp2 = titres.get(i).getHistorique().getBaseCent();
+						if (temp2.containsKey(d)==false){
+							b=false;
+							break;
+						}	
+					}
+					if (b){
+						if(dateReference==null)
+							dateReference=d;
+						Vector<Double> v= new Vector<Double>();
+						for(int i=0; i<titres.size();i++){
+							TreeMap<GregorianCalendar, Double> temp2 = titres.get(i).getHistorique().getBaseCentReference(dateReference);
 							v.add(temp2.get(d));
-							baseCent.put(d, v);
-						} else {
-							Vector<Double> v = baseCent.get(d);
-							v.add(prec);
-							baseCent.put(d, v);
 						}
+						baseCent.put(d, v);
 					}
 				}
 			}
