@@ -69,6 +69,7 @@
 				 		<option value="CHART" selected>Courbes</option>
 						<option value="CHANDELIER">Chandeliers</option>
 						<option value="VOLUMES">Volumes</option>
+						<option value="MOYENNEMOBILE">Moyennes Mobiles</option>	
 						<option value="TABLEAU">Tableau de valeurs</option>				
 					</select>
 				</td>
