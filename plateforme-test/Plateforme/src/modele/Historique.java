@@ -50,7 +50,7 @@ public class Historique {
 			GregorianCalendar key=(GregorianCalendar) it.next();
 			baseCent.put(key, getFermetureJours(key)/reference*100);
 		}
-		System.out.println("taille valeurs : "+ valeurs.size()+ "\n nb de dates : " + baseCent.size());
+		//System.out.println("taille valeurs : "+ valeurs.size()+ "\n nb de dates : " + baseCent.size());
 		return baseCent;
 	}
 	
@@ -66,8 +66,43 @@ public class Historique {
 			GregorianCalendar key=(GregorianCalendar) it.next();
 			baseCent.put(key, getFermetureJours(key)/reference*100);
 		}
-		System.out.println("taille valeurs : "+ valeurs.size()+ "\n nb de dates : " + baseCent.size());
+		//System.out.println("taille valeurs : "+ valeurs.size()+ "\n nb de dates : " + baseCent.size());
 		return baseCent;
+	}
+	
+	public Double calculEsperanceRendement(){
+		Iterator<GregorianCalendar> it=valeurs.keySet().iterator(); // on cree un iterator sur les clés de ton hashmap
+		Double rendement=1.0;
+		int nb=0;
+		GregorianCalendar debut=(GregorianCalendar) it.next();
+		while(it.hasNext()) { 
+			GregorianCalendar fin=(GregorianCalendar) it.next();
+			Double rendementJour=(getFermetureJours(debut)-getFermetureJours(fin))/getFermetureJours(debut);
+			rendement*=(1.0+rendementJour);
+			debut=fin;
+			nb++;
+		}
+		rendement=Math.pow(rendement,1.0/nb);
+		return rendement;
+	}
+	
+	
+	public Double calculVarianceRendement(){
+		Iterator<GregorianCalendar> it=valeurs.keySet().iterator(); // on cree un iterator sur les clés de ton hashmap
+		//Moyenne géométrique mieux qu'arithmétique ici ??
+		Double rendement=calculEsperanceRendement();
+		Double covariance=0.0;
+		int nb=0;
+		GregorianCalendar debut=(GregorianCalendar) it.next();
+		while(it.hasNext()) { 
+			GregorianCalendar fin=(GregorianCalendar) it.next();
+			Double rendementJour=(getFermetureJours(debut)-getFermetureJours(fin))/getFermetureJours(debut);
+			covariance+=(rendementJour-rendement)*(rendementJour-rendement);
+			debut=fin;
+			nb++;
+		}
+		covariance/=nb;
+		return covariance;
 	}
 	
 	// GETTERS AND SETTERS
