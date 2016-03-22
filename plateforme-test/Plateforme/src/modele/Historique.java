@@ -105,6 +105,48 @@ public class Historique {
 		return covariance;
 	}
 	
+	
+	public TreeMap<GregorianCalendar, Vector<Double>> calculMoyenneMobileSimple(Integer periode){
+		Vector<Double> temp = new Vector<Double>(periode);
+		TreeMap<GregorianCalendar, Vector<Double>> resultat = new TreeMap<GregorianCalendar, Vector<Double>>();
+		
+		if (periode > valeurs.size()) {
+			return null; // erreur periode trop grande ou alors on fait une moyenne par defaut..?
+		}
+		
+		Iterator<GregorianCalendar> it = valeurs.keySet().iterator();
+		if (it.hasNext()) {
+			GregorianCalendar date = null ;
+			for (int i=0; i<periode; i++) {
+				date = (GregorianCalendar) it.next();
+				temp.add(getFermetureJours(date));
+			}
+			
+			Vector<Double> val = new Vector<Double>();
+			Double moyenne = 0.0;
+			for (Double v : temp) {
+				moyenne += v;
+			}
+			val.add(getFermetureJours(date));
+			val.add(moyenne/periode);
+			resultat.put(date, val);
+			
+			while (it.hasNext()) {
+				date = (GregorianCalendar) it.next();
+				Double dernier = getFermetureJours(date);
+				moyenne = moyenne - temp.firstElement() + dernier;
+				temp.remove(0); // on retire le plus ancien du vecteur temporaire
+				temp.add(dernier); // on ajoute le nouveau
+				val.clear(); 
+				val.add(dernier);
+				val.add(moyenne/periode);
+				resultat.put(date, val);
+			}
+		}
+		
+		return resultat;
+	}
+	
 	// GETTERS AND SETTERS
 	public String getCode() {
 		return code;
