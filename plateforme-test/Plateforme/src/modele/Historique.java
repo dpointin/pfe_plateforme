@@ -91,13 +91,44 @@ public class Historique {
 		Iterator<GregorianCalendar> it=valeurs.keySet().iterator(); // on cree un iterator sur les clés de ton hashmap
 		//Moyenne géométrique mieux qu'arithmétique ici ??
 		Double rendement=calculEsperanceRendement();
-		Double covariance=0.0;
+		Double variance=0.0;
 		int nb=0;
 		GregorianCalendar debut=(GregorianCalendar) it.next();
 		while(it.hasNext()) { 
 			GregorianCalendar fin=(GregorianCalendar) it.next();
 			Double rendementJour=(getFermetureJours(debut)-getFermetureJours(fin))/getFermetureJours(debut);
-			covariance+=(rendementJour-rendement)*(rendementJour-rendement);
+			variance+=(rendementJour-rendement)*(rendementJour-rendement);
+			debut=fin;
+			nb++;
+		}
+		variance/=nb;
+		return variance;
+	}
+	
+	public Double calculCoVarianceRendement(Historique h2){
+		Iterator<GregorianCalendar> it=valeurs.keySet().iterator(); // on cree un iterator sur les clés de ton hashmap
+		Double rendementh1=calculEsperanceRendement();
+		Double rendementh2=h2.calculEsperanceRendement();
+		Double covariance=0.0;
+		int nb=0;
+		GregorianCalendar debut=null;
+		//date de debut commune aux deux
+		while(debut==null && it.hasNext()){
+			debut=(GregorianCalendar) it.next();
+			if(h2.getFermetureJours(debut)==null)
+				debut=null;
+		}
+		GregorianCalendar fin=null;
+		while(it.hasNext()) { 
+			//date de fin communes aux deux
+			while(fin==null && it.hasNext()){
+				fin=(GregorianCalendar) it.next();
+				if(h2.getFermetureJours(debut)==null)
+					debut=null;
+			}
+			Double rendementJourh1=(getFermetureJours(debut)-getFermetureJours(fin))/getFermetureJours(debut);
+			Double rendementJourh2=(h2.getFermetureJours(debut)-h2.getFermetureJours(fin))/h2.getFermetureJours(debut);
+			covariance+=(rendementJourh1-rendementh1)*(rendementJourh2-rendementh2);
 			debut=fin;
 			nb++;
 		}
