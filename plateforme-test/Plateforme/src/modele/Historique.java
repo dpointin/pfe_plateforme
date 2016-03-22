@@ -54,6 +54,22 @@ public class Historique {
 		return baseCent;
 	}
 	
+	public TreeMap<GregorianCalendar, Double> getBaseCentReference(GregorianCalendar dateReference){
+		TreeMap<GregorianCalendar, Double> baseCent=new TreeMap<GregorianCalendar, Double>();
+		//Notre reference est la premiere date
+		Double reference= getFermetureJours(dateReference);
+		
+		//on itere sur toutes les valeurs et on les rajoute
+		Iterator<GregorianCalendar> it=valeurs.keySet().iterator(); // on cree un iterator sur les clés de ton hashmap
+		
+		while(it.hasNext()) { /// que les 50 dernieres valeurs
+			GregorianCalendar key=(GregorianCalendar) it.next();
+			baseCent.put(key, getFermetureJours(key)/reference*100);
+		}
+		System.out.println("taille valeurs : "+ valeurs.size()+ "\n nb de dates : " + baseCent.size());
+		return baseCent;
+	}
+	
 	// GETTERS AND SETTERS
 	public String getCode() {
 		return code;
