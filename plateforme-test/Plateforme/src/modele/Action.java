@@ -5,6 +5,14 @@ package modele;
 *
 * @author  Celine Chaugny & Damien Pointin 
 */
+/**
+ * @author damien
+ *
+ */
+/**
+ * @author damien
+ *
+ */
 public class Action extends Titre {
 	/**
 	* Le dividende de l'action.
@@ -19,7 +27,7 @@ public class Action extends Titre {
 	/**
 	* Constructeur Action.
 	* <p>
-	* Avec les paramètres code, libelle, nombreDisponible et dividende
+	* Avec les parametres code, libelle, nombreDisponible et dividende
 	* correspondant aux entrees
 	* </p>
 	*
@@ -57,6 +65,12 @@ public class Action extends Titre {
 		this.dividende = dividende;
 	}
 
+	
+	/**
+	* toString correspondant a l'action.
+	*
+	* @return String correspondant a notre action.
+	*/ 
 	public String toString(){
 		return "ACTION;"+getLibelle();
 	}
