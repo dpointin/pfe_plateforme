@@ -90,7 +90,6 @@ public class Achat extends HttpServlet {
 	* @throws ServletException si jamais la recuperation de l'instance se passe mal
 	*/ 
 	public void init() throws ServletException {
-		/* Récupération d'une instance de nos DAO Obligation et Titre */
 		this.portefeuilleDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPortefeuilleDao();
 		this.titreDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTitreDao();
 		this.obligationDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getObligationDao();
@@ -225,5 +224,4 @@ public class Achat extends HttpServlet {
 		}
 	}
 
-	
 }

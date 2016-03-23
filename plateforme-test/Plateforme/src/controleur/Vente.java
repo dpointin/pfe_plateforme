@@ -2,13 +2,8 @@ package controleur;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Enumeration;
-import java.util.GregorianCalendar;
-import java.util.Vector;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +20,11 @@ import modele.Obligation;
 import modele.Portefeuille;
 import modele.Titre;
 
+/**
+* Servlet vente gerant la vente d'un objet financier du portefeuille
+*
+* @author  Celine Chaugny & Damien Pointin 
+*/
 public class Vente extends HttpServlet {
 	/**
 	 * serialVersionUID
@@ -37,7 +37,7 @@ public class Vente extends HttpServlet {
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	
 	/**
-	* ATT_SESSION_JOUEUR correspond a l'attribut titres
+	* ATT_SESSION_PORTEFEUILLE correspond a l'attribut portefeuille
 	*/ 
 	public static final String ATT_SESSION_PORTEFEUILLE = "portefeuille";
 
@@ -47,12 +47,12 @@ public class Vente extends HttpServlet {
 	public static final String ATT_SESSION_JOUEUR = "sessionJoueur";
 	
 	/**
-	* ATT_SESSION_JOUEUR correspond a l'attribut titres
+	* ATT_SESSION_OBJETS_FINANCIERS correspond a l'attribut session ObjetsFinanciers
 	*/ 
 	public static final String ATT_SESSION_OBJETS_FINANCIERS = "objetsFinanciers";
 
 	/**
-	* ATT_SESSION_JOUEUR correspond a l'attribut session Joueur
+	* ATT_ERREUR correspond a l'attribut erreur en cas de vente impossible
 	*/ 
 	public static final String ATT_ERREUR = "erreur";
 	
@@ -61,18 +61,24 @@ public class Vente extends HttpServlet {
 	*/ 
 	public static final String VUE = "/WEB-INF/joueurConnecte/portefeuilleVendre.jsp";
 	
-	
 	/**
-	* VUE correspond a la jsp lie a la servlet
+	* VUE_PORTEFEUILLE correspond a la jsp lie au portefeuille
 	*/ 
 	public static final String VUE_PORTEFEUILLE = "/WEB-INF/joueurConnecte/portefeuille.jsp";
 	
-
 	/**
-	* Le joueurDao de notre servlet
+	* Le portefeuilleDao de notre servlet
 	*/ 
 	private PortefeuilleDao portefeuilleDao;
-	private TitreDao titreDao;	
+	
+	/**
+	* Le titreDao de notre servlet
+	*/ 
+	private TitreDao titreDao;
+	
+	/**
+	* Le obligationDao de notre servlet
+	*/ 
 	private ObligationDao obligationDao;
 	
 	/**
@@ -81,7 +87,6 @@ public class Vente extends HttpServlet {
 	* @throws ServletException si jamais la recuperation de l'instance se passe mal
 	*/ 
 	public void init() throws ServletException {
-		/* Récupération d'une instance de nos DAO Obligation et Titre */
 		this.portefeuilleDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPortefeuilleDao();
 		this.titreDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTitreDao();
 		this.obligationDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getObligationDao();
@@ -89,7 +94,7 @@ public class Vente extends HttpServlet {
 	
 	/**
 	* Implementation de la methode doGet
-	* affiche la page de connexion
+	* affiche la page de vente
 	* 
 	* @param request
 	* la HttpRequeteServlet
@@ -108,7 +113,6 @@ public class Vente extends HttpServlet {
 			session.setAttribute( ATT_SESSION_PORTEFEUILLE, portefeuille );
 		} else {
 			session.setAttribute( ATT_SESSION_PORTEFEUILLE, new Portefeuille() );
-			
 		}
 
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );		
@@ -117,8 +121,10 @@ public class Vente extends HttpServlet {
 	
 	/**
 	* Implementation de la methode doPost
-	* effectue la connexion du joueur s'il n'y a eu aucune erreur, ajout de l'attribut
-	* dans la session puis affichage de la page connexion
+	* effectue la vente d'un objet financier s'il n'y a eu aucune erreur
+	* puis affiche le portefeuille si cela s'est bien passe
+	* ou reste sur la page de vente si la vente n'est pas possible
+	* (quantite superieure a la quantite possedee)
 	* 
 	* @param request
 	* la HttpRequeteServlet
@@ -129,7 +135,6 @@ public class Vente extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {		
-	
 		/* Vente */
 		HttpSession session = request.getSession();	
 		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
@@ -137,8 +142,6 @@ public class Vente extends HttpServlet {
 		
 		Enumeration<ObjetFinancier> enum_ObjetsFinanciers = portefeuille.getPrixObjetFinancier().keys();
 		ArrayList<ObjetFinancier> objetsFinanciers = Collections.list(enum_ObjetsFinanciers);
-		
-		System.out.println("nombre d'objets : " + objetsFinanciers.size());
 		
 		String quantiteString = request.getParameter("quantite");
 		if (quantiteString != null && !quantiteString.equals("")) {
@@ -163,9 +166,7 @@ public class Vente extends HttpServlet {
 					if (request.getParameter(((Obligation)objetsFinanciers.get(i)).getEmetteur())!=null) {
 						Obligation obligation = obligationDao.recupererObligation(((Obligation)objetsFinanciers.get(i)).getEmetteur());
 						obligation=(Obligation)portefeuille.trouver(obligation);
-						System.out.println("l'emmeteur existe");
 						if (portefeuille.vendre(obligation, quantite)) {
-							System.out.println("vente effecutee");
 							portefeuilleDao.mettreAJour(portefeuille, obligation);
 							session.setAttribute(ATT_SESSION_PORTEFEUILLE, portefeuille);
 							this.getServletContext().getRequestDispatcher( VUE_PORTEFEUILLE ).forward( request, response );
@@ -183,6 +184,4 @@ public class Vente extends HttpServlet {
 			this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 		}
 	}
-
-	
 }

@@ -25,30 +25,25 @@ public class Inscription extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-
 	/**
 	* CONF_DAO_FACTORY correspond a l'attribut daoFactory.
 	*/ 
 	public static final String CONF_DAO_FACTORY = "daofactory";
-	
-	
+		
 	/**
 	* ATT_USER correspond a l'attribut joueur
 	*/ 
 	public static final String ATT_USER = "joueur";
-	
 	
 	/**
 	* ATT_FORM correspond a l'attribut form
 	*/ 
 	public static final String ATT_FORM = "form";
 	
-	
 	/**
 	* VUE correspond a la jsp lie a la servlet
 	*/ 
 	public static final String VUE = "/WEB-INF/inscription.jsp";
-	
 	
 	/**
 	* Le joueurDao de notre servlet
@@ -56,7 +51,7 @@ public class Inscription extends HttpServlet {
 	private JoueurDao joueurDao;
 	
 	/**
-	* Le joueurDao de notre servlet
+	* Le portefeuilleDao de notre servlet
 	*/ 
 	private PortefeuilleDao portefeuilleDao;
 	
@@ -66,7 +61,6 @@ public class Inscription extends HttpServlet {
 	* @throws ServletException si jamais la recuperation de l'instance se passe mal
 	*/ 
 	public void init() throws ServletException {
-		/* Récupération d'une instance de notre DAO Utilisateur */
 		this.joueurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getJoueurDao();
 		this.portefeuilleDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPortefeuilleDao();
 	}
@@ -85,7 +79,6 @@ public class Inscription extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		/* Affichage de la page d'inscription */
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}
 	

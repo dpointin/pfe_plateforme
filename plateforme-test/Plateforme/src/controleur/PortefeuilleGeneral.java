@@ -22,6 +22,12 @@ import modele.ObjetFinancier;
 import modele.Portefeuille;
 import modele.Titre;
 
+/**
+* Servlet portefeuille General gerant la constitution d'un portefeuille
+* et la visualisation d'indicateurs
+*
+* @author  Celine Chaugny & Damien Pointin 
+*/
 public class PortefeuilleGeneral extends HttpServlet {
 	/**
 	 * serialVersionUID
@@ -34,7 +40,7 @@ public class PortefeuilleGeneral extends HttpServlet {
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	
 	/**
-	* ATT_SESSION_JOUEUR correspond a l'attribut titres
+	* ATT_SESSION_PORTEFEUILLE correspond a l'attribut session Portefeuille
 	*/ 
 	public static final String ATT_SESSION_PORTEFEUILLE = "portefeuille";
 
@@ -42,25 +48,29 @@ public class PortefeuilleGeneral extends HttpServlet {
 	* ATT_SESSION_JOUEUR correspond a l'attribut session Joueur
 	*/ 
 	public static final String ATT_SESSION_JOUEUR = "sessionJoueur";
-
-	/**
-	* ATT_SESSION_JOUEUR correspond a l'attribut session Joueur
-	*/ 
-	public static final String 	ATT_COURS_BASE_CENT = "baseCent";
-
 	
+	/**
+	* ATT_SESSION_TITRES correspond a l'attribut titres
+	*/ 
+	public static final String ATT_SESSION_TITRES = "titres";
+	
+	/**
+	* ATT_COURS_BASE_CENT correspond a l'attribut baseCent
+	*/ 
+	public static final String ATT_COURS_BASE_CENT = "baseCent";
+
 	/**
 	* VUE correspond a la jsp lie a la servlet
 	*/ 
 	public static final String VUE = "/WEB-INF/joueurConnecte/portefeuille.jsp";
 	
 	/**
-	* VUE correspond a la jsp lie a la servlet
+	* VUE_INDICATEURS correspond a la jsp lie a l'affichage des indicateurs
 	*/ 
 	public static final String VUE_INDICATEURS = "/WEB-INF/joueurConnecte/portefeuilleIndicateurs.jsp";
 	
 	/**
-	* Le joueurDao de notre servlet
+	* Le portefeuilleDao de notre servlet
 	*/ 
 	private PortefeuilleDao portefeuilleDao;
 	
@@ -70,13 +80,12 @@ public class PortefeuilleGeneral extends HttpServlet {
 	* @throws ServletException si jamais la recuperation de l'instance se passe mal
 	*/ 
 	public void init() throws ServletException {
-		/* Récupération d'une instance de nos DAO Obligation et Titre */
 		this.portefeuilleDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPortefeuilleDao();
 	}
 	
 	/**
 	* Implementation de la methode doGet
-	* affiche la page de connexion
+	* affiche la page du portefeuille ou ses indicateurs
 	* 
 	* @param request
 	* la HttpRequeteServlet
@@ -87,7 +96,6 @@ public class PortefeuilleGeneral extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		/* Affichage de la page de connexion */
 		HttpSession session = request.getSession();
 		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
 		
@@ -138,7 +146,7 @@ public class PortefeuilleGeneral extends HttpServlet {
 				}
 			}
 
-			session.setAttribute("titres", codes);
+			session.setAttribute(ATT_SESSION_TITRES, codes);
 			session.setAttribute(ATT_COURS_BASE_CENT, baseCent);
 			this.getServletContext().getRequestDispatcher( VUE_INDICATEURS ).forward( request, response );			
 		} else {
@@ -149,8 +157,6 @@ public class PortefeuilleGeneral extends HttpServlet {
 	
 	/**
 	* Implementation de la methode doPost
-	* effectue la connexion du joueur s'il n'y a eu aucune erreur, ajout de l'attribut
-	* dans la session puis affichage de la page connexion
 	* 
 	* @param request
 	* la HttpRequeteServlet
@@ -161,7 +167,7 @@ public class PortefeuilleGeneral extends HttpServlet {
 	* @throws IOException en cas d'erreur
 	*/ 
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {		
-		this.getServletContext().getRequestDispatcher( VUE_INDICATEURS ).forward( request, response );
+		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}
 
 	
