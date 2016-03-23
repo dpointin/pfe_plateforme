@@ -11,11 +11,33 @@ import java.util.TreeMap;
 import java.util.Scanner;
 import java.util.Vector;
 
+/**
+* Classe TelechargeurCours permettant de telecharger des cours de la bourse
+* sur Internet avec l'API Yahoo Finance. 
+*
+* @author  Celine Chaugny & Damien Pointin 
+*/
 public class TelechargeurCours {	
 
+	/**
+	* L'historique qui va etre rempli avec le TelechargeurCours.
+	*
+	* @see TelechargeurCours#getHistorique()
+	* @see TelechargeurCours#setHistorique(Historique)
+	*/ 
 	private Historique historique;
 	
-	//Constructeur prenant le code de l'indice, une date de début, une date de fin
+	/**
+	 * Constructeur TelechargeurCours qui telecharge le cours et cree donc l'historique.
+	 * <p>
+	 * Avec les parametres code, debut, fin
+	 * correspondant aux entrees
+	 * </p>
+	 * 
+	 * @param code, code du cours a telecharger
+	 * @param debut, date du debut du telechargement
+	 * @param fin, date de fin du telechargement
+	 */
 	public TelechargeurCours(String code, GregorianCalendar debut, GregorianCalendar fin){
 		
 		historique = new Historique(code);
@@ -87,11 +109,20 @@ public class TelechargeurCours {
 		}
 	}
 
-	// GETTER AND SETTER
+	/**
+	 * Retourne l'historique du telechargeurCours.
+	 * 
+	 * @return l'historique du telechargeurCours.
+	 */
 	public Historique getHistorique() {
 		return historique;
 	}
 
+	/**
+	 * Met a jour l'historique du telechargeurCours.
+	 * 
+	 * @param historique, nouvel historique du telechargeurCours
+	 */
 	public void setHistorique(Historique historique) {
 		this.historique = historique;
 	}

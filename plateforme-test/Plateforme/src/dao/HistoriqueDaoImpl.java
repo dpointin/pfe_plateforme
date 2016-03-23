@@ -84,7 +84,7 @@ public class HistoriqueDaoImpl implements HistoriqueDao {
 	@Override
 	public void mettreAJour(String code) throws DAOException {
 		GregorianCalendar dateMax = max(code);
-		TelechargeurCours tc = new TelechargeurCours(code,new GregorianCalendar(2015,0,2)/*dateMax*/,new GregorianCalendar(2015,11,31));//new GregorianCalendar());
+		TelechargeurCours tc = new TelechargeurCours(code,dateMax,new GregorianCalendar());
 		ajouterCours(tc.getHistorique());
 	}
 	
