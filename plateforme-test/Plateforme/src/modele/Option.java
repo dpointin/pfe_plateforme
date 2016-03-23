@@ -93,6 +93,8 @@ public class Option extends ObjetFinancier{
 	 * @param strike
 	 * @param prime
 	 * @param titre
+	 * 
+     * @see ObjetFinancier#ObjetFinancier(Integer)
 	 */
 	public Option(Integer idOption, TypeOption type, TypePosition position, GregorianCalendar maturite, Double strike, Double prime,
 			Titre titre) {

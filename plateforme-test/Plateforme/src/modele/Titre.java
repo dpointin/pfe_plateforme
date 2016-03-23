@@ -2,13 +2,12 @@ package modele;
 
 /**
 * Classe abstraite Titre representant une titre du jeu 
+* herite de la classe ObjetFinancier
+* 
+* @see ObjetFinancier
 *
 * @author  Celine Chaugny & Damien Pointin 
 */
-/**
- * @author mathieu
- *
- */
 public abstract class Titre extends ObjetFinancier{
 
 	/**
@@ -122,7 +121,7 @@ public abstract class Titre extends ObjetFinancier{
 	}
 
 	/**
-	 * Redefinition de la méthode equals pour tester si deux historique sont identiques.
+	 * Redefinition de la méthode equals pour tester si deux titres sont identiques.
 	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */

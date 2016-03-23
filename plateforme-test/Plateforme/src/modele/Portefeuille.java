@@ -7,19 +7,79 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
 
+/**
+* Classe Portefeuille representant le portefeuille d'un joueur
+* 
+* @author  Celine Chaugny & Damien Pointin 
+*/
 public class Portefeuille {
-	
+	/**
+	* L'argentDisponible du portefeuille.
+	*
+	* @see Portefeuille#Portefeuille(Double)
+	* @see Portefeuille#getArgentDisponible()
+	* @see Portefeuille#setArgentDisponible(Double)
+	*/ 
 	private Double argentDisponible;
+	
+	/**
+	* La quantiteObjetFinancier du portefeuille.
+	* Hashtable qui pour chaque ObjetFinancier associe une quantite.
+	*
+	* @see Portefeuille#getQuantiteObjetFinancier()
+	* @see Portefeuille#setQuantiteObjetFinancier(Hashtable<ObjetFinancier,Integer>)
+	*/ 
 	private Hashtable<ObjetFinancier,Integer> quantiteObjetFinancier;
-	private Hashtable<ObjetFinancier,Double> prixObjetFinancier;	
+	
+	/**e
+	* L prixObjetFinancier du portefeuille.
+	* Hashtable qui pour chaque ObjetFinancier associe un prix.
+	*
+	* @see Portefeuille#getPrixObjetFinancier()
+	* @see Portefeuille#setPrixObjetFinancier(Hashtable<ObjetFinancier,Double>)
+	*/ 	
+	private Hashtable<ObjetFinancier,Double> prixObjetFinancier;
+	
+	/**
+	* Le rendement du portefeuille.
+	*
+	* @see Portefeuille#getRendement()
+	* @see Portefeuille#setRendement(Double)
+	*/ 	
 	private Double rendement;
+	
+	/**
+	* L'idPortefeuille du portefeuille.
+	*
+	* @see Portefeuille#getIdPortefeuille()
+	* @see Portefeuille#setIdPortefeuille(Integer)
+	*/ 	
 	private Integer idPortefeuille;
+	
+	/**
+	* Les operations du portefeuille.
+	*
+	* @see Portefeuille#getOperations()
+	* @see Portefeuille#setOperations(Vector<Operation>)
+	*/ 		
 	private Vector<Operation> operations;
 	
+	/**
+	 * Constructeur Portefeuille sans parametres.
+	 */
 	public Portefeuille() {
 		this(10000.0);
 	}
 
+	/**
+	 * Constructeur Portefeuille.
+	 * <p>
+	 * Avec le parametre argentDisponible
+	 * correspondant a l'entree
+	 * </p>
+	 * 
+	 * @param argentDisponible
+	 */
 	public Portefeuille(Double argentDisponible) {
 		super();
 		this.argentDisponible = argentDisponible;
@@ -27,9 +87,15 @@ public class Portefeuille {
 		this.prixObjetFinancier = new Hashtable<ObjetFinancier, Double>();
 		this.rendement = 0.0;
 		this.idPortefeuille = -1;
-		operations=new Vector<Operation>();
+		this.operations=new Vector<Operation>();
 	}
 	
+	
+	/**
+	 * Methode qui compte le nombre d'objets financiers du portefeuille 
+	 *
+	 * @return int le nombre d'objets financiers du portefeuille.
+	 */
 	public int getNbActifs() {
 		Enumeration<ObjetFinancier> enum_ObjetsFinanciers = getPrixObjetFinancier().keys();
 		ArrayList<ObjetFinancier> objetsFinanciers = Collections.list(enum_ObjetsFinanciers);
@@ -43,6 +109,18 @@ public class Portefeuille {
 		return n;
 	}
 	
+	
+	/**
+	 * Methode qui permet d'acheter un Objet financier
+	 * <p>
+	 * Avec les parametres objetFinancier et quantite
+	 * correspondant aux entrees
+	 * </p>
+	 * 
+	 * @param objetFinancier qui fait l'objet de l'achat
+	 * @param quantite d'objets financiers a acheter
+	 * @return un boolean pour savoir si l'achat a pu avoir lieu ou non
+	 */
 	public boolean acheter(ObjetFinancier objetFinancier, int quantite){
 		if( (objetFinancier.getNombreDisponible()>=quantite) && (objetFinancier.getPrix()*quantite<=argentDisponible) ){
 			int quantiteTemp=0;
@@ -65,6 +143,17 @@ public class Portefeuille {
 		return false;
 	}
 
+	/**
+	 * Methode qui permet de vendre un Objet financier du portefeuille
+	 * <p>
+	 * Avec les parametres objetFinancier et quantite
+	 * correspondant aux entrees
+	 * </p>
+	 * 
+	 * @param objetFinancier qui fait l'objet de la vente
+	 * @param quantite d'objets financiers a vendre
+	 * @return un boolean pour savoir si la vente a pu avoir lieu ou non
+	 */	
     public boolean vendre(ObjetFinancier objetFinancier, Integer quantite){
     	if(quantiteObjetFinancier.get(objetFinancier)!=null){
 	    	int tempQuantite=quantiteObjetFinancier.get(objetFinancier);
@@ -82,6 +171,11 @@ public class Portefeuille {
     }	
 	
     
+    /**
+     * Methode permettant d'avoir le portefeuille au format csv
+     * 
+     * @return le portefeuille sous forme de string pour ecrire dans le fichier csv
+     */
     public String ecrire(){
     	String s;
     	s="Argent disponible;"+argentDisponible+"<br><br><br>";
@@ -100,69 +194,61 @@ public class Portefeuille {
     	return s;
     }
     
-    //METHODE UTILISE DANS LE DAO POUR LE MOMENT
-    public void ajoutQuantiteObjetFinancier(ObjetFinancier o, Integer q) {
-		getQuantiteObjetFinancier().put(o,q);
+    /**
+     * Methode qui permet d'ajouter une certain quantite d'un objet financier
+	 * <p>
+	 * Avec les parametres objetFinancier et quantite
+	 * correspondant aux entrees
+	 * </p>
+     * 
+     * @param objetFinancier a ajouter dans le portefeuille
+     * @param quantite d'objets a ajouter
+     */
+    public void ajoutQuantiteObjetFinancier(ObjetFinancier objetFinancier, Integer quantite) {
+		getQuantiteObjetFinancier().put(objetFinancier,quantite);
 	}
-	public void ajoutPrixObjetFinancier(ObjetFinancier o, Double p) {
-		getPrixObjetFinancier().put(o,p);
+    
+    /**
+     * Methode qui permet d'ajouter le prix d'un objet financier
+	 * <p>
+	 * Avec les parametres objetFinancier et prix
+	 * correspondant aux entrees
+	 * </p>
+     * 
+     * @param objetFinancier a ajouter dans le portefeuille
+     * @param prix de l'objet a ajouter
+     */    
+	public void ajoutPrixObjetFinancier(ObjetFinancier objetFinancier, Double prix) {
+		getPrixObjetFinancier().put(objetFinancier,prix);
 	}
 	
-	public ObjetFinancier trouver(ObjetFinancier o){
+	
+	/**
+	 * Methode permettant de trouver un objet financier du portefeuille
+	 * 
+	 * @param objetFinancier
+	 * @return l'objet financier du portefeuille
+	 */
+	public ObjetFinancier trouver(ObjetFinancier objetFinancier){
 		Iterator<ObjetFinancier> it = quantiteObjetFinancier.keySet().iterator(); 
 		while(it.hasNext()) {
 		   ObjetFinancier key = it.next();
-		   if ((o instanceof Obligation) && (((Obligation)o).equals(key)) ){
+		   if ((objetFinancier instanceof Obligation) && (((Obligation)objetFinancier).equals(key)) ){
 			   return key;
-		   } else  if ((o instanceof Titre) && (((Titre)o).equals(key)) ){
+		   } else  if ((objetFinancier instanceof Titre) && (((Titre)objetFinancier).equals(key)) ){
 			   		return key;
 		   } else if  (key instanceof Option) {
 		   }
 		}
-		return o;
+		return objetFinancier;
 	}
 	
-	//GETTER ET SETTER
-	public Double getArgentDisponible() {
-		return argentDisponible;
-	}
-	public void setArgentDisponible(Double argentDisponible) {
-		this.argentDisponible = argentDisponible;
-	}
-	public Hashtable<ObjetFinancier, Integer> getQuantiteObjetFinancier() {
-		return quantiteObjetFinancier;
-	}
-	public void setQuantiteObjetFinancier(Hashtable<ObjetFinancier, Integer> quantiteTitre) {
-		this.quantiteObjetFinancier = quantiteTitre;
-	}
-	public Hashtable<ObjetFinancier, Double> getPrixObjetFinancier() {
-		return prixObjetFinancier;
-	}
-	public void setPrixObjetFinancier(Hashtable<ObjetFinancier, Double> prixTitre) {
-		this.prixObjetFinancier = prixTitre;
-	}
-	public Double getRendement() {
-		return rendement;
-	}
-	public void setRendement(Double rendement) {
-		this.rendement = rendement;
-	}
-
-	public Integer getIdPortefeuille() {
-		return idPortefeuille;
-	}
-	public void setIdPortefeuille(Integer idPortefeuille) {
-		this.idPortefeuille = idPortefeuille;
-	}
-	
-	public Vector<Operation> getOperations() {
-		return operations;
-	}
-
-	public void setOperations(Vector<Operation> operations) {
-		this.operations = operations;
-	}
-
+	/**
+	 * Methode permettant de recuperer les quantites de chaque type d'objets financiers du portefeuille.
+	 * 
+	 * @return un tableau d'entier avec le nombre de chaque type d'objets financiers.
+	 * 			Integer[Obligation,Action,Indice,Option]
+	 */
 	public Integer[] getCamembertQuantite() {
 		// obligation, ation, indice, option
 		Integer[] n = {0,0,0,0};
@@ -182,6 +268,12 @@ public class Portefeuille {
 		return n;
 	}
 	
+	/**
+	 * Methode permettant de recuperer les sommes d'argent investies dans chaque type d'objets financiers du portefeuille.
+	 * 
+	 * @return un tableau de valeurs avec les sommes investies dans chaque type d'objets financiers.
+	 * 			Double[Obligation,Action,Indice,Option]
+	 */
 	public Double[] getCamembertPrix() {
 		// obligation, ation, indice, option
 		Double[] n = {0.0,0.0,0.0,0.0};
@@ -200,4 +292,113 @@ public class Portefeuille {
 		}
 		return n;
 	}
+	
+	/**
+	 * Retourne l'argentDisponible du portefeuille.
+	 * 
+	 * @return l'argentDisponible du portefeuille.
+	 */
+	public Double getArgentDisponible() {
+		return argentDisponible;
+	}
+	
+	/**
+	 * Met a jour l'argentDisponible du portefeuille.
+	 * 
+	 * @param argentDisponible, nouvel argentDisponible du portefeuille.
+	 */
+	public void setArgentDisponible(Double argentDisponible) {
+		this.argentDisponible = argentDisponible;
+	}
+	
+	/**
+	 * Retourne la quantiteObjetFinancier du portefeuille.
+	 * 
+	 * @return la quantiteObjetFinancier du portefeuille.
+	 */	
+	public Hashtable<ObjetFinancier, Integer> getQuantiteObjetFinancier() {
+		return quantiteObjetFinancier;
+	}
+	
+	/**
+	 * Met a jour la quantiteObjetFinancier du portefeuille.
+	 * 
+	 * @param la quantiteObjetFinancier, nouvelle quantiteObjetFinancier du portefeuille.
+	 */	
+	public void setQuantiteObjetFinancier(Hashtable<ObjetFinancier, Integer> quantiteObjetFinancier) {
+		this.quantiteObjetFinancier = quantiteObjetFinancier;
+	}
+	
+	/**
+	 * Retourne le prixObjetFinancier du portefeuille.
+	 * 
+	 * @return le prixObjetFinancier du portefeuille.
+	 */		
+	public Hashtable<ObjetFinancier, Double> getPrixObjetFinancier() {
+		return prixObjetFinancier;
+	}
+	
+	/**
+	 * Met a jour la prixObjetFinancier du portefeuille.
+	 * 
+	 * @param la prixObjetFinancier, nouveau prixObjetFinancier du portefeuille.
+	 */	
+	public void setPrixObjetFinancier(Hashtable<ObjetFinancier, Double> prixObjetFinancier) {
+		this.prixObjetFinancier = prixObjetFinancier;
+	}
+	
+	/**
+	 * Retourne le rendement du portefeuille.
+	 * 
+	 * @return le rendement du portefeuille.
+	 */		
+	public Double getRendement() {
+		return rendement;
+	}
+	
+	/**
+	 * Met a jour le rendement du portefeuille.
+	 * 
+	 * @param le rendement, nouveau rendement du portefeuille.
+	 */		
+	public void setRendement(Double rendement) {
+		this.rendement = rendement;
+	}
+
+	/**
+	 * Retourne l'idPortefeuille du portefeuille.
+	 * 
+	 * @return l'idPortefeuille du portefeuille.
+	 */	
+	public Integer getIdPortefeuille() {
+		return idPortefeuille;
+	}
+	
+	/**
+	 * Met a jour l'idPortefeuille du portefeuille.
+	 * 
+	 * @param l'idPortefeuille, nouvel idPortefeuille du portefeuille.
+	 */			
+	public void setIdPortefeuille(Integer idPortefeuille) {
+		this.idPortefeuille = idPortefeuille;
+	}
+	
+	/**
+	 * Retourne les operations du portefeuille.
+	 * 
+	 * @return les operations du portefeuille.
+	 */	
+	public Vector<Operation> getOperations() {
+		return operations;
+	}
+
+	/**
+	 * Met a jour les operations du portefeuille.
+	 * 
+	 * @param les operations, nouvelles operations du portefeuille.
+	 */	
+	public void setOperations(Vector<Operation> operations) {
+		this.operations = operations;
+	}
+
 }

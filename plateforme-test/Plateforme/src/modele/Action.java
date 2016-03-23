@@ -2,7 +2,10 @@ package modele;
 
 /**
 * Classe Action representant une action du jeu 
-*
+* herite de la classe Titre
+*  
+* @see Titre
+* 
 * @author  Celine Chaugny & Damien Pointin 
 */
 public class Action extends Titre {
@@ -46,12 +49,10 @@ public class Action extends Titre {
 		return dividende;
 	}
 
-	
 	/**
 	* Met a jour le dividende de l'action.
 	*
 	* @param dividende , nouveau dividende de l'action.
-	*
 	*/ 
 	public void setDividende(Double dividende) {
 		this.dividende = dividende;
