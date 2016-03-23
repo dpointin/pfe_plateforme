@@ -1,6 +1,5 @@
 package dao;
 
-import static dao.DAOUtilitaire.executeRequete;
 import static dao.DAOUtilitaire.fermeturesSilencieuses;
 import static dao.DAOUtilitaire.initialisationRequetePreparee;
 

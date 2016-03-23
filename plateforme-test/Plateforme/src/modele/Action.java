@@ -5,14 +5,6 @@ package modele;
 *
 * @author  Celine Chaugny & Damien Pointin 
 */
-/**
- * @author damien
- *
- */
-/**
- * @author damien
- *
- */
 public class Action extends Titre {
 	/**
 	* Le dividende de l'action.
