@@ -226,16 +226,16 @@ public class Historique {
 	* @see Historique#getFermetureJours(GregorianCalendar)
 	*/ 
 	public TreeMap<GregorianCalendar, Vector<Double>> calculMoyenneMobileSimple(Integer periode){
-		Vector<Double> temp = new Vector<Double>(periode);
+		Vector<Double> temp = new Vector<Double>();
 		TreeMap<GregorianCalendar, Vector<Double>> resultat = new TreeMap<GregorianCalendar, Vector<Double>>();
 		
 		if (periode > valeurs.size()) {
-			return null; // erreur periode trop grande ou alors on fait une moyenne par defaut..?
+			return resultat; // erreur periode trop grande ou alors on fait une moyenne par defaut..?
 		}
 		
 		Iterator<GregorianCalendar> it = valeurs.keySet().iterator();
 		if (it.hasNext()) {
-			GregorianCalendar date = null ;
+			GregorianCalendar date = new GregorianCalendar() ;
 			for (int i=0; i<periode; i++) {
 				date = (GregorianCalendar) it.next();
 				temp.add(getFermetureJours(date));
@@ -244,7 +244,7 @@ public class Historique {
 			Vector<Double> val = new Vector<Double>();
 			Double moyenne = 0.0;
 			for (Double v : temp) {
-				moyenne += v;
+				moyenne = moyenne + v;
 			}
 			val.add(getFermetureJours(date));
 			val.add(moyenne/periode);
@@ -256,10 +256,10 @@ public class Historique {
 				moyenne = moyenne - temp.firstElement() + dernier;
 				temp.remove(0); // on retire le plus ancien du vecteur temporaire
 				temp.add(dernier); // on ajoute le nouveau
-				val.clear(); 
-				val.add(dernier);
-				val.add(moyenne/periode);
-				resultat.put(date, val);
+				Vector<Double> vals = new Vector<Double>();
+				vals.add(dernier);
+				vals.add(moyenne/periode);
+				resultat.put(date, vals);
 			}
 		}
 		

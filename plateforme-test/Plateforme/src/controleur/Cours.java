@@ -40,6 +40,11 @@ public class Cours extends HttpServlet {
 	public static final String ATT_SESSION_COURS = "cours";
 	
 	/**
+	* ATT_SESSION_MM correspond a l'attribut mm
+	*/ 
+	public static final String ATT_SESSION_MM = "mm";
+	
+	/**
 	* VUE correspond a la jsp lie a la servlet
 	*/ 
 	public static final String VUE = "/WEB-INF/joueurConnecte/historique.jsp";
@@ -58,6 +63,11 @@ public class Cours extends HttpServlet {
 	* VUE_VOLUMES correspond a la jsp d'affichage des volumes sous forme de barres
 	*/ 
 	public static final String VUE_VOLUMES = "/WEB-INF/joueurConnecte/volumes.jsp";
+	
+	/**
+	* VUE_MOYENNEMOBILE correspond a la jsp d'affichage du graphe du cours et de sa moyenne mobile
+	*/ 
+	public static final String VUE_MOYENNEMOBILE = "/WEB-INF/joueurConnecte/moyennesMobiles.jsp";
 	
 	/**
 	* Le historiqueDao de notre servlet
@@ -145,6 +155,9 @@ public class Cours extends HttpServlet {
 			this.getServletContext().getRequestDispatcher( VUE_CHART).forward( request, response );
 		} else if (typeGraphe!=null && typeGraphe.equals("VOLUMES")) {
 			this.getServletContext().getRequestDispatcher( VUE_VOLUMES).forward( request, response );
+		} else if (typeGraphe!=null && typeGraphe.equals("MOYENNEMOBILE")) {
+			session.setAttribute(ATT_SESSION_MM, cours.calculMoyenneMobileSimple(5));
+			this.getServletContext().getRequestDispatcher( VUE_MOYENNEMOBILE).forward( request, response );
 		} else {
 			this.getServletContext().getRequestDispatcher( VUE).forward( request, response );
 		}

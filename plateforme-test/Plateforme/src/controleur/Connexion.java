@@ -141,13 +141,13 @@ public class Connexion extends HttpServlet {
 		if(session.getAttribute(ATT_SESSION_JOUEUR)==null)
 			this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 		else{
-			TitreDao titreDao=( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTitreDao();
-			ArrayList<String> t=titreDao.trouverTousCodes();
-			for(String s : t){
-				HistoriqueDao hDao=( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getHistoriqueDao();
-				hDao.mettreAJour(s);
-				System.out.println(s);
-			}
+//			TitreDao titreDao=( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTitreDao();
+//			ArrayList<String> t=titreDao.trouverTousCodes();
+//			for(String s : t){
+//				HistoriqueDao hDao=( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getHistoriqueDao();
+//				hDao.mettreAJour(s);
+//				System.out.println(s);
+//			}
 		this.getServletContext().getRequestDispatcher( VUE_CONNECTE ).forward( request, response );
 		}
 	}

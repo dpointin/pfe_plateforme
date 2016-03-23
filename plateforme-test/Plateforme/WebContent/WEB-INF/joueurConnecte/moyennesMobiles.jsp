@@ -3,9 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-
 <%@page import="java.util.Vector" %>
 <%@page import="modele.Portefeuille" %>
+<%@page import="modele.Historique" %>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -61,9 +61,9 @@
 
        	google.charts.load('current', {'packages':['corechart']});
        	
-  	  	google.charts.setOnLoadCallback(drawChart);
+  	  	google.charts.setOnLoadCallback(drawChart3);
 		 
-	  	function drawChart() {
+	  	function drawChart3() {
 			  var data = new google.visualization.DataTable(); 
 			  
 			  // on cree les colonnes
@@ -71,8 +71,8 @@
 		  		data.addColumn('number', 'Moyenne Mobile');
 		  		data.addColumn('number', 'Cours');
 				 
-				 data.addRows(${baseCent.size()});
 				 var i=0;
+				 data.addRows(${mm.size()});
 				 <c:forEach items="${sessionScope['mm']}" var="entry">
 				 	<c:set var="date" value="${entry.key}"/>
 					<fmt:formatDate var="date2" type="date" dateStyle="short" pattern="dd/MM/yyyy" value="${date.time}"/>
