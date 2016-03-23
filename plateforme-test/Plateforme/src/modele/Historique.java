@@ -216,6 +216,55 @@ public class Historique {
 	
 	
 	/**
+	* Methode qui calcule l'esperance de notre historique
+	* grace a une moyenne geometrique des rendements
+	*
+	* @return Double correspondant a l'esperance 
+	* 
+	* @see Historique#valeurs
+	* @see Historique#getFermetureJours(GregorianCalendar)
+	*/ 
+	public Double calculEsperance(){
+		Iterator<GregorianCalendar> it=valeurs.keySet().iterator(); // on cree un iterator sur les clés de ton hashmap
+		Double esperance=1.0;
+		int nb=0;
+		while(it.hasNext()) { 
+			GregorianCalendar key=(GregorianCalendar) it.next();
+			esperance+=getFermetureJours(key);
+			nb++;
+		}
+		esperance/=nb;
+		return esperance;
+	}
+	
+	
+	/**
+	* Methode qui calcule la variance de notre historique
+	*
+	* @return Double correspondant a la variance 
+	* 
+	* @see Historique#valeurs
+	* @see Historique#getFermetureJours(GregorianCalendar)
+	* @see Historique#calculEsperance()
+	*/ 
+	public Double calculVariance(){
+		Iterator<GregorianCalendar> it=valeurs.keySet().iterator(); // on cree un iterator sur les clés de ton hashmap
+		//Moyenne géométrique mieux qu'arithmétique ici ??
+		Double esperance=calculEsperance();
+		Double variance=0.0;
+		int nb=0;
+		while(it.hasNext()) { 
+			GregorianCalendar key=(GregorianCalendar) it.next();
+			Double valeurJour=getFermetureJours(key);
+			variance+=(valeurJour-esperance)*(valeurJour-esperance);
+			nb++;
+		}
+		variance/=nb;
+		return variance;
+	}
+	
+	
+	/**
 	* Methode qui permet de calculer les moyennes mobiles
 	* 
 	* @param periode qui correspond la periode sur laquelle on veut les moyennes mobiles
