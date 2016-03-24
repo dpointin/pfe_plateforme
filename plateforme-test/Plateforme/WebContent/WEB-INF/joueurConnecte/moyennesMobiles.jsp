@@ -68,8 +68,8 @@
 			  
 			  // on cree les colonnes
 	 			data.addColumn('string', 'Date');
-		  		data.addColumn('number', 'Moyenne Mobile');
 		  		data.addColumn('number', 'Cours');
+		  		data.addColumn('number', 'Moyenne Mobile');
 				 
 				 var i=0;
 				 data.addRows(${mm.size()});
@@ -121,7 +121,8 @@
 				 		<option value="CHART" selected>Courbes</option>
 						<option value="CHANDELIER">Chandeliers</option>
 						<option value="VOLUMES">Volumes</option>
-						<option value="MOYENNEMOBILE">Moyennes Mobiles</option>		
+						<option value="MOYENNEMOBILE">Moyennes Mobiles</option>	
+						<option value="BOLLINGER">Bollinger</option>			
 						<option value="TABLEAU">Tableau de valeurs</option>				
 					</select>
 				</td>
