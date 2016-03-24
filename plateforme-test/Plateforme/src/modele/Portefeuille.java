@@ -193,6 +193,45 @@ public class Portefeuille {
     	for(Operation o:operations){
     		s+=o.toString()+"<br>";
     	}
+    	s+="<br><br>";
+    	s+="Esperance des rendements<br>";
+    	it = quantiteObjetFinancier.keySet().iterator(); 
+		while(it.hasNext()) {
+		   ObjetFinancier key = it.next();
+		   if(key instanceof Titre)
+		   s+=((Titre) key).getCode()+";";
+		}
+		s+="<br>";
+    	it = quantiteObjetFinancier.keySet().iterator(); 
+		while(it.hasNext()) {
+			   ObjetFinancier key = it.next();
+			   if(key instanceof Titre)
+			   s+=((Titre) key).getHistorique().calculEsperanceRendement()+";";
+			}
+		s+="<br><br>";
+    	s+="Variance des rendements<br>";
+    	it = quantiteObjetFinancier.keySet().iterator(); 
+		while(it.hasNext()) {
+		   ObjetFinancier key = it.next();
+		   if(key instanceof Titre)
+		   s+=";"+((Titre) key).getCode();
+		}
+		s+="<br>";
+    	it = quantiteObjetFinancier.keySet().iterator(); 
+		while(it.hasNext()) {
+			   ObjetFinancier key = it.next();
+			   if(key instanceof Titre){
+				   s+=((Titre) key).getCode();
+				   Iterator<ObjetFinancier> it2 = quantiteObjetFinancier.keySet().iterator(); 
+					   while(it2.hasNext()){
+						   	ObjetFinancier key2=it2.next();
+						   	if(key2 instanceof  Titre){
+						   		s+=";"+((Titre)key2).getHistorique().calculCoVarianceRendement(((Titre) key).getHistorique());
+						   	}
+					   }  
+					   s+="<br>";	   
+			   }
+			}
     	return s;
     }
     

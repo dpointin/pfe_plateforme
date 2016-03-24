@@ -1,5 +1,6 @@
 package modele;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.TreeMap;
@@ -189,25 +190,33 @@ public class Historique {
 		Double rendementh2=h2.calculEsperanceRendement();
 		Double covariance=0.0;
 		int nb=0;
+		
 		GregorianCalendar debut=null;
 		//date de debut commune aux deux
 		while(debut==null && it.hasNext()){
 			debut=(GregorianCalendar) it.next();
-			if(h2.getFermetureJours(debut)==null)
+		//	System.out.print(debut);
+			if(h2.getValeurs().get(debut)==null)
 				debut=null;
 		}
 		GregorianCalendar fin=null;
 		while(it.hasNext()) { 
+			//System.out.println("test");
+
+			//System.out.println("test1");
 			//date de fin communes aux deux
 			while(fin==null && it.hasNext()){
 				fin=(GregorianCalendar) it.next();
-				if(h2.getFermetureJours(debut)==null)
-					debut=null;
+			//	System.out.println("jour "+fin.get(Calendar.DAY_OF_MONTH)+"mois"+fin.get(Calendar.MONTH));
+				if(h2.getValeurs().get(fin)==null)
+					fin=null;
 			}
+			//System.out.println("test3");
 			Double rendementJourh1=(getFermetureJours(debut)-getFermetureJours(fin))/getFermetureJours(debut);
 			Double rendementJourh2=(h2.getFermetureJours(debut)-h2.getFermetureJours(fin))/h2.getFermetureJours(debut);
 			covariance+=(rendementJourh1-rendementh1)*(rendementJourh2-rendementh2);
 			debut=fin;
+			fin=null;
 			nb++;
 		}
 		covariance/=nb;
