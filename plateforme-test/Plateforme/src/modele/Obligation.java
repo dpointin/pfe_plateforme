@@ -78,7 +78,7 @@ public class Obligation extends ObjetFinancier{
 	* @return String correspondant a notre obligation.
 	*/ 
 	public String toString(){
-		return "OBLIGATION;"+getEmetteur()+" date de fin : "+getDateFin().get(Calendar.DATE)+"/"+getDateFin().get(Calendar.MONTH+1)+"/"+getDateFin().get(Calendar.YEAR);
+		return "OBLIGATION;"+getEmetteur()+" date de fin : "+dateFin.get(Calendar.DAY_OF_MONTH)+"/"+(dateFin.get(Calendar.MONTH)+1)+"/"+dateFin.get(Calendar.YEAR);
 	}
 	
 	/**

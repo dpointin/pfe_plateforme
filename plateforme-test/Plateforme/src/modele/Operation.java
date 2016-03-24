@@ -86,7 +86,7 @@ public class Operation {
 	 */
 	public String toString(){
 		String s=id+";";
-		s+=date.get(Calendar.DATE)+"/"+date.get(Calendar.MONTH+1)+"/"+date.get(Calendar.YEAR)+";";
+		s+=date.get(Calendar.DATE)+"/"+(date.get(Calendar.MONTH)+1)+"/"+date.get(Calendar.YEAR)+";";
 		if(quantite<0)
 			s+="VENTE;"+(-quantite)+";";
 		else
