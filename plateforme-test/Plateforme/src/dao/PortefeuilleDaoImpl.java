@@ -46,6 +46,12 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
     
     
     /**
+	* SQL_UPDATE_RENDEMENT correspond a la requete SQL de mise a jour du rendement pour un portefeuille dans la table portefeuille.
+	*/ 
+    private static final String SQL_UPDATE_RENDEMENT = "UPDATE Portefeuille SET rendement=? WHERE idPortefeuille=?";
+    
+    
+    /**
    	* La daoFactory qui va permettre la connection a la base de donnee.
    	*/ 
     private DAOFactory daoFactory;
@@ -183,6 +189,8 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 		hist.ajouter(portefeuille.getIdPortefeuille(),portefeuille.getOperations().get(portefeuille.getOperations().size()-1));
 		//Mise a jour de l'argent disponible
 		executeRequete(daoFactory,SQL_UPDATE_ARGENT_DISPONIBLE, portefeuille.getArgentDisponible(), portefeuille.getIdPortefeuille());
+		executeRequete(daoFactory,SQL_UPDATE_RENDEMENT, portefeuille.getRendement(), portefeuille.getIdPortefeuille());
+
 	}
 
 

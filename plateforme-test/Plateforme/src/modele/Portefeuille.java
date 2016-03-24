@@ -138,6 +138,7 @@ public class Portefeuille {
 			//nombre dispo mis a jour
 		    objetFinancier.setNombreDisponible(objetFinancier.getNombreDisponible()-quantite);
 			operations.add(new Operation(objetFinancier,objetFinancier.getPrix(),quantite));
+	    	rendement=calculRendement();
 		    return true;
 	    }
 		return false;
@@ -164,6 +165,7 @@ public class Portefeuille {
 		    	objetFinancier.setNombreDisponible(objetFinancier.getNombreDisponible()+quantite);
 				argentDisponible+=quantite*objetFinancier.getPrix();
 				operations.add(new Operation(objetFinancier,objetFinancier.getPrix(),-quantite));
+		    	rendement=calculRendement();
 				return true;
 			}
     	}
@@ -401,4 +403,28 @@ public class Portefeuille {
 		this.operations = operations;
 	}
 
+	
+	/**
+	 * Calcul le rendement du portefeuille
+	 * 
+	 * @return le rendement du portefeuille
+	 */
+	private Double calculRendement(){
+		Double rendement=0.0;
+		int nb=0;
+		Iterator<ObjetFinancier> it = prixObjetFinancier.keySet().iterator(); 
+		while(it.hasNext()) {	
+		   nb++;	
+		   ObjetFinancier key = it.next();
+		   if (key instanceof Obligation) {
+			   Obligation o=(Obligation)key;
+			   rendement+=quantiteObjetFinancier.get(key)*o.getTauxInterets();
+		   } else if  (key instanceof Titre) {
+			   rendement+=quantiteObjetFinancier.get(key)*((Titre)key).getHistorique().calculEsperanceRendement();
+		   } else if  (key instanceof Option) {
+		   }
+		}   
+		rendement/=nb;
+		return rendement;
+	}
 }
