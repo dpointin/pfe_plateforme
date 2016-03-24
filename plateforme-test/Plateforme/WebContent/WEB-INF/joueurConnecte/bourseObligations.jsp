@@ -23,8 +23,8 @@
 
 			<c:forEach var="entry" items="${sessionScope['obligations']}" >
 				<tr> <td>${entry.emetteur}</td> <td>${entry.prix}€</td>
-					 <c:set var="tauxInterets" value="${entry.tauxInterets*10000}"/>
-					 <c:set var="tauxInt" value="${fn:substringBefore(tauxInterets,'.')}"/>
+					 <c:set var="tauxInteret" value="${entry.tauxInteret*10000}"/>
+					 <c:set var="tauxInt" value="${fn:substringBefore(tauxInteret,'.')}"/>
 					 <td>${tauxInt/100} %</td> <td>${entry.nombreDisponible}</td>
 				</tr>
 			</c:forEach>

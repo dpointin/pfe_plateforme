@@ -22,18 +22,20 @@
 		<h1>Mon Portefeuille d'Actifs</h1>
 		
 		<h2>Résumé du portefeuille</h2>
-		<table>
-			<tr>
-				<td>Argent disponible : ${sessionScope['portefeuille'].argentDisponible}<br/>
-				Rendement : ${sessionScope['portefeuille'].rendement}</td>
-			
-				<td>
-					<form method="post" action="<c:url value="/portefeuilleGeneral" />">
-						<input type="submit" value="Gestion de mon portefeuille" >
-					</form>
-				</td>
-			</tr>
-		</table>
+		<div style="text-align:center">
+			<table border="1px" style="width:50%; margin: 0 auto">
+				<tr>
+					<th> Argent disponible </th>
+					<th> Rendement du portefeuille </th>
+				</tr>
+				<tr>
+					<td> ${sessionScope['portefeuille'].argentDisponible} € </td>
+					<c:set var="rendement" value="${sessionScope['portefeuille'].rendement*10000}"/>
+					<c:set var="r" value="${fn:substringBefore(rendement,'.')}"/>
+					<td> ${r/10000} %</td>
+				</tr>
+			</table>
+		</div>
 		
 		<h2>Actifs du portefeuille</h2>
 		<table border="1px" style="width:100%">
@@ -64,7 +66,11 @@
 					<td>${type}</td>
 				 	<td>${quantite}</td>
 					<td>${prix} €</td>
-					<td>Bouton détail</td>
+					<td>
+						<c:if test="${(type eq 'Action') or (type eq 'Indice')}">
+							<input type="button" value="Détail/Historique" onclick="window.location='cours?code=${objetFinancier.code}'" >
+						</c:if>	
+					</td>
 				</tr>
 			</c:forEach>
 		</table>		

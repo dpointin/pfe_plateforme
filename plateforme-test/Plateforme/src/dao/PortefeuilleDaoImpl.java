@@ -129,7 +129,6 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
             connexion = daoFactory.getConnection();
            	preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, login, portefeuille.getArgentDisponible(), portefeuille.getRendement());
             int statut = preparedStatement.executeUpdate();
-            //ON DONNE A LA DEFENSE SON ID GENERE DANS LA TABLE 
             ResultSet result=preparedStatement.getGeneratedKeys();
             if(result.next())
             	portefeuille.setIdPortefeuille(result.getInt(1));

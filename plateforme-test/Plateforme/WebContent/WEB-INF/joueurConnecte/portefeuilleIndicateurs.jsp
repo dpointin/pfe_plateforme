@@ -28,10 +28,10 @@
 			
 			var options = {
 					backgroundColor: '#d2d2d2',
-					width: 600,
-			        height: 400,
-			 		title: 'Répartition du portefeuille',
-			 		is3D: true
+			 		title: 'Répartition du portefeuille selon la quantité',
+			 		is3D: true,
+					width:400,
+                    height:300
 			};
 			
 			var chart = new google.visualization.PieChart(document.getElementById('camembertQ'));
@@ -51,10 +51,10 @@
 			
 			var options = {
 					backgroundColor: '#d2d2d2',
-					width: 600,
-			        height: 400,
-			 		title: 'Répartition du portefeuille',
-			 		is3D: true
+			 		title: 'Répartition du portefeuille selon la somme investie',
+			 		is3D: true,
+			 		width:400,
+                    height:300
 			};
 			
 			var chart = new google.visualization.PieChart(document.getElementById('camembertP'));
@@ -96,8 +96,6 @@
 		     	var options = {
 					//backgroundColor: '#d2d2d2',
 					backgroundColor: {stroke:'black', fill:'#d2d2d2',strokeSize: 1},
-					width: 1100,
-			        height: 500,
 	    			title: 'Cours de fermeture sur la derniere periode',
 			        //curveType: 'function',
 
@@ -117,31 +115,29 @@
 		<c:import url="/inc/menuPortefeuille.jsp" />
 
 		<h1>Indicateurs :</h1>
+		<div style="text-align:center">
 		<table border="1px" style="width:100%">
-			<tr><th>Distribution des actifs selon leur quantité</th>
-				<th>Distribution des actifs selon leur somme investie</th>
-			</tr>
-			<tr><td> <div id="camembertQ" style="width: 600px; height: 400px; text-align: center"></div> </td> 
-				<td> <div id="camembertP" style="width: 600px; height: 400px; text-align: center"></div> </td> 
-			</tr>
-			<tr><th colspan=2>Evolution des titres en base 100</th>
+			<tr><th colspan=2>Résumé du portefeuille</th>
+				<th colspan=2>Distribution des actifs</th>
 			</tr>
 			<tr>
-				<td colspan=2> <div id="chart" style="width: 1100px; height: 500px; text-align: center"></div>	</td>
+				<td> Argent disponible : <br/> ${sessionScope['portefeuille'].argentDisponible} € </td>
+				<c:set var="rendement" value="${sessionScope['portefeuille'].rendement*10000}"/>
+				<c:set var="r" value="${fn:substringBefore(rendement,'.')}"/>
+				<td> Rendement du portefeuille : <br/> ${r/10000} %</td>
+				<td style="width:30%">
+					<div id="camembertQ"></div>
+				</td>
+				<td style="width:30%">
+					<div id="camembertP"></div>
+				</td> 
+			</tr>
+			<tr><th colspan=4>Evolution des titres en base 100</th>
+			</tr>
+			<tr>
+				<td colspan=4> <div id="chart" style="width: 80%; height: 400px; text-align: center"></div>	</td>
 			</tr>
 		</table>
-		
-		<h1>Problème d'optimisation de Markowitz :</h1>
-		<table>
-			<tr>
-				<td>Objet financier</td>
-				<td>Quantité idéale</td>				
-			</tr>
-			<tr> 
-				<c:forEach var="objetsFinanciers" items="${requestScope['markowitz']}" >
-					<td>${objetsFinanciers.key}</td>
-					<td>${objetsFinanciers.value}</td>
-				</c:forEach>
-		</table>		
+		</div>
 	</body>
 </html>

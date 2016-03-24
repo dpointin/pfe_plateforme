@@ -418,7 +418,7 @@ public class Portefeuille {
 		   ObjetFinancier key = it.next();
 		   if (key instanceof Obligation) {
 			   Obligation o=(Obligation)key;
-			   rendement+=quantiteObjetFinancier.get(key)*o.getTauxInterets();
+			   rendement+=quantiteObjetFinancier.get(key)*o.getTauxInteret();
 		   } else if  (key instanceof Titre) {
 			   rendement+=quantiteObjetFinancier.get(key)*((Titre)key).getHistorique().calculEsperanceRendement();
 		   } else if  (key instanceof Option) {
