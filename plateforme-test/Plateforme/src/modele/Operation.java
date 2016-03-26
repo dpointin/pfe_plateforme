@@ -51,7 +51,7 @@ public class Operation {
 	* @see Operation#getId()
 	* @see Operation#setId(int)
 	*/ 	
-	int id;
+	private int id;
 	
 	/**
 	* Constructeur Operation sans parametres.

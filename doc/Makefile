@@ -3,7 +3,7 @@ all: graphes mvgraph tex mvdoc pseudoclean
 tex: texRapport
 
 graphes:
-	cd src/Diagrammes/; java -jar plantuml.jar *.uml; cd ../..
+	cd src/Diagrammes_fin/; java -jar plantuml.jar *.uml; cd ../..
 
 texRapport:
 	cd src; pdflatex Rapport.tex;pdflatex Rapport.tex; cd ..
