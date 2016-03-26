@@ -28,7 +28,24 @@
 			out.print("<p style=\"color: #ff0000\" >" +request.getAttribute("erreur") + "</p>");
 		}
 		%>
+		
+		<h2>Résumé du portefeuille</h2>
+		<div style="text-align:center">
+			<table border="1px" style="width:50%; margin: 0 auto">
+				<tr>
+					<th> Argent disponible </th>
+					<th> Rendement du portefeuille </th>
+				</tr>
+				<tr>
+					<td> ${sessionScope['portefeuille'].argentDisponible} € </td>
+					<c:set var="rendement" value="${sessionScope['portefeuille'].rendement*10000}"/>
+					<c:set var="r" value="${fn:substringBefore(rendement,'.')}"/>
+					<td> ${r/10000} %</td>
+				</tr>
+			</table>
+		</div>
 	
+		<h2>Recherche d'un actif</h2>
 		<form method="post" action="<c:url value="/achat" />">
 			<input type="text" name="motscles" placeholder="Recherche...">
 			<select name="type">
@@ -49,34 +66,42 @@
 				<th>Quantité</th>
 				<th>Acheter</th>
 			</tr>
-			<% Vector<ObjetFinancier> objetsFinanciersVec = (Vector<ObjetFinancier>) request.getAttribute("objetsFinanciers") ; 
 			
-			if(objetsFinanciersVec!=null) {			
- 				for(int i=0;i<objetsFinanciersVec.size();i++){	
- 					out.print("<tr>");		%>	
-					<form method="post" action="<c:url value="/achat" />">
-					<%
- 					if (objetsFinanciersVec.get(i) instanceof Titre) {
- 						out.print("<td>"+ ((Titre)objetsFinanciersVec.get(i)).getCode() +"</td>");
- 						out.print("<td>"+ ((Titre)objetsFinanciersVec.get(i)).getLibelle() +"</td>");
- 						out.print("<td>"+ ((Titre)objetsFinanciersVec.get(i)).getPrix() +"€</td>");
- 					} else {
- 						out.print("<td>"+ ((Obligation)objetsFinanciersVec.get(i)).getEmetteur() +"</td>");
- 						out.print("<td> 10 ans </td>");
- 						out.print("<td>"+ ((Obligation)objetsFinanciersVec.get(i)).getPrix() +"€</td>");
- 					}	
- 					out.print("<td>"+ objetsFinanciersVec.get(i).getNombreDisponible() +"</td>");
- 					
- 					out.print("<td> <input type=\"text\" name=\"quantite\" > </td>");
- 					if (objetsFinanciersVec.get(i) instanceof Titre) {
- 						out.print("<td> <input type=\"submit\" name=\"" + ((Titre)objetsFinanciersVec.get(i)).getCode() + "\" value=\"Acheter\"> </td>");
- 					} else {
- 						out.print("<td> <input type=\"submit\" name=\"" + ((Obligation)objetsFinanciersVec.get(i)).getEmetteur() + "\" value=\"Acheter\"> </td>");
- 	  				}%>
- 					</form>
-					<%out.print("</tr>");
- 				}			
- 			} %>
+			<c:forEach var="entry" items="${objetsFinanciers}" >		
+				<form method="post" action="<c:url value="/achat"/>">
+					<c:set var="type" value="${fn:substringAfter(entry['class'],'.')}" />
+					<c:choose>  
+						<c:when test="${type eq 'Obligation'}">
+							<tr>
+								<td>${entry.emetteur} (10 ans)</td>
+								<c:set var="tauxInteret" value="${entry.tauxInteret*10000}"/>
+							 	<c:set var="tauxInt" value="${fn:substringBefore(tauxInteret,'.')}"/>
+							 	<td>${tauxInt/100} %</td>
+								<td>${entry.prix}€</td>	
+								<td>${entry.nombreDisponible}</td>
+								<td> <input type="text" name="quantite" > </td>
+								<td> <input type="submit" name="${entry.emetteur}" value="Acheter"> </td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td>${entry.libelle} (${entry.code})</td>
+								<c:set var="d" value="0.0"/>
+ 								<c:if test="${type eq 'Action'}">
+									<c:set var="dividende" value="${entry.dividende*10000}"/>
+									<c:set var="d" value="${fn:substringBefore(dividende,'.')}"/>
+								</c:if>
+								<td>${d/100} % </td> 
+								<td>${entry.prix}€</td>
+								<td>${entry.nombreDisponible}</td>
+								<td> <input type="text" name="quantite" > </td>
+								<td> <input type="submit" name="${entry.code}" value="Acheter"> </td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
+				 </form>
+			</c:forEach>
+
  		</table> 	
 	</body>
 </html>

@@ -58,8 +58,8 @@
 						<td>${entry.prix}€</td>
 						<td>${entry.emetteur} (10 ans)</td>
 						<td>${type}</td>
-						<c:set var="tauxInterets" value="${entry.tauxInterets*10000}"/>
-					 	<c:set var="tauxInt" value="${fn:substringBefore(tauxInterets,'.')}"/>
+						<c:set var="tauxInteret" value="${entry.tauxInteret*10000}"/>
+					 	<c:set var="tauxInt" value="${fn:substringBefore(tauxInteret,'.')}"/>
 					 	<td>${tauxInt/100} %</td>				
 					</c:otherwise>
 				</c:choose>

@@ -1,6 +1,5 @@
 package modele;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.TreeMap;
@@ -274,11 +273,11 @@ public class Historique {
 	
 	
 	/**
-	* Methode qui permet de calculer les moyennes mobiles
+	* Methode qui permet de calculer la moyenne mobile simple sur une periode donnee
 	* 
 	* @param periode qui correspond la periode sur laquelle on veut les moyennes mobiles
 	*
-	* @return TreeMap qui correspond aux moyennes mobiles
+	* @return TreeMap qui correspond a le cours du jour ainsi que la moyenne mobile 
 	* 
 	* @see Historique#valeurs
 	* @see Historique#getFermetureJours(GregorianCalendar)
@@ -324,7 +323,34 @@ public class Historique {
 		return resultat;
 	}
 	
-
+	/**
+	* Methode qui permet de calculer les bandes de bollinger
+	* par defaut avec une periode de 20 et 2 x l'ecart type
+	*
+	* @return TreeMap qui correspond aux bandes de bollinger
+	* 
+	* @see Historique#valeurs
+	* @see Historique#getFermetureJours(GregorianCalendar)
+	*/ 
+	public TreeMap<GregorianCalendar, Vector<Double>> calculBollinger() {
+		TreeMap<GregorianCalendar, Vector<Double>> resultat = new TreeMap<GregorianCalendar, Vector<Double>>();
+		TreeMap<GregorianCalendar, Vector<Double>> mms_tree = calculMoyenneMobileSimple(20);
+		int n_ecartType = 2;
+	
+		Iterator<GregorianCalendar> it = mms_tree.keySet().iterator();
+		while (it.hasNext()) {
+			GregorianCalendar date = (GregorianCalendar) it.next();
+			Vector<Double> valeurs = new Vector<Double>(); // le cours, la mm, la bande basse, la bande haute
+			valeurs.add(mms_tree.get(date).get(0));
+			Double mms = mms_tree.get(date).get(1);	
+			valeurs.add(mms);
+			valeurs.add(mms-n_ecartType*Math.sqrt(calculVariance()));
+			valeurs.add(mms+n_ecartType*Math.sqrt(calculVariance()));
+			resultat.put(date, valeurs);
+		}
+		return resultat;
+	}
+	
 	/**
 	* Retourne le code de l'historique.
 	*

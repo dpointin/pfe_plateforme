@@ -137,7 +137,7 @@ public class Obligation extends ObjetFinancier{
 	*
 	* @return le tauxInteret de l'obligation.
 	*/ 		
-	public Double getTauxInterets() {
+	public Double getTauxInteret() {
 		return tauxInteret;
 	}
 	
@@ -146,7 +146,7 @@ public class Obligation extends ObjetFinancier{
 	*
 	* @param tauxInteret, nouveau tauxInteret de l'obligation.
 	*/ 
-	public void setTauxInterets(Double tauxInteret) {
+	public void setTauxInteret(Double tauxInteret) {
 		this.tauxInteret = tauxInteret;
 	}
 	

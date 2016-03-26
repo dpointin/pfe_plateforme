@@ -43,6 +43,11 @@ public class Cours extends HttpServlet {
 	* ATT_SESSION_MM correspond a l'attribut mm
 	*/ 
 	public static final String ATT_SESSION_MM = "mm";
+
+	/**
+	* ATT_SESSION_BOLLINGER correspond a l'attribut bollinger
+	*/ 
+	public static final String ATT_SESSION_BOLLINGER = "bollinger";
 	
 	/**
 	* VUE correspond a la jsp lie a la servlet
@@ -68,6 +73,11 @@ public class Cours extends HttpServlet {
 	* VUE_MOYENNEMOBILE correspond a la jsp d'affichage du graphe du cours et de sa moyenne mobile
 	*/ 
 	public static final String VUE_MOYENNEMOBILE = "/WEB-INF/joueurConnecte/moyennesMobiles.jsp";
+
+	/**
+	* VUE_BOLLINGER correspond a la jsp d'affichage des bandes de bollinger
+	*/ 
+	public static final String VUE_BOLLINGER = "/WEB-INF/joueurConnecte/bollinger.jsp";
 	
 	/**
 	* Le historiqueDao de notre servlet
@@ -158,6 +168,9 @@ public class Cours extends HttpServlet {
 		} else if (typeGraphe!=null && typeGraphe.equals("MOYENNEMOBILE")) {
 			session.setAttribute(ATT_SESSION_MM, cours.calculMoyenneMobileSimple(5));
 			this.getServletContext().getRequestDispatcher( VUE_MOYENNEMOBILE).forward( request, response );
+		} else if (typeGraphe!=null && typeGraphe.equals("BOLLINGER")) {
+			session.setAttribute(ATT_SESSION_BOLLINGER, cours.calculBollinger());
+			this.getServletContext().getRequestDispatcher( VUE_BOLLINGER).forward( request, response );
 		} else {
 			this.getServletContext().getRequestDispatcher( VUE).forward( request, response );
 		}
