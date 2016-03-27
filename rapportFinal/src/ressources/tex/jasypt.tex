@@ -21,6 +21,10 @@ Jasypt possede les avantages suivants :
 \item il applique un nombre aléatoire de fois notre fonction de hachage (nombre > 1000 pour rendre plus difficile les attaques)
 \end{itemize}  
 
+Nous pouvons résumer l'algorithme de chiffrement de Jasypt comme suit :\\
+\begin{center}
+\includegraphics[scale=0.5]{../graph/passwordEncryption.png} \\
+\end{center}
 Le code pour encrypter le mot de passe est très simple, il nous suffit de créer un objet de type ConfigurablePasswordEncryptor, de définir l'algorithme de chiffrement. La méthode setPlainDigest nous permet avec l'argument false de choisir la méthode la plus sure avec un salage et un nombre d'itération aléatoire pour notre fonction de hachage. Enfin il ne nous reste plus qu'a appeler la méthode encryptPassword qui nous renvoie notre mot de passe encrypté à partir d'un mot de passe donné en entrée. 
 \begin{lstlisting}
  ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
