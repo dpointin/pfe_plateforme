@@ -91,7 +91,7 @@ La couche DAO va gérer les opérations classiques de stockage : ajout, lecture,
 
 Pour mettre en application le modèle DAO nous avons du créer nos propres exceptions. En effet, il faut que les exceptions générées par SQL ou JDBC soit référencées comme étant des exceptions dues à la boite noire DAO. 
 
-En reprenant la même idée, DAO se propose d'offrir une interface pour chacun des objets décrivant l'ensemble des méthodes qui seront accessibles dans l'objet. Ainsi, peu importe l'implémentation effectuée on pourra connaître les diverses méthodes de nos classes. Les interfaces permettent de décrire les méthodes des objets la couche donnée et ce n'est que l'implémentation qui sera dépendante du mode de stockage. \\ 
+En reprenant la même idée, DAO se propose d'offrir une interface pour chacun des objets décrivant l'ensemble des méthodes qui seront accessibles dans l'objet. Ainsi, peu importe l'implémentation effectuée on pourra connaître les diverses méthodes de nos classes. Les interfaces permettent de décrire les méthodes des objets la couche donnée et ce n'est que l'implémentation qui sera dépendante du mode de stockage. Par exemple, pour un stockage SQL nous pouvons utiliser le driver JDBC présenté ci-dessus.\\ 
 \begin{center}
 \includegraphics[scale=0.5]{../graph/dao2.png} \\
 \end{center}
@@ -104,7 +104,7 @@ L'avantage du modèle DAO est donc clair, le changement du stockage du mode de s
 
 \subsection{La sérialisation}
 
-\subsection{Principe}
+\subsubsection{Principe}
 
 La sérialisation est le processus de conversion d'un objet pour l'enregistrer dans une base de données ou un fichier par exemple. Le processus inverse s'appelle la désérialisation. Nous pouvons donc représenter cette méthode selon le schéma suivant. 
 
@@ -112,19 +112,25 @@ La sérialisation est le processus de conversion d'un objet pour l'enregistrer d
 \includegraphics[scale=0.5]{../graph/serialisation.png} \\
 \end{center}
 
-\subsection{Mise en place}
+\subsubsection{Mise en place}
 On peut choisir par exemple d'effectuer sa sérialisation en XML. \\
 
 La classe XMLEncoder permet de sérialiser un objet en XML. Cette sérialisation ne prend en compte que les champs ayant un getter et un setter public. XMLEncoder(output) crée une nouvelle instance qui utilise le flux passé en paramètre comme résultat de la sérialisation. \\
 
 La classe XMLDecoder permet quand à elle de désérialiser un objet à partir d'un document XML. \\
 
-Pour notre application nous aurions besoin d'effectuer une sérialisation vers SQL. Prenons l'exemple du joueur, pour effectuer la sérialisation nous avons besoin d'une classe Joueur qui implémente Serializable, d'avoir un constructeur par défaut et d'avoir un getter et un setter public pour chaque attribut. Ensuite notre table SQL java devrait contenir un id et un longblob (Binary Large Object). Ensuite nous n'aurions plus qu'a effectue une sauvegarde dans la base de données. Pour la desérialisation 
+Pour notre application nous aurions besoin d'effectuer une sérialisation vers SQL. Prenons l'exemple du joueur, pour effectuer la sérialisation nous avons besoin d'une classe Joueur qui implémente Serializable, d'avoir un constructeur par défaut et d'avoir un getter et un setter public pour chaque attribut. Ensuite notre table SQL java doit contenir un id et un longblob (Binary Large Object). Ensuite nous n'avons plus qu'a effectue une sauvegarde dans la base de données. Pour la desérialisation, il nous faut récupérer le longblob pour le convertir en ObjectInputStream pour utiliser la méthode readObject(). 
 
 
-\subsection{Avantage et Inconvénient}
-La sérialisation en XML présente des avantages comme une bonne portabilité ou le fait que le processus de sérialisation ne prenne pas en compte les champs qui ont leur valeur par défaut. Elle présente les inconvénients suivants : 
+\subsubsection{Avantage et Inconvénient}
+La sérialisation présente des avantages comme une bonne portabilité ou le fait que le processus de sérialisation ne prenne pas en compte les champs qui ont leur valeur par défaut. Elle présente les inconvénients suivants : 
 \begin{itemize}
 \item ne peut s'utiliser que sur des objets respectant la convention JavaBeans (constructeur par défaut, getter et setter pour tous les attributs ..)
 \item la taille des données sérialisés est plus importante que leur équivalent binaire
 \end{itemize}
+
+
+\subsection{Notre choix : DAO vs Serialisation}
+Pour la communication avec notre base de données nous avons choisi d'utiliser le modèle DAO. \\
+
+Le modèle DAO demande plus de travail pour être mis en place que la sérialisation mais possède l'avantage de nous fournir une base de données plus facilement utilisable dans un autre contexte. En effet, chacune de nos tables ne seront pas simplement un blob mais une valeur pour chacun des champs de notre table. 
