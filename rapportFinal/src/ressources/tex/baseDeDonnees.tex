@@ -1,5 +1,80 @@
 \section{Communiquer avec la base de données}
 
+
+\subsection{Connecteur JDBC}
+JDBC signifie Java Data Base Connectivity. C'est une interface Java qui permet d'accéder à une base de données SQL.
+L'avantage de ce driver est qu'il permet de se connecter à une base, d'exécuter des requêtes et d'en récupérer les résultats de manière simple.
+Tout se fait en Java, ce qui rend l'utilisation simple. Il suffit de connaître les commandes SQL.
+Une fois que le pilote est chargé dans le code Java, on se connecte à la base de données voulue avec l'URL, l'utilisateur et le mot-de-passe. Le package java.sql est ici nécessaire.
+Lorsque la connexion a été établie, l'exécution d'une requête se fait de la manière suivante :
+
+\begin{lstlisting}
+  // Chargement du pilote :
+  Class.forName("com.mysql.jdbc.Driver").newInstance();
+  
+  // Connexion a la base de donnees :
+  java.sql.Connection connexion =  DriverManager.getConnection("jdbc:mysql:URL", "utilisateur", "motDePasse");
+  
+  // Generation de l'objet statement associe à la connexion :
+  java.sql.Statement statement = connexion.createStatement();
+\end{lstlisting}  
+  
+% insérer code connexion jdbc et execute query
+%\lstinputlisting[language=Java]{source_filename.py}
+Une fois la connexion établie, il est possible d'interagir avec la base de données. Dans les exemples ci-dessous, nous supposerons que la base de données
+est composée d'une table Joueur dont les attributs sont des chaînes de caractères représentant le nom et le prénom des joueurs. Il existe deux fonctions
+principales associées à différents types de requêtes et qui s'appliquent à l'objet Statement :
+\begin{itemize}
+ \item executeQuery : permet d'exécuter une requête du type 'SELECT' par exemple et qui donne retourne certaines lignes d'une table.
+  \begin{lstlisting}  
+  // Ecriture et execution de la requete SQL :
+  String requete = "SELECT * FROM Joueur";
+  ResultSet resultat = statement.executeQuery(requete);
+  \end{lstlisting}
+ \item executeUpdate : permet de mettre à jour une table de la base de données dans le cadre de requêtes du type 'UPDATE', 'INSERT', 'DELETE'.
+  \begin{lstlisting}
+  // Mise a jour d'une table (ajout d'un joueur) :
+  String udpate = "INSERT INTO Joueur (nom, prenom) VALUES ('Dupont', 'Jean')";
+  int nbLignesMAJ = statement.executeUpdate(update);
+  \end{lstlisting}
+\end{itemize}
+
+Une fois que la requête a été exécutée, il ne reste plus qu'à lire les données reçues. Dans le cadre de l'utilisation de la fonction executeUpdate, on récupère
+simplement un entier qui donne le nombre de lignes mise à jour dans la table. En revanche, la fonction executeQuery retourne un objet du type ResultSet qui
+est moins trivial à étudier. Cet objet contient une certain nombre de lignes répondant aux conditions de la requête et peut être comparé à une table d'une base de données.
+Il est composé de colonnes symbolisant les attributs des enregistrements de la table : ils possèdent un nom et un domaine dans lequel ils prennent leur valeur (int, float, char, ...).
+De plus, pour parcourir cet objet on a une sorte de curseurs qui point sur une ligne. On utilise la commande next pour passer à la ligne suivante si elle existe.
+
+\begin{lstlisting}  
+  // Parcours du ResultSet s'il est non nul et tant qu'il y a une ligne :
+  Vector<String> noms;
+  Vector<String> prenoms;
+  if (resultat != null) {
+    while (resultat.next()) {
+      noms.add(resultat.getString("nom"));
+      prenoms.add(resultat.getString("prenom"));
+    }
+  }
+\end{lstlisting}
+
+
+Après l'exécution de requêtes et la récupération des données, il ne reste plus qu'à 'refermer' la connexion de la manière suivante :
+\begin{lstlisting}
+  // Fermeture des ojets :
+  statement.close();
+  connexion.close();
+\end{lstlisting}
+
+Les exemples de codes précédents ne prennent pas en compte les erreurs pouvant être générées lors de la compilation de ce code.
+En réalité, il faut protéger les instructions et lever les exceptions générées.
+Erreurs possibles :
+\begin{itemize}
+ \item Lors de la connexion : échec de la connexion (ex : mauvais mot de passe, URL invalide,...).
+ \item Lors de l'exécution d'une requête : mauvaise syntaxe ou appel de table/attributs inexistants.
+ \item Lors de la déconnexion.
+\end{itemize}
+
+
 \subsection{DAO}
 
 \subsubsection{Présentation}
