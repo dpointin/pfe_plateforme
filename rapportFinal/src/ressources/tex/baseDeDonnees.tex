@@ -27,5 +27,29 @@ La couche DAO comportera également une fabrique. Cette fabrique sera unique et 
 L'avantage du modèle DAO est donc clair, le changement du stockage du mode de stockage de données est simple. En effet, nous aurons seulement à changer nos classes DAO pour changer ce mode de stockage. L'inconvénient est du à la mise en œuvre qui demande une couche supplémentaire. 
 
 
+\subsection{La sérialisation}
+
+\subsection{Principe}
+
+La sérialisation est le processus de conversion d'un objet pour l'enregistrer dans une base de données ou un fichier par exemple. Le processus inverse s'appelle la désérialisation. Nous pouvons donc représenter cette méthode selon le schéma suivant. 
+
+\begin{center}
+\includegraphics[scale=0.5]{../graph/serialisation.png} \\
+\end{center}
+
+\subsection{Mise en place}
+On peut choisir par exemple d'effectuer sa sérialisation en XML. \\
+
+La classe XMLEncoder permet de sérialiser un objet en XML. Cette sérialisation ne prend en compte que les champs ayant un getter et un setter public. XMLEncoder(output) crée une nouvelle instance qui utilise le flux passé en paramètre comme résultat de la sérialisation. \\
+
+La classe XMLDecoder permet quand à elle de désérialiser un objet à partir d'un document XML. \\
 
 
+
+
+\subsection{Avantage et Inconvénient}
+La sérialisation en XML présente des avantages comme une bonne portabilité ou le fait que le processus de sérialisation ne prenne pas en compte les champs qui ont leur valeur par défaut. Elle présente les inconvénients suivants : 
+\begin{itemize}
+\item ne peut s'utiliser que sur des objets respectant la convention JavaBeans (constructeur par défaut, getter et setter pour tous les attributs ..)
+\item la taille des données sérialisés est plus importante que leur équivalent binaire
+\end{itemize}
