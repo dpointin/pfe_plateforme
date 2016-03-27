@@ -1,1 +1,31 @@
-\section{Introduction}
+\section{Communiquer avec la base de données}
+
+\subsection{DAO}
+
+\subsubsection{Présentation}
+Un objet d'accès aux données (Data Access Object ou DAO en anglais) est un modèle qui permet d'isoler les méthodes concernant le stockage des données et de ne pas les écrire directement dans nos classes métier. Ainsi le modèle DAO permet de regrouper l'accès aux données dans des classes à part plutôt que de les disperser. \\
+
+Le but du modèle DAO est d'arriver à encapsuler les méthodes concernant la communication avec la base de données dans une coucher pour arriver au schéma suivant :
+
+\begin{center}
+\includegraphics[scale=0.5]{../graph/dao1.png} \\
+\end{center}
+
+\subsubsection{Mise en place}
+La couche DAO va gérer les opérations classiques de stockage : ajout, lecture, modification et suppression. Ces quatre opérations sont souvent raccourcis par l'acronyme CRUD (create, read, update and delete). \\
+
+Pour mettre en application le modèle DAO nous avons du créer nos propres exceptions. En effet, il faut que les exceptions générées par SQL ou JDBC soit référencées comme étant des exceptions dues à la boite noire DAO. 
+
+En reprenant la même idée, DAO se propose d'offrir une interface pour chacun des objets décrivant l'ensemble des méthodes qui seront accessibles dans l'objet. Ainsi, peu importe l'implémentation effectuée on pourra connaître les diverses méthodes de nos classes. Les interfaces permettent de décrire les méthodes des objets la couche donnée et ce n'est que l'implémentation qui sera dépendante du mode de stockage. \\ 
+\begin{center}
+\includegraphics[scale=0.5]{../graph/dao2.png} \\
+\end{center}
+
+La couche DAO comportera également une fabrique. Cette fabrique sera unique et ne sera instanciée que si les informations de configuration sont correctes. Le but de cette fabrique sera de fournir une instance des différentes implémentations de la DAO.
+
+\subsubsection{Avantage et Inconvénient}
+L'avantage du modèle DAO est donc clair, le changement du stockage du mode de stockage de données est simple. En effet, nous aurons seulement à changer nos classes DAO pour changer ce mode de stockage. L'inconvénient est du à la mise en œuvre qui demande une couche supplémentaire. 
+
+
+
+
