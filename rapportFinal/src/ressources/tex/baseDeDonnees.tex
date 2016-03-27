@@ -44,7 +44,7 @@ La classe XMLEncoder permet de sérialiser un objet en XML. Cette sérialisation
 
 La classe XMLDecoder permet quand à elle de désérialiser un objet à partir d'un document XML. \\
 
-
+Pour notre application nous aurions besoin d'effectuer une sérialisation vers SQL. Prenons l'exemple du joueur, pour effectuer la sérialisation nous avons besoin d'une classe Joueur qui implémente Serializable, d'avoir un constructeur par défaut et d'avoir un getter et un setter public pour chaque attribut. Ensuite notre table SQL java devrait contenir un id et un longblob (Binary Large Object). Ensuite nous n'aurions plus qu'a effectue une sauvegarde dans la base de données. Pour la desérialisation 
 
 
 \subsection{Avantage et Inconvénient}
