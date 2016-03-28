@@ -1,0 +1,23 @@
+@startuml
+
+title Exemple d'architecture MVC pour un joueur\n dans une application Eclipse Java EE
+ 
+node "Packages Java" {
+    node "Controleur" {
+         component [JoueurServlet.java] as CTRL #259314
+    }
+    node "Modèle" {
+         component [Joueur.java] as MODL #294EE5
+    }
+} 
+
+node "Vue" {
+    component [Joueur.jsp] as VUE #E52929
+}
+
+VUE --> CTRL
+CTRL --> MODL
+CTRL <-. MODL
+VUE <-. CTRL
+
+@enduml
