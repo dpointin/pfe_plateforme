@@ -14,7 +14,25 @@ La mise en place de MySQL est assez simple. Il suffit de télécharger MySQL pou
 
 On fait maintenant l'hypothèse que l'on utilise Linux. On pourra alors créer notre base de données et ses tables soit en ligne de commande soit à l'aide d'une interface graphique. L'interface utilisée pourra être phpMyAdmin qui est simple à utiliser.\\
 
-Le langage SQL est composé
+Le langage SQL permet de rechercher, ajouter, modifier ou supprimer des données dans une base de données relationnelle. Les instructions sont des requêtes plus ou moins complexes constituées de mots clés tels que 'SELECT', 'UPDATE', 'INSERT' ou encore 'DELETE'. Il est également possible d'utiliser des opérations d'algèbre relationnelle comme 'FROM', 'JOIN', ou 'GROUP'.
+On ne souhaite pas détailler l'ensemble des possibilités offertes par le langage SQL ici, mais voici une exemple dans lequel on créée une base de données pour stocker des joueurs avec leur \textit{nom} et leur \textit{prenom} dans une table. On ajoute ensuite un joueur à la table et on affiche l'ensemble des joueurs.
+\begin{lstlisting}[language=SQL]
+  /* Creation de la base de donnees et on se place dedans */
+  CREATE DATABASE baseJoueurs;
+  USE baseJoueurs;
+  
+  /* Creation de la table Joueur */
+  CREATE TABLE Joueur (
+    nom VARCHAR(20) NOT NULL,
+    prenom VARCHAR(20) NOT NULL
+  );
+  
+  /* Ajout d'un joueur */
+  INSERT INTO Joueur (nom,prenom) VALUES ('Dupont', 'Jean');
+  
+  /* Requete pour recuperer tous les joueurs de la table */
+  SELECT * FROM Joueur;
+\end{lstlisting}
 
 
 \subsubsection{Avantage et Inconvénient}
