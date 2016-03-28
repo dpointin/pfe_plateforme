@@ -12,7 +12,11 @@ Etant donné le fait que nous avons choisi de faire une application interactive,
 \end{description}
 
 Le schéma suivant présente les intéractions entre les trois entités de notre architecture logicielle.
-%\includegraphics[scale=0.5]{../graph/MVC.png} \\
+\begin{figure}[H]
+  \center
+  \includegraphics[scale=0.6]{../graph/MVC.png} \\
+  \caption{Structure MVC}
+\end{figure}
 
 \begin{enumerate}
  \item L'utilisateur intéragi avec la vue (le site Web) et lance une action du contrôleur qui reçoit les informations.
@@ -61,18 +65,32 @@ Une fois qu'Eclipse est installé, il est nécessaire de mettre en place un serv
 \paragraph{Le serveur Apache Tomcat}
 Apache Tomcat est un conteneur web libre de servlets et JSP Java EE. Nous verrons dans les parties suivantes ce que sont les servlets et les JSP. Il permet notammement l'utilisation des servlets et des JSP (JavaServer Pages).
 Tomcat est un serveur HTTP avant tout. Il est écrit en Java ce qui permet de l'utiliser sur n'importe quelle système d'exploitation via la machine virtuelle Java.\\
-En réalité, ce n'est pas un vrai serveur d'application mais un serveur web assemblé à un conteneur web. Dans notre projet, nous utilisons la dernière version d'Apache Tomcat 8.0 qui est suport de Java 7 et possède d'autres avantages dont nous avons besoin.\\
 \begin{figure}[H]
   \center
   \includegraphics[scale=0.3]{../graph/apache.png} \\
   \caption{Apache Tomcat - \url{http://tomcat.apache.org/index.html}}
 \end{figure}
-
+En réalité, ce n'est pas un vrai serveur d'application mais un serveur web assemblé à un conteneur web. Dans notre projet, nous utilisons la dernière version d'Apache Tomcat 8.0 qui est suport de Java 7 et possède d'autres avantages dont nous avons besoin.\\
 
 \paragraph{Dynamic Web Project}
-Maintenant que le serveur Tomcat est ajouté, on peut créer le projet dans Eclipse. On créée un Dynamic Web Projet qui nous permettra de faire notre application.
+Maintenant que le serveur Tomcat est ajouté, on peut créer le projet dans Eclipse. On crée un Dynamic Web Projet qui nous permettra de faire notre application.
+Le schéma suivant donne la structure des fichiers de notre dossier projet :\\
+\begin{figure}[H]
+  \center
+  \includegraphics[scale=0.5]{../graph/schemaProjetDynamic.png} \\
+  \caption{Structure des fichiers d'une application web JSP/Servlet sous Eclipse (Java EE) - \url{https://openclassrooms.com/courses/creez-votre-application-web-avec-java-ee/outils-et-environnement-de-developpement}}
+\end{figure}
+Quelques remarques sur le schéma précédent :
+\begin{itemize}
+ \item Le dossier src : c'est ici que se trouvent les packages Java et notamment les packages du modèle et du contrôleur.
+ \item Le dossier WEB-INF : il est spécial et essentiel au bon fonctionnement de l'application. Il contient le fichier web.xml qui configure l'application, un dossier nommé classes qui contient les classes Java compilées et un dossier lib contenant les bibliothèques supplémentaires (.jar). Cette structure du dossier WEB-INF doit impérativement être comme ci-dessus.
+ \item Les fichiers et dossiers publics sont placés dans le WebContent (en bleu) et les privés dans le WEB-INF. Cette notion de public/privé servira notamment lorsque l'on voudra bloquer l'accès à certaines pages.
+ \item Le dossier WebContent est propre à Eclipse et n'est pas un dossier nécessaire à l'origine.
+\end{itemize}
+Enfin, il est important de préciser que si l'application n'est pas strucutrée de cette manière alors le serveur d'applications ne sera pas capable de la déployer et ainsi elle ne pourra pas fonctionner correctement.\\
 
 
+Le projet est maitenant ouvert et il est alors possible de créer une première page web. Si l'on voulait créer une simple page web statique il suffirait de créer une fichier HTML dans le dossier WebContent. Pour créer des pages dynamiques on va avoir recours aux servlets et aux Java Server Pages décrites dans ce qui suit.
 
 
 \subsubsection{Les servlets}
@@ -145,7 +163,3 @@ avoir une interaction avec l'utilisateur.\\
 Les JSP 
 
 FAIRE EXEMMLE MVC avec Joueur
-
-
-
-
