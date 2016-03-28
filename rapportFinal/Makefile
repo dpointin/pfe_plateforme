@@ -1,4 +1,4 @@
-all: graphes mvgraph tex mvdoc pseudoclean
+all: tex mvdoc pseudoclean
 
 tex: texRapport
 

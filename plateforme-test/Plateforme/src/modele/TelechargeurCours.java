@@ -54,7 +54,7 @@ public class TelechargeurCours {
 		           +"&f="+fin.get(Calendar.YEAR)
 		           +"&g=d" //On veut par jour
 		           +"&ignore=.csv"; //au format csv;
-		System.out.println(url);
+//		System.out.println(url);
 		
 		//Il ne nous reste plus qu'à nous connecter a l'url et copier les données
 		try
