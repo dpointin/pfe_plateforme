@@ -1,10 +1,8 @@
-\section{Téléchargement des cours de la bourse}
+\section{Gestion des cours de la bourse : Yahoo! Finance}
 
-Dans le cadre de ce projet nous avons besoin de 
+Dans le cadre de ce projet nous avons besoin de connaître les cours des indices et des actions pour pouvoir permettre au joueur de faire des paris sur ce qu'il va se passer.
 
-\subsection{Yahoo! Finance}
-
-\subsubsection{Présentation}
+\subsection{Présentation}
 
 Yahoo! Finance est un site internet du groupe Yahoo! qui délivre des nombreuses informations dans le domaine de la finance. Ainsi, nous retrouvons une section actualité qui nous permet d'avoir un rapide coup d’œil sur les divers articles de journaux en rapport avec l'économie. Dans la partie vidéo le principe est le même sauf que les actualités sont sous forme de vidéos. \\
 
@@ -21,7 +19,7 @@ Pour un indice, ACCOR S.A dans notre exemple la page se présente comme suit : \
 \end{figure}
 Nous retrouvons les prix historiques (ce qui nous intéresse) ainsi que d'autres informations concernant le cours. 
 
-\subsubsection{Principe du téléchargement}
+\subsection{Principe du téléchargement}
 
 Nous avons vu dans la partie précédente que nous avions accès à l'historique des cours pour les indices et les cours. Nous avons la possibilité de télécharger ces cours au format CSV. La chose intéressante à étudier est la construction de l'URL qui permet d'effectuer ce téléchargement. \\ 
 
@@ -61,14 +59,9 @@ String url="http://real-chart.finance.yahoo.com/table.csv?"+
 			URL yahooUrl = new URL(url);
 			URLConnection donnee = yahooUrl.openConnection();
 			Scanner entree = new Scanner(donnee.getInputStream());
-	
-			//La premiere ligne est juste l'en-tete
-			if(entree.hasNext()) //au cas ou mauvaise lecture
-				entree.nextLine();
 			
 			while(entree.hasNextLine()){
 				String ligne = entree.nextLine();
-				
 				Traitement de la ligne
 			}	
 		}
