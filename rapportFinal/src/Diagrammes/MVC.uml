@@ -1,0 +1,29 @@
+@startuml
+
+title Architecture logicielle MVC
+
+skinparam component {
+  FontSize 13
+  InterfaceBackgroundColor RosyBrown
+  InterfaceBorderColor orange
+  BackgroundColor<<Apache>> Red
+  BorderColor<<Apache>> #FF6655
+  BorderColor black
+  ArrowFontName Impact
+  ArrowColor black
+  ArrowFontColor black
+}
+
+
+component [Vue] as VUE #E52929
+component [Contrôleur] as CTRL #259314
+component [Modèle] as MODL #294EE5
+
+
+[VUE] --> [CTRL] : [ 1]
+[CTRL] --> [MODL] : [ 2]
+[CTRL] <.. [MODL] : [  3]
+[VUE] <.. [CTRL] : [  4]
+
+@enduml
+
