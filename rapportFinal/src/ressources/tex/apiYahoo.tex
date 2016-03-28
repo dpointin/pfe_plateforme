@@ -14,10 +14,18 @@ Par exemple, pour l'indice du cac 40 n retrouve sa valeur ainsi que va variation
 
 
 Pour un indice, ACCOR S.A dans notre exemple la page se présente comme suit : \\
-\begin{figure}[!h]
+\begin{figure}[H]
   \center
   \includegraphics[scale=0.4]{../graph/yahoo.png} \\
   \caption{Visualisation du site Yahoo! Finance}
 \end{figure}
 Nous retrouvons les prix historiques (ce qui nous intéresse) ainsi que d'autres informations concernant le cours. 
 
+\subsubsection{Principe du téléchargement}
+
+Nous avons vu dans la partie précédente que nous avions accès à l'historique des cours pour les indices et les cours. Nous avons la possibilité de télécharger ces cours au format CSV. La chose intéressante à étudier est la construction de l'URL qui permet d'effectuer ce téléchargement. \\ 
+
+Par exemple, regardons l'URL pour télécharger le CAC40 entre le 01 janvier 2016 et le 01 février : 
+\begin{lstlisting}
+real-chart.finance.yahoo.com/table.csv?s=%5EFCHI&a=00&b=1&c=2016&d=01&e=1&f=2016&g=d&ignore=.csv
+\end{lstlisting}
