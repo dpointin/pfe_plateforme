@@ -15,7 +15,7 @@ mvdoc:
 	mv src/Rapport.pdf doc/RapportPFE.pdf
 
 pseudoclean:
-	rm -rf src/*.log src/*.aux src/*.toc src/*.out
+	rm -rf src/*.log src/*.aux src/*.toc src/*.out src/*.lof
 
 clean: pseudoclean
 	rm -rf graph/DiagrammeSequence*.png graph/DiagrammeDeCasDUtilisation.png src/Diagrammes/*.cmapx doc/*.pdf
