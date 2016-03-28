@@ -164,6 +164,6 @@ Les JSP sont donc la partie vue du modèle MVC puisqu'elles correspondent aux pa
 Dans cet exemple on considère que l'utilisateur est sur une page web intitulée générée par la JSP Joueur.jsp. Il rempli un formulaire quelconque par exemple pour moddifier son âge. La servlet reçoit un message et sa méthode doPost est déclenchée. Au sein de sa méthode doPost elle fait appelle au modèle, la classe Joueur.java, et plus précisemment la méthode qui modifie l'âge (setAge par exemple). L'âge est alors modifié dans le modèle, ce dernier renvoie à la servlet le nouvel âge et lui signifie que la modification a été effectuée. Enfin, la servlet forward vers la page web le nouvel âge du joueur.
 \begin{figure}[H]
   \center
-  \includegraphics[scale=0.5]{../graph/exempleMVC.png} \\
+  \includegraphics[scale=0.6]{../graph/exempleMVC.png} \\
   \caption{Exemple d'application de la structure MVC à notre environnement Java EE}
 \end{figure}
