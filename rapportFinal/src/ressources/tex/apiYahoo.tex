@@ -25,7 +25,55 @@ Nous retrouvons les prix historiques (ce qui nous intéresse) ainsi que d'autres
 
 Nous avons vu dans la partie précédente que nous avions accès à l'historique des cours pour les indices et les cours. Nous avons la possibilité de télécharger ces cours au format CSV. La chose intéressante à étudier est la construction de l'URL qui permet d'effectuer ce téléchargement. \\ 
 
-Par exemple, regardons l'URL pour télécharger le CAC40 entre le 01 janvier 2016 et le 01 février : 
+Par exemple, regardons l'URL pour télécharger le cours d'IBM entre le 01 janvier 2016 et le 01 février : 
 \begin{lstlisting}
-real-chart.finance.yahoo.com/table.csv?s=%5EFCHI&a=00&b=1&c=2016&d=01&e=1&f=2016&g=d&ignore=.csv
+real-chart.finance.yahoo.com/table.csv?s=IBM&a=00&b=1&c=2016&d=01&e=1&f=2016&g=d&ignore=.csv
 \end{lstlisting}
+Nous pouvons ainsi étudié la construction de l'URL qui sera la même pour télécharger chacun des cours. L'URL est construit de la manière suivante : 
+\begin{itemize} 
+\item "real-chart.finance.yahoo.com/table.csv?" une première partie fixe qui sera commune à tous les téléchargements 
+\item "s=IBM" qui permet de savoir quel action/indice nous téléchargeons. Ici IBM correspond au code d'IBM sur la site Yahoo! Finance
+\item "\&a=00\&b=1\&c=2016" correspond à la date à partir de laquelle nous souhaitons télécharger les valeurs, "a" correspond au mois (00 = janvier), b au jour, et c à l'année
+\item "\&d=01\&e=1\&f=2016" correspond à la date jusqu'à laquelle nous souhaitons télécharger les valeurs, "d" correspond au mois (01 = février), e au jour, et f à l'année
+\item "\&g=d" signifie que nous voulons télécharger les valeurs jour par jour, nous aurions pu choisir semaine par semaine ou mensuellement
+\item "\&ignore=.csv" enfin cela signifie que nous voulons télécharger au format csv
+\end{itemize}
+
+Une fois cette remarque effectuée nous voyons que le code pour télécharger le cours est très simple : 
+
+\begin{lstlisting}
+//Construisons l'url de notre page
+		//Chaque url permettant d'acceder aux cours de la bourse est construit de la meme maniere
+String url="http://real-chart.finance.yahoo.com/table.csv?"+
+		           "s="+code  //code correspondant a l'action
+		           +"&a="+debut.get(Calendar.MONTH) //mois de debut 00=janvier, 01=fevrier, 02=mars...
+		           +"&b="+debut.get(Calendar.DAY_OF_MONTH) //jour de debut
+		           +"&c="+debut.get(Calendar.YEAR) //annee de debut
+		           +"&d="+fin.get(Calendar.MONTH)
+		           +"&e="+fin.get(Calendar.DAY_OF_MONTH)
+		           +"&f="+fin.get(Calendar.YEAR)
+		           +"&g=d" //On veut par jour
+		           +"&ignore=.csv"; //au format csv;
+		
+		//Il ne nous reste plus qu'a nous connecter a l'url et copier les donnees
+		try
+		{
+			URL yahooUrl = new URL(url);
+			URLConnection donnee = yahooUrl.openConnection();
+			Scanner entree = new Scanner(donnee.getInputStream());
+	
+			//La premiere ligne est juste l'en-tete
+			if(entree.hasNext()) //au cas ou mauvaise lecture
+				entree.nextLine();
+			
+			while(entree.hasNextLine()){
+				String ligne = entree.nextLine();
+				
+				Traitement de la ligne
+			}	
+		}
+		catch(Exception e)
+		{
+			System.err.println(e);
+		}
+\end{lstlisting} 
