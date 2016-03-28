@@ -1,14 +1,54 @@
 \section{La base de données}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------MySQL-----------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{MySQL}
 
-\subsection{Connecteur JDBC}
-JDBC signifie Java Data Base Connectivity. C'est une interface Java qui permet d'accéder à une base de données SQL.
-L'avantage de ce driver est qu'il permet de se connecter à une base, d'exécuter des requêtes et d'en récupérer les résultats de manière simple.
-Tout se fait en Java, ce qui rend l'utilisation simple. Il suffit de connaître les commandes SQL.
-Une fois que le pilote est chargé dans le code Java, on se connecte à la base de données voulue avec l'URL, l'utilisateur et le mot-de-passe. Le package java.sql est ici nécessaire.
-Lorsque la connexion a été établie, l'exécution d'une requête se fait de la manière suivante :
+\subsubsection{Présentation}
+MySQL est un système de gestion de bases de données (SGDB) relationnelles. Ce logiciel étant libre et open source, il est accessible à tout le monde et gratuitement dans la plupart des cas.
+Il utilise le langage SQL (Stuctured Query Language) pour les requêtes.
 
+\subsubsection{Mise en place}
+La mise en place de MySQL est assez simple. Il suffit de télécharger MySQL pour la version du système d'exploitation utilisé. On aura alors accès à un environnement en local dans lequel il est possible de créer des bases de données.\\
+
+On fait maintenant l'hypothèse que l'on utilise Linux. On pourra alors créer notre base de données et ses tables soit en ligne de commande soit à l'aide d'une interface graphique. L'interface utilisée pourra être phpMyAdmin qui est simple à utiliser.\\
+
+Le langage SQL est composé
+
+
+\subsubsection{Avantage et Inconvénient}
+Le premier avantage pour nous est le fait que nous sommes familier avec ce langage alors que nous ne n'avons pas eu l'occasion d'utiliser d'autres SGDB.
+De plus, il est pratique de pouvoir utiliser phpMyAdmin afin de visualiser nos tables. Enfin, la capacité de stockage est amplement suffisante (plusieurs centaines de Go de données).
+Un inconvénient de ce SGDB dans le cadre de notre projet est qu'il ne permet pas d'effectuer des transactions finanicères intensives ce qui pourrait poser problème si l'on voulait ajouter cette fonctionnalité à notre système.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------JDBC------------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Connecteur JDBC}
+
+\subsubsection{Présentation}
+JDBC signifie Java Data Base Connectivity. C'est une interface Java qui permet d'accéder à une base de données SQL ou MySQL. L'avantage de ce driver est qu'il permet de se connecter à une base, d'exécuter des requêtes et d'en récupérer les résultats de manière simple. Tout se fait en Java, ce qui permet de l'intégrer à notre environnement Java EE sans problème. Il suffit alors de connaître les commandes SQL et les quelques caractéristiques du JDBC.\\
+
+\begin{figure}[!h]
+  \center
+  \includegraphics[scale=0.7]{../graph/jdbc.png} \\
+  \caption{Schéma simple du JDBC - http://tutorials.jenkov.com/jdbc/index.html}
+\end{figure}
+
+L'API JDBC est composée des interfaces et classes suivantes :
+\begin{description}
+ \item[Driver :] cette interface gère les communications avec le serveur de base de données. On ne l'utilise pas directement, on utilisera plutôt le DriverManager.
+ \item[DriverManager :] cette classe gère la liste des pilotes de base de données. Il choisira à la connexion le pilote correspondant à la base utilisée.
+ \item[Connection :] cette interface contient toutes les méthodes permettant d'échanger avec la base de données.
+ \item[Statement :] cette interface permet de soumettre des requêtes SQL à la base de données.
+ \item[ResultSet :] cette classe contient les données récupérées suite à une requête à la base de données après son exécution.
+ \item[SQLException :] cette classe gère les différentes erreurs qui peuvent se produire lors de l'accès à la base de données. 
+\end{description}
+
+\subsubsection{Mise en place}
+
+Une fois que le pilote est chargé dans le code Java, on se connecte à la base de données voulue avec l'URL, l'utilisateur et le mot-de-passe. Le package java.sql est ici nécessaire. Lorsque la connexion a été établie, l'exécution d'une requête se fait de la manière suivante :
 \begin{lstlisting}
   // Chargement du pilote :
   Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -20,32 +60,23 @@ Lorsque la connexion a été établie, l'exécution d'une requête se fait de la
   java.sql.Statement statement = connexion.createStatement();
 \end{lstlisting}  
   
-% insérer code connexion jdbc et execute query
-%\lstinputlisting[language=Java]{source_filename.py}
-Une fois la connexion établie, il est possible d'interagir avec la base de données. Dans les exemples ci-dessous, nous supposerons que la base de données
-est composée d'une table Joueur dont les attributs sont des chaînes de caractères représentant le nom et le prénom des joueurs. Il existe deux fonctions
-principales associées à différents types de requêtes et qui s'appliquent à l'objet Statement :
+Maintenant que la connexion est établie, il est possible d'interagir avec la base de données. Dans les exemples ci-dessous, nous supposerons que la base de données est composée d'une table Joueur dont les attributs sont des chaînes de caractères représentant le nom et le prénom des joueurs. Il existe deux fonctions principales associées à différents types de requêtes et qui s'appliquent à l'objet Statement :
 \begin{itemize}
- \item executeQuery : permet d'exécuter une requête du type 'SELECT' par exemple et qui donne retourne certaines lignes d'une table.
-  \begin{lstlisting}  
+ \item \textit{executeQuery(String sql)} : permet d'exécuter une requête du type 'SELECT' par exemple et qui donne retourne certaines lignes d'une table.
+\begin{lstlisting}  
   // Ecriture et execution de la requete SQL :
   String requete = "SELECT * FROM Joueur";
   ResultSet resultat = statement.executeQuery(requete);
-  \end{lstlisting}
- \item executeUpdate : permet de mettre à jour une table de la base de données dans le cadre de requêtes du type 'UPDATE', 'INSERT', 'DELETE'.
-  \begin{lstlisting}
+\end{lstlisting}
+ \item \textit{executeUpdate(String sql)} : permet de mettre à jour une table de la base de données dans le cadre de requêtes du type 'UPDATE', 'INSERT', 'DELETE'.
+\begin{lstlisting}
   // Mise a jour d'une table (ajout d'un joueur) :
   String udpate = "INSERT INTO Joueur (nom, prenom) VALUES ('Dupont', 'Jean')";
   int nbLignesMAJ = statement.executeUpdate(update);
-  \end{lstlisting}
+\end{lstlisting}
 \end{itemize}
 
-Une fois que la requête a été exécutée, il ne reste plus qu'à lire les données reçues. Dans le cadre de l'utilisation de la fonction executeUpdate, on récupère
-simplement un entier qui donne le nombre de lignes mise à jour dans la table. En revanche, la fonction executeQuery retourne un objet du type ResultSet qui
-est moins trivial à étudier. Cet objet contient une certain nombre de lignes répondant aux conditions de la requête et peut être comparé à une table d'une base de données.
-Il est composé de colonnes symbolisant les attributs des enregistrements de la table : ils possèdent un nom et un domaine dans lequel ils prennent leur valeur (int, float, char, ...).
-De plus, pour parcourir cet objet on a une sorte de curseurs qui point sur une ligne. On utilise la commande next pour passer à la ligne suivante si elle existe.
-
+Une fois que la requête a été exécutée, il ne reste plus qu'à lire les données reçues. Dans le cadre de l'utilisation de la fonction executeUpdate, on récupère simplement un entier qui donne le nombre de lignes mise à jour dans la table. En revanche, la fonction executeQuery retourne un objet du type ResultSet qui est moins trivial à étudier. Cet objet contient une certain nombre de lignes répondant aux conditions de la requête et peut être comparé à une table d'une base de données. Il est composé de colonnes symbolisant les attributs des enregistrements de la table : ils possèdent un nom et un domaine dans lequel ils prennent leur valeur (int, float, char, ...). De plus, pour parcourir cet objet on a une sorte de curseurs qui point sur une ligne. On utilise la commande next pour passer à la ligne suivante si elle existe.
 \begin{lstlisting}  
   // Parcours du ResultSet s'il est non nul et tant qu'il y a une ligne :
   Vector<String> noms;
@@ -58,7 +89,6 @@ De plus, pour parcourir cet objet on a une sorte de curseurs qui point sur une l
   }
 \end{lstlisting}
 
-
 Après l'exécution de requêtes et la récupération des données, il ne reste plus qu'à 'refermer' la connexion de la manière suivante :
 \begin{lstlisting}
   // Fermeture des ojets :
@@ -66,26 +96,32 @@ Après l'exécution de requêtes et la récupération des données, il ne reste 
   connexion.close();
 \end{lstlisting}
 
-Les exemples de codes précédents ne prennent pas en compte les erreurs pouvant être générées lors de la compilation de ce code.
-En réalité, il faut protéger les instructions et lever les exceptions générées.
-Erreurs possibles :
+Les exemples de codes précédents ne prennent pas en compte les erreurs pouvant être générées lors de la compilation de ce code. En réalité, il faut protéger les instructions et lever les exceptions générées. Voici les erreurs qui peuvent être générées :
 \begin{itemize}
  \item Lors de la connexion : échec de la connexion (ex : mauvais mot de passe, URL invalide,...).
  \item Lors de l'exécution d'une requête : mauvaise syntaxe ou appel de table/attributs inexistants.
  \item Lors de la déconnexion.
 \end{itemize}
 
+\subsubsection{Avantage et Inconvénient}
+Il existe d'autre moyens d'accéder à une base de données MySQL en Java tel que Hibernate mais il s'utilise dans le cadre d'une architecture ORM (Objet/Relational Mapping) alors que nous allons utliser une architecture DAO (Data Access Object) pour l'accès à notre base de données. L'avantage du JDBC est qu'il est simple à utiliser (seulement deux méthodes pour exécuter des requêtes SQL) et qu'il contient des pilotes permettant d'accéder à n'importe quelle base de données de type relationnel.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------DAO-------------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{DAO}
 
 \subsubsection{Présentation}
 Un objet d'accès aux données (Data Access Object ou DAO en anglais) est un modèle qui permet d'isoler les méthodes concernant le stockage des données et de ne pas les écrire directement dans nos classes métier. Ainsi le modèle DAO permet de regrouper l'accès aux données dans des classes à part plutôt que de les disperser. \\
 
-Le but du modèle DAO est d'arriver à encapsuler les méthodes concernant la communication avec la base de données dans une coucher pour arriver au schéma suivant :
+Le but du modèle DAO est d'arriver à encapsuler les méthodes concernant la communication avec la base de données dans une couche pour arriver au schéma suivant :
 
-\begin{center}
-\includegraphics[scale=0.5]{../graph/dao1.png} \\
-\end{center}
+\begin{figure}[!h]
+  \center
+  \includegraphics[scale=0.5]{../graph/dao1.png} \\
+  \caption{Schéma simple du modèle DAO}
+\end{figure}
 
 \subsubsection{Mise en place}
 La couche DAO va gérer les opérations classiques de stockage : ajout, lecture, modification et suppression. Ces quatre opérations sont souvent raccourcis par l'acronyme CRUD (create, read, update and delete). \\
@@ -93,25 +129,33 @@ La couche DAO va gérer les opérations classiques de stockage : ajout, lecture,
 Pour mettre en application le modèle DAO nous avons du créer nos propres exceptions. En effet, il faut que les exceptions générées par SQL ou JDBC soit référencées comme étant des exceptions dues à la boite noire DAO. 
 
 En reprenant la même idée, DAO se propose d'offrir une interface pour chacun des objets décrivant l'ensemble des méthodes qui seront accessibles dans l'objet. Ainsi, peu importe l'implémentation effectuée on pourra connaître les diverses méthodes de nos classes. Les interfaces permettent de décrire les méthodes des objets la couche donnée et ce n'est que l'implémentation qui sera dépendante du mode de stockage. Par exemple, pour un stockage SQL nous pouvons utiliser le driver JDBC présenté ci-dessus.\\ 
-\begin{center}
-\includegraphics[scale=0.5]{../graph/dao2.png} \\
-\end{center}
+\begin{figure}[!h]
+  \center
+  \includegraphics[scale=0.5]{../graph/dao2.png} \\
+  \caption{Schéma détaillé du modèle DAO}
+\end{figure}
 
 La couche DAO comportera également une fabrique. Cette fabrique sera unique et ne sera instanciée que si les informations de configuration sont correctes. Le but de cette fabrique sera de fournir une instance des différentes implémentations de la DAO.
 
 \subsubsection{Avantage et Inconvénient}
-L'avantage du modèle DAO est donc clair, le changement du stockage du mode de stockage de données est simple. En effet, nous aurons seulement à changer nos classes DAO pour changer ce mode de stockage. L'inconvénient est du à la mise en œuvre qui demande une couche supplémentaire. 
+L'avantage du modèle DAO est donc clair, le changement du mode de stockage de données est simple. En effet, nous aurons seulement à changer nos classes DAO pour changer ce mode de stockage. L'inconvénient est du à la mise en œuvre qui demande une couche supplémentaire. 
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------Serialisation---------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{La sérialisation}
 
 \subsubsection{Principe}
 
 La sérialisation est le processus de conversion d'un objet pour l'enregistrer dans une base de données ou un fichier par exemple. Le processus inverse s'appelle la désérialisation. Nous pouvons donc représenter cette méthode selon le schéma suivant. 
 
-\begin{center}
-\includegraphics[scale=0.5]{../graph/serialisation.png} \\
-\end{center}
+\begin{figure}[!h]
+  \center
+  \includegraphics[scale=0.5]{../graph/serialisation.png} \\
+  \caption{Schéma de la sérialisation}
+\end{figure}
 
 \subsubsection{Mise en place}
 On peut choisir par exemple d'effectuer sa sérialisation en XML. \\
@@ -131,6 +175,9 @@ La sérialisation présente des avantages comme une bonne portabilité ou le fai
 \end{itemize}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------CHOIX-----------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Notre choix : DAO vs Serialisation}
 Pour la communication avec notre base de données nous avons choisi d'utiliser le modèle DAO. \\
 
