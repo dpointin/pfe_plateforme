@@ -1,10 +1,10 @@
-<%@ page pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ page import="java.util.ArrayList" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 
+<!DOCTYPE html>
+
+<html>
 	<head>
 		<meta charset="utf-8" />
 		<title>Actions</title>
@@ -16,7 +16,7 @@
 		<br>
 		<h1> Actions </h1>
 		
-		<table border="1px" style="width:100%">
+		<table border="1" style="width:100%">
 			<tr> 	<th>Voir historique</th> <th>Code</th> <th>Libellé</th>
 					<th>Rendement dividende</th> <th>Nombre disponible</th>
 			</tr>
@@ -34,7 +34,6 @@
 				</c:if>
 				</tr>	
 			</c:forEach>
-			
 		</table>
 	</body>
 </html>

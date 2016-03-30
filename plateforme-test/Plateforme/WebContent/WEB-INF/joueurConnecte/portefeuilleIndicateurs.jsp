@@ -3,12 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-
-<%@page import="java.util.Vector" %>
-<%@page import="modele.Portefeuille" %>
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html>
 	<head>
@@ -116,28 +111,28 @@
 
 		<h1>Indicateurs :</h1>
 		<div style="text-align:center">
-		<table border="1px" style="width:100%">
-			<tr><th colspan=2>Résumé du portefeuille</th>
-				<th colspan=2>Distribution des actifs</th>
-			</tr>
-			<tr>
-				<td> Argent disponible : <br/> ${sessionScope['portefeuille'].argentDisponible} € </td>
-				<c:set var="rendement" value="${sessionScope['portefeuille'].rendement*10000}"/>
-				<c:set var="r" value="${fn:substringBefore(rendement,'.')}"/>
-				<td> Rendement du portefeuille : <br/> ${r/10000} %</td>
-				<td style="width:30%">
-					<div id="camembertQ"></div>
-				</td>
-				<td style="width:30%">
-					<div id="camembertP"></div>
-				</td> 
-			</tr>
-			<tr><th colspan=4>Evolution des titres en base 100</th>
-			</tr>
-			<tr>
-				<td colspan=4> <div id="chart" style="width: 80%; height: 400px; text-align: center"></div>	</td>
-			</tr>
-		</table>
+			<table border="1" style="width:100%">
+				<tr><th colspan=2>Résumé du portefeuille</th>
+					<th colspan=2>Distribution des actifs</th>
+				</tr>
+				<tr>
+					<td> Argent disponible : <br/> ${sessionScope['portefeuille'].argentDisponible} € </td>
+					<c:set var="rendement" value="${sessionScope['portefeuille'].rendement*10000}"/>
+					<c:set var="r" value="${fn:substringBefore(rendement,'.')}"/>
+					<td> Rendement du portefeuille : <br/> ${r/10000} %</td>
+					<td style="width:30%">
+						<div id="camembertQ"></div>
+					</td>
+					<td style="width:30%">
+						<div id="camembertP"></div>
+					</td> 
+				</tr>
+				<tr><th colspan=4>Evolution des titres en base 100</th>
+				</tr>
+				<tr>
+					<td colspan=4> <div id="chart" style="width: 80%; height: 400px; text-align: center"></div>	</td>
+				</tr>
+			</table>
 		</div>
 	</body>
 </html>

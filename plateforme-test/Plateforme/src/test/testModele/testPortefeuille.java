@@ -1,6 +1,5 @@
 package test.testModele;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TreeMap;
 import java.util.Vector;
@@ -23,8 +22,8 @@ public class testPortefeuille {
 		v.add(100000.0);
 		v.add(100000.0);
 		v.add(100000.0);
-		Date d=new Date();
-		hash.put(new GregorianCalendar(d.getYear(),d.getMonth(),d.getDay()), v);
+		GregorianCalendar d = new GregorianCalendar();
+		hash.put(d, v);
 		h.setValeurs(hash);
 		t.setHistorique(h);
 		Portefeuille p=new Portefeuille();

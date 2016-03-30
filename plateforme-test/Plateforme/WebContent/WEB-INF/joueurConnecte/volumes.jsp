@@ -1,11 +1,11 @@
-<%@ page pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
 
+<html>
 	<head>
 		<meta charset="utf-8" />
 		<title>Graphe</title>
@@ -94,7 +94,7 @@
 		<h1> Volumes du cours : ${sessionScope['code']} </h1>
 		
 		<form method="post" action="<c:url value="/cours" />">
-			<table border="1px" style="width:100%">
+			<table border="1" style="width:100%">
 				<tr>
 				<td>Date début : <input type="text" id="datepicker" name="dateDebut"></td>
 				<td>Date fin : <input type="text" id="datepicker2" name="dateFin"></td>

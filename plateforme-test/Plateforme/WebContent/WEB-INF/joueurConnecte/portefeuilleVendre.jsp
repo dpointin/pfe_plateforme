@@ -3,11 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<%@page import="java.util.Vector" %>
-<%@page import="modele.Portefeuille" %>
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html>
 	<head>
@@ -27,45 +23,43 @@
 		%>
 		
 		<h2>Actifs du portefeuille</h2>
-		<table border="1px" style="width:100%">
+		<table border="1" style="width:100%">
 			<tr>
 				<th>Objet financier</th> <th>Type</th> <th>Quantité</th>
 				<th>Prix Unitaire</th> <th>Quantité à vendre</th> <th>Vente</th>
 			</tr>
 		
 			<c:forEach var="objetsFinanciers" items="${sessionScope['portefeuille'].quantiteObjetFinancier}" >
-				<tr>
-					<form method="post" action="<c:url value="/vente" />">
-						<c:set var="objetFinancier" value="${objetsFinanciers.key}"/>
-						<c:set var="quantite" value="${objetsFinanciers.value}" />
-						<c:set var="prix" value="${sessionScope['portefeuille'].prixObjetFinancier[objetsFinanciers.key]}" />
-						<c:set var="type" value="${fn:substringAfter(objetFinancier['class'],'.')}" />
-					
-						<c:choose> 
-							<c:when test="${type eq 'Obligation'}"> 							
+				<form method="post" action="<c:url value="/vente" />">
+					<c:set var="objetFinancier" value="${objetsFinanciers.key}"/>
+					<c:set var="quantite" value="${objetsFinanciers.value}" />
+					<c:set var="prix" value="${sessionScope['portefeuille'].prixObjetFinancier[objetsFinanciers.key]}" />
+					<c:set var="type" value="${fn:substringAfter(objetFinancier['class'],'.')}" />
+					<c:choose> 
+						<c:when test="${type eq 'Obligation'}"> 	
+							<tr>						
 								<c:set var="date" value="${objetFinancier.dateFin}"/>
 								<fmt:formatDate var="date2" type="date" dateStyle="short" pattern="dd/MM/yyyy" value="${date.time}"/>
 								<td>${objetFinancier.emetteur} (${date2})</td>
-							</c:when>
-							<c:otherwise> 
-								<td>${objetFinancier.code}</td> 
-							</c:otherwise>
-						</c:choose>
-						<td>${type}</td>
-					 	<td>${quantite}</td>
-						<td>${prix} €</td>
-						<td> <input type="text" name="quantite" > </td>
-						<c:choose> 
-							<c:when test="${type eq 'Obligation'}"> 
+								<td>${type}</td>
+							 	<td>${quantite}</td>
+								<td>${prix} €</td>
+								<td> <input type="text" name="quantite" > </td>
 								<td> <input type="submit" name="${objetFinancier.emetteur}" value="Vendre">  </td>
-							</c:when>
-							<c:otherwise> 
+							</tr>
+						</c:when>
+						<c:otherwise> 
+							<tr>
+								<td>${objetFinancier.code}</td> 
+								<td>${type}</td>
+							 	<td>${quantite}</td>
+								<td>${prix} €</td>
+								<td> <input type="text" name="quantite" > </td>
 								<td> <input type="submit" name="${objetFinancier.code}" value="Vendre">  </td>
-							</c:otherwise>
-						</c:choose>
-
-					</form>
-				</tr>
+							</tr>
+						</c:otherwise>
+					</c:choose>
+				</form>
 			</c:forEach>
 		</table>		
 	</body>
