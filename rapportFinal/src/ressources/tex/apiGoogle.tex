@@ -157,22 +157,41 @@ Pour utiliser les graphes mis à disposition par Google, il faut suivre le sché
     google.charts.setOnLoadCallback(drawChart);
 </script>
 \end{lstlisting}
- \item \textbf{Préparer les données :} l'API requiert d'avoir les données sous forme d'une 'DataTable' qui est une classe Javascript définie dans la librairie Google Visualization chargée à l'étape précédente. Une DataTable est un tableau à deux dimensions donc les colonnes sont les types de données et les lignes les données elle-mêmes. Il existe différentes manières de créer une DataTable mais il est important qu'elle soit toujours adaptée au type de graphe qui sera créé (par exemple pour un camembert il faudra toujours deux colonnes). Il est possible d'instancier la DataTable de manière statique ou dynamique.
+ \item \textbf{Préparer les données :} l'API requiert d'avoir les données sous forme d'une 'DataTable' qui est une classe Javascript définie dans la librairie Google Visualization chargée à l'étape précédente. Une DataTable est un tableau à deux dimensions donc les colonnes sont les types de données et les lignes les données elle-mêmes. Il existe différentes manières de créer une DataTable mais il est important qu'elle soit toujours adaptée au type de graphe qui sera créé (par exemple pour un camembert il faudra toujours deux colonnes). Il est possible d'instancier la DataTable de manière statique ou dynamique. Remarque : tous les morceaux de code qui suivent devront être placés dans une fonction Javascript \textit{drawChart} comme précisé précédemment.
 \begin{lstlisting}
 // Creation de la DataTable avec deux colonnes et trois lignes :
 var data = new google.visualization.DataTable();
 data.addColumn('string', 'Actifs');
 data.addColumn('number', 'Quantite');
 data.addRows([
-    ['Obligations', 76.7],
+    ['Obligation', 76.7],
     ['Action', 23.3]
 ]);
 \end{lstlisting}
-
-
+ \item \textbf{Personnaliser le graphe :} il est possible de spécifier certaines options à l'API comme les couleurs de chaque partie du graphique, la police, la taille, le titre, les légendes, etc...
+\begin{lstlisting} 
+var options = {
+    backgroundColor: '#d2d2d2',
+    title: 'Repartition du portefeuille selon la somme investie',
+    is3D: true,
+    width:400,
+    height:300
+};
+\end{lstlisting}
+ \item \textbf{Dessiner le graphe :} c'est ici que l'on va préciser à l'API quel type de graphe on souhaite dessiner, avec quelles données et options. On affectera alors un ID au graphique qui servira dans la dernière étape. Remarque : après ces deux lignes, la fonction \textit{drawChart} est finie.
+\begin{lstlisting}
+var chart = new google.visualization.PieChart(document.getElementById('camembert'));
+chart.draw(data, options);
+\end{lstlisting} 
+ \item \textbf{Afficher le graphe :} il ne reste plus qu'à choisir l'emplacement du graphe dans la page web et à insérer la ligne suivante au bon endroit dans le HTML. L'ID devra être exactement le même que celui donné dans l'étape précédente.
+\begin{lstlisting}
+<div id="camembert"></div>
+\end{lstlisting}  
+ 
+ On est censé voir s'afficher ceci :
 \begin{figure}[H]
   \center
-  \includegraphics[scale=0.5]{../graph/camembertAPI.png}
+  \includegraphics[scale=0.6]{../graph/camembertAPI.png}
   \caption{Exemple diagramme Camembert (Pie Chart)}
 \end{figure}
 \end{enumerate}
@@ -182,6 +201,10 @@ data.addRows([
 %------------------------notrechoix---------------------------------%
 %-------------------------------------------------------------------%
 \subsection{Notre choix}
+Maintenant que nous avons étudié les différentes options qui s'offrent à nous, nous pouvons discuter la meilleure solution à adopter. Tout d'abord, il apparait clairement que la méthode utilisant Flash est désuette bien qu'elle doit fonctionner sans problème. Nous n'avons donc même pas essayé de l'implémenter.\\
 
-inconvénient de JFreeChart : il faut stocker les images mais on peut utliser cewolf, c'est complexe à mettre en oeuvre.
-inconvénient de Flash : il faut utiliser flash
+En ce qui concerne la librairie JFreeChart, c'est la première à laquelle nous avons pensé et que nous avons essayé de mettre en oeuvre. Après avoir rencontré quelques difficultés dans la mise en place de cette solution, nous avons réfléchis à une autre solution. En effet, nous perdions trop de temps à essayer d'utiliser JFreeChart et Cewolf, sans parler du fait que cela nécessitait l'ajout de librairie à notre projet.\\
+
+Ainsi, nous nous sommes finalement retrouvé à utiliser l'API Google Chart qui, pour le coup, est très simple à utiliser car elle est gérée uniquement dans les JSP. De plus, nous trouvons que les graphes mis à disposition sont satisfaisants et que l'intéractivité avec les diagrammes peut avoir des avantages lors de l'analyse des graphes.\\
+
+Nous avons néanmoins rencontré quelques difficultés avec les DataTable lorsque nous avons voulu les définir de manière dynamique, mais nous avons finalement réussi et ce notamment grâce à la librairie JSTL que nous avons défini auparavant.
