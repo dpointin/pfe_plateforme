@@ -1,1 +1,61 @@
 \section{Introduction}
+
+Notre programme sera une plateforme permettant la gestion de portefeuille. Pour cela, nous offrirons la possibilité à l’utilisateur pour chaque actif disponible divers outils d’analyse technique. \\ \\
+
+
+Notre programme sera une plateforme permettant la gestion de portefeuille. Pour cela, nous offrirons la possibilité à l’utilisateur pour chaque actif disponible divers outils d’analyse technique. A partir de cela, nous lui fournirons un conseil concernant l’actif sélectionné (signal de vente, signal d’achat, …). \\ \\
+	Nous lui proposerons également une analyse plus pointue qui lui permettra de regarder le comportement de ses actifs en tant que portefeuille par exemple avec la méthode de Black-Scholes ou Markowitz. \\ \\
+	La finalité du projet serait de réaliser un jeu en réseau qui permettrait à chaque joueur de créer son portefeuille, de voir son évolution et de la comparer aux autres joueurs : le gagnant sera le joueur le plus riche (ou le moins pauvre). 
+
+
+Notre projet va donc se découper en trois phases principales : 
+\begin{itemize}
+\item La première consistera à récupérer les données des cours et les stocker par l’intermédiaire d’une base de données.
+\item La deuxième étape sera le traitement de ces données (outils d’analyse technique).
+\item Enfin, nous proposerons à l’utilisateur d'afficher des indicateurs sur les historiques mais également de visualiser son portefeuille. 
+\end{itemize}
+
+
+
+\section{Base de données}
+Gestion des différents cours des actifs (Nom, valeur à l’ouverture, à la clôture, la plus haute et la plus basse pendant la séance). \\ \\ 
+Deux options pour la récupération des données : soit on les stocke dans une base de donnée statique, c’est-à-dire, nous aurons récupéré les cours pour une certaine durée. Nous placerons le début du jeu dans le passé, de manière à pouvoir constater les gains ou pertes du joueur. La deuxième méthode pour gérer nos données, consisterait à actualiser notre base de données à la demande du joueur en allant chercher les données sur un serveur web. 
+
+\section{Gestion des actifs}
+Pour chaque actif nous proposerons une analyse des divers cours que nous aurons dans notre base de données. Pour cela nous utiliserons des outils d’analyse technique. \\ \\
+A la fin de l’analyse, nous proposerons un avis sur l’actif. 
+
+\section{Indicateurs}
+Chaque utilisateur aura la possibilité de consulter l’ensemble de son portefeuille. Pour cela un descriptif lui sera affiché avec les fonctionnalités suivantes : détails (composition du portefeuille, liste des actifs), performance (rendement) et répartition par actifs par types. \\ \\
+Chaque utilisateur aura la possibilité de consulter l’ensemble de son portefeuille. Pour cela un descriptif lui sera affiché avec les fonctionnalités suivantes : détails (composition du portefeuille, liste des actifs), performance (rendement) et répartition par actifs par types. \\ \\
+Ensuite pour chaque action, il sera possible de visualiser la valeur du cours, sa variation et son volume, un graphique et plusieurs possibilités d’indicateurs. 
+
+
+\subsection{Différentes versions envisagées}
+Pour réaliser ce projet, nous avons choisi de nous fixer divers objectifs à atteindre. Chacun de ces objectifs correspond à une nouvelle qui sera pour la première une version très simplifiée du projet final à laquelle nous ajouterons les différents éléments au fur et à mesure. \\ 
+\section{Version 1}
+Dans la première version, le joueur aura la possibilité de s'ajouter à la liste des joueurs, d'ajouter lui même les actions qui constitueront la bourse, d'acheter ou de vendre une action et de voir le contenu de portefeuille. \\ \\
+Cette première version nous permettra d'avoir la base de notre projet. 
+
+\section{Version 2}
+Dans la deuxième version, nous allons ajouter la dimension base de données à notre projet. C'est-à-dire, que toutes les données qui seront ajoutées au fur et à mesure du jeu ne seront pas perdus comme dans la version précédente quand le jeu se fermera. \\ \\
+Ensuite, le joueur n'aura plus la possibilité de choisir les actions et leur valeur lui-même mais il y aura une table qui regroupera les différentes actions qui sont possibles pour le joueur. Nous pourrons ainsi stocker l'historique de chacun des cours également (nous nous contenterons dans un premier temps des actions du CAC 40). 
+
+\section{Version 3}
+Dans cette version, nous allons rajouter le téléchargement des cours via l'API Yahoo. A chaque lancement du jeu, nous mettrons à jour la base de données depuis la dernière connexion pour compléter les données manquantes. Nous aurons ainsi un historique complet pour les cours de nos actions. 
+
+\section{Version 4}
+Nous allons pour ce nouveau objectif rajouter le tracé des cours. Le joueur pourra avoir une représentation graphique de l'évolution des cours depuis l'historique que nous trouverons dans la base de données remplies précédemment. 
+
+\section{Version 5}
+Nous choisirons plusieurs indicateurs techniques que nous mettrons à la disponibilité de chaque joueur. Nous essaierons de lui livrer un conseil à partir de chacun de nos indicateurs (signal de vente, signal d'achat etc). 
+
+\section{Version 6}
+Dans cette partie, nous améliorerons la qualité des informations fournies au joueur. Nous  
+allons essayer de lui proposer une vision de son portefeuille plus détaillés avec un graphique représentant l'évolution de la valeur de son portefeuille, plus de possibilités en terme d'actions : en essayant d'en augmenter le nombre, de les classifier par secteur, ...
+
+\section{Version 7}
+Nous allons pour cette partie développer un véritable mode multijoueur sur un seul ordinateur. Jusqu'à présent le joueur pouvait s'ajouter à la liste des joueurs mais ne devait pas s'identifier par le biais d'un mot de passe ce qui sera mis en place. De plus, il pourra consulter le classement des autres joueurs. 
+
+\section{Version 8}
+Dans cette ultime version, nous pourrons nous connecter à notre base de données à distance et ainsi nous pourrons joueur sur plusieurs machines à notre jeu. 
