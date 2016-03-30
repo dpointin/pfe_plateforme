@@ -125,14 +125,14 @@ Il faut ensuite déclarer à notre application l'existence de la servlet. Pour c
 On prend comme exemple une servlet JoueurServlet.java qu'on aura pris soin de placer dans le package controleur (dans le dossier src). Dans le fichier web.xml on a deux étapes :
 \begin{enumerate}
  \item Déclaration de la servlet : on la nomme et on précise son emplacement dans le projet.
-\begin{lstlisting}
+\begin{lstlisting}[language=XML]
   <servlet>
     <servlet-name>JoueurServlet</servlet-name>
     <servlet-class>controleur.JoueurServlet</servlet-class>
   </servlet>
 \end{lstlisting}  
  \item Correspondance de la servlet avec une URL (le mapping) : on défini l'URL associée à la servlet, le nom doit être le même que celui défini ci-dessus.
-\begin{lstlisting}
+\begin{lstlisting}[language=XML]
   <servlet-mapping>
     <servlet-name>JoueurServlet</servlet-name>
     <url-pattern>/joueur</url-pattern>
