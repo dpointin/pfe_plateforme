@@ -1,0 +1,22 @@
+@startuml
+ activate Utilisateur
+            loop tant que utilisateur non correct
+            Utilisateur -> VueConnexion :saisieDonnee()
+            activate VueConnexion
+            VueConnexion -> ConnexionServlet :tentativeConnexion()
+            activate ConnexionServlet
+            deactivate VueConnexion   
+            ConnexionServlet -> ConnexionForm : connexionJoueur()
+            activate ConnexionForm
+            ConnexionForm -> joueurDao : verificationDonnee
+            activate joueurDao
+            joueurDao -> BDD : consulter()
+            activate BDD
+            deactivate BDD
+            joueurDao -> ConnexionForm : joueur, erreur
+            deactivate joueurDao
+            ConnexionForm -> ConnexionServlet : joueur, erreur
+            ConnexionServlet -> Utilisateur : redirectionVue()
+            deactivate ConnexionServlet
+  deactivate Utilisateur
+@enduml

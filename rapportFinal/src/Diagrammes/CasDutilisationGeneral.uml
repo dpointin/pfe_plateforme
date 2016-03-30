@@ -1,0 +1,22 @@
+@startuml
+    left to right direction
+    skinparam packageStyle rect
+    actor joueur
+    joueur -- (creerNouveauPortefeuille)
+    joueur -- (consulterClassementJoueur)
+    joueur -- (consulterJouerPortefeuille)
+    (creerNouveauPortefeuille) ..> (seConnecter) : include
+    (consulterClassementJoueur) ..> (seConnecter) : include
+    (consulterJouerPortefeuille) ..> (seConnecter) : include
+    (consulterJouerPortefeuille) -- (suppressionPortefeuille)
+    (consulterJouerPortefeuille) -- (gererPortefeuille)
+    (consulterJouerPortefeuille) -- (consulterActif)
+    (consulterActif) ..> (mettreAJour) : include
+    (consulterActif) -- (calculerAfficherIndice)
+    (gererPortefeuille) -- (consulterListeActif)
+    (consulterListeActif) -- (consulterActif)
+    (gererPortefeuille) -- (achatActif)
+    (achatActif) -down- (consulterListeActif)
+    (gererPortefeuille) -- (afficherListeActif)
+    (afficherListeActif) -- (vendreActif)
+@enduml
