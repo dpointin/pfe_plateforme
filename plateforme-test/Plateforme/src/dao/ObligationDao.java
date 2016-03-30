@@ -2,6 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 
+import dao.config.DAOException;
 import modele.Obligation;
 
 /**

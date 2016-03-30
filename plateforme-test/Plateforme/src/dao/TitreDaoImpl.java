@@ -1,8 +1,8 @@
 package dao;
 
+import static dao.DAOUtilitaire.executeRequete;
 import static dao.DAOUtilitaire.fermeturesSilencieuses;
 import static dao.DAOUtilitaire.initialisationRequetePreparee;
-import static dao.DAOUtilitaire.executeRequete;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +13,7 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
+import dao.config.DAOException;
 import modele.Action;
 import modele.Indice;
 import modele.Titre;

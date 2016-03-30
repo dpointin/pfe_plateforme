@@ -5,6 +5,7 @@ import java.util.TreeMap;
 import java.util.Iterator;
 import java.util.Vector;
 
+import dao.config.DAOException;
 import modele.Historique;
 import modele.TelechargeurCours;
 

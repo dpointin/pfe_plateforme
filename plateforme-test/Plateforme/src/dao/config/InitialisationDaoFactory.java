@@ -1,8 +1,9 @@
-package config;
+package dao.config;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
 import dao.DAOFactory;
 
 /**

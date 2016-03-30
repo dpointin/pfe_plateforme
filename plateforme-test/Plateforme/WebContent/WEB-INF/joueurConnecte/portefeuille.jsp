@@ -3,15 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<%@page import="java.util.Vector" %>
-<%@page import="modele.Portefeuille" %>
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8" />
 		<link type="text/css" rel="stylesheet" href="<c:url value="/inc/form.css"/>" />
 		<title>Portefeuille</title>
 	</head>
@@ -23,7 +19,7 @@
 		
 		<h2>Résumé du portefeuille</h2>
 		<div style="text-align:center">
-			<table border="1px" style="width:50%; margin: 0 auto">
+			<table border="1" style="width:50%; margin: 0 auto">
 				<tr>
 					<th> Argent disponible </th>
 					<th> Rendement du portefeuille </th>
@@ -38,7 +34,7 @@
 		</div>
 		
 		<h2>Actifs du portefeuille</h2>
-		<table border="1px" style="width:100%">
+		<table border="1" style="width:100%">
 			<tr>
 				<th>Objet financier</th> <th>Type</th> <th>Quantité</th>
 				<th>Prix Unitaire</th> <th>Détail</th>

@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controleur.formulaire.InscriptionForm;
 import dao.DAOFactory;
 import dao.JoueurDao;
 import dao.PortefeuilleDao;
-import formulaire.InscriptionForm;
 import modele.Joueur;
 import modele.Portefeuille;
 

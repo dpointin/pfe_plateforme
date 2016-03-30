@@ -1,5 +1,6 @@
 package dao;
 
+import dao.config.DAOException;
 import modele.ObjetFinancier;
 import modele.Portefeuille;
 

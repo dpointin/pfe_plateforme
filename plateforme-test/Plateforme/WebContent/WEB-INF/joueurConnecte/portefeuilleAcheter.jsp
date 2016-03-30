@@ -2,15 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 
-<%@page import="java.util.Vector" %>
-<%@page import="modele.Portefeuille" %>
-<%@page import="modele.ObjetFinancier" %>
-
-<%@page import="modele.Titre" %>
-<%@page import="modele.Obligation" %>
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html>
 	<head>
@@ -31,7 +23,7 @@
 		
 		<h2>Résumé du portefeuille</h2>
 		<div style="text-align:center">
-			<table border="1px" style="width:50%; margin: 0 auto">
+			<table border="1" style="width:50%; margin: 0 auto">
 				<tr>
 					<th> Argent disponible </th>
 					<th> Rendement du portefeuille </th>
@@ -58,7 +50,7 @@
 		</form>
 		<br/>	
 			
-		<table border="1px" style="width:100%">
+		<table border="1" style="width:100%">
 			<tr>
 				<th colspan=2>Objet Financier</th>
 				<th>Prix unitaire</th>

@@ -1,13 +1,12 @@
 package test.testdao;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TreeMap;
 import java.util.Vector;
 
-import dao.DAOException;
 import dao.DAOFactory;
 import dao.PortefeuilleDaoImpl;
+import dao.config.DAOException;
 import modele.Action;
 import modele.Historique;
 import modele.Obligation;
@@ -52,8 +51,8 @@ public class testPortefeuilleDao {
 		v.add(100.0);
 		v.add(100.0);
 		v.add(100.0);
-		Date d=new Date();
-		hash.put(new GregorianCalendar(d.getYear(),d.getMonth(),d.getDay()), v);
+		GregorianCalendar d=new GregorianCalendar();
+		hash.put(d, v);
 		h.setValeurs(hash);
 		t.setHistorique(h);
 		p2.acheter(t,2);

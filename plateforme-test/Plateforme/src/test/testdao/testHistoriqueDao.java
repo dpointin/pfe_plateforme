@@ -3,9 +3,9 @@ package test.testdao;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
-import dao.DAOException;
 import dao.DAOFactory;
 import dao.HistoriqueDaoImpl;
+import dao.config.DAOException;
 import modele.Historique;
 
 public class testHistoriqueDao {

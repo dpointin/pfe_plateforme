@@ -1,6 +1,7 @@
 package dao;
 
 
+import dao.config.DAOException;
 import modele.Portefeuille;
 import modele.Titre;
 

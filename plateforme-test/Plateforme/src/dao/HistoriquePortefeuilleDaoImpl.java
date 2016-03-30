@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.GregorianCalendar;
 import java.util.Vector;
 
-
+import dao.config.DAOException;
 import modele.ObjetFinancier;
 import modele.Obligation;
 import modele.Operation;

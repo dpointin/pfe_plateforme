@@ -1,12 +1,12 @@
-package formulaire;
+package controleur.formulaire;
 
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 
-import dao.DAOException;
 import dao.JoueurDao;
+import dao.config.DAOException;
 import modele.Joueur;
 
 /**

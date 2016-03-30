@@ -1,11 +1,11 @@
-package dao;
+package dao.config;
 
 /**
-* Classe DAOConfigurationException representant les exceptions de configuration du DAO
+* Classe DAOException representant les exceptions du DAO
 *
 * @author  Celine Chaugny & Damien Pointin 
 */
-public class DAOConfigurationException extends RuntimeException {
+public class DAOException extends RuntimeException {
 	/**
 	 * serialVersionUID
 	 */
@@ -13,21 +13,21 @@ public class DAOConfigurationException extends RuntimeException {
 
 
 	/**
-	* Constructeur DAOConfigurationException.
+	* Constructeur DAOException.
 	* <p>
 	* Avec le parametre message
 	* </p>
 	*
 	* @param message
 	* Le message de l'exception.
-	*/ 	
-	public DAOConfigurationException( String message ) {
+	*/ 
+	public DAOException( String message ) {
 		super( message );
 	}
 	
 	
 	/**
-	* Constructeur DAOConfigurationException.
+	* Constructeur DAOException.
 	* <p>
 	* Avec le parametre message et la cause
 	* </p>
@@ -36,14 +36,14 @@ public class DAOConfigurationException extends RuntimeException {
 	* Le message de l'exception.
 	* @param cause
 	* La cause de l'exception
-	*/ 	
-	public DAOConfigurationException( String message, Throwable cause ) {
+	*/ 
+	public DAOException( String message, Throwable cause ) {
 		super( message, cause );
 	}
 	
 	
 	/**
-	* Constructeur DAOConfigurationException.
+	* Constructeur DAOException.
 	* <p>
 	* Avec le parametre cause
 	* </p>
@@ -51,7 +51,7 @@ public class DAOConfigurationException extends RuntimeException {
 	* @param cause
 	* La cause de l'exception.
 	*/ 	
-	public DAOConfigurationException( Throwable cause ) {
+	public DAOException( Throwable cause ) {
 		super( cause );
 	}
 	

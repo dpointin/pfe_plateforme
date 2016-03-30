@@ -2,6 +2,7 @@ package dao;
 
 import java.util.Vector;
 
+import dao.config.DAOException;
 import modele.Operation;
 import modele.Portefeuille;
 
