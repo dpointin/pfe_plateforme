@@ -1,4 +1,4 @@
-package formulaire;
+package controleur.formulaire;
 
 /**
 * Classe Joueur representant les exceptions de formulaire 

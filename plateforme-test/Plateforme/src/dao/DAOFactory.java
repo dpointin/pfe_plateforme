@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import dao.config.DAOConfigurationException;
+
 /**
 * Classe DAOFactory representant la fabrique DAO
 *

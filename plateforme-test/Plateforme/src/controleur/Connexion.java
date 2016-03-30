@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.JoueurDao;
-import formulaire.ConnexionForm;
-import modele.Joueur;
+import controleur.formulaire.ConnexionForm;
 import dao.DAOFactory;
+import dao.JoueurDao;
+import modele.Joueur;
 
 /**
 * Servlet connexion gerant la connexion d'un joueur

@@ -150,7 +150,7 @@ Cette API se met en place en Javascript sans que l'on est besoin de télécharge
 Pour utiliser les graphes mis à disposition par Google, il faut suivre le schéma suivant et écrire le code dans les balises HTML de la page JSP dans laquelle on souhaite afficher un graphe :
 \begin{enumerate}
  \item \textbf{Charger la librairie :} nous n'aurons besoin que de graphes classiques, c'est pourquoi on charge uniquement le package intitulé 'corechart'. Le mot clé 'current' signifie que l'on veut charger la dernière mise à jour officielle et validée par Google Charts. De plus, on suppose que l'on aura une fonction JavaScript plus loin dans le code intitulée 'drawChart'.
-\begin{lstlisting}[language=HTML]
+\begin{lstlisting}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart']});
@@ -158,19 +158,23 @@ Pour utiliser les graphes mis à disposition par Google, il faut suivre le sché
 </script>
 \end{lstlisting}
  \item \textbf{Préparer les données :} l'API requiert d'avoir les données sous forme d'une 'DataTable' qui est une classe Javascript définie dans la librairie Google Visualization chargée à l'étape précédente. Une DataTable est un tableau à deux dimensions donc les colonnes sont les types de données et les lignes les données elle-mêmes. Il existe différentes manières de créer une DataTable mais il est important qu'elle soit toujours adaptée au type de graphe qui sera créé (par exemple pour un camembert il faudra toujours deux colonnes). Il est possible d'instancier la DataTable de manière statique ou dynamique.
-\begin{lstlisting}[language=HTML]
+\begin{lstlisting}
 // Creation de la DataTable avec deux colonnes et trois lignes :
 var data = new google.visualization.DataTable();
-data.addColumn('string', 'Topping');
-data.addColumn('number', 'Slices');
+data.addColumn('string', 'Actifs');
+data.addColumn('number', 'Quantite');
 data.addRows([
-    ['Mushrooms', 3],
-    ['Onions', 1],
-    ['Olives', 1], 
-    ['Zucchini', 1],
-    ['Pepperoni', 2]
+    ['Obligations', 76.7],
+    ['Action', 23.3]
 ]);
 \end{lstlisting}
+
+
+\begin{figure}[H]
+  \center
+  \includegraphics[scale=0.5]{../graph/camembertAPI.png}
+  \caption{Exemple diagramme Camembert (Pie Chart)}
+\end{figure}
 \end{enumerate}
 
 

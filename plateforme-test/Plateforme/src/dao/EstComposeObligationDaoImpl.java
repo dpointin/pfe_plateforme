@@ -1,8 +1,8 @@
 package dao;
 
+import static dao.DAOUtilitaire.executeRequete;
 import static dao.DAOUtilitaire.fermeturesSilencieuses;
 import static dao.DAOUtilitaire.initialisationRequetePreparee;
-import static dao.DAOUtilitaire.executeRequete;
 import static dao.DAOUtilitaire.verification;
 
 import java.sql.Connection;
@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.GregorianCalendar;
 
+import dao.config.DAOException;
 import modele.Obligation;
 import modele.Portefeuille;
 

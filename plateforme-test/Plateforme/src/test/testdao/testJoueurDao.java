@@ -1,8 +1,8 @@
 package test.testdao;
 
+import dao.DAOFactory;
 import dao.JoueurDaoImpl;
 import modele.Joueur;
-import dao.DAOFactory;
 
 public class testJoueurDao {
 	public static void main(String[] args) {

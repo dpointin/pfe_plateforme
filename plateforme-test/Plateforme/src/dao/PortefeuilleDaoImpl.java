@@ -1,8 +1,8 @@
 package dao;
 
+import static dao.DAOUtilitaire.executeRequete;
 import static dao.DAOUtilitaire.fermeturesSilencieuses;
 import static dao.DAOUtilitaire.initialisationRequetePreparee;
-import static dao.DAOUtilitaire.executeRequete;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
 
+import dao.config.DAOException;
 import modele.ObjetFinancier;
 import modele.Obligation;
 import modele.Portefeuille;

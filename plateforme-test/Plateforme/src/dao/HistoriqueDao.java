@@ -2,6 +2,7 @@ package dao;
 
 import java.util.GregorianCalendar;
 
+import dao.config.DAOException;
 import modele.Historique;
 import modele.Titre;
 /**

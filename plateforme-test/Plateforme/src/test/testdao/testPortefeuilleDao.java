@@ -4,9 +4,9 @@ import java.util.GregorianCalendar;
 import java.util.TreeMap;
 import java.util.Vector;
 
-import dao.DAOException;
 import dao.DAOFactory;
 import dao.PortefeuilleDaoImpl;
+import dao.config.DAOException;
 import modele.Action;
 import modele.Historique;
 import modele.Obligation;
