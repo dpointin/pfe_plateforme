@@ -6,22 +6,22 @@ package MySQL <<Database>> {
   }
 }
 
-package src <<Folder>> {
-  package controleur <<Folder>> {
+package src <<Folder>> #7ace61{
+  package controleur <<Folder>> #259314{
     package controleur.filtre <<Folder>> {
     }
     package controleur.formulaire <<Folder>> {
     }
   }
-  package dao <<Folder>> {
+  package dao <<Folder>> #DDDDDD{
     package dao.config <<Folder>> {
     }  
   }  
-  package modele <<Folder>> {
+  package modele <<Folder>> #294EE5{
   }
 }
 
-package WebContent <<Folder>> {
+package WebContent <<Folder>> #E52929{
   package inc <<Folder>> {
     package images <<Folder>> {
     }
