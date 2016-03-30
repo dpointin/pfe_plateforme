@@ -25,7 +25,7 @@ Nous pouvons résumer l'algorithme de chiffrement de Jasypt comme suit :\\
 \begin{figure}[H]
   \center
   \includegraphics[scale=0.7]{../graph/passwordEncryption.png} \\
-  \caption{Schéma simple du fonctionnement de Jasypt - http://www.jasypt.org/howtoencryptuserpasswords.html}
+  \caption{Schéma simple du fonctionnement de Jasypt - \url{http://www.jasypt.org/howtoencryptuserpasswords.html}}
 \end{figure}
 Le code pour encrypter le mot de passe est très simple, il nous suffit de créer un objet de type ConfigurablePasswordEncryptor, de définir l'algorithme de chiffrement. La méthode setPlainDigest nous permet avec l'argument false de choisir la méthode la plus sure avec un salage et un nombre d'itération aléatoire pour notre fonction de hachage. Enfin il ne nous reste plus qu'a appeler la méthode encryptPassword qui nous renvoie notre mot de passe encrypté à partir d'un mot de passe donné en entrée. 
 \begin{lstlisting}
