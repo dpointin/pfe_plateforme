@@ -1,0 +1,39 @@
+@startuml
+
+package dao <<Folder>> {
+    package dao.config <<Folder>> {
+      class DAOConfigurationException
+      class DAOException
+      class InitialisationDaoFactory
+    }  
+    class DAOFactory     
+    class DAOUtilitaire
+    interface EstComposeObligationDao
+    interface EstComposeTitreDao
+    interface HistoriqueDao
+    interface HistoriquePortefeuilleDao
+    interface JoueurDao
+    interface ObligationDao
+    interface PortefeuilleDao
+    interface TitreDao
+    class EstComposeObligationDaoImpl
+    class EstComposeTitreDaoImpl
+    class HistoriqueDaoImpl
+    class HistoriquePortefeuilleDaoImpl
+    class JoueurDaoImpl
+    class ObligationDaoImpl
+    class PortefeuilleDaoImpl
+    class TitreDaoImpl
+}  
+left to right direction
+
+EstComposeObligationDaoImpl ..|> EstComposeObligationDao
+EstComposeTitreDaoImpl ..|> EstComposeTitreDao
+HistoriqueDaoImpl ..|> HistoriqueDao
+HistoriquePortefeuilleDaoImpl ..|> HistoriquePortefeuilleDao
+JoueurDaoImpl ..|> JoueurDao
+ObligationDaoImpl ..|> ObligationDao
+PortefeuilleDaoImpl ..|> PortefeuilleDao
+TitreDaoImpl ..|> TitreDao
+
+@enduml

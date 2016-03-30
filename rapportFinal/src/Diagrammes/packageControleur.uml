@@ -1,0 +1,27 @@
+@startuml
+
+left to right direction
+
+package controleur <<Folder>> {
+    package controleur.formulaire <<Folder>> {
+      class ConnexionForm
+      class FormValidationException
+      class InscriptionForm
+    }
+  
+    package controleur.filtre <<Folder>> {
+      class RestrictionFilter
+    }
+
+    class Achat
+    class Bourse
+    class Connexion
+    class Cours
+    class Deconnexion
+    class Exporter
+    class Inscription
+    class PortefeuilleGeneral
+    class Vente
+}
+
+@enduml
