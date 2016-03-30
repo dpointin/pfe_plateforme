@@ -46,9 +46,9 @@ package WebContent <<Folder>> #E52929{
 
 WEBINF .-.> controleur
 WEBINF <.-. controleur
-controleur ..> modele
+controleur .left> modele
 controleur <.. modele
-modele ..> dao
+modele .left> dao
 modele <.. dao
 dao ..> plateforme
 dao <.. plateforme
