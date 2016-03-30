@@ -1,4 +1,5 @@
 @startuml
+    left to right direction
 title Packages
 
 package MySQL <<Database>> {
@@ -46,9 +47,9 @@ package WebContent <<Folder>> #E52929{
 
 WEBINF .-.> controleur
 WEBINF <.-. controleur
-controleur .left> modele
+controleur ..> modele
 controleur <.. modele
-modele .left> dao
+modele ..> dao
 modele <.. dao
 dao ..> plateforme
 dao <.. plateforme
