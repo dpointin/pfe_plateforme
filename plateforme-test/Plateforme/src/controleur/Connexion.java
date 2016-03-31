@@ -1,6 +1,8 @@
 package controleur;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import controleur.formulaire.ConnexionForm;
 import dao.DAOFactory;
+import dao.HistoriqueDao;
 import dao.JoueurDao;
+import dao.TitreDao;
 import modele.Joueur;
 
 /**
@@ -137,13 +141,13 @@ public class Connexion extends HttpServlet {
 		if(session.getAttribute(ATT_SESSION_JOUEUR)==null)
 			this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 		else{
-//			TitreDao titreDao=( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTitreDao();
-//			ArrayList<String> t=titreDao.trouverTousCodes();
-//			for(String s : t){
-//				HistoriqueDao hDao=( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getHistoriqueDao();
-//				hDao.mettreAJour(s);
-//				System.out.println(s);
-//			}
+			TitreDao titreDao=( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTitreDao();
+			ArrayList<String> t=titreDao.trouverTousCodes();
+			for(String s : t){
+				HistoriqueDao hDao=( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getHistoriqueDao();
+				hDao.mettreAJour(s);
+				System.out.println(s);
+			}
 		this.getServletContext().getRequestDispatcher( VUE_CONNECTE ).forward( request, response );
 		}
 	}

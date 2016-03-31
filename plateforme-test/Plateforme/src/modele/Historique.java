@@ -1,5 +1,6 @@
 package modele;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.TreeMap;
@@ -344,14 +345,61 @@ public class Historique {
 			valeurs.add(mms_tree.get(date).get(0));
 			Double mms = mms_tree.get(date).get(1);	
 			valeurs.add(mms);
-			Double variance=calculVariance();
+			Double variance=calculVarianceBollinger(20, date, mms);
+			if(variance!=0){
 			valeurs.add(mms-n_ecartType*Math.sqrt(variance));
 			valeurs.add(mms+n_ecartType*Math.sqrt(variance));
-			resultat.put(date, valeurs);
+			resultat.put(date, valeurs);}
 		}
 		return resultat;
 	}
 	
+	
+	/**
+	* Methode qui calcule la variance de notre historique
+	*
+	* @return Double correspondant a la variance 
+	* 
+	* @see Historique#valeurs
+	* @see Historique#getFermetureJours(GregorianCalendar)
+	* @see Historique#calculEsperance()
+	*/ 
+	public Double calculVarianceBollinger(int periode, GregorianCalendar debut, Double mms){
+		//Moyenne géométrique mieux qu'arithmétique ici ??
+		Double variance=0.0;		
+		if (periode > valeurs.size()) {
+			return 0.0 ; // erreur periode trop grande ou alors on fait une moyenne par defaut..?
+		}
+		
+		Iterator<GregorianCalendar> it = valeurs.keySet().iterator();
+		int cpt=0;
+		boolean b=false;
+		while (it.hasNext() && b==false) {
+			cpt++;
+			GregorianCalendar date = it.next() ;
+			if( (date.get(Calendar.MONTH)==debut.get(Calendar.MONTH)) && (date.get(Calendar.YEAR)==debut.get(Calendar.YEAR)) && (date.get(Calendar.DAY_OF_MONTH)==debut.get(Calendar.DAY_OF_MONTH)))  
+				b=true;
+		}
+		
+		it = valeurs.keySet().iterator();
+		int i=0;
+		if (cpt-20>0){
+		while(i<cpt-20 && it.hasNext()){
+			it.next();
+			i++;
+		}
+		int j=0;
+		while(j<20 && it.hasNext()){
+			GregorianCalendar key=(GregorianCalendar) it.next();
+			Double valeurJour=getFermetureJours(key);
+			variance+=(valeurJour-mms)*(valeurJour-mms);
+			j++;
+		}	
+		variance/=20;}
+		return variance;
+		
+		
+	}
 	/**
 	* Retourne le code de l'historique.
 	*
