@@ -211,13 +211,13 @@ public class Historique {
 				if(h2.getValeurs().get(fin)==null)
 					fin=null;
 			}
-			//System.out.println("test3");
+			if(fin!=null){
 			Double rendementJourh1=(getFermetureJours(debut)-getFermetureJours(fin))/getFermetureJours(debut);
 			Double rendementJourh2=(h2.getFermetureJours(debut)-h2.getFermetureJours(fin))/h2.getFermetureJours(debut);
 			covariance+=(rendementJourh1-rendementh1)*(rendementJourh2-rendementh2);
 			debut=fin;
 			fin=null;
-			nb++;
+			nb++;}
 		}
 		covariance/=nb;
 		return covariance;

@@ -10,7 +10,7 @@
 		<title>Exporter le portefeuille au format .csv</title>
 	</head>
 	<body>
-		<%		Portefeuille p=(Portefeuille) request.getAttribute("portefeuille");
+		<%		Portefeuille p=(Portefeuille) session.getAttribute("portefeuille");
 				out.print(p.ecrire());
 		%>
 	</body>
