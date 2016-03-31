@@ -1,0 +1,40 @@
+@startuml
+actor Utilisateur
+
+ activate Utilisateur
+            Utilisateur -> VueAchat : saisieQuantite()
+            activate VueAchat
+            VueAchat -> AchatServlet : doPost()
+            activate AchatServlet
+            deactivate VueAchat 
+            AchatServlet -> Joueur : acheter(ObjetFinancier, quantite)
+            activate Joueur
+            alt achat reussi
+            
+                Joueur -> AchatServlet : true
+                deactivate Joueur
+                AchatServlet -> JoueurDao : achat(objetFinancier,quantite)
+                activate JoueurDao
+                database BDD
+                JoueurDao -> BDD : modification
+                activate BDD
+                BDD -> JoueurDao : erreur
+                deactivate BDD
+                JoueurDao -> AchatServlet : exceptionEventuelle
+                deactivate JoueurDao
+                AchatServlet -> VuePortefeuille : redirection()
+                activate VuePortefeuille
+                deactivate VuePortefeuille
+                
+            else achat rate
+            
+                Joueur -> AchatServlet : false
+                activate Joueur
+                deactivate Joueur
+                deactivate AchatServlet
+                AchatServlet -> VueAchat : redirection()
+                activate VueAchat
+                deactivate VueAchat
+            end  
+  deactivate Utilisateur
+@enduml
