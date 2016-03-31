@@ -1,0 +1,24 @@
+\beamer@endinputifotherversion {3.24pt}
+\beamer@sectionintoc {2}{Introduction}{3}{0}{1}
+\beamer@sectionintoc {3}{Technologies utilis\IeC {\'e}es}{4}{0}{2}
+\beamer@subsectionintoc {3}{1}{Dynamic Web Project}{4}{0}{2}
+\beamer@subsectionintoc {3}{2}{Base de donn\IeC {\'e}es}{10}{0}{2}
+\beamer@subsectionintoc {3}{3}{Yahoo! Finance}{14}{0}{2}
+\beamer@subsectionintoc {3}{4}{API Google Chart}{17}{0}{2}
+\beamer@sectionintoc {4}{Th\IeC {\'e}orie Finance}{21}{0}{3}
+\beamer@subsectionintoc {4}{1}{Produits financiers}{21}{0}{3}
+\beamer@subsectionintoc {4}{2}{Indicateurs techniques}{25}{0}{3}
+\beamer@subsectionintoc {4}{3}{Gestion Portefeuille}{35}{0}{3}
+\beamer@subsectionintoc {4}{4}{Cadre du projet}{39}{0}{3}
+\beamer@sectionintoc {5}{Mod\IeC {\'e}lisation}{43}{0}{4}
+\beamer@subsectionintoc {5}{1}{Cas d'utilisation}{43}{0}{4}
+\beamer@subsectionintoc {5}{2}{Diagramme classe}{45}{0}{4}
+\beamer@subsectionintoc {5}{3}{Diagramme s\IeC {\'e}quence}{47}{0}{4}
+\beamer@subsectionintoc {5}{4}{Base de donn\IeC {\'e}es}{49}{0}{4}
+\beamer@subsectionintoc {5}{5}{Mod\IeC {\'e}lisation de la bourse et portefeuille}{51}{0}{4}
+\beamer@sectionintoc {6}{Travail de groupe}{53}{0}{5}
+\beamer@subsectionintoc {6}{1}{R\IeC {\'e}partition}{53}{0}{5}
+\beamer@subsectionintoc {6}{2}{Git}{55}{0}{5}
+\beamer@sectionintoc {7}{D\IeC {\'e}monstration}{57}{0}{6}
+\beamer@subsectionintoc {7}{1}{D\IeC {\'e}mo}{57}{0}{6}
+\beamer@sectionintoc {8}{Conclusion}{59}{0}{7}

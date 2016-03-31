@@ -1,0 +1,48 @@
+@startuml
+    left to right direction
+title Packages
+
+package MySQL <<Database>> {
+  package plateforme {
+  }
+}
+
+package src <<Folder>> {
+  package controleur <<Folder>> #7ace61{
+    package controleur.filtre <<Folder>> {
+    }
+    package controleur.formulaire <<Folder>> {
+    }
+  }
+  package dao <<Folder>> #DDDDDD{
+    package dao.config <<Folder>> {
+    }  
+  }  
+  package modele <<Folder>> #294EE5{
+  }
+}
+
+package WebContent <<Folder>> {
+  package inc <<Folder>> #E52929{
+    package images <<Folder>> {
+    }
+  }
+  package WEBINF <<Folder>> #E52929{
+    package inscription.jsp <<File>> {
+    }
+    package lib <<Folder>> {
+    }
+    package JSP(joueurConnecte) <<Folder>> {
+    }
+  } 
+}
+
+WEBINF .-.> controleur
+WEBINF <.-. controleur
+controleur ..> modele
+controleur <.. modele
+modele ..> dao
+modele <.. dao
+dao ..> plateforme
+dao <.. plateforme
+@enduml
