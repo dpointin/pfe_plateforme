@@ -10,7 +10,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+/**
+* Filtre réduisant l'accés
+*
+* @author  Celine Chaugny & Damien Pointin 
+*/
 public class RestrictionFilter implements Filter {
 	
 	public static final String ACCES_CONNEXION = "/connexion";

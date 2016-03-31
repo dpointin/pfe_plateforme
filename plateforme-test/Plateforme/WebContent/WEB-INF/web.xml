@@ -4,7 +4,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   <filter>
     <filter-name>RestrictionFilter</filter-name>
-    <filter-class>filtre.RestrictionFilter</filter-class>
+    <filter-class>controleur.filtre.RestrictionFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>RestrictionFilter</filter-name>
@@ -102,6 +102,6 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <listener>
-    <listener-class>config.InitialisationDaoFactory</listener-class>
+    <listener-class>dao.config.InitialisationDaoFactory</listener-class>
   </listener>
 </web-app>
