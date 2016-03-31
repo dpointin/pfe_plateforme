@@ -16,14 +16,45 @@ import javax.servlet.http.HttpSession;
 * @author  Celine Chaugny & Damien Pointin 
 */
 public class RestrictionFilter implements Filter {
-	
+	/**
+	* ACCES_CONNEXION correspond a le vue connexion
+	*/ 
 	public static final String ACCES_CONNEXION = "/connexion";
+	
+	/**
+	* ATT_SESSION_JOUEUR correspond a l'attribut session Joueur
+	*/ 
 	public static final String ATT_SESSION_USER = "sessionJoueur";
+	
+	
+	/**
+	* ALERTE_PB_CONNEXION correspond au message d'alerte
+	*/ 
 	public static final String ALERTE_PB_CONNEXION="messageAlerte";
 	
+	
+	/**
+	* Implementation de la methode init 
+	* 
+	* @throws ServletException si l'init se passe mal
+	*/ 
 	public void init( FilterConfig config ) throws ServletException {
 	}
 	
+	
+	/**
+	* Implementation de la methode doFilter qui realise le filtre
+	* 
+	* @param req
+	* la HttpRequeteServlet
+	* @param res
+	* la HttpServletResponse 
+	* @param chain 
+	* le filtre chain
+	* 
+	* @throws ServletException en cas d'erreur
+	* @throws IOException en cas d'erreur
+	*/ 
 	public void doFilter( ServletRequest req, ServletResponse res, FilterChain chain ) throws IOException,
 	ServletException {
 		/* Cast des objets request et response */
@@ -51,6 +82,10 @@ public class RestrictionFilter implements Filter {
 		}
 	} 
 	
+	
+	/**
+	* Fonction qui detruit la servlet
+	*/ 
 	public void destroy() {
 		
 	}
