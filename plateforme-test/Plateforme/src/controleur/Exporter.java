@@ -75,7 +75,7 @@ public class Exporter extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Joueur joueur = (Joueur) session.getAttribute( ATT_SESSION_JOUEUR );
-		request.setAttribute(ATT_SESSION_PORTEFEUILLE, portefeuilleDao.charger(joueur.getLogin()));
+		session.setAttribute(ATT_SESSION_PORTEFEUILLE, portefeuilleDao.charger(joueur.getLogin()));
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );		
 	}
 

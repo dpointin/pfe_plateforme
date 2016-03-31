@@ -1,0 +1,26 @@
+@startuml
+actor Utilisateur
+
+ activate Utilisateur
+            loop tant que informations non correct
+            Utilisateur -> VueInscription :saisieDonnee()
+            activate VueInscription
+            VueInscription -> InscriptionServlet :tentativeInscription()
+            activate InscriptionServlet
+            deactivate VueInscription   
+            InscriptionServlet -> InscriptionForm : InscriptionJoueur()
+            activate InscriptionForm
+            InscriptionForm -> joueurDao : verificationDonnee
+            activate joueurDao
+            database BDD
+            joueurDao -> BDD : consulter()
+            activate BDD
+            deactivate BDD
+            joueurDao -> InscriptionForm : joueur, erreur
+            deactivate joueurDao
+            InscriptionForm -> InscriptionServlet : joueur, erreur
+            deactivate InscriptionForm
+            InscriptionServlet -> Utilisateur : redirectionVue()
+            deactivate InscriptionServlet
+  deactivate Utilisateur
+@enduml

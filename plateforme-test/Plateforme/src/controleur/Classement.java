@@ -27,6 +27,11 @@ public class Classement extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	* ATT_SESSION_PORTEFEUILLE correspond a l'attribut session Portefeuille
+	*/ 
+	public static final String ATT_SESSION_PORTEFEUILLE = "portefeuille";
+	
+	/**
 	* CONF_DAO_FACTORY correspond a l'attribut daoFactory.
 	*/ 
 	public static final String CONF_DAO_FACTORY = "daofactory";
@@ -49,7 +54,7 @@ public class Classement extends HttpServlet {
 	/**
 	* VUE_PORTEFEUILLE correspond a la jsp lie a la servlet
 	*/ 
-	public static final String VUE_PORTEFEUILLE = "/WEB-INF/joueurConnecte/porteufeuille.jsp";
+	public static final String VUE_PORTEFEUILLE = "/WEB-INF/joueurConnecte/portefeuille.jsp";
 
 	
 	/**
@@ -96,6 +101,7 @@ public class Classement extends HttpServlet {
 				portefeuilleDao.supprimer(joueur.getLogin());
 				joueur.setPortefeuille(new Portefeuille(10000.0));
 				portefeuilleDao.creer(joueur.getLogin(), joueur.getPortefeuille());
+				session.setAttribute(ATT_SESSION_PORTEFEUILLE, joueur.getPortefeuille());
 				this.getServletContext().getRequestDispatcher( VUE_PORTEFEUILLE ).forward( request, response );
 			}
 		} else {

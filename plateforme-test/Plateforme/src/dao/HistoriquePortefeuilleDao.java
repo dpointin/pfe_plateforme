@@ -43,4 +43,17 @@ public interface HistoriquePortefeuilleDao {
 	* @see HistoriquePortefeuilleDaoImpl
 	*/
 	void ajouter(int idPortefeuille, Operation operation) throws DAOException;
+	
+	
+	/**
+	* Sert a supprimer toutes les lignes d'un meme portefeuille
+	*
+	* @param idPortefeuille que l'on supprime
+	* 
+	* @throws DAOException Si une erreur arrive lors de la suppression dans la bdd
+	* 
+	* @see Portefeuille
+	* @see DAOException
+	*/ 
+	void supprimer(Integer idPortefeuille) throws DAOException;
 }

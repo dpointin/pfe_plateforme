@@ -1,5 +1,6 @@
 package dao;
 
+import static dao.DAOUtilitaire.executeRequete;
 import static dao.DAOUtilitaire.fermeturesSilencieuses;
 import static dao.DAOUtilitaire.initialisationRequetePreparee;
 
@@ -39,6 +40,12 @@ public class HistoriquePortefeuilleDaoImpl implements HistoriquePortefeuilleDao 
 	* SQL_INSERT_TITRE correspond a la requete SQL d'insertion d'une operation titre dans la table HistoriquePortefeuille.
 	*/
 	private static final String SQL_INSERT_TITRE= "INSERT INTO HistoriquePortefeuille (idPortefeuille, code, prix, quantite, dateOperation) VALUES (?, ?, ?, ?, ?)";
+	
+	
+	/**
+	* SQL_DELETE_PORTEFEUILLE correspond a la requete SQL de suppression par idPortefeuille dans la table estComposeObligation.
+	*/
+	private static final String SQL_DELETE_PORTEFEUILLE="DELETE FROM HistoriquePortefeuille WHERE idPortefeuille=?";
 	
 	
 	/**
@@ -147,35 +154,6 @@ public class HistoriquePortefeuilleDaoImpl implements HistoriquePortefeuilleDao 
 	}
 	
 	
-	 /**
-   	* Methode permettant l'excution d'une requete
-   	*
-   	* @param sql correspond a la requete sql
-   	* @param objects correspond aux parametres de la requete
-   	*  
-   	* @throws DAOException Si une erreur arrive lors l'execution de la requete
-   	* 
-   	* @see DAOException
-   	*/ 
-    public static void executeRequete(DAOFactory daoFactory, String sql, Object...objects){
-    	Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        
-        try {
-            connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objects);
-            int statut = preparedStatement.executeUpdate();
-            if ( statut == 0 ) {
-                throw new DAOException( "Échec de l'execution" );
-            }        
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
-        } finally {
-            fermeturesSilencieuses( preparedStatement, connexion );
-        }
-    }
-
-	
 	/**
 	* Methode qui fait la correspondance entre une ligne de la table
 	* et une operation du modele
@@ -215,4 +193,22 @@ public class HistoriquePortefeuilleDaoImpl implements HistoriquePortefeuilleDao 
         operation.setId(resultSet.getInt("idHistoriquePortefeuille"));
         return operation;
     }
+    
+    
+    /**
+   	* Implementation de la methode definie dans l'interface HistoriquePortefeuilleDao
+   	*
+   	* @param idPortefeuille que l'on supprime
+   	* 
+   	* @throws DAOException Si une erreur arrive lors la suppression dans la bdd
+   	* 
+   	* @see Portefeuille
+   	* @see DAOException
+   	* @see HistoriquePortefeuilleDao
+   	* @see DAOUtilitaire#executeRequete(String, Object...)
+   	*/ 
+	@Override
+	public void supprimer(Integer idPortefeuille) throws DAOException {
+		executeRequete(daoFactory,SQL_DELETE_PORTEFEUILLE, idPortefeuille);
+	}
 }

@@ -1,6 +1,6 @@
 @startuml
 actor Utilisateur
-database BDD
+
  activate Utilisateur
             loop tant que utilisateur non correct
             Utilisateur -> VueConnexion :saisieDonnee()
@@ -12,12 +12,14 @@ database BDD
             activate ConnexionForm
             ConnexionForm -> joueurDao : verificationDonnee
             activate joueurDao
+            database BDD
             joueurDao -> BDD : consulter()
             activate BDD
             deactivate BDD
             joueurDao -> ConnexionForm : joueur, erreur
             deactivate joueurDao
             ConnexionForm -> ConnexionServlet : joueur, erreur
+            deactivate ConnexionForm
             ConnexionServlet -> Utilisateur : redirectionVue()
             deactivate ConnexionServlet
   deactivate Utilisateur
