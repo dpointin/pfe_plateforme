@@ -7,9 +7,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Vector;
 
 import dao.config.DAOException;
 import modele.Joueur;
+import modele.JoueurComparateur;
 
 /**
 * Classe JoueurDaoImpl implementant l'interface JoueurDao
@@ -29,9 +32,18 @@ public class JoueurDaoImpl implements JoueurDao {
     private static final String SQL_INSERT           = "INSERT INTO Joueur (login, motDePasse) VALUES (?, ?)";
 
     
+    /**
+	* SQL_DELETE correspond a la requete SQL de suppression dans la table.
+	*/ 
 	private static final String SQL_DELETE = "DELETE FROM Joueur WHERE login=?";
 
     
+	 /**
+		* SQL_SELECT_ALL correspond a la requete SQL de recherche de tous les joueurs.
+		*/
+	 private static final String SQL_SELECT_ALL = "SELECT login FROM Joueur";
+	 
+	 
     /**
 	* La daoFactory qui va permettre la connection a la base de donnee.
 	*/ 
@@ -134,7 +146,44 @@ public class JoueurDaoImpl implements JoueurDao {
         }
 	}
 	
-	
+	/**
+	* Implementation de la methode definie dans l'interface JoueurDao 
+	* 
+	* @throws DAOException Si une erreur arrive lors de la lecture dans la bdd
+	* 
+	* @see Joueur
+	* @see DAOException
+	* @see JoueurDao
+	*/
+	@Override
+	public Vector<Joueur> trouverTousLesJoueurs() throws DAOException {
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Vector<Joueur> joueur = new Vector<Joueur>();
+
+        try {
+            /* Récupération d'une connexion depuis la Factory */
+            connexion = daoFactory.getConnection();
+            /*
+             * Préparation de la requête avec les objets passés en arguments
+             * (ici, uniquement une adresse email) et exécution.
+             */
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_ALL, false );
+            resultSet = preparedStatement.executeQuery();
+            /* Parcours de la ligne de données retournée dans le ResultSet */
+            while ( resultSet.next() ) {
+                joueur.add( map(resultSet));
+            }
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }
+        JoueurComparateur joueurComparateur = new JoueurComparateur();
+        Collections.sort(joueur, joueurComparateur);
+        return joueur;
+	}
     /**
 	* Methode qui retourne un utilisateur depuis la base
     * de donnees, correspondant a la requete SQL donnee prenant en parametres

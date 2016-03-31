@@ -334,6 +334,29 @@ public class Portefeuille {
 		return n;
 	}
 	
+	
+	/**
+	 * Calcul l'argent total du joueur
+	 * 
+	 * @return l'argent du joueur
+	 */
+	public Double calculArgent(){
+		Double argent=0.0;
+		argent+=argentDisponible;
+		Iterator<ObjetFinancier> it = prixObjetFinancier.keySet().iterator(); 
+		while(it.hasNext()) {	
+		   ObjetFinancier key = it.next();
+		   if (key instanceof Obligation) {
+			   Obligation o=(Obligation)key;
+			   argent+=quantiteObjetFinancier.get(key)*o.getPrix();
+		   } else if  (key instanceof Titre) {
+			   argent+=quantiteObjetFinancier.get(key)*((Titre)key).getPrix();
+		   } else if  (key instanceof Option) {
+		   }
+		}   
+		return argent;
+	}
+	
 	/**
 	 * Retourne l'argentDisponible du portefeuille.
 	 * 

@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.Vector;
+
 import dao.config.DAOException;
 import modele.Joueur;
 
@@ -51,4 +53,15 @@ public interface JoueurDao {
 	* @see JoueurDaoImpl
 	*/ 
 	void supprimer( String login ) throws DAOException;
+	
+	/**
+	* Methode chargee de trouver tous les joueurs
+	*	* 
+	* @throws DAOException Si une erreur arrive lors de la lecture dans la bdd
+	* 
+	* @see Joueur
+	* @see DAOException
+	* @see JoueurDaoImpl
+	*/ 
+	Vector<Joueur> trouverTousLesJoueurs() throws DAOException;
 } 

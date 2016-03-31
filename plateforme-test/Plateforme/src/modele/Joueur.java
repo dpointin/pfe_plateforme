@@ -110,16 +110,45 @@ public class Joueur {
 	}
 
 	
+	/**
+	* Retourne le score du joueur.
+	*
+	* @return score du joueur.
+	*/ 
+	public Double calculScore(){
+		return portefeuille.calculArgent();
+	}
 	
 	
+	/**
+	* Effectue l'achat.
+	* 
+	* @param o objet financier
+	* @param quantite de l'objet qu'on achete
+	*
+	* @return boolean si l'achat a ete effectue.
+	*/ 
 	public boolean achat(ObjetFinancier o, int quantite ){
 		return portefeuille.acheter(o, quantite);
 	}
 	
+	
+	/**
+	* Effectue la vente.
+	* 
+	* @param o objet financier
+	* @param quantite de l'objet qu'on vend
+	*
+	* @return boolean si la vente a ete effectue.
+	*/ 
 	public boolean vendre(ObjetFinancier o, int quantite){
 		return portefeuille.vendre(o, quantite);
 	}
 
+	
+	/**
+	* supprime le portefeuille
+	*/ 
 	public void supprimerPortefeuille(){
 		this.setPortefeuille(new Portefeuille());
 	}
