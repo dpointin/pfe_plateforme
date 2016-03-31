@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{color}
 \usepackage{fancyvrb}
+\usepackage{listings}
 \usetheme{Berlin}
 \setbeamerfont{caption}{size=\footnotesize}
 
@@ -11,6 +12,11 @@
 \institute{Génie Mathématique | INSA Rouen}
 
 \begin{document}
+\lstset{
+keywordstyle=\color[rgb]{0,0,1},
+commentstyle=\color[rgb]{0.133,0.545,0.133},
+stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
     \beamertemplatenavigationsymbolsempty
 
     \begin{frame}
@@ -87,18 +93,14 @@
         \end{frame}
         \subsection{Cas d'utilisation}
 	        \input{tex/casUtilisation.tex}
-        \subsection{Agencement Package}
-	        \input{tex/package.tex}
 	    \subsection{Diagramme classe}
 	        \input{tex/classe.tex}    
 		\subsection{Diagramme séquence}
 	        \input{tex/sequence.tex}
 	    \subsection{Base de données}
 	        \input{tex/bdd.tex}
-	    \subsection{Modélisation de la bourse}
+	    \subsection{Modélisation de la bourse et portefeuille}
 	        \input{tex/bourse.tex}
-	    \subsection{Modélisation du portefeuille}
-	        \input{tex/modelisationPortefeuille.tex}                    	   
     
     \section{Travail de groupe}
         \begin{frame}

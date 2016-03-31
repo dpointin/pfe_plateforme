@@ -1,6 +1,92 @@
+\begin{frame}
+    \frametitle{Architecture Modèle-Vue-Contrôleur}
+    \begin{columns}
+  		\begin{column}{5cm}
+  		\begin{alertblock}{Vue}
+  			Interface Homme-Machine
+  		\end{alertblock}
+  		\begin{exampleblock}{Contrôleur}
+  			Lien entre Modèle et Vue
+  		\end{exampleblock}
+  		\begin{block}{Modèle}
+  			Coeur du programme
+  		\end{block}
+  		\end{column}
+  		
+  		\begin{column}{5cm}
+  			\includegraphics[scale=0.5]{images/MVC.png}
+  		\end{column}
+  	\end{columns}
+\end{frame}
 
 \begin{frame}
-    \frametitle{Yahoo}
-  
+    \frametitle{Environnement Java EE sous Eclipse}
+    	  \begin{figure}[H]
+      \center
+      \includegraphics[scale=0.3]{images/protocoleHTTP.png}
+      \caption{Application web - Protocole HTTP}
+      \end{figure}
 
+	\begin{block}{IDE Eclipse}
+		\begin{itemize}
+			\item Gratuit, libre, puissant
+			\item Auto-complétion, génération automatique de fonction
+			\item Visualisation de la hiérarchie
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Servlet}
+    	  \begin{figure}[H]
+      \center
+      \includegraphics[scale=0.24]{images/serveurclient.png}
+      \end{figure}
+
+	\begin{block}{Configuration des servlets}
+		\begin{itemize}
+			\item Méthode doGet() et doPost()
+			\item Configuration dans web.xml
+			\item Apache Tomcat 8.0
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+    \frametitle{Java Server Pages}
+    	  
+	\begin{block}{JSP}
+		\begin{itemize}
+			\item Utilisés pour nos pages web dynamiques
+			\item Langage : XML, HTML, Javascript, Java, CSS, ...
+		\end{itemize}
+	\end{block}
+	\begin{block}{Java server page Standard Tag Library}
+		\begin{itemize}
+			\item Tags prédéfinis
+			\item \begin{lstlisting}[language=HTML, basicstyle=\scriptsize] 
+<%@ taglib uri="http://java.sun.com/jstl/core" 
+prefix="c" %>
+<c:out value="Bonjour" />
+\end{lstlisting}	  
+		\end{itemize}	
+			
+	\end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Hiérarchie MVC du projet}
+    \begin{columns}
+  		\begin{column}{3cm}
+  		  	\includegraphics[scale=0.28]{images/exempleMVC.png}
+
+  		\end{column}
+  		  		\begin{column}{0.3cm}
+  		  		\end{column}
+
+  		\begin{column}{7cm}
+  			\includegraphics[scale=0.3]{images/schemaProjetDynamic.png}
+  		\end{column}
+  	\end{columns}
 \end{frame}
