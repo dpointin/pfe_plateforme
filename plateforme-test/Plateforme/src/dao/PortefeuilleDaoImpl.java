@@ -212,11 +212,19 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
 	public void supprimer(String login) throws DAOException {
 		Portefeuille p=charger(login);
 		
-		EstComposeTitreDao estTitre=new EstComposeTitreDaoImpl(daoFactory);
-		estTitre.supprimer(p.getIdPortefeuille());
-		EstComposeObligationDao estCompose=new EstComposeObligationDaoImpl(daoFactory);
-		estCompose.supprimer(p.getIdPortefeuille());
+		if(p.getCamembertQuantite()[1]>0 || p.getCamembertQuantite()[2]>0){
+			EstComposeTitreDao estTitre=new EstComposeTitreDaoImpl(daoFactory);
+			estTitre.supprimer(p.getIdPortefeuille());
+		}
+		if(p.getCamembertQuantite()[0]>0){
+			EstComposeObligationDao estCompose=new EstComposeObligationDaoImpl(daoFactory);
+			estCompose.supprimer(p.getIdPortefeuille());
+		}
 		
+		if(p.getOperations().size()>0){
+			HistoriquePortefeuilleDao operation=daoFactory.getHistoriquePortefeuilleDao();
+			operation.supprimer(p.getIdPortefeuille());
+		}
 		//Dans cet ordre sinon probleme de supprimer une foreign key
 		executeRequete(daoFactory,SQL_DELETE_CODE, p.getIdPortefeuille());
 	}

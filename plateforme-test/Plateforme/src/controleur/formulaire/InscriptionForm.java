@@ -129,6 +129,7 @@ public final class InscriptionForm {
                 joueurDao.creer( joueur );
                 resultat = "Succès de l'inscription.";
             } else {
+            	joueur=null;
                 resultat = "Échec de l'inscription.";
             }
         } catch ( DAOException e ) {

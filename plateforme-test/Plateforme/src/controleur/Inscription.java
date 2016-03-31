@@ -100,9 +100,9 @@ public class Inscription extends HttpServlet {
 		InscriptionForm form = new InscriptionForm( joueurDao );
 		/* Traitement de la requête et récupération du bean en résultant */
 		Joueur joueur = form.inscrireJoueur( request );
-		
+		if(joueur!=null){
 		Portefeuille portefeuille = new Portefeuille();
-		portefeuilleDao.creer(joueur.getLogin(), portefeuille);
+		portefeuilleDao.creer(joueur.getLogin(), portefeuille);}
 		
 		/* Stockage du formulaire et du bean dans l'objet request */
 		request.setAttribute( ATT_FORM, form );

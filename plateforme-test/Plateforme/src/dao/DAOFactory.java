@@ -217,4 +217,17 @@ public class DAOFactory {
 	public EstComposeObligationDao getEstComposeObligationDao() {
 		return new EstComposeObligationDaoImpl(this);
 	}
+	
+	
+	/**
+	* Retourne une implementation d'un historiqueOperationDAO.
+	*
+	* @return un historiquePortefeuilleDao.
+	* 
+	* @see HistoriquePortefeuilleDao
+	* @see HistoriquePortefeuilleDaoImpl
+	*/
+	public HistoriquePortefeuilleDao getHistoriquePortefeuilleDao() {
+		return new HistoriquePortefeuilleDaoImpl( this );
+	}
 } 
