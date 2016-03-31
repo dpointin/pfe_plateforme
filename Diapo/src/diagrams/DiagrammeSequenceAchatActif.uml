@@ -1,4 +1,6 @@
 @startuml
+title Diagramme sequence : Achat actif
+
 actor Utilisateur
 
  activate Utilisateur

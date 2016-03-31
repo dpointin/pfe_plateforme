@@ -1,0 +1,42 @@
+@startuml
+title Diagramme sequence : Vente actif
+
+actor Utilisateur
+
+ activate Utilisateur
+            Utilisateur -> VueVente : saisieQuantite()
+            activate Vue
+            VueVente -> VenteServlet : doPost()
+            activate VenteServlet
+            deactivate VueVente 
+            VenteServlet -> Joueur : acheter(ObjetFinancier, quantite)
+            activate Joueur
+            alt Vente reussi
+            
+                Joueur -> VenteServlet : true
+                deactivate Joueur
+                VenteServlet -> JoueurDao : Vente(objetFinancier,quantite)
+                activate JoueurDao
+                database BDD
+                JoueurDao -> BDD : modification
+                activate BDD
+                BDD -> JoueurDao : erreur
+                deactivate BDD
+                JoueurDao -> VenteServlet : exceptionEventuelle
+                deactivate JoueurDao
+                VenteServlet -> VuePortefeuille : redirection()
+                activate VuePortefeuille
+                deactivate VuePortefeuille
+                
+            else Vente rate
+            
+                Joueur -> VenteServlet : false
+                activate Joueur
+                deactivate Joueur
+                deactivate VenteServlet
+                VenteServlet -> VueVente : redirection()
+                activate VueVente
+                deactivate VueVente
+            end  
+  deactivate Utilisateur
+@enduml

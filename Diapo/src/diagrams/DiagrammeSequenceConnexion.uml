@@ -1,4 +1,6 @@
 @startuml
+title Diagramme Sequence : Connexion
+
 actor Utilisateur
 
  activate Utilisateur
