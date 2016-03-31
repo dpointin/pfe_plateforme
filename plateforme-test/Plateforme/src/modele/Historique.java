@@ -138,7 +138,7 @@ public class Historique {
 			debut=fin;
 			nb++;
 		}
-		rendement=Math.pow(rendement,1.0/nb);
+		rendement=Math.pow(rendement,1.0/nb)-1;
 		return rendement;
 	}
 	
@@ -344,8 +344,9 @@ public class Historique {
 			valeurs.add(mms_tree.get(date).get(0));
 			Double mms = mms_tree.get(date).get(1);	
 			valeurs.add(mms);
-			valeurs.add(mms-n_ecartType*Math.sqrt(calculVariance()));
-			valeurs.add(mms+n_ecartType*Math.sqrt(calculVariance()));
+			Double variance=calculVariance();
+			valeurs.add(mms-n_ecartType*Math.sqrt(variance));
+			valeurs.add(mms+n_ecartType*Math.sqrt(variance));
 			resultat.put(date, valeurs);
 		}
 		return resultat;
