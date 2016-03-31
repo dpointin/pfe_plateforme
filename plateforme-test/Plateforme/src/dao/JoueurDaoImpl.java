@@ -173,7 +173,7 @@ public class JoueurDaoImpl implements JoueurDao {
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de données retournée dans le ResultSet */
             while ( resultSet.next() ) {
-                joueur.add( map(resultSet));
+                joueur.add( trouver(resultSet.getString("login")));
             }
         } catch ( SQLException e ) {
             throw new DAOException( e );
@@ -216,6 +216,8 @@ public class JoueurDaoImpl implements JoueurDao {
             /* Parcours de la ligne de donnees retournee dans le ResultSet */
             if ( resultSet.next() ) {
                 joueur = map( resultSet );
+                PortefeuilleDao pDao = daoFactory.getPortefeuilleDao();
+                joueur.setPortefeuille(pDao.charger(resultSet.getString("login")));
             }
         } catch ( SQLException e ) {
             throw new DAOException( e );

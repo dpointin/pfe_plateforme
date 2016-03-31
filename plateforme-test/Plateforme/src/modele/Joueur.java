@@ -88,7 +88,7 @@ public class Joueur {
 		super();
 		this.login = login;
 		this.motDePasse=motDePasse;
-		this.portefeuille = new Portefeuille(1000.0);
+		this.portefeuille = new Portefeuille(10000.0);
 	}
 	
 	
@@ -103,10 +103,7 @@ public class Joueur {
 	* @see Joueur#portefeuille
 	*/ 	
 	public Joueur() {
-		super();
-		this.login="";
-		this.motDePasse="";
-		this.portefeuille=new Portefeuille(1000.0);
+		this("","");
 	}
 
 	

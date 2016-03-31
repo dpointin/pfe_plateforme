@@ -19,7 +19,7 @@ public class JoueurComparateur implements Comparator<Joueur>{
 	 */
 	@Override
 	public int compare(Joueur j1, Joueur j2) {
-		if(j1.calculScore()<j2.calculScore())
+		if(j1.calculScore()>j2.calculScore())
 			return -1;
 		else
 			return 1;

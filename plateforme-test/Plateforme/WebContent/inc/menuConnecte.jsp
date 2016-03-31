@@ -18,6 +18,12 @@
 				<li> <a href="<c:url value="/exporter"/>"> Exporter </a> </li>		
 			</ul>
 		</li> 
+		<li> <a href="<c:url value="/classement"/>"> Jeu </a> 
+			<ul>
+				<li> <a href="<c:url value="/classement"/>"> Classement </a> </li>
+				<li> <a href="<c:url value="/classement?redir=supprimer"/>"> Reset partie </a> </li>	
+			</ul>
+		</li> 
 		<li> <a href="<c:url value="/deconnexion"/>"> Déconnexion </a>
 		</li>
 	</ul>

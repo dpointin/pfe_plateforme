@@ -3,7 +3,7 @@
 <div id="menu">
 <nav>
 	<ul>
-		<li> <a id="active" href="<c:url value="/bourse"/>"> Bourse </a>
+		<li> <a href="<c:url value="/bourse"/>"> Bourse </a>
 			<ul>
 				<li> <a href="<c:url value="/bourse?redir=actions"/>"> Actions </a> </li>
 				<li> <a href="<c:url value="/bourse?redir=indices"/>"> Indices </a> </li>
@@ -15,10 +15,10 @@
 				<li> <a href="<c:url value="/achat"/>"> Acheter </a> </li>
 				<li> <a href="<c:url value="/vente"/>"> Vendre </a> </li>
 				<li> <a href="<c:url value="/portefeuilleGeneral?redir=indicateurs"/>"> Indicateurs </a> </li>
-				<li> <a href="<c:url value=""/>"> Exporter </a> </li>		
+				<li> <a href="<c:url value="/exporter"/>"> Exporter </a> </li>		
 			</ul>
 		</li> 
-		<li> <a href="<c:url value="/classement"/>"> Jeu </a> 
+		<li> <a id="active" href="<c:url value="/classement"/>"> Jeu </a> 
 			<ul>
 				<li> <a href="<c:url value="/classement"/>"> Classement </a> </li>
 				<li> <a href="<c:url value="/classement?redir=supprimer"/>"> Reset partie </a> </li>	

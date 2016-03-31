@@ -49,6 +49,10 @@
     <servlet-name>Exporter</servlet-name>
     <servlet-class>controleur.Exporter</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Classement</servlet-name>
+    <servlet-class>controleur.Classement</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Inscription</servlet-name>
     <url-pattern>/inscription</url-pattern>
@@ -84,6 +88,10 @@
   <servlet-mapping>
     <servlet-name>Exporter</servlet-name>
     <url-pattern>/exporter</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Classement</servlet-name>
+    <url-pattern>/classement</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>Set Character Encoding</filter-name>
