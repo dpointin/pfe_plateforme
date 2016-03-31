@@ -1,0 +1,60 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage{fancyvrb}
+\usetheme{Berlin}
+\setbeamerfont{caption}{size=\footnotesize}
+
+\title{Plateforme pour l'analyse technique en Finance}
+\subtitle{Soutenance PFE}
+\author{CHAUGNY Céline, POINTIN Damien}
+\institute{Génie Mathématique | INSA Rouen}
+
+\begin{document}
+    \beamertemplatenavigationsymbolsempty
+
+    \begin{frame}
+        \titlepage{}
+    \end{frame}
+
+    \section*{Sommaire}
+        \begin{frame}
+            \begin{columns}[t]
+  				\begin{column}{5cm}
+  					\tableofcontents[sections={1-4}]
+  				\end{column}
+  				\begin{column}{5cm}
+  					\tableofcontents[sections={5-8}]
+  				\end{column}
+  			\end{columns}
+        \end{frame}
+
+    \section{Introduction}
+        \subsection{ }
+            \input{tex/Introduction.tex}
+
+    \section{Technologies utilisées}
+        \begin{frame}
+            \begin{columns}[t]
+  				\begin{column}{5cm}
+  					\tableofcontents[sections={1-4}, currentsection]
+  				\end{column}
+  				\begin{column}{5cm}
+  					\tableofcontents[sections={5-8}, currentsection]
+  				\end{column}
+  			\end{columns}
+        \end{frame}
+        \subsection{Présentation jasypt}
+	        \input{tex/jasypt.tex}
+	    \subsection{Présentation yahoo}
+	        \input{tex/yahoo.tex}
+	    \subsection{Présentation google}
+	        \input{tex/google.tex}       
+        	
+    
+    
+        	
+    \section{Conclusion}
+        \subsection{}
+            \input{tex/Conclusion.tex}
+\end{document}
