@@ -1,0 +1,79 @@
+@startuml
+Class Action{
+- Double : dividende
++ Action( code, libelle, nombreDisponible, dividende)
++ String toString()
+}
+Class Historique{
+- String : code
+- TreeMap<GregorianCalendar, Vector<Double>> : valeurs
++ Historique(code)
++ TreeMap<GregorianCalendar, Double> getBaseCent()
++ TreeMap<GregorianCalendar, Double> getBaseCentReference(GregorianCalendar reference)
++ Double calculEsperanceRendement()
++ Double calculVarianceRendement()
++ Double calculCovarianceRendement(Historique h2)
++ Double calculEsperance()
++ Double calculVariance()
++ TreeMap<GregorianCalendar, Vector<Double>> calculMoyenneMobileSimple(Integer periode)
+}
+Class Indice{
++ Indice(code,libelle, nombreDisponible)
++ String toString()
+}
+Class Joueur{
+- String login
+- String motDePasse
++ Joueur(login, motDePasse, portefeuille)
++ Joueur(login, motDePasse)
++ achat(ObjetFinancier, quantite)
++ vendre(ObjetFinancier, quantite)
++ void supprimerPortefeuille()
+}
+abstract Class ObjetFinancier{
+- Integer nombreDisponible
+abstract double getPrix()
+}
+Class Obligation{
+- String emetteur
+- Double prix
+- GregorianCalendar dateFin
++ Obligation(emetteur, prix, tauxInteret, nombreDisponible, dateFin)
++ String toString()
+}
+Class Operation{
+- Double prixUnitaire
+- int quantite
+- GregorianCalendar date
+- int id
++ Operation(objetFinancier, prixUnitaire, quantite)
++ String toString()
+}
+abstract Class Titre{
+- String code
+- String libelle
++ Titre(code, libelle, nombreDisponible)
+}
+Class Portefeuille{
+- Double argentDisponible
+- Hashtable<ObjetFinancier,Integer> quantiteObjetFinancier
+- Hashtable<ObjetFinancier,Double> prixObjetFinancier
+- Double rendement
+- Integer idPortefeuille
+- Vector<Operation> operations
++ Portefeuille(argentDisponible)
++ int getNbActifs()
++ boolean acheter(ObjetFinancier, quantite)
++ boolean vendre(objetFinancier, quantite)
++ String ecrire() 
+}
+Action --|> Titre
+Indice --|> Titre
+Joueur *-- Portefeuille
+Obligation --|> ObjetFinancier
+Titre --|> ObjetFinancier
+Operation *-- ObjetFinancier
+Portefeuille *-- ObjetFinancier
+Portefeuille *-- Operation
+Titre *-- Historique
+@enduml

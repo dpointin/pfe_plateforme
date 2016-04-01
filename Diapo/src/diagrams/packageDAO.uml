@@ -1,0 +1,21 @@
+@startuml
+
+package dao <<Folder>> {
+    package dao.config <<Folder>> {
+      class DAOConfigurationException
+      class DAOException
+      class InitialisationDaoFactory
+    }  
+    class DAOFactory     
+    class DAOUtilitaire
+    interface JoueurDao
+    interface PortefeuilleDao
+    class JoueurDaoImpl
+    class PortefeuilleDaoImpl
+}  
+
+JoueurDaoImpl ..|> JoueurDao
+PortefeuilleDaoImpl ..|> PortefeuilleDao
+
+DAOFactory -left[hidden] DAOUtilitaire
+@enduml

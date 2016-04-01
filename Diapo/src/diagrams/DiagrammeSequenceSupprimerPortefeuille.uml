@@ -1,0 +1,42 @@
+@startuml
+title Diagramme sequence : Supprimer Portefeuille
+
+actor Utilisateur
+
+ activate Utilisateur
+           Utilisateur -> VueSuppression : demandeSuppression()
+           activate VueSuppression 
+           VueSuppression -> ServletSuppression  : doPost()
+           deactivate VueSuppression 
+           activate ServletSuppression 
+           ServletSuppression -> PortefeuilleDao : Suppression()
+           activate PortefeuilleDao
+           alt titre dans le portefeuille
+                PortefeuilleDao -> EstComposeTitreDao : SuppresionLignes(idPortefeuille)
+                activate EstComposeTitreDao
+                EstComposeTitreDao -> PortefeuilleDao : erreurEventuelle
+                deactivate EstComposeTitreDao
+           end
+           alt obligations dans le portefeuille
+                PortefeuilleDao -> EstComposeObligationDao : SuppresionLignes(idPortefeuille)
+                activate EstComposeObligationDao
+                EstComposeObligationDao -> PortefeuilleDao : erreurEventuelle
+                deactivate EstComposeObligationDao
+           end
+           alt operation effectuee > 0 
+                PortefeuilleDao -> HistoriquePortefeuilleDao : SuppresionLignes(idPortefeuille)
+                activate HistoriquePortefeuilleDao
+               HistoriquePortefeuilleDao -> PortefeuilleDao : erreurEventuelle      
+                deactivate HistoriquePortefeuilleDao
+           end
+           PortefeuilleDao -> PortefeuilleDao : suppressionPortefeuille()
+           activate PortefeuilleDao
+           deactivate PortefeuilleDao
+           PortefeuilleDao -> ServletSuppression : erreurEventuelle      
+           deactivate PortefeuilleDao
+           ServletSuppression -> VuePortefeuille : redirection
+           deactivate ServletSuppression
+           activate VuePortefeuille
+           deactivate VuePortefeuille 
+  deactivate Utilisateur
+@enduml

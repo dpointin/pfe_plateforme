@@ -1,0 +1,98 @@
+@startuml
+''' Titre du schema
+Title Schema E/A Base de données bourses 
+
+
+
+''' Legende
+package Legende <<Frame>>{
+    class Association<<(A, orchid)>> #White{
+        +Clef
+    }
+    class Entité<<(E, lightgreen)>>{
+        +<b>Clef primaire
+        +Clef
+    }
+    Association -- Entité : Cardinalité
+}
+
+
+
+''' Association
+class possede <<(A, orchid)>> #White
+class aEffectue <<(A, orchid)>> #White
+class estComposeTitre <<(A, orchid)>> #White
+class estComposeObligation <<(A, orchid)>> #White
+class estUneA <<(A, orchid)>> #White
+class estUnI <<(A, orchid)>> #White
+class historique <<(A, orchid)>> #White
+
+
+
+
+''' Entites
+class Joueur<<(E, lightgreen)>>{
+    +<b>Login
+    +motDePasse
+}
+class Portefeuille<<(E, lightgreen)>>{
+    +<b>Nom
+    +Prix
+}
+class Operation<<(E, lightgreen)>>{
+    +<b>id
+    +date
+}
+class Titre<<(E, lightgreen)>>{
+    +<b>Code
+    +Libelle
+}
+class Action<<(E, lightgreen)>>{
+    +<b>Societe
+    +dividende
+}
+class Obligation<<(E, lightgreen)>>{
+    +<b>Organisme
+    +valeur
+}
+class Indice<<(E, lightgreen)>>{
+    +<b>Nom
+}
+class Cours<<(E, lightgreen)>>{
+    +<b>date
+    +valeur
+}
+
+
+
+
+
+
+''' Liaison
+Joueur - possede : 1,1
+possede - Portefeuille : 1,1
+
+estComposeObligation -up- Portefeuille : 1,n
+Obligation -up- estComposeObligation : 1,n
+
+estUnI -right- Titre : 0,1
+estUnI -right- Indice  : 1,1
+
+estComposeTitre -up- Portefeuille : 1,1
+Titre -up- estComposeTitre : 1,n
+
+Action -up- estUneA : 1,1
+estUneA -up- Titre : 0,1
+
+
+Titre -left- historique :1,n
+historique -left- Cours : 1,1
+
+Portefeuille - aEffectue : 1,1
+aEffectue - Operation : 1,n
+
+
+
+hide empty attribute
+hide method
+@enduml
