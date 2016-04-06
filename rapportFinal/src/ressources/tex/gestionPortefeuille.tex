@@ -33,7 +33,6 @@ On identifie deux grands types de risques lorsque l'on investi dans un portefeui
  \item \textbf{Les risques non-financiers :} il en existe énormément, nous ne citerons que ceux qui peuvent vraiment avoir un impact dans la situtation d'un individu qui investi seul (et non pas la gestion d'un portefeuille pour une entreprise telle qu'une banque ou un assureur).
     \begin{itemize}
      \item \underline{Le risque de modèle :} on peut se tromper de modèle d'évaluation des actifs, d'analyse ou d'aide à la décision.
-     \item \underline{Le risque de liquidité :} il est possible qu'on soit obligé de vendre un actif à un prix plus faible que sa juste valeur, on perd alors de l'argent.
      \item \underline{Le risque de perte extrême :} c'est par exemple le risque qu'une entreprise pourtant très solide s'effondre.
     \end{itemize}
 \end{enumerate}
@@ -130,7 +129,46 @@ Maintenant que l'on est capable de calculer le rendement d'un actif, on peut cal
 \[ R_P = \sum_{i=1}^{N}w_iR_i\]
 avec $N$ le nombre d'actifs différents du portefeuille et la somme des poids qui vaut 1 : \(\sum_{i=1}^{N}w_i =1\).
 
-\subsubsection{La volatilité}
+\subsubsection{Le risque (ou la volatilité)}
+La variance d'un actif se mesure de la manière suivante :
+\[Var_{i} = \frac{\sum_{t=1}^T (R_{i,t} - E(R_i))^2}{T} \]
+On en déduit alors facilement l'écart-type qui est également appelé volatilité ou bien risque de l'actif :
+\[\sigma_i = \sqrt{Var_i}\]
+
+Connaissant le risque d'un actif, nous pouvons calculer le risque d'un portefeuille d'actifs avec toujours la condition sur les poids des actifs suivante : $\sum_{i=1}^{N} w_i = 1$.
+\begin{equation}
+ \begin{split}
+  \sigma_P^2 & = Var_{P} \\
+	   & = Var(\sum_{i=1}^N w_iR_i)\\
+	   & = \sum_{i,j=1}^N w_i w_j Cov(R_i,R_j)\\
+	   & = \sum_{i=1}^N w_i^2 Var(R_i) + \sum_{i,j=1; i \ne j}^N w_i w_j Cov(R_i,R_j)
+ \end{split}
+\end{equation}
+
+Si, de plus, on note que la corrélation entre deux actifs i et j vaut : $Corr(i,j) = \rho_{i,j} = \frac{Cov(R_i,R_j)}{\sigma_i \sigma_j}$,
+alors, en remplaçant dans l'équation du risque du portefeuille on obtient :
+\[\sigma_P =  \sqrt{ \sum_{i=1}^N w_i^2 Var(R_i) + \sum_{i,j=1; i \ne j}^N w_i w_j \rho_{i,j} \times \sigma_i \sigma_j }\]
+
+\subsubsection{La fonction d'utilité et la courbe d'indifférence}
+Si l'on repense aux différents profils de risque définis précédemment, on peut considérer que quelque soit la situation, chaque investisseur fait le choix qui lui procure le plus de \textbf{satisfaction} ou d'\textbf{utilité} (ce n'est pas forcément de l'argent).\\
+
+La théorie de l'utilité permet de définir une fonction d'utilité pour chaque investisseur dont les paramètres varient en fonction du rendement, du risque et du profil de la personne. L'équation de cette fonction d'utilité est la suivante :
+\[U = E(R) - \frac{A \times \sigma^2}{2} \]
+\begin{itemize}
+ \item $U$ : l'utilité de l'investissement,
+ \item $E(R)$ : le rendement attendu (espéré),
+ \item $\sigma^2$ : la variance de l'investissement,
+ \item et $A$ : le coefficient d'utilité.
+\end{itemize}
+
+~\\ On observe donc trois cas différents associés chacun à un profil de risque :
+\begin{enumerate}
+ \item $A < 0$ : c'est le cas où l'utilité $U$ augmente lorsque $\sigma$, donc le risque, augmente. Les risk lovers ont un coefficient d'utilité négatif.
+ \item $A = 0$ : cela signifie que l'utilité est égale à l'espérance du rendement de l'investissement $U = E(R)$. Dans ce cas là on a affaire à des risk neutral.
+ \item $A > 0$ : dernier cas qui arrive lorsque $\sigma$ augmente et que $U$ diminu. Alors A est très positif, c'est le cas d'un risk adverse.
+\end{enumerate}
+
+\subsubsection{Exemple d'un portefeuille à deux actifs}
 
 
 %Exemple bidon :
