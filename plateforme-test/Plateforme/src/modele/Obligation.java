@@ -61,7 +61,7 @@ public class Obligation extends ObjetFinancier{
 	* @param nombreDisponible de l'obligation
 	* @param dateFin de l'obligation
 	* 
-	* @see ObjetFinancier#ObjetFinancier(Integer)
+	* @see ObjetFinancier#ObjetFinancier(int)
 	*/ 	
 	public Obligation(String emetteur, Double prix, Double tauxInteret, Integer nombreDisponible,
 			GregorianCalendar dateFin) {
@@ -108,7 +108,7 @@ public class Obligation extends ObjetFinancier{
 	/**
 	* Met a jour l'emetteur de l'obligation.
 	*
-	* @param emetteur, nouvel emetteur de l'obligation.
+	* @param emetteur nouvel emetteur de l'obligation.
 	*/ 
 	public void setEmetteur(String emetteur) {
 		this.emetteur = emetteur;
@@ -126,7 +126,7 @@ public class Obligation extends ObjetFinancier{
 	/**
 	* Met a jour le prix de l'obligation.
 	*
-	* @param prix, nouveau prix de l'obligation.
+	* @param prix nouveau prix de l'obligation.
 	*/ 
 	public void setPrix(Double prix) {
 		this.prix = prix;
@@ -144,7 +144,7 @@ public class Obligation extends ObjetFinancier{
 	/**
 	* Met a jour le tauxInteret de l'obligation.
 	*
-	* @param tauxInteret, nouveau tauxInteret de l'obligation.
+	* @param tauxInteret nouveau tauxInteret de l'obligation.
 	*/ 
 	public void setTauxInteret(Double tauxInteret) {
 		this.tauxInteret = tauxInteret;
@@ -162,7 +162,7 @@ public class Obligation extends ObjetFinancier{
 	/**
 	* Met a jour le nombreDisponible de l'obligation.
 	*
-	* @param nombreDisponible, nouveau nombreDisponible de l'obligation.
+	* @param nombreDisponible nouveau nombreDisponible de l'obligation.
 	*/ 
 	public void setNombreDisponible(Integer nombreDisponible) {
 		this.nombreDisponible = nombreDisponible;
@@ -180,7 +180,7 @@ public class Obligation extends ObjetFinancier{
 	/**
 	* Met a jour la dateFin de l'obligation.
 	*
-	* @param dateFin, nouvelle dateFin de l'obligation.
+	* @param dateFin nouvelle dateFin de l'obligation.
 	*/ 
 	public void setDateFin(GregorianCalendar dateFin) {
 		this.dateFin = dateFin;

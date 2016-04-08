@@ -94,7 +94,7 @@ public class Option extends ObjetFinancier{
 	 * @param prime
 	 * @param titre
 	 * 
-     * @see ObjetFinancier#ObjetFinancier(Integer)
+     * @see ObjetFinancier#ObjetFinancier(int)
 	 */
 	public Option(Integer idOption, TypeOption type, TypePosition position, GregorianCalendar maturite, Double strike, Double prime,
 			Titre titre) {
@@ -133,7 +133,7 @@ public class Option extends ObjetFinancier{
 	/**
 	 * Met a jour l'idOption de l'option.
 	 * 
-	 * @param idOption, nouvel idOption de l'option.
+	 * @param idOption nouvel idOption de l'option.
 	 */
 	public void setIdOption(Integer idOption) {
 		this.idOption = idOption;
@@ -151,7 +151,7 @@ public class Option extends ObjetFinancier{
 	/**
 	 * Met a jour le type de l'option.
 	 * 
-	 * @param type, nouveau type de l'option.
+	 * @param type nouveau type de l'option.
 	 */
 	public void setType(TypeOption type) {
 		this.type = type;
@@ -169,7 +169,7 @@ public class Option extends ObjetFinancier{
 	/**
 	 * Met a jour la position de l'option.
 	 * 
-	 * @param position, nouvelle position l'option.
+	 * @param position nouvelle position l'option.
 	 */	
 	public void setPosition(TypePosition position) {
 		this.position = position;
@@ -187,7 +187,7 @@ public class Option extends ObjetFinancier{
 	/**
 	 * Met a jour la maturite de l'option.
 	 * 
-	 * @param maturite, nouvelle maturite l'option.
+	 * @param maturite nouvelle maturite l'option.
 	 */	
 	public void setMaturite(GregorianCalendar maturite) {
 		this.maturite = maturite;
@@ -205,7 +205,7 @@ public class Option extends ObjetFinancier{
 	/**
 	 * Met a jour le strike de l'option.
 	 * 
-	 * @param strike, nouveau strike de l'option.
+	 * @param strike nouveau strike de l'option.
 	 */
 	public void setStrike(Double strike) {
 		this.strike = strike;
@@ -223,7 +223,7 @@ public class Option extends ObjetFinancier{
 	/**
 	 * Met a jour la prime de l'option.
 	 * 
-	 * @param prime, nouvelle prime l'option.
+	 * @param prime nouvelle prime l'option.
 	 */	
 	public void setPrime(Double prime) {
 		this.prime = prime;
@@ -241,7 +241,7 @@ public class Option extends ObjetFinancier{
 	/**
 	 * Met a jour le titre de l'option.
 	 * 
-	 * @param titre, nouveau titre l'option.
+	 * @param titre nouveau titre l'option.
 	 */
 	public void setTitre(Titre titre) {
 		this.titre = titre;

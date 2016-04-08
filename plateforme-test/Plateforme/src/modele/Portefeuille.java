@@ -369,7 +369,7 @@ public class Portefeuille {
 	/**
 	 * Met a jour l'argentDisponible du portefeuille.
 	 * 
-	 * @param argentDisponible, nouvel argentDisponible du portefeuille.
+	 * @param argentDisponible nouvel argentDisponible du portefeuille.
 	 */
 	public void setArgentDisponible(Double argentDisponible) {
 		this.argentDisponible = argentDisponible;
@@ -387,7 +387,7 @@ public class Portefeuille {
 	/**
 	 * Met a jour la quantiteObjetFinancier du portefeuille.
 	 * 
-	 * @param la quantiteObjetFinancier, nouvelle quantiteObjetFinancier du portefeuille.
+	 * @param quantiteObjetFinancier nouvelle quantiteObjetFinancier du portefeuille.
 	 */	
 	public void setQuantiteObjetFinancier(Hashtable<ObjetFinancier, Integer> quantiteObjetFinancier) {
 		this.quantiteObjetFinancier = quantiteObjetFinancier;
@@ -405,7 +405,7 @@ public class Portefeuille {
 	/**
 	 * Met a jour la prixObjetFinancier du portefeuille.
 	 * 
-	 * @param la prixObjetFinancier, nouveau prixObjetFinancier du portefeuille.
+	 * @param prixObjetFinancier nouveau prixObjetFinancier du portefeuille.
 	 */	
 	public void setPrixObjetFinancier(Hashtable<ObjetFinancier, Double> prixObjetFinancier) {
 		this.prixObjetFinancier = prixObjetFinancier;
@@ -423,7 +423,7 @@ public class Portefeuille {
 	/**
 	 * Met a jour le rendement du portefeuille.
 	 * 
-	 * @param le rendement, nouveau rendement du portefeuille.
+	 * @param rendement nouveau rendement du portefeuille.
 	 */		
 	public void setRendement(Double rendement) {
 		this.rendement = rendement;
@@ -441,7 +441,7 @@ public class Portefeuille {
 	/**
 	 * Met a jour l'idPortefeuille du portefeuille.
 	 * 
-	 * @param l'idPortefeuille, nouvel idPortefeuille du portefeuille.
+	 * @param idPortefeuille nouvel idPortefeuille du portefeuille.
 	 */			
 	public void setIdPortefeuille(Integer idPortefeuille) {
 		this.idPortefeuille = idPortefeuille;
@@ -459,7 +459,7 @@ public class Portefeuille {
 	/**
 	 * Met a jour les operations du portefeuille.
 	 * 
-	 * @param les operations, nouvelles operations du portefeuille.
+	 * @param operations nouvelles operations du portefeuille.
 	 */	
 	public void setOperations(Vector<Operation> operations) {
 		this.operations = operations;

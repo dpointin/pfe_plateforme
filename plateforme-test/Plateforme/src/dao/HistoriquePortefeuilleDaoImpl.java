@@ -114,7 +114,7 @@ public class HistoriquePortefeuilleDaoImpl implements HistoriquePortefeuilleDao 
 	* Implementation de la methode definie dans l'interface HistoriquePortefeuilleDao
 	*
 	* @param idPortefeuille correspond au portefeuille qui a effectue l'operation
-	* @param Operation correspond a l'operation que l'on souhaite ajouter
+	* @param operation correspond a l'operation que l'on souhaite ajouter
 	* 
 	* @throws DAOException Si une erreur arrive lors de l'ajout dans la bdd
 	* 
@@ -205,7 +205,7 @@ public class HistoriquePortefeuilleDaoImpl implements HistoriquePortefeuilleDao 
    	* @see Portefeuille
    	* @see DAOException
    	* @see HistoriquePortefeuilleDao
-   	* @see DAOUtilitaire#executeRequete(String, Object...)
+   	* @see DAOUtilitaire#executeRequete(DAOFactory, String, Object...)
    	*/ 
 	@Override
 	public void supprimer(Integer idPortefeuille) throws DAOException {

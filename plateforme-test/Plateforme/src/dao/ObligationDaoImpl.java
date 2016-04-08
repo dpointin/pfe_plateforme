@@ -188,7 +188,7 @@ public class ObligationDaoImpl implements ObligationDao {
 	* @see Obligation
 	* @see DAOException
 	* @see ObligationDao
-	* @see DAOUtilitaire#executeRequete(String, Object...)
+	* @see DAOUtilitaire#executeRequete(DAOFactory, String, Object...)
 	*/
 	@Override
 	public void mettreAJour(Obligation obligation) throws DAOException{

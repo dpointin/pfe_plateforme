@@ -40,7 +40,7 @@ public abstract class ObjetFinancier {
 	/**
 	* Met a jour le nombreDisponible de l'objet financier.
 	*
-	* @param nombreDisponible, nouveau nombreDisponible de l'objet financier.
+	* @param nombreDisponible nouveau nombreDisponible de l'objet financier.
 	*/ 
 	public void setNombreDisponible(Integer nombreDisponible) {
 		this.nombreDisponible = nombreDisponible;

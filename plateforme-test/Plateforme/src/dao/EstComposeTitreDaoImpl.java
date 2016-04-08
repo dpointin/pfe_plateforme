@@ -92,7 +92,7 @@ public class EstComposeTitreDaoImpl implements EstComposeTitreDao{
    	* @see DAOException
    	* @see EstComposeTitreDao
    	* @see DAOUtilitaire#executeRequete(DAOFactory, String, Object...)
-   	* @see DAOUtilitaire#verification(String, Object...)
+   	* @see DAOUtilitaire#verification(DAOFactory, String, Object...)
    	*/ 
     @Override
 	public void mettreAJour(Portefeuille portefeuille, Titre titre) throws DAOException {

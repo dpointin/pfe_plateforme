@@ -34,9 +34,9 @@ public class TelechargeurCours {
 	 * correspondant aux entrees
 	 * </p>
 	 * 
-	 * @param code, code du cours a telecharger
-	 * @param debut, date du debut du telechargement
-	 * @param fin, date de fin du telechargement
+	 * @param code code du cours a telecharger
+	 * @param debut date du debut du telechargement
+	 * @param fin date de fin du telechargement
 	 */
 	public TelechargeurCours(String code, GregorianCalendar debut, GregorianCalendar fin){
 		
@@ -121,7 +121,7 @@ public class TelechargeurCours {
 	/**
 	 * Met a jour l'historique du telechargeurCours.
 	 * 
-	 * @param historique, nouvel historique du telechargeurCours
+	 * @param historique nouvel historique du telechargeurCours
 	 */
 	public void setHistorique(Historique historique) {
 		this.historique = historique;
