@@ -33,7 +33,7 @@ public interface HistoriquePortefeuilleDao {
 	* Methode qui permet d"ajouter une operation dans la table
 	*
 	* @param idPortefeuille correspond au portefeuille qui a effectue l'operation
-	* @param Operation correspond a l'operation que l'on souhaite ajouter
+	* @param operation correspond a l'operation que l'on souhaite ajouter
 	* 
 	* @throws DAOException Si une erreur arrive lors de l'ajout dans la bdd
 	* 

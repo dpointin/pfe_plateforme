@@ -92,8 +92,8 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
    	* @see Obligation
    	* @see DAOException
    	* @see EstComposeObligationDao
-   	* @see DAOUtilitaire#executeRequete(String, Object...)
-   	* @see DAOUtilitaire#verification(String, Object...)
+   	* @see DAOUtilitaire#executeRequete(DAOFactory, String, Object...)
+   	* @see DAOUtilitaire#verification(DAOFactory, String, Object...)
    	*/ 
     @Override
 	public void mettreAJour(Portefeuille portefeuille, Obligation obligation) throws DAOException {
@@ -119,7 +119,7 @@ public class EstComposeObligationDaoImpl implements EstComposeObligationDao {
    	* @see Portefeuille
    	* @see DAOException
    	* @see EstComposeObligationDao
-   	* @see DAOUtilitaire#executeRequete(String, Object...)
+   	* @see DAOUtilitaire#executeRequete(DAOFactory, String, Object...)
    	*/ 
 	@Override
 	public void supprimer(Integer idPortefeuille) throws DAOException {

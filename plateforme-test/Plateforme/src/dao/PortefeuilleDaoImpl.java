@@ -166,7 +166,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
    	* @see PortefeuilleDao
    	* @see EstComposeTitreDao
    	* @see EstComposeObligationDao
-   	* @see DAOUtilitaire#executeRequete(String, Object...)
+   	* @see DAOUtilitaire#executeRequete(DAOFactory, String, Object...)
    	*/ 
 	@Override
 	public void mettreAJour(Portefeuille portefeuille, ObjetFinancier objetFinancier) throws DAOException {
@@ -204,7 +204,7 @@ public class PortefeuilleDaoImpl implements PortefeuilleDao {
    	* @see Portefeuille
    	* @see DAOException
    	* @see PortefeuilleDao
-   	* @see DAOUtilitaire#executeRequete(String, Object...)
+   	* @see DAOUtilitaire#executeRequete(DAOFactory, String, Object...)
    	* @see EstComposeTitreDao
    	* @see EstComposeObligationDao
    	*/ 

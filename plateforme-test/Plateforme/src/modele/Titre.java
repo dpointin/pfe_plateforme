@@ -69,7 +69,7 @@ public abstract class Titre extends ObjetFinancier{
 	/**
 	 * Met a jour le libelle du titre.
 	 * 
-	 * @param libelle, nouveau libelle du titre
+	 * @param libelle nouveau libelle du titre
 	 */
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
@@ -87,7 +87,7 @@ public abstract class Titre extends ObjetFinancier{
 	/**
 	 * Met a jour le code du titre.
 	 * 
-	 * @param code, nouveau code du titre
+	 * @param code nouveau code du titre
 	 */
 	public void setCode(String code) {
 		this.code = code;
@@ -105,7 +105,7 @@ public abstract class Titre extends ObjetFinancier{
 	/**
 	 * Met a jour l'historique du titre.
 	 * 
-	 * @param historique, nouvel historique du titre
+	 * @param historique nouvel historique du titre
 	 */
 	public void setHistorique(Historique historique) {
 		this.historique = historique;

@@ -234,7 +234,7 @@ public class TitreDaoImpl implements TitreDao {
 	* @see Titre
 	* @see DAOException
 	* @see TitreDao
-	* @see DAOUtilitaire#executeRequete(String, Object...)
+	* @see DAOUtilitaire#executeRequete(DAOFactory, String, Object...)
 	*/
 	@Override
 	public void mettreAJour(Titre titre) throws DAOException{

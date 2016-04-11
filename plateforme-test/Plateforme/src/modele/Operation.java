@@ -108,7 +108,7 @@ public class Operation {
 	/**
 	 * Met a jour l'objetFinancier de l'operation.
 	 * 
-	 * @param objetFinancier, nouvel objetFinancier de l'operation.
+	 * @param objetFinancier nouvel objetFinancier de l'operation.
 	 */
 	public void setObjetFinancier(ObjetFinancier objetFinancier) {
 		this.objetFinancier = objetFinancier;
@@ -126,7 +126,7 @@ public class Operation {
 	/**
 	 * Met a jour le prixUnitaire de l'operation.
 	 * 
-	 * @param prixUnitaire, nouveau prixUnitaire de l'operation.
+	 * @param prixUnitaire nouveau prixUnitaire de l'operation.
 	 */
 	public void setPrixUnitaire(double prixUnitaire) {
 		this.prixUnitaire = prixUnitaire;
@@ -144,7 +144,7 @@ public class Operation {
 	/**
 	 * Met a jour la quantite d'actifs de l'operation.
 	 * 
-	 * @param quantite, nouvelle quantite d'actifs de l'operation.
+	 * @param quantite nouvelle quantite d'actifs de l'operation.
 	 */
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
@@ -162,7 +162,7 @@ public class Operation {
 	/**
 	 * Met a jour la date de l'operation.
 	 * 
-	 * @param date, nouvelle date de l'operation.
+	 * @param date nouvelle date de l'operation.
 	 */
 	public void setDate(GregorianCalendar date) {
 		this.date = date;
@@ -180,7 +180,7 @@ public class Operation {
 	/**
 	 * Met a jour l'id de l'operation.
 	 * 
-	 * @param id, nouvel id de l'operation.
+	 * @param id nouvel id de l'operation.
 	 */	
 	public void setId(int id){
 		this.id=id;
