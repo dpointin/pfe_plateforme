@@ -168,7 +168,67 @@ La théorie de l'utilité permet de définir une fonction d'utilité pour chaque
  \item $A > 0$ : dernier cas qui arrive lorsque $\sigma$ augmente et que $U$ diminu. Alors A est très positif, c'est le cas d'un risk adverse.
 \end{enumerate}
 
+\subsection{La théorie moderne du portefeuille}
+La théorie moderne du portefeuille est née en 1952 avec Harry Markowitz. Il a proposé un modèle de gestion de portefeuille au sein duquel il énonce l'importance de diversifier son portefeuille.
+Néanmoins, son modèle suppose certaines hypothèses qui peuvent être considérées comme \textit{trop} simplificatrice par nombreux théoriciens. Les hypothèses sont les suivantes :
+\begin{itemize}
+ \item Les investisseurs sont rationnels et sont averses au risque
+ \item Le marché est efficient, il n'y pas d'arbitrage
+ \item Il n'y pas de commissions ni de restriction de quantité
+\end{itemize}
+
+Une fois que ces hypothèses ont été posée, on peut établir le modèle de Markowitz sous la forme d'un problème d'optimisation sous contraintes. Le but étant d'optimiser le couple (risque, rendement), on le présente sous deux formes :
+\begin{enumerate}
+ \item Maximiser le rendement : dans ce cas, on fixe le risque à un certain niveau $\sigma_{P^*}$ et on pose le problème suivant (en reprenant les notations précédentes).
+  \[  \left\{
+	\begin{array}{l}
+	   max\ E(R_P) = \sum_{i=1}^N w_i E(R_i) \\\\
+	   \sum_{i,j} Cov(R_i,R_j) w_i w_j = \sigma_{P^*}^2 \\
+	   \sum_{i=1}^{N}w_i =1
+	\end{array}
+    \right.
+  \]
+
+ \item Minimiser le risque : ici on fait le contraire, on fixe le rendement au niveau $E(R_{P^*})$ et on cherche à minimiser le risque sous cette contrainte (et la contrainte des poids).
+  \[  \left\{
+	\begin{array}{l}
+	   min\ \sigma^2(R_P) = \sum_{i,j} Cov(R_i,R_j) w_i w_j \\\\
+	   \sum_{i=1}^N w_i E(R_i) = E(R_{P^*}) \\
+	   \sum_{i=1}^{N}w_i =1
+	\end{array}
+    \right.
+  \]
+\end{enumerate}
+Le choix du modèle dépend de la situation dans laquelle se trouve l'investisseur, à savoir s'il veut un certain rendement ou s'il veut un certain risque.\\
+
+On peut également visualiser ce problème graphiquement :
+\begin{figure}[H]
+    \center
+    \includegraphics[scale=0.4]{../graph/frontiereEfficiente.png} \\
+    \caption{La frontière de variance minimale ou frontière efficiente. La partie supérieure correspond à la frontière de Markowitz. \url{http://www.andlil.com/le-portefeuille-efficient-selon-markowitz-144615.html}}
+\end{figure}
+
+Les points bleus sont les différents portefeuilles possibles. Ce sont toutes les combinaisons linéaires formées avec les poids possibles. L'univers des portefeuilles est restreint à la partie interne et à droite de la courbe bleue. Nous allons voir que cette courbe forme en fait la frontière des portefeuilles optimaux. Tous les portefeuilles qui se trouveraient à l'extérieure de la zone délimitée ne seraient pas réalisables.\\
+
+Que ce soit graphiquement ou numériquement, la résolution de ce problème passe par le fait de faire varier les poids $w_i$ des différents actifs. Dans les deux problèmes d'optimisation numériques, on fait varier les $w_i$ pour obtenir le résultat escompté, cela revient à résoudre un programme linéaire.
+Sinon, graphiquement, on peut également fixer un rendement par exemple et prendre le portefeuille qui se situe sur la frontière bleue, ce sera le portefeuille optimal pour ce rendement.\\
+
+De même on peut fixer un niveau de risque, est chercher le portefeuille qui procure le meilleur rendement pour ce risque. On choisira donc des portefeuilles qui sont plus vers la gauche si on est averse au risque, et même le point A si on souhaite vraiment minimiser le risque quelque soit le rendement.
+Par exemple, les portefeuilles B et C ont le même risque mais on choisira plutôt B car il a un rendement supérieur à C. C'est la raison pour laquelle la frontière de Markowitz est la partie supérieure de la courbe, en effet, la partie inférieure est inutile car elle est aussi risquée mais pour un rendement plus faible.
+
+
+
 \subsubsection{Exemple d'un portefeuille à deux actifs}
+Nous allons illustrer les points abordés dans cette partie au travers d'un exemple de portefeuille composé de deux actifs risqués A et B. On connait leur rendement et leur risque :
+\begin{center}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    Portefeuille & $R$ & $\sigma$ \\  \hline
+    A	& $20$ & $50$ \\   \hline
+    B	& $15$ & $33$ \\
+    \hline
+  \end{tabular}
+\end{center}
 
 
 %Exemple bidon :
@@ -183,4 +243,3 @@ La théorie de l'utilité permet de définir une fonction d'utilité pour chaque
 
 %la VaR?
 
-\subsection{La théorie moderne du portefeuille}
