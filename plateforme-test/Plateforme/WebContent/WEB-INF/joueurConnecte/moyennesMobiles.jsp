@@ -92,7 +92,7 @@
 					backgroundColor: {stroke:'black', fill:'#d2d2d2',strokeSize: 1},
 					width: 1100,
 			        height: 500,
-	    			title: 'Cours de fermeture sur la derniere periode',
+	    			title: 'Moyenne mobile sur une periode de deux jours (cours fermeture)',
 			        //curveType: 'function',
 
 

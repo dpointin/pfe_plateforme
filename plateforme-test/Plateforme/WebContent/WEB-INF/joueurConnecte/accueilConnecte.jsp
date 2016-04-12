@@ -14,13 +14,15 @@
 	  	<c:import url="/inc/menuConnecte.jsp" />
 		<br/>
 		
+		<div id="menu">
 		<table>
 			<tr> 	<td> Aller vers son portefeuille </td>
 					<td> Aller vers la bourse </td>
 			</tr>
-			<tr>	<td> <a href="<c:url value="/portefeuilleGeneral"/>" > <img src="<c:url value="/inc/portefeuille.jpg"/>" width="200" height="50" alt="Portefeuille" /> </a> </td>
-					<td> <a href="<c:url value="/bourse"/>" > <img src="<c:url value="/inc/bourse.jpg"/>" width="200" height="50" alt="Bourse" /> </a>  </td>
+			<tr>	<td> <a href="<c:url value="/portefeuilleGeneral"/>" > <img src="<c:url value="/inc/portefeuille.jpg"/>" height="200" alt="Portefeuille" /> </a> </td>
+					<td> <a href="<c:url value="/bourse"/>" > <img src="<c:url value="/inc/bourse.jpg"/>" height="200" alt="Bourse" /> </a>  </td>
 			</tr>
 		</table>	
+		</div>
 </body>
 </html>

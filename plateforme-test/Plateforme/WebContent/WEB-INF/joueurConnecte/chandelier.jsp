@@ -78,6 +78,7 @@
 		        // Set chart options
 		        var options = {
 		          title: 'Chandeliers',
+				  backgroundColor: {stroke:'black', fill:'#d2d2d2',strokeSize: 1},
 		         //curveType: 'function',
 		          legend: { position: 'bottom' }
 		        };

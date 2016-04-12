@@ -94,7 +94,7 @@
 					backgroundColor: {stroke:'black', fill:'#d2d2d2',strokeSize: 1},
 					width: 1100,
 			        height: 500,
-	    			title: 'Cours de fermeture sur la derniere periode',
+	    			title: 'Bande de Bollinger (cours de fermeture)',
 			        //curveType: 'function',
 
 

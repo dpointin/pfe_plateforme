@@ -219,27 +219,24 @@ Par exemple, les portefeuilles B et C ont le même risque mais on choisira plut�
 
 
 \subsubsection{Exemple d'un portefeuille à deux actifs}
-Nous allons illustrer les points abordés dans cette partie au travers d'un exemple de portefeuille composé de deux actifs risqués A et B. On connait leur rendement et leur risque :
+Nous allons illustrer les points abordés dans cette partie au travers d'un exemple de portefeuille composé de deux actifs risqués A et B non corrélés. On connait leur rendement et leur risque :
 \begin{center}
-  \begin{tabular}{|c|c|c|}
+  \begin{tabular}{|c|c|c|c|}
     \hline
-    Portefeuille & $R$ & $\sigma$ \\  \hline
-    A	& $20$ & $50$ \\   \hline
-    B	& $15$ & $33$ \\
+    Actif i & $R_i$ & $\sigma_i$ & $w_i$ \\  \hline
+    A	& $20$ & $50$ & $0.9$\\   \hline
+    B	& $15$ & $33$ & $0.1$\\
     \hline
   \end{tabular}
 \end{center}
 
+\begin{itemize}
+  \item \textbf{Analyse directe :} avec les données que l'on a, on peut déjà dire que si l'investisseur doit choisir un seul actif parmi A et B, il fera son choix en fonction de son profil de risque. Il choisira B s'il est plutôt averse au risque et A s'il aime le risque.\\
 
-%Exemple bidon :
-%Même rendement et volatilités différentes : on choisit la volatilité la plus faible si on est censé.
-%Même volatilité et rendements différents : meilleur rendement.
+  \item \textbf{Rendement du portefeuille :} $ R_P = 0.9 \times 20 + 0.1 \times 15 = 15.5$\\
 
+  \item \textbf{Risque du portefeuille :} $ \sigma_P = \sqrt{0.1^2 \times 0.5^2 + 0.9^2 \times 0.33^2} = 30.12$ car A et B sont décorrélés.\\
 
-%Analyse d'un historique : variance (volatilité)
-%Covariance entre deux actifs
-%Optimisation d'un portefeuille : Markowitz
-
-
-%la VaR?
-
+  \item \textbf{Etude sous Excel :} dans une feuille Excel on peut étudier les différents portefeuilles qui sont réalisables (en faisant varier les poids). On suppose ici que les actifs peuvent être corrélés de quatre manières différentes (-1, 0.2, 0.5, 1) et on calcul le rendement et le risque de chaque portefeuille pour les différentes combinaisons de poids et corrélations. On trace alors les différentes frontières efficientes.
+IMPRESSION ECRAN DE LA FEUILLE EXCEL
+\end{itemize}
