@@ -29,7 +29,8 @@
     \end{figure}
 
   \subsection{Joueur connecté}  
-  Après avoir validé son formulaire de connexion, et si les identifiants ont bien été saisis, le joueur arrive sur une nouvelle page d'accueil dans laquelle on visulalise un menu horizontal ainsi que deux boutons : l'un permettant d'aller vers son \textbf{portefeuille}, et l'autre vers la \textbf{bourse}.
+  Après avoir validé son formulaire de connexion, et si les identifiants ont bien été saisis, l'application va télécharger les historiques des cours non présents dans la base de données. Le chargement peut donc être assez long si c'est la première connexion ou si cela fait longtemps qu'on ne s'est pas connecté.
+  le joueur arrive ensuite sur une nouvelle page d'accueil dans laquelle on visulalise un menu horizontal ainsi que deux boutons : l'un permettant d'aller vers son \textbf{portefeuille}, et l'autre vers la \textbf{bourse}.
   \begin{figure}[H]
     \center
     \includegraphics[scale=0.5]{../graph/4-accueilconnecte.png}
@@ -61,55 +62,91 @@
 	\includegraphics[scale=0.5]{../graph/5-detailaction.png}
       \end{figure}
       
-      \item \textbf{Historique :}
+      \item \textbf{Historique :} le joueur peut accéder à l'historique des actions et des indices. Ceux-ci ont été récupérés par l'application sur Yahoo! Finance et sont mis à disposition des joueurs sous différentes formes. La première est simplement sous forme d'un tableau de valeurs classé par dates.\\
       \begin{figure}[H]
 	\center
 	\includegraphics[scale=0.5]{../graph/6-historiquetableau.png}
       \end{figure}
+      
+      A propos de dates justement, il est possible de choisir l'intervalle de temps que l'on souhaite observer grâce à des calendriers qui sont affichés grâce à une fonction JavaScript :\\
       \begin{figure}[H]
 	\center
 	\includegraphics[scale=0.5]{../graph/6-recherchecalendrier.png}
       \end{figure}
-      \begin{figure}[H]
-	\center
-	\includegraphics[scale=0.5]{../graph/6-historiquecourbe.png}
-      \end{figure}
-      \begin{figure}[H]
-	\center
-	\includegraphics[scale=0.5]{../graph/6-historiquechandeliers.png}
-      \end{figure}
-      \begin{figure}[H]
-	\center
-	\includegraphics[scale=0.5]{../graph/6-historiquevolumes.png}
-      \end{figure}
-      \begin{figure}[H]
-	\center
-	\includegraphics[scale=0.5]{../graph/6-historiqueMoyMob.png}
-      \end{figure}
-      \begin{figure}[H]
-	\center
-	\includegraphics[scale=0.5]{../graph/6-historiqueBollinger.png} 
-      \end{figure}
+      
+      Il est également possible de sélectionner le type d'affichage d'historique que l'on souhaite. Nous avons choisi de proposer cinq indicateurs différents : 
+      \begin{enumerate}
+	\item une courbe simple de l'historique du cours :\\
+	  \begin{figure}[H]
+	    \center
+	    \includegraphics[scale=0.5]{../graph/6-historiquecourbe.png}
+	  \end{figure}
+	\item des chandeliers pour lequels il vaut mieux prendre un intervalle de temps réduit pour bien les visualiser :\\  
+	  \begin{figure}[H]
+	    \center
+	    \includegraphics[scale=0.5]{../graph/6-historiquechandeliers.png}
+	  \end{figure}
+	\item les volumes échangés chaque jours sous forme de diagramme en barre :\\
+	  \begin{figure}[H]
+	    \center
+	    \includegraphics[scale=0.5]{../graph/6-historiquevolumes.png}
+	  \end{figure}
+	\item la moyenne mobile à deux jours (ici mieux vaut une période assez longue) :\\
+	  \begin{figure}[H]
+	    \center
+	    \includegraphics[scale=0.5]{../graph/6-historiqueMoyMob.png}
+	  \end{figure}
+	\item les bandes de Bollinger (période longue également) :\\
+	  \begin{figure}[H]
+	    \center
+	    \includegraphics[scale=0.5]{../graph/6-historiqueBollinger.png} 
+	  \end{figure}
+      \end{enumerate}
+      Tous ces graphiques ont pu être tracé grâce à l'API Google Chart, il est donc nécessaire d'être connecté à Internet pour les observer.
       
       \end{enumerate}
     
     \subsubsection{Portefeuille}
+    La deuxième partie importante de notre application concerne le portefeuille d'actifs financiers et sa gestion. Il est possible via notre site Web, d'achat et vendre des actifs mais également d'accéder à une page donnant des chiffres clés sur le portefeuille constitué par le joueur. Lorsque l'on clique sur le menu portefeuille on atteint la page suivante (qui dans ce cas est vide car il n'y a pas encore d'actifs dans le portefeuille) :\\
     \begin{figure}[H]
       \center
       \includegraphics[scale=0.5]{../graph/7-accueilportefeuillevide.png}
     \end{figure}
+    On observe sur cette page la quantité d'argent disponible au sein du portefeuille, le rendement de celui-ci, et quand il y en a la liste des actifs possédés.
       
-      Achat d'actifs financiers
+      \begin{enumerate}
+       \item \textbf{Achat d'actifs financiers :} dans un premier temps, nous allons acheter des actifs financiers. Nous disposons au départ de 10000€. Après avoir effectuer une recherche via la page \textbf{Achat} dans l'onglet \textbf{Portefeuille} on obtient un liste d'actions par exemple. On souhaite acheter 15 actions \textit{American Airlines Group Inc.} à 42.11€ l'unité. On clique alors sur le bouton acheter.
       \begin{figure}[H]
 	\center
 	\includegraphics[scale=0.5]{../graph/7-achataction.png}
+      \end{figure}
+
+      On souhaite ensuite acheter une \textbf{Obligation} étatique par exemple, on choisit l'Espagne, la durée de l'emprunt fait par le pays est de 10ans (c'est un choix de notre part qui a été fixé pour toutes les obligations). Le prix unitaire est de 1€ et la quantité 60.
+      \begin{figure}[H]
+	\center
 	\includegraphics[scale=0.5]{../graph/7-achatobligation.png}
-	\includegraphics[scale=0.5]{../graph/7-achatindicetropcher.png}
-	\includegraphics[scale=0.5]{../graph/7-achatindiceechec.png}
-	\includegraphics[scale=0.5]{../graph/7-vueportefeuilleapresachats.png}
       \end{figure}
       
-      Vente d'actifs financiers
+      L'exemple suivant va nous montrer que le système gère également les achats irréalisables. Par exemple, si on tente d'acheter 1 \textbf{Indice} du \textit{Dow Jones} à 17251.5€ l'unité, cela est impossible (puisque nous disposons de moins de 10000€ après les achats précédents) :
+      \begin{figure}[H]
+	\center
+	\includegraphics[scale=0.5]{../graph/7-achatindicetropcher.png}
+      \end{figure}
+      
+      Le message d'erreur suivant est alors affiché et l'achat n'a pas été effectué :
+      \begin{figure}[H]
+	\center
+	\includegraphics[scale=0.5]{../graph/7-achatindiceechec.png}
+      \end{figure}
+     
+      En revanche, à chaque fois qu'un achat a pu être effectué, le joueur est redirigé vers la page d'accueil du portefeuille comme suit (on observe bien les actifs qui ont été achetés et une action supplémentaire \textit{ALV.DE} acheté également) :
+      \begin{figure}[H]
+	\center
+	\includegraphics[scale=0.5]{../graph/7-vueportefeuilleapresachats.png}
+      \end{figure}
+      Une autre remarque sur cette page concerne le rendement du portefeuille. Celui-ci a été recalculé à chaque nouvel achat d'actif. De plus, le prix unitaire de chaque actif au sein du portefeuille est la somme pondéré des prix à chaque achat de cet actif (par exemple, si dans deux jours on rachète le même actif, le prix unitaire vaudra la moyenne pondérée par la quantité achetée aujourd'hui et celle achetée dans deux jours).
+      
+      \item \textbf{Vente d'actifs financiers :} l'étape suivante est la vente d'actifs financiers possédés par le
       \begin{figure}[H]
 	\center
 	\includegraphics[scale=0.5]{../graph/7-vente.png}
@@ -117,18 +154,20 @@
 	\includegraphics[scale=0.5]{../graph/7-accueilapresvente.png}
       \end{figure}
 	
-      Indicateurs
+      \item \textbf{Indicateurs :}
       \begin{figure}[H]
 	\center
 	\includegraphics[scale=0.5]{../graph/7-indicateursPtfcamemberts.png}
 	\includegraphics[scale=0.5]{../graph/7-indicateursbase100.png}
       \end{figure}
 
-      Exporter  
+      \item \textbf{Exporter :}
       \begin{figure}[H]
 	\center	
 	\includegraphics[scale=0.5]{../graph/7-exporterpage.png}
-      \end{figure} 
+      \end{figure}
+
+    \end{enumerate}
   
     \subsubsection{Jeu}
     \begin{figure}[H]
