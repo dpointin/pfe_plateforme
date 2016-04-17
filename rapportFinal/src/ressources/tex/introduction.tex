@@ -1,8 +1,18 @@
-\section{Introduction}
+Le projet de fin d'étude s'incrit dans notre cursus d'ingénieur comme un point final qui a pour objectif de nous faire évoluer et nous faire découvrir un domaine qui nous plait plus particulièrement et pourquoi pas vers lequel nous souhaitons évoluer professionnellement. C'est pour cette raison que nous nous sommes penchés sur le sujet de l'analyse technique en finance sous la forme d'une plateforme.\\
 
-Le but de ce projet est de réaliser un programme qui est une plateforme permettant la gestion de portefeuille. Ce projet est présenté sous la forme d'un jeu. Chaque joueur se voit confier une somme d'argent lors de la création de son portefeuille. Il pourra ensuite utiliser la stratégie qu'il souhaite pour faire fructifier au maximum cette cagnotte. Le gagnant sera le joueur le plus riche (ou le moins pauvre).\\
+En effet, ce projet possède deux dimensions :
+\begin{enumerate}
+ \item La première concerne la finance de marché, un vaste domaine que nous ne pouvons étudier en profondeur au cours de notre cursus et qui pourtant nous passionne et pourrait faire l'objet de notre carrière future.
+ \item La deuxième est en rapport avec l'informatique et la programmation en générale, nous avons acquis un certain bagage au cours de nos études qui nous permet aujourd'hui d'avoir l'ambition de créer un site Web de A à Z tout en intégrant diverses fonctionnalités. L'approfondissement et la découverte de nouveaux outils informatiques est également pour un élément moteur.
+\end{enumerate}
 
-Pour permettre à l'utilisateur d'affiner sa stratégie, nous lui offrirons la possibilité pour chaque actif disponible divers outils d’analyse technique. Il aura également accès à l'intégralité de la composition de son portefeuille, et à un historique de ses opérations téléchargeables. Dans le document à télécharger, nous lui fournirons toutes les informations nécessaires à la réalisation de gestion de portefeuille. En effet, nous lui fournirons le rendement de chaque actif ainsi que leur corrélation pour qu'il puisse s'il le souhaite (et a les connaissances) effectué une étude pour obtenir le portefeuille optimal.\\
+Nous nous sommes donc trouvé tous les deux avec les mêmes envies, les mêmes idées et objectifs sur le projet proposé et nous avons donc choisi d'un commun accord de mener à bien ce projet ensemble.
+
+
+\section{Les fonctionnalités}
+Le but de ce projet est de réaliser un programme qui est une plateforme permettant la gestion d'un portefeuille d'actifs financiers. Ce projet est présenté sous la forme d'un jeu. Chaque joueur se voit confier une somme d'argent lors de la création de son portefeuille. Il pourra ensuite utiliser la stratégie qu'il souhaite pour faire fructifier au maximum cette cagnotte. Le gagnant sera le joueur le plus riche (ou le moins pauvre).\\
+
+Pour permettre à l'utilisateur d'affiner sa stratégie, nous lui offrirons la possibilité pour chaque actif disponible divers outils d’analyse technique. Il aura également accès à l'intégralité de la composition de son portefeuille, et à un historique de ses opérations téléchargeable. Dans le document à télécharger, nous lui fournirons toutes les informations nécessaires à la réalisation de la gestion de son portefeuille. En effet, nous lui fournirons le rendement de chaque actif ainsi que leur corrélation pour qu'il puisse, s'il le souhaite (et a les connaissances), effectuer une étude, sur Excel par exemple, pour obtenir le portefeuille optimal.\\
 
 Notre projet va donc se découper en trois phases principales : 
 \begin{itemize}
@@ -11,45 +21,38 @@ Notre projet va donc se découper en trois phases principales :
 \item Enfin, nous proposerons à l’utilisateur d'afficher des indicateurs sur les historiques mais également de visualiser son portefeuille. 
 \end{itemize}
 
-\subsection{Base de données}
-Gestion des différents cours des actifs (Nom, valeur à l’ouverture, à la clôture, la plus haute et la plus basse pendant la séance). \\ \\ 
-Deux options pour la récupération des données : soit on les stocke dans une base de donnée statique, c’est-à-dire, nous aurons récupéré les cours pour une certaine durée. Nous placerons le début du jeu dans le passé, de manière à pouvoir constater les gains ou pertes du joueur. La deuxième méthode pour gérer nos données, consisterait à actualiser notre base de données à la demande du joueur en allant chercher les données sur un serveur web. 
+Nous pouvons détailler les éléments de notre projet ainsi :
+\begin{enumerate}
+  \item \textbf{Base de données :}
+    elle premet de stocker les cours des différents actifs à différente dates (Nom, valeur à l’ouverture, à la clôture, la plus haute et la plus basse pendant la séance). Nous avions deux options pour récupérer les données : soit on les stocke dans une base de données statique, autrement dit on récupère les cours sur une certaine période dans le passé et le jeu se déroulera alors dans le passé, de manière à pouvoir constater les gains ou pertes du joueur. La deuxième méthode consiste à actualiser notre base de données à la demande du joueur en allant chercher les données sur un serveur web et donc à récupérer de manière instantannée les données requêtées. 
+  \item \textbf{Gestion des actifs :}
+    pour chaque actif nous proposerons une analyse des divers cours que nous aurons dans notre base de données. Pour cela nous utiliserons des outils d’analyse technique. A la fin de l’analyse, nous aimerions proposer un avis sur l’actif. 
+  \item \textbf{Indicateurs :}
+    chaque utilisateur aura la possibilité de consulter l’ensemble de son portefeuille. Pour cela un descriptif lui sera affiché avec les fonctionnalités suivantes : détails (composition du portefeuille, liste des actifs), performance (rendement) et répartition des actifs par types. Ensuite pour chaque action, il sera possible de visualiser la valeur du cours, sa variation et son volume, et plusieurs possibilités d’indicateurs sous forme de graphiques. 
+\end{enumerate}
 
-\subsection{Gestion des actifs}
-Pour chaque actif nous proposerons une analyse des divers cours que nous aurons dans notre base de données. Pour cela nous utiliserons des outils d’analyse technique. \\ \\
-A la fin de l’analyse, nous proposerons un avis sur l’actif. 
+\section{Les différentes versions envisagées}
+Pour réaliser ce projet, nous avons choisi de nous fixer divers objectifs à atteindre. Chacun de ces objectifs correspond à une nouvelle version. La première une version sera une version très simplifiée du projet final à laquelle nous ajouterons les différents éléments au fur et à mesure.\\
 
-\subsection{Indicateurs}
-Chaque utilisateur aura la possibilité de consulter l’ensemble de son portefeuille. Pour cela un descriptif lui sera affiché avec les fonctionnalités suivantes : détails (composition du portefeuille, liste des actifs), performance (rendement) et répartition par actifs par types. \\ \\
-Chaque utilisateur aura la possibilité de consulter l’ensemble de son portefeuille. Pour cela un descriptif lui sera affiché avec les fonctionnalités suivantes : détails (composition du portefeuille, liste des actifs), performance (rendement) et répartition par actifs par types. \\ \\
-Ensuite pour chaque action, il sera possible de visualiser la valeur du cours, sa variation et son volume, un graphique et plusieurs possibilités d’indicateurs. 
+\underline{\textbf{Version 1 :}}
+Dans la première version, le joueur aura la possibilité de s'ajouter à la liste des joueurs, d'ajouter lui même les actions qui constitueront la bourse, d'acheter ou de vendre une action et de voir le contenu de portefeuille.
+Cette première version nous permettra d'avoir la base de notre projet.\\
 
+\underline{\textbf{Version 2 :}}
+Dans la deuxième version, nous allons ajouter la dimension base de données à notre projet. C'est-à-dire, que toutes les données qui seront ajoutées au fur et à mesure du jeu ne seront pas perdues comme dans la version précédente quand le jeu se fermera. \\
+Ensuite, le joueur n'aura plus la possibilité de choisir les actions et leur valeur lui-même mais il y aura une table qui regroupera les différentes actions disponibles pour le joueur. Nous pourrons ainsi stocker l'historique de chacun des cours également (nous nous contenterons dans un premier temps des actions du CAC 40).\\
 
-\subsection{Différentes versions envisagées}
-Pour réaliser ce projet, nous avons choisi de nous fixer divers objectifs à atteindre. Chacun de ces objectifs correspond à une nouvelle qui sera pour la première une version très simplifiée du projet final à laquelle nous ajouterons les différents éléments au fur et à mesure.
-\subsubsection{Version 1}
-Dans la première version, le joueur aura la possibilité de s'ajouter à la liste des joueurs, d'ajouter lui même les actions qui constitueront la bourse, d'acheter ou de vendre une action et de voir le contenu de portefeuille. \\ \\
-Cette première version nous permettra d'avoir la base de notre projet. 
+\underline{\textbf{Version 3 :}}
+Dans cette version, nous allons rajouter le téléchargement des cours via l'API Yahoo! Finance. A chaque lancement du jeu, nous mettrons à jour la base de données depuis la dernière connexion pour compléter les données manquantes. Nous aurons ainsi un historique complet pour les cours de nos actions. \\
 
-\subsubsection{Version 2}
-Dans la deuxième version, nous allons ajouter la dimension base de données à notre projet. C'est-à-dire, que toutes les données qui seront ajoutées au fur et à mesure du jeu ne seront pas perdus comme dans la version précédente quand le jeu se fermera. \\ \\
-Ensuite, le joueur n'aura plus la possibilité de choisir les actions et leur valeur lui-même mais il y aura une table qui regroupera les différentes actions qui sont possibles pour le joueur. Nous pourrons ainsi stocker l'historique de chacun des cours également (nous nous contenterons dans un premier temps des actions du CAC 40). 
+\underline{\textbf{Version 4 :}}
+Nous allons pour ce nouvel objectif rajouter le tracé des cours. Le joueur pourra avoir une représentation graphique de l'évolution des cours depuis l'historique que nous trouverons dans la base de données remplie précédemment. \\
 
-\subsubsection{Version 3}
-Dans cette version, nous allons rajouter le téléchargement des cours via l'API Yahoo. A chaque lancement du jeu, nous mettrons à jour la base de données depuis la dernière connexion pour compléter les données manquantes. Nous aurons ainsi un historique complet pour les cours de nos actions. 
+\underline{\textbf{Version 5 :}}
+Nous choisirons plusieurs indicateurs techniques que nous mettrons à la disponibilité de chaque joueur. Nous essaierons de lui livrer un conseil à partir de chacun de nos indicateurs (signal de vente, signal d'achat etc). En parallèle, la gestion de portefeuille commencera à prendre forme : nous allons essayer de lui proposer une vision de son portefeuille plus détaillée avec un graphique représentant l'évolution des actifs mais également une visualisation de la diversification via des diagrammes en camembert.\\
 
-\subsubsection{Version 4}
-Nous allons pour ce nouveau objectif rajouter le tracé des cours. Le joueur pourra avoir une représentation graphique de l'évolution des cours depuis l'historique que nous trouverons dans la base de données remplies précédemment. 
+\underline{\textbf{Version 6 :}}
+Nous allons pour cette partie développer un véritable mode multijoueur sur un seul ordinateur. Jusqu'à présent le joueur pouvait s'ajouter à la liste des joueurs mais ne devait pas s'identifier par le biais d'un mot de passe ce qui sera mis en place. De plus, il pourra consulter le classement des autres joueurs. \\
 
-\subsubsection{Version 5}
-Nous choisirons plusieurs indicateurs techniques que nous mettrons à la disponibilité de chaque joueur. Nous essaierons de lui livrer un conseil à partir de chacun de nos indicateurs (signal de vente, signal d'achat etc). 
-
-\subsubsection{Version 6}
-Dans cette partie, nous améliorerons la qualité des informations fournies au joueur. Nous  
-allons essayer de lui proposer une vision de son portefeuille plus détaillés avec un graphique représentant l'évolution de la valeur de son portefeuille, plus de possibilités en terme d'actions : en essayant d'en augmenter le nombre, de les classifier par secteur, ...
-
-\subsubsection{Version 7}
-Nous allons pour cette partie développer un véritable mode multijoueur sur un seul ordinateur. Jusqu'à présent le joueur pouvait s'ajouter à la liste des joueurs mais ne devait pas s'identifier par le biais d'un mot de passe ce qui sera mis en place. De plus, il pourra consulter le classement des autres joueurs. 
-
-\subsubsection{Version 8}
-Dans cette ultime version, nous pourrons nous connecter à notre base de données à distance et ainsi nous pourrons joueur sur plusieurs machines à notre jeu. 
+\underline{\textbf{Version 7 :}}
+Dans cette ultime version, nous pourrons nous connecter à notre base de données à distance et ainsi nous pourrons jouer sur plusieurs machines en réseau à notre jeu. 

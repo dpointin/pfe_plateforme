@@ -146,22 +146,50 @@
       \end{figure}
       Une autre remarque sur cette page concerne le rendement du portefeuille. Celui-ci a été recalculé à chaque nouvel achat d'actif. De plus, le prix unitaire de chaque actif au sein du portefeuille est la somme pondéré des prix à chaque achat de cet actif (par exemple, si dans deux jours on rachète le même actif, le prix unitaire vaudra la moyenne pondérée par la quantité achetée aujourd'hui et celle achetée dans deux jours).
       
-      \item \textbf{Vente d'actifs financiers :} l'étape suivante est la vente d'actifs financiers possédés par le
+      \item \textbf{Vente d'actifs financiers :} l'étape suivante est la vente d'actifs financiers possédés par le joueur. Pour cela, il faut se rendre dans l'onglet \textbf{Vente} du menu \textbf{Portefeuille}. On atteint alors la page suivante :
       \begin{figure}[H]
 	\center
 	\includegraphics[scale=0.5]{../graph/7-vente.png}
-	\includegraphics[scale=0.5]{../graph/7-vente1action.png}
-	\includegraphics[scale=0.5]{../graph/7-accueilapresvente.png}
       \end{figure}
-	
-      \item \textbf{Indicateurs :}
+      
+      Imaginons que l'on souhaite vendre 1 \textbf{Action} \textit{AAL}. On saisi la quantité dans la case correspondante et on appuie sur le bouton vente de la même ligne :
       \begin{figure}[H]
 	\center
-	\includegraphics[scale=0.5]{../graph/7-indicateursPtfcamemberts.png}
-	\includegraphics[scale=0.5]{../graph/7-indicateursbase100.png}
+	\includegraphics[scale=0.5]{../graph/7-vente1action.png}
       \end{figure}
+      
+      Suite à la vente, le joueur est redirigé vers la page d'accueil du portefeuille si la vente a bien été effectuée, sinon il reçoit un message d'erreur (dans le cas où il essaye de vendre plus que ce qu'il possède) :
+      \begin{figure}[H]
+	\center
+	\includegraphics[scale=0.5]{../graph/7-accueilapresvente.png}
+      \end{figure}
+      Sur cette même page, on peut voir qu'il y a un bouton \textbf{Détail/Historique} qui permet de voir des détails sur les actions ou les indices. Via ce bouton, on accède à la même page que vu précédemment dans la partie \textbf{Historique}.
+	
+      \item \textbf{Indicateurs :} en parralèlle de l'achat et la vente d'actifs, il est possible d'obtenir quelques indicateurs sur le portefeuille dans sa globalité. C'est l'onglet \textbf{Indicateurs} du menu portefeuille qui permet d'y aller. Nous proposons différents indicateurs :
+      \begin{enumerate}
+       \item Les camemberts : ils permettent de voir la répartition du portefeuille selon la quantité de chaque type d'actifs financiers ou selon la somme d'argent investie dans chaque type. Cela peut être utile si l'on souhaite s'interroger sur la \textbf{diversification} du portefeuille.
+	  \begin{figure}[H]
+	    \center
+	    \includegraphics[scale=0.5]{../graph/7-indicateursPtfcamemberts.png}
+	  \end{figure}
+	  
+       \item Les courbes des actions et indices en base 100 : cela permet de visualiser les historiques des actions et indices du portefeuille sur une période. On peut voir par exemple si les actifs sont corrélés ou pas.
+	  \begin{figure}[H]
+	    \center
+	    \includegraphics[scale=0.5]{../graph/7-indicateursbase100.png}
+	  \end{figure}
+      
+      \end{enumerate}
 
-      \item \textbf{Exporter :}
+      \item \textbf{Exporter :} afin d'obtenir d'autres indicateurs tels que la meilleure distrubition du portefeuille avec la méthode de Markowitz, nous avons mis à disposition une page permettant d'exporter le portefeuille au format \textbf{.csv}. Il faut copier-coller le texte de la page Web visible lorsque l'on clique sur l'onglet \textbf{Exporter}. Dans ce fichier qui résume le portefeuille depuis sa création on a accès à :
+      \begin{itemize}
+       \item L'argent non investi disponible
+       \item La composition actuelle du portefeuille
+       \item L'historique des actions (achat/vente) qui ont été effectuées
+       \item L'espérance des rendements de chaques indices et actions
+       \item La matrice de covariance des rendements
+      \end{itemize}
+
       \begin{figure}[H]
 	\center	
 	\includegraphics[scale=0.5]{../graph/7-exporterpage.png}
@@ -170,10 +198,20 @@
     \end{enumerate}
   
     \subsubsection{Jeu}
-    \begin{figure}[H]
-      \center
-      \includegraphics[scale=0.5]{../graph/8-jeuclassement.png}
-      \includegraphics[scale=0.5]{../graph/8-jeuresetpartie.png}
-    \end{figure} 
-
-    Déconnexion
+    Le dernier menu auquel on peut accéder concerne le jeu en cours. On considère que chaque joueur à un portefeuille et on classe les joueurs selon l'argent qu'ils possèdent (ils ont le même argent disponible au départ). Pour faire le classement, on fait la somme des prix actuels des actifs multipliées par la quantité correspondante et on ajoute l'argent disponible. Il est également possile d'abandonner la partie si l'on considère que les choix on été trop mauvais et repartir de zéro en ayant un nouveau portefeuille.
+  
+    \begin{enumerate}
+     \item \textbf{Le classement :} on affiche les différents joueurs et leur score. Le joueur courant (celui qui est connecté) et en rouge :
+     \begin{figure}[H]
+	\center
+	\includegraphics[scale=0.5]{../graph/8-jeuclassement.png}
+      \end{figure} 
+     \item \textbf{La réinitialisation :} tout le portefeuille est remis à zéro, le joueur possède à nouveau 10000€.
+      \begin{figure}[H]
+	\center
+	\includegraphics[scale=0.5]{../graph/8-jeuresetpartie.png}
+      \end{figure} 
+    \end{enumerate}
+  
+    \subsubsection{Déconnexion}
+    La dernière étape avant de fermer l'application est de se déconnecter. On est alors redirigé vers la page d'accueil vu au début.
