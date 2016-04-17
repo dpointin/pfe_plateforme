@@ -1,0 +1,29 @@
+@startuml
+title WebContent
+
+
+
+package WebContent <<Folder>> {
+  package inc <<Folder>> {
+    package images <<Folder>> {
+    }
+    package css <<File>> {
+    }
+  }
+  package WEBINF <<Folder>> {
+    package connexion.jsp <<File>> {
+    }
+    package inscription.jsp <<File>> {
+    }
+    package web.xml <<File>> {
+    }
+    package lib <<Folder>> {
+    }
+    package JSP(joueurConnecte) <<Folder>> {
+    }
+  } 
+  package accueil.jsp <<File>> {
+  }
+}
+
+@enduml
