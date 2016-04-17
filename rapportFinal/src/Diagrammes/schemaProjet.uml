@@ -1,0 +1,13 @@
+@startuml
+
+title Schématisation du cadre du projet
+
+left to right direction
+actor :Courtier:
+actor :Client:
+
+Courtier ..> (Application Web\nCourtier) : gère
+[Bourse] --  (Application Web\nCourtier)
+ (Application Web\nCourtier) <.. Client : utilise
+
+@enduml

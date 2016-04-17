@@ -1,0 +1,30 @@
+@startuml
+title Diagramme sequence : Achat actif Modele
+
+
+ activate AchatServlet
+            AchatServlet -> Joueur : acheter(ObjetFinancier, quantite)
+            activate Joueur
+            Joueur -> Portefeuille : acheter(ObjetFinancier, quantite)
+            activate Portefeuille
+            Portefeuille -> ObjetFinancier : quantiteDisponible?()
+            activate ObjetFinancier
+            ObjetFinancier -> Portefeuille : int
+            deactivate ObjetFinancier
+            activate Portefeuille
+            Portefeuille -> Portefeuille : argentDisponible?()
+            alt conditions reunies
+                Portefeuille -> Portefeuille : calculPrix(obj)
+                Portefeuille -> Portefeuille : calculQuantite(obj)
+                Portefeuille -> Portefeuille : enleverArgent()
+                Portefeuille -> Portefeuille : calculRendement()
+                Portefeuille -> Joueur : true
+            else conditions echouees
+                Portefeuille -> Joueur : false
+            end
+            deactivate Portefeuille
+            deactivate Portefeuille  
+            Joueur -> AchatServlet : boolean
+            deactivate Joueur
+  deactivate AchatServlet
+@enduml
