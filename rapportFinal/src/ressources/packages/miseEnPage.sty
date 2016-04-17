@@ -92,7 +92,7 @@
 
 \newcommand{\texteBasGauche}{\begin{minipage}{5cm}\raggedright \fontsize{14pt}{14pt}\selectfont \textcolor{white}{ \thepage{} | \pageref*{LastPage}} \end{minipage}}
 \newcommand{\texteBasDroite}{\begin{minipage}{6cm}\raggedleft \fontsize{16pt}{0pt}\equipe{} \end{minipage}}
-
+\newcommand{\texteBasDroiteA}{\begin{minipage}{6cm}\centering \fontsize{16pt}{0pt}\equipeA{} \end{minipage}}
 
 \fancypagestyle{pageCouverture}{
   \fancyhf{}
@@ -107,7 +107,7 @@
 
 
   \put(-250,-600){\includegraphics[width=412mm]{ressources/images/finance.jpg}}
-  \put(-87,-760){\includegraphics[width=216mm]{ressources/images/pageGarde.png}}
+  \put(-87,-760){\includegraphics[width=218mm]{ressources/images/pageGarde.png}}
 
 
   \put(-45,-220){\begin{minipage}[t]{150mm}\begin{flushleft}
@@ -118,14 +118,14 @@
         \end{flushleft}\end{minipage}}
 
 
-  \put(60,-510){\begin{minipage}[t]{150mm}\textcolor{INSA_MARINE}{\begin{flushleft}
-        \fontsize{57pt}{60pt}\selectfont \textbf{\titre}\\
+  \put(120,-510){\begin{minipage}[t]{150mm}\textcolor{INSA_MARINE}{\begin{flushleft}
+        \fontsize{25pt}{35pt}\selectfont \textbf{\titre}\\
         \vspace*{17pt}
         \end{flushleft}}\end{minipage}}
 
 
   \end{picture}
-  \put(-50, -20){\texteBasDroite{}}
+  \put(-20, -8){\texteBasDroiteA{}}
   \newpage
 }
 

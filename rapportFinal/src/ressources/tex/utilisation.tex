@@ -1,14 +1,14 @@
-\section{Utilisation de la plateforme}
+
   Pour lancer l'application, il suffit d'avoir lancé le serveur Tomcat puis d'ouvrir dans navigateur web la bonne URL. Par exemple : http://localhost:8080/Plateforme/accueil.jsp.
     
-  \subsection{Accueil}
+  \section{Accueil}
   Le joueur arrive donc sur une page d'accueil sur laquelle deux options s'offrent à lui : s'inscrire ou se connecter. Prenons le cas d'un nouveau joueur et inscrivons-le.
   \begin{figure}[H]
     \center
     \includegraphics[scale=0.5]{../graph/1-accueil.png} 
   \end{figure}
     
-    \subsubsection{Inscription}
+    \subsection{Inscription}
     Après avoir cliqué sur le bouton \textbf{Inscription}, la formulaire suivant s'affiche :
     \begin{figure}[H]
       \center 
@@ -21,22 +21,26 @@
       \includegraphics[scale=0.36]{../graph/2.2-inscriptionechec.png} 
     \end{figure}
 
-    \subsubsection{Connexion}
+    \subsection{Connexion}
     Maintenant que le joueur est inscrit, il peut se connecter via un autre formulaire où il lui ai demandé de saisir login et mot de passe (qui doivent toujours être valides). 
     \begin{figure}[H]
       \center
       \includegraphics[scale=0.5]{../graph/3-connexion.png}
     \end{figure}
 
-  \subsection{Joueur connecté}  
-  Après avoir validé son formulaire de connexion, et si les identifiants ont bien été saisis, l'application va télécharger les historiques des cours non présents dans la base de données. Le chargement peut donc être assez long si c'est la première connexion ou si cela fait longtemps qu'on ne s'est pas connecté.
-  le joueur arrive ensuite sur une nouvelle page d'accueil dans laquelle on visulalise un menu horizontal ainsi que deux boutons : l'un permettant d'aller vers son \textbf{portefeuille}, et l'autre vers la \textbf{bourse}.
+  \section{Joueur connecté}  
+  Après avoir validé son formulaire de connexion, et si les identifiants ont bien été saisis, l'application va télécharger les historiques des cours non présents dans la base de données.\\
+  
+  \noindent Le chargement peut donc être assez long si c'est la première connexion ou si cela fait longtemps qu'on ne s'est pas connecté.\\
+  
+  \noindent Le joueur arrive ensuite sur une nouvelle page d'accueil dans laquelle on visulalise un menu horizontal ainsi que deux boutons : l'un permettant d'aller vers son \textbf{portefeuille}, et l'autre vers la \textbf{bourse}.
   \begin{figure}[H]
     \center
     \includegraphics[scale=0.5]{../graph/4-accueilconnecte.png}
   \end{figure}
     
-    \subsubsection{Bourse}
+    \newpage
+    \subsection{Bourse}
     Prenons le cas où il décide de consulter la \textbf{bourse}, ou plutôt l'échantillon de la bourse que le broker propose à ses clients. Dans un premier temps, le joueur arrive sur la page suivante (vide et une simple barre de recherche) : 
     \begin{figure}[H]
       \center
@@ -50,25 +54,26 @@
 	\includegraphics[scale=0.5]{../graph/5-rechercheactifs.png}
       \end{figure}
       
-      La même chose peut s'effectuer sur une recherche sans mot clé et seulement sur les obligations :\\
+      \newpage
+      La même chose peut s'effectuer sur une recherche sans mot clé et seulement sur les obligations :
       \begin{figure}[H]
 	\center      
 	\includegraphics[scale=0.5]{../graph/5-rechercheobligations.png}
       \end{figure}
       
-      On suppose finalement que la recherche abouti au résultat suivant et que le joueur souhaite en savoir plus sur cette action et clique sur le bouton \textbf{Historique}.\\	
+      On suppose finalement que la recherche abouti au résultat suivant et que le joueur souhaite en savoir plus sur cette action et clique sur le bouton \textbf{Historique}.
       \begin{figure}[H]
 	\center      
 	\includegraphics[scale=0.5]{../graph/5-detailaction.png}
       \end{figure}
       
-      \item \textbf{Historique :} le joueur peut accéder à l'historique des actions et des indices. Ceux-ci ont été récupérés par l'application sur Yahoo! Finance et sont mis à disposition des joueurs sous différentes formes. La première est simplement sous forme d'un tableau de valeurs classé par dates.\\
+      \item \textbf{Historique :} le joueur peut accéder à l'historique des actions et des indices. Ceux-ci ont été récupérés par l'application sur Yahoo! Finance et sont mis à disposition des joueurs sous différentes formes. La première est simplement sous forme d'un tableau de valeurs classé par dates.
       \begin{figure}[H]
 	\center
 	\includegraphics[scale=0.5]{../graph/6-historiquetableau.png}
       \end{figure}
       
-      A propos de dates justement, il est possible de choisir l'intervalle de temps que l'on souhaite observer grâce à des calendriers qui sont affichés grâce à une fonction JavaScript :\\
+      A propos de dates justement, il est possible de choisir l'intervalle de temps que l'on souhaite observer grâce à des calendriers qui sont affichés grâce à une fonction JavaScript :
       \begin{figure}[H]
 	\center
 	\includegraphics[scale=0.5]{../graph/6-recherchecalendrier.png}
@@ -76,27 +81,29 @@
       
       Il est également possible de sélectionner le type d'affichage d'historique que l'on souhaite. Nous avons choisi de proposer cinq indicateurs différents : 
       \begin{enumerate}
-	\item une courbe simple de l'historique du cours :\\
+	\item une courbe simple de l'historique du cours :
 	  \begin{figure}[H]
 	    \center
 	    \includegraphics[scale=0.5]{../graph/6-historiquecourbe.png}
 	  \end{figure}
-	\item des chandeliers pour lequels il vaut mieux prendre un intervalle de temps réduit pour bien les visualiser :\\  
+	\newpage  
+	\item des chandeliers pour lequels il vaut mieux prendre un intervalle de temps réduit pour bien les visualiser : 
 	  \begin{figure}[H]
 	    \center
 	    \includegraphics[scale=0.5]{../graph/6-historiquechandeliers.png}
 	  \end{figure}
-	\item les volumes échangés chaque jours sous forme de diagramme en barre :\\
+	\item les volumes échangés chaque jours sous forme de diagramme en barre :
 	  \begin{figure}[H]
 	    \center
 	    \includegraphics[scale=0.5]{../graph/6-historiquevolumes.png}
 	  \end{figure}
-	\item la moyenne mobile à deux jours (ici mieux vaut une période assez longue) :\\
+	\newpage  
+	\item la moyenne mobile à deux jours (ici mieux vaut une période assez longue) :
 	  \begin{figure}[H]
 	    \center
 	    \includegraphics[scale=0.5]{../graph/6-historiqueMoyMob.png}
 	  \end{figure}
-	\item les bandes de Bollinger (période longue également) :\\
+	\item les bandes de Bollinger (période longue également) :
 	  \begin{figure}[H]
 	    \center
 	    \includegraphics[scale=0.5]{../graph/6-historiqueBollinger.png} 
@@ -106,7 +113,7 @@
       
       \end{enumerate}
     
-    \subsubsection{Portefeuille}
+    \subsection{Portefeuille}
     La deuxième partie importante de notre application concerne le portefeuille d'actifs financiers et sa gestion. Il est possible via notre site Web, d'achat et vendre des actifs mais également d'accéder à une page donnant des chiffres clés sur le portefeuille constitué par le joueur. Lorsque l'on clique sur le menu portefeuille on atteint la page suivante (qui dans ce cas est vide car il n'y a pas encore d'actifs dans le portefeuille) :\\
     \begin{figure}[H]
       \center
@@ -133,6 +140,7 @@
 	\includegraphics[scale=0.5]{../graph/7-achatindicetropcher.png}
       \end{figure}
       
+      \newpage
       Le message d'erreur suivant est alors affiché et l'achat n'a pas été effectué :
       \begin{figure}[H]
 	\center
@@ -197,7 +205,7 @@
 
     \end{enumerate}
   
-    \subsubsection{Jeu}
+    \subsection{Jeu}
     Le dernier menu auquel on peut accéder concerne le jeu en cours. On considère que chaque joueur à un portefeuille et on classe les joueurs selon l'argent qu'ils possèdent (ils ont le même argent disponible au départ). Pour faire le classement, on fait la somme des prix actuels des actifs multipliées par la quantité correspondante et on ajoute l'argent disponible. Il est également possile d'abandonner la partie si l'on considère que les choix on été trop mauvais et repartir de zéro en ayant un nouveau portefeuille.
   
     \begin{enumerate}
@@ -213,5 +221,5 @@
       \end{figure} 
     \end{enumerate}
   
-    \subsubsection{Déconnexion}
+    \subsection{Déconnexion}
     La dernière étape avant de fermer l'application est de se déconnecter. On est alors redirigé vers la page d'accueil vu au début.
